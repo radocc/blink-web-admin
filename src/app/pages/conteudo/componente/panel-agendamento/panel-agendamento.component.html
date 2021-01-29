@@ -1,0 +1,44 @@
+<div class="panel-agendamento-conteudo rd-flex rd-col">
+    <form [formGroup]="form">
+        <div class="rd-flex rd-col ">
+            <span class="title">AGENDAMENTO</span>
+            <div class="rd-col rd-gap">            
+                <div class="rd-row rd-gap">
+                    <div class="rd-row">
+                        <label class="label-left" for="dataInicio">Início as</label>
+                        <p-calendar [showTime]="true" formControlName="dataInicio" inputId="dataInicio"></p-calendar>
+                    </div>
+                    <div class="rd-row">
+                        <label class="label-left" for="dataFim">Término as</label>
+                        <p-calendar [showTime]="true" formControlName="dataFim"  inputId="dataFim"></p-calendar>
+                    </div>
+                </div>
+            </div>   
+            <div class="">
+                <p>Dias da semana a ser exibido</p>
+                <div class="dia-semana rd-row rd-gap rd-txt-center">           
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="1" (onChange)="onClickDiaSemana($event,'1')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Dom"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="2" (onChange)="onClickDiaSemana($event,'2')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Seg"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="3" (onChange)="onClickDiaSemana($event,'3')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Ter"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="4" (onChange)="onClickDiaSemana($event,'4')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Qua"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="5" (onChange)="onClickDiaSemana($event,'5')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Qui"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="6" (onChange)="onClickDiaSemana($event,'6')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Sex"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="7" (onChange)="onClickDiaSemana($event,'7')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Sab"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="0" (onChange)="onClickTodos($event)" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Todos"></p-checkbox>
+                </div>
+            </div>    
+            <div>
+                <p>Horário do dia a ser exibido:</p>
+                <p-radioButton class="" name="horarioSemana" label="O dia todo" [(ngModel)]="modoHorario" [ngModelOptions]="{standalone: true}" value="1" ></p-radioButton>
+                <div class="rd-row">
+                    <p-radioButton class="" name="horarioSemana" label="Configurar" [(ngModel)]="modoHorario" [ngModelOptions]="{standalone: true}" value="2" ></p-radioButton>
+                    &nbsp;&nbsp;
+                    <label class="label-left" for="horaInicio">das</label> 
+                    <p-calendar [disabled]="modoHorario == '1'" [timeOnly]="true" formControlName="horaInicio" imputId="horaInicio"></p-calendar>
+                    <label class="label-left" for="horaFim">&nbsp;Até as</label> 
+                    <p-calendar [disabled]="modoHorario == '1'"  [timeOnly]="true" formControlName="horaFim"  imputId="horaFim"></p-calendar>
+                </div>
+            </div> 
+        </div>
+    </form>    
+</div>

@@ -1,1 +1,96 @@
 /* You can add global styles to this file, and also import other style files */
+@import './app/componentes/layouts/painel-site/painel-site.component.scss';
+@import './app/pages/conteudo/panel-conteudo/panel-conteudo.component.scss';
+@import './app/pages/login/login.scss';
+@import './app/pages/conteudo/componente/panel-agendamento/panel-agendamento.component.scss';
+@import './app/pages/conteudo/componente/template-imagem/template-imagem.component.scss';
+@import './app/pages/conteudo/componente/template-video/template-video.component.scss';
+@import './app/pages/conteudo/componente/template-noticia/template-noticia.component.scss';
+@import './app/pages/conteudo/componente/template-cotacao/template-cotacao.component.scss';
+@import './app/pages/conteudo/componente/template-loteria/template-loteria.component.scss';
+@import './app/componentes/register-action/register-action.component.scss';
+
+@import 'primeng/resources/themes/bootstrap4-light-blue/theme.css';
+
+// @include mat-core();
+
+
+$theme:(
+    primary:#8c7f7f59,
+    secondary:#8c7f7f59,
+    dark:#dd823859,
+    light:#2c965859,
+    white:white,
+    black:black
+);
+
+@mixin background-body {
+    background: #8c7f7f59;
+}
+@mixin absoluto {    
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+@include painel-site-component($theme);
+@include app-panel-conteudo($theme);
+@include panel-agendamento-conteudo($theme);
+@include template-imagem-conteudo($theme);
+@include template-video-conteudo($theme);
+@include template-noticia-conteudo($theme);
+@include template-cotacao-conteudo($theme);
+@include template-loteria-conteudo($theme);
+@include login-page-layout($theme);
+@include register-action($theme);
+
+
+html, body { 
+    height: 100%; 
+    @include absoluto();
+    @include background-body();
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.rd-row{
+    display: flex;
+    flex-direction: row;
+}
+.rd-col{
+    display: flex;
+    flex-direction: column;
+}
+.rd-flex{
+    flex: 1;
+}
+.rd-mg-8{
+    margin: 8px;
+}
+
+.rd-gap{
+    gap: 16px;
+}
+
+.rd-mgl-16{
+    margin-left: 16px;
+}
+.rd-gap-8{
+    gap: 8px;
+}
+.rd-mgr-16{
+    margin-right: 16px;
+}
+.rd-w-100{
+    width: 100%;
+}
+.rd-h-100{
+    height: 100%;
+}
+.rd-txt-center{
+    text-align: center;
+}

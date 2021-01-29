@@ -1,0 +1,49 @@
+@mixin painel-site-component($theme) {
+ 
+    app-painel-site{
+        background: #8c7f7f59;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+
+        .row{
+            display: flex;
+            flex-direction: row;
+        }
+        .div-marca{
+            flex: 1;
+            .marca{
+                margin-left: 150px;
+                margin: 16px;
+            }
+        }
+
+        .menu-conteiner{
+            min-width: 600px;
+            align-self: flex-end;
+            display: flex;
+            flex-direction: row;
+            padding-right: 25px;
+
+            .item-menu {
+                margin-left: 8px;
+                margin-right: 8px;
+                padding: 16px;
+                height: 50px; 
+                border-bottom-right-radius: 12px;
+                border-bottom-left-radius: 12px;
+                min-width: 70px;
+                text-align: center;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            .item-menu.selected {
+                background: #0b0feb59;
+            }
+        }
+
+    }
+}

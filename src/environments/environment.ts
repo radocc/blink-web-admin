@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  serverHost: 'developer-tv.radocc.com',
+  serverPort: '8468', 
+  protocol:'https', 
+  ws:'wss', 
 };
 
 /*

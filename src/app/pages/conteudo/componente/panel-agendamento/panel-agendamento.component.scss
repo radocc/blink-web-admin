@@ -1,0 +1,38 @@
+@mixin panel-agendamento-conteudo($theme) {
+ 
+    app-panel-agendamento-conteudo {        
+        display: flex;
+        margin-bottom: 8px;
+
+        .title{
+            margin-bottom: 8px;
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            color: map-get($theme , white);
+            background: map-get($theme , black);
+            border-radius: 5px;
+            padding: 8px;
+            width: fit-content;            
+        }
+        .label-left{
+            white-space: nowrap;
+            line-height: 38px;
+            padding-right: 8px;
+        }
+        .recuo-left{
+            margin-left: 20px;
+        }
+        .dia-semana{
+            margin-bottom: 16px;
+            margin-left: 20px;
+
+            .check-dia{
+                .p-checkbox-label {
+                    margin-left: 0px;
+                }
+            }
+        }
+        
+    }
+}

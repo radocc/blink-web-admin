@@ -1,0 +1,35 @@
+@mixin login-page-layout($theme){
+    $primary: map-get($theme, primary);
+
+    .page-login{       
+
+        .panel-acesso{
+            width: 400px;
+            height: 400px;
+            @include absoluto;
+            background: $primary;
+            margin: auto;
+            padding: 16px;
+            border-radius: 5px;
+            border-width: 2px;
+            
+
+            h2 {
+                text-align: center;
+                margin: 16px;
+            }
+            p{
+
+            }
+            form {
+                margin: 30px;
+            }
+            button{
+                background: map-get($theme,dark );
+            }
+            .esqueci-senha{
+                margin-top: 16px;
+            }
+        }
+    }
+}    

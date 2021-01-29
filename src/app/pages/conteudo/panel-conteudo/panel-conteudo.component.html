@@ -1,0 +1,53 @@
+<div class="rd-col rd-flex"> 
+    <div class="rd-row rd-flex rd-gap">
+        <div class="rd-col rd-flex">
+            <div class="p-d-flex p-jc-end ">
+                <span class="p-float-label field-busca">
+                    <input id="float-input" type="text" pInputText> 
+                    <label for="float-input" >{{'BUSCAR'|translate}}</label>
+                </span>
+            </div>
+            <div class="rd-row rd-flex pesquisa ">
+                <div class="div-menu">
+                    <span class="p-float-label">
+                        <input id="float-input" type="text" pInputText> 
+                        <label for="float-input" translate>OPCOES</label>
+                    </span>
+                    <div *ngFor="let item of tiposConteudos">
+                        <div class="item-menu" [ngClass]="{'selected':item.id == tipoConteudo?.id }" (click)="filtrarTipo(item)">{{item.nome}}</div>
+                    </div>
+                </div>
+                <div class="rd-flex pesquisa-list">
+                    <div class="div-filtro"> filtro: Data / Nome / Recentes / Antigos</div>
+                    <div class="title-conteudo" >
+                        {{tipoConteudo?.nome}}
+                    </div>
+                    <div class="item-conteudo rd-row" *ngFor="let conteudo of conteudos">
+                        <div class="view" [ngStyle]="{'background':'url(' + conteudo.url +')'}">
+    
+                        </div>
+                        <div class="rd-col rd-flex">
+                            <div class="rd-flex">
+                                {{conteudo.titulo}}
+                            </div>
+                            <div class="rd-row rd-gap">
+                                <span>{{conteudo.data |date:'dd/MM/yyyy'}}</span>
+                                <div class="rd-flex"></div>
+                                <button pButton pRipple type="button" (click)="alterarConteudo(conteudo)" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+                                <button pButton pRipple type="button" (click)="visualizarConteudo(conteudo)" icon="pi pi-desktop" class="p-button-rounded  p-button-text"></button>
+                                <button pButton pRipple type="button" (click)="arquivoConteudo(conteudo)" icon="pi pi-file" class="p-button-rounded p-button-text"></button>
+                                <button pButton pRipple type="button" (click)="excluirConteudo(conteudo)" icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="rd-row rd-flex cadastro">
+            <router-outlet>
+
+            </router-outlet>
+                      
+        </div>
+    </div>
+</div>

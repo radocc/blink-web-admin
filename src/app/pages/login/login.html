@@ -1,0 +1,24 @@
+<div class="page-login">
+    <div class="panel-acesso">
+        <form [formGroup]="form">
+            <h2>TV CORPORATIVA</h2>
+            <p class="rd-txt-center">Acesse sua conta com nome ou e-mail.</p>
+            <div class="p-field rd-col">
+                <label for="f-user">Login</label>
+                <input id="f-user" type="text" formControlName="login" pInputText> 
+            </div>
+            <div class="p-field rd-col">
+                <label for="f-user">Senha</label>
+                <input id="f-user" formControlName="senha" (keydown)="keyDownFunction($event)" type="text" pInputText> 
+            </div>
+            <div class="rd-txt-center ">
+                <button pButton  type="button"  (click)="entrar()" label="Entrar" ></button>
+            </div>
+            <div class="esqueci-senha rd-txt-center">
+                <a href="">Esqueci minha senha</a>
+            </div>
+            
+        </form>
+
+    </div>
+</div>
