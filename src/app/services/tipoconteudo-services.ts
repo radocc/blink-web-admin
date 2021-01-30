@@ -16,5 +16,7 @@ export class TipoConteudoService extends TVBlinkService<TipoConteudo> {
     public getWebService(): string {
         return 'tipoconteudo';
     }
+
+    
     
 }

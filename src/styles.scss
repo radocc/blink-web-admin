@@ -8,8 +8,8 @@
 @import './app/pages/conteudo/componente/template-noticia/template-noticia.component.scss';
 @import './app/pages/conteudo/componente/template-cotacao/template-cotacao.component.scss';
 @import './app/pages/conteudo/componente/template-loteria/template-loteria.component.scss';
+@import './app/pages/conteudo/componente/template-previsaotempo/template-previsaotempo.component.scss';
 @import './app/componentes/register-action/register-action.component.scss';
-
 @import 'primeng/resources/themes/bootstrap4-light-blue/theme.css';
 
 // @include mat-core();
@@ -43,6 +43,7 @@ $theme:(
 @include template-noticia-conteudo($theme);
 @include template-cotacao-conteudo($theme);
 @include template-loteria-conteudo($theme);
+@include template-previsaotempo-conteudo($theme);
 @include login-page-layout($theme);
 @include register-action($theme);
 

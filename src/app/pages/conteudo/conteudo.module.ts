@@ -12,6 +12,7 @@ import { TemplateNoticiaComponent } from './componente/template-noticia/template
 import { TemplateCotacaoComponent } from './componente/template-cotacao/template-cotacao.component';
 import { TemplateLoteriaComponent } from './componente/template-loteria/template-loteria.component';
 import { ShareTranslateModule } from 'app/modules/share-translate/share-translate.module';
+import { TemplatePrevisaoTempoComponent } from './componente/template-previsaotempo/template-previsaotempo.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,14 @@ const routes: Routes = [
         path:'loteria/:id',
         component:TemplateLoteriaComponent
       },
+      {
+        path:'previsaotempo',
+        component:TemplatePrevisaoTempoComponent
+      },
+      {
+        path:'previsaotempo/:id',
+        component:TemplatePrevisaoTempoComponent
+      },
     ]
   }
   
@@ -81,7 +90,8 @@ const routes: Routes = [
     TemplateVideoComponent,
     TemplateNoticiaComponent,
     TemplateCotacaoComponent,
-    TemplateLoteriaComponent
+    TemplateLoteriaComponent,
+    TemplatePrevisaoTempoComponent
   ],
   imports: [
     CommonModule,

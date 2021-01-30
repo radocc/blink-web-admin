@@ -11,6 +11,8 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
 import {ListboxModule} from 'primeng/listbox';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -25,7 +27,8 @@ import {ListboxModule} from 'primeng/listbox';
     MessagesModule,
     MessageModule,
     DialogModule,
-    ListboxModule
+    ListboxModule,
+    AutoCompleteModule
   ],
   exports:[
     ButtonModule,
@@ -38,7 +41,8 @@ import {ListboxModule} from 'primeng/listbox';
     MessagesModule,
     MessageModule,
     DialogModule,
-    ListboxModule
+    ListboxModule,
+    AutoCompleteModule
   ]
 })
 export class NgPrimeModule { }

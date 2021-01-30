@@ -90,6 +90,7 @@ export class TemplateNoticiaComponent implements OnInit {
             ids.push(this.conteudoNoticias[w].editoriasSelecionado[x].id);
         }
         this.conteudoNoticias[w].idsEditorias = ids.join(',');
+        this.conteudoNoticias[w].idFonteNoticia = this.conteudoNoticias[w].fonte.id;
         fontes.push(this.conteudoNoticias[w]);
       }      
     }

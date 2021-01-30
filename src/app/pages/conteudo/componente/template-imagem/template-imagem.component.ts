@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { Conteudo } from '@radoccmodels/conteudo';
+import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { RegisterActionComponent } from 'app/componentes/register-action/register-action.component';
@@ -85,7 +86,7 @@ export class TemplateImagemComponent implements OnInit {
       this.conteudo = new Conteudo();
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
-    this.conteudo.idTipoConteudo = 2//Imagens
+    this.conteudo.idTipoConteudo = ETipoConteudo.Imagens; 
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;

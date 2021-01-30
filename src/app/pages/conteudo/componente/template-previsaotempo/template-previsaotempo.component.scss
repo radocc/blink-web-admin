@@ -1,0 +1,55 @@
+@mixin template-previsaotempo-conteudo($videotheme) {
+ 
+    app-template-previsaotempo-conteudo {
+        height: 100%;
+        display: flex;
+        flex:1;
+        .label-field{
+            line-height: 20px;
+            white-space: nowrap;
+            margin: 8px;
+            margin-left: 0px;
+        }
+        .input-tempo{
+            width: 70px;
+        }
+        .p-fileupload .p-fileupload-content{
+            padding: 0px !important;
+        }
+        .p-fileupload{
+            margin-bottom: 8px;
+        }
+        p-autocomplete {
+            display: flex;
+            span {
+                flex: 1;
+            };
+        }
+        .div-edicao{
+            border-radius: 5px;
+            border-style: solid;
+            border-width: 1px;
+            border-color: black;
+            padding: 16px;
+        }
+        .grid-fonte{
+            display: grid;
+            grid-template-columns: repeat(2fr);
+            gap: 8px;
+        }
+        .fonte{
+            width: 100%;
+            border-style: solid;
+            border-width: 0.5px;
+            border-radius: 5px; 
+            .header {
+                padding: 16px;
+                background-color: white;
+            }    
+            .p-listbox{
+                flex: 1;
+            }       
+        }
+        
+    }
+}
