@@ -1,0 +1,35 @@
+<div class="player-cadastro rd-flex rd-col rd-gap-8">
+    <div class="">
+        <button pButton  type="button" label="NOVO" ></button>
+    </div>
+    <div class="rd-row rd-flex rd-gap">
+        <div class="div-edicao rd-flex rd-col">
+            <form [formGroup]="form">
+                <div class="rd-flex rd-col ">
+                    <div class="p-field rd-col">
+                        <label for="titulo" translate>NOME</label>
+                        <input id="titulo" required formControlName="nome" type="text" pInputText>                     
+                    </div> 
+                    <div class="tempo rd-row rd-gap">
+                        <label class="label-field" translate>LOCALIZACAO</label>
+                        <input formControlName="localizacao" type="text" pInputText>
+                    </div>
+                    <div>
+                        <label class="label-field" translate>ORIENTACAO</label>
+                        <p-radioButton name="orientacao" value="1" formControlName="orientacao"></p-radioButton>
+                        <p-radioButton name="orientacao" value="2" formControlName="orientacao"></p-radioButton>
+                    </div>
+                </div> 
+            </form>
+            <p-messages></p-messages>       
+        </div>
+        <div class="acoes rd-col rd-gap">
+            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">
+        
+            </app-register-action> 
+        </div>      
+    </div>    
+</div>            
+
+
+

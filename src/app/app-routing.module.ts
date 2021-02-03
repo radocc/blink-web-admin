@@ -20,6 +20,22 @@ const routes: Routes = [
       {
         path:'conteudo',
         loadChildren: '@radoccpages/conteudo/conteudo.module#ConteudoModule'
+      },
+      {
+        path:'publicacao',
+        loadChildren: '@radoccpages/publicacao/publicacao.module#PublicacaoModule'
+      },
+      {
+        path:'player',
+        loadChildren: '@radoccpages/player/player.module#PlayerModule'
+      },
+      {
+        path:'grupo',
+        loadChildren: '@radoccpages/grupo/grupo.module#GrupoModule'
+      },
+      {
+        path:'relatorio',
+        loadChildren: '@radoccpages/relatorio/relatorio.module#RelatorioModule'
       }
     ] 
   },
