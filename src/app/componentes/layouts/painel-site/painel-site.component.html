@@ -6,26 +6,26 @@
             </div>
         </div> 
         <div class="menu-conteiner">
-            <div class="item-menu selected">
-                <span routerLink="conteudo" translate>CONTEUDOS</span>
+            <div class="item-menu " [ngClass]="{'selected':rotaSelecionada=='conteudo'}">
+                <span routerLink="conteudo" (click)="navegar('conteudo')" translate>CONTEUDOS</span>
             </div>
-            <div class="item-menu">
-                <span routerLink="publicacao" translate>PUBLICACOES</span>
+            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='publicacao'}">
+                <span routerLink="publicacao"  (click)="navegar('publicacao')" translate>PUBLICACOES</span>
             </div>
-            <div class="item-menu">
-                <span routerLink="player" translate>PLAYERS</span>
+            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='player'}">
+                <span routerLink="player"  (click)="navegar('player')" translate>PLAYERS</span>
             </div>
-            <div class="item-menu">
-                <span routerLink="grupo" translate>GRUPOS</span>
+            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='grupo'}">
+                <span routerLink="grupo"  (click)="navegar('grupo')" translate>GRUPOS</span>
             </div>
-            <div class="item-menu">
-                <span routerLink="relatorio" translate>RELATORIOS</span>
+            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='relatorio'}">
+                <span routerLink="relatorio"  (click)="navegar('relatorio')" translate>RELATORIOS</span>
             </div>
-            <div class="item-menu">
-                <span routerLink="usuario" translate>USUARIOS</span>
+            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='usuario'}">
+                <span routerLink="usuario" (click)="navegar('usuario')"  translate>USUARIOS</span>
             </div>
-            <div class="item-menu">
-                <span routerLink="ajuda" translate>AJUDA</span>
+            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='ajuda'}">
+                <span routerLink="ajuda" (click)="navegar('ajuda')" translate>AJUDA</span>
             </div>
         </div>
     </div>

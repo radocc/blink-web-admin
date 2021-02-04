@@ -1,0 +1,50 @@
+<div class="template-imagem-conteudo rd-flex rd-col rd-gap-8">
+    <div class="">
+        <button pButton  type="button" label="NOVO_CONTEUDO" (click)="novo()"></button>
+    </div>
+    <div class="rd-row rd-flex rd-gap">
+        <div class="div-edicao rd-flex rd-col">
+            <form [formGroup]="form">
+                <div class="rd-flex rd-col ">
+                    <div class="p-field rd-col">
+                        <label for="titulo">Título</label>
+                        <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
+                    </div>
+                    <div class="p-field rd-row">
+                        <p-fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
+                        name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" ></p-fileUpload>
+                        <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
+                        <p-dialog [(visible)]="mostrarPreview" >
+                            <div class="image-container" [ngStyle]="{'background':'url(' + arquivo?.url+')'}" ></div>
+                            <ng-template pTemplate="footer">
+                                <p-button icon="pi pi-check" (click)="mostrarPreview=false" label="OK" styleClass="p-button-text"></p-button>
+                            </ng-template>
+                        </p-dialog>
+                    </div> 
+                    
+                        <!-- [url]="arquivoService.getUrlUpload()" -->
+                    <div class="tempo rd-row rd-gap">
+                        <label class="label-field">Tempo de exibição</label>
+                        <span class=" rd-row">                
+                            <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
+                            <label class="label-field" for="minutos">&nbsp; Minutos</label>
+                        </span>
+                        <span class=" rd-row">                
+                            <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
+                            <label class="label-field" for="segundos">&nbsp;Segundos</label>
+                        </span>
+                    </div>
+                </div> 
+            </form>
+            <p-messages></p-messages>       
+        </div>
+        <div class="acoes rd-col rd-gap">
+            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">
+        
+            </app-register-action> 
+        </div>      
+    </div>    
+</div>            
+
+
+

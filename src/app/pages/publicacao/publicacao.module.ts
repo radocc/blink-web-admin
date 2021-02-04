@@ -5,6 +5,7 @@ import { DevComponentModule } from 'app/modules/devcomponent/devcomponent.module
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgPrimeModule } from 'app/ngprime/ngprime.module';
 import { PanelPublicacaoComponent } from './panel-publicacao/panel-publicacao.component';
+import { PublicacaoImagemComponent } from './componente/publicacao-imagem/publicacao-imagem.component';
 
 const routes: Routes = [
   {
@@ -23,24 +24,24 @@ const routes: Routes = [
       },
       {
         path:'imagem',
-        // component:
+        component:PublicacaoImagemComponent
       },
-      {
-        path:'video',
-        // component:
-      },
-      {
-        path:'noticia',
-        // component:
-      },
-      {
-        path:'cotacao',
-        // component:
-      },
-      {
-        path:'loteria',
-        // component:
-      },
+      // {
+      //   path:'video',
+      //   // component:
+      // },
+      // {
+      //   path:'noticia',
+      //   // component:
+      // },
+      // {
+      //   path:'cotacao',
+      //   // component:
+      // },
+      // {
+      //   path:'loteria',
+      //   // component:
+      // },
     ]
   }
   
@@ -48,7 +49,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    PanelPublicacaoComponent
+    PanelPublicacaoComponent,
+    PublicacaoImagemComponent
   ],
   imports: [
     CommonModule,

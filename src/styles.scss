@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import './app/componentes/register-action/register-action.component.scss';
+@import 'primeng/resources/themes/bootstrap4-light-blue/theme.css';
 @import './app/componentes/layouts/painel-site/painel-site.component.scss';
 @import './app/pages/conteudo/panel-conteudo/panel-conteudo.component.scss';
 @import './app/pages/login/login.scss';
@@ -9,15 +11,21 @@
 @import './app/pages/conteudo/componente/template-cotacao/template-cotacao.component.scss';
 @import './app/pages/conteudo/componente/template-loteria/template-loteria.component.scss';
 @import './app/pages/conteudo/componente/template-previsaotempo/template-previsaotempo.component.scss';
-@import './app/componentes/register-action/register-action.component.scss';
-@import 'primeng/resources/themes/bootstrap4-light-blue/theme.css';
+
+@import './app/pages/publicacao/panel-publicacao/panel-publicacao.component.scss';
+@import './app/pages/publicacao/componente/publicacao-imagem/publicacao-imagem.component.scss';
+
+@import './app/pages/player/panel-player/panel-player.component.scss';
+@import './app/pages/player/componente/player-cadastro/player-cadastro.component.scss';
+
+@import './app/pages/grupo/panel-grupo/panel-grupo.component.scss';
 
 // @include mat-core();
 
 
 $theme:(
-    primary:#8c7f7f59,
-    secondary:#8c7f7f59,
+    primary:#ece2e259,
+    secondary:#f5ededef,
     dark:#dd823859,
     light:#2c965859,
     white:white,
@@ -44,6 +52,20 @@ $theme:(
 @include template-cotacao-conteudo($theme);
 @include template-loteria-conteudo($theme);
 @include template-previsaotempo-conteudo($theme);
+/**
+PUBLICACAÇÂO
+*/
+@include app-panel-publicacao($theme);
+@include app-publicacao-imagem($theme);
+
+/*
+PLAYER
+*/
+@include app-panel-player($theme);
+@include app-player-cadastro($theme);
+
+@include app-panel-grupo-player($theme);
+
 @include login-page-layout($theme);
 @include register-action($theme);
 

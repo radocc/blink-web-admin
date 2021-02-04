@@ -12,12 +12,17 @@
                     </div> 
                     <div class="tempo rd-row rd-gap">
                         <label class="label-field" translate>LOCALIZACAO</label>
-                        <input formControlName="localizacao" type="text" pInputText>
+                        <!-- <p-autoComplete formControlName="empresa" 
+                            [suggestions]="empresas" (completeMethod)="pesquisarEmpresa($event.query)" field="razaoSocial" [dropdown]="true">
+                            <ng-template let-empresa pTemplate="item">
+                                <div>{{empresa.razaoSocial}} </div>
+                            </ng-template>
+                        </p-autoComplete> -->
                     </div>
-                    <div>
+                    <div class="p-field rd-col">
                         <label class="label-field" translate>ORIENTACAO</label>
-                        <p-radioButton name="orientacao" value="1" formControlName="orientacao"></p-radioButton>
-                        <p-radioButton name="orientacao" value="2" formControlName="orientacao"></p-radioButton>
+                        <p-radioButton name="orientacao" value="1" formControlName="orientacao" label="PAISAGEM"></p-radioButton>
+                        <p-radioButton name="orientacao" value="2" formControlName="orientacao" label="RETRATO"></p-radioButton>
                     </div>
                 </div> 
             </form>

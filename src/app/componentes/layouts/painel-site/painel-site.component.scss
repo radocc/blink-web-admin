@@ -1,7 +1,7 @@
 @mixin painel-site-component($theme) {
  
     app-painel-site{
-        background: #8c7f7f59;
+        background: map-get($theme,secondary);
         position: absolute;
         left: 0;
         top: 0;

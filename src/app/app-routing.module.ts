@@ -22,7 +22,7 @@ const routes: Routes = [
         loadChildren: '@radoccpages/conteudo/conteudo.module#ConteudoModule'
       },
       {
-        path:'publicacao',
+        path:'publicacao',        
         loadChildren: '@radoccpages/publicacao/publicacao.module#PublicacaoModule'
       },
       {

@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PainelSiteComponent implements OnInit {
 
+  public rotaSelecionada:string = 'conteudo';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public navegar(rota){
+    this.rotaSelecionada = rota;
   }
 
 }

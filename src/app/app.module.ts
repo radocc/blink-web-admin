@@ -17,6 +17,9 @@ import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/
 import { RegisterActionComponent } from './componentes/register-action/register-action.component';
 import { DevComponentModule } from './modules/devcomponent/devcomponent.module';
 import { DevionnTranslateLoader } from './modules/share-translate/devionn-translate-loader';
+import { PublicacaoModule } from '@radoccpages/publicacao/publicacao.module';
+import { PlayerModule } from '@radoccpages/player/player.module';
+import { GrupoModule } from '@radoccpages/grupo/grupo.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,12 +34,12 @@ import { DevionnTranslateLoader } from './modules/share-translate/devionn-transl
     AppRoutingModule,
     BrowserAnimationsModule,
     NgPrimeModule, 
-    ConteudoModule,
     HttpClientModule,
     ShareTranslateModule,
     DevComponentModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GrupoModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },

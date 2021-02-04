@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
-import { Conteudo } from '@radoccmodels/conteudo';
+import { Router } from '@angular/router';  
+import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
@@ -17,7 +17,7 @@ export class PanelPublicacaoComponent implements OnInit {
 
   public nomeBusca:string = "";
   public tiposConteudos: TipoConteudo[] = [ ]
-  public conteudos:Conteudo[] = [];
+  public conteudos:ConteudoResult[] = [];
   public tipoConteudo:TipoConteudo= null;
 
   constructor(private router:Router, private tipoConteudoService:TipoConteudoService, private conteudoService:ConteudoService) { }

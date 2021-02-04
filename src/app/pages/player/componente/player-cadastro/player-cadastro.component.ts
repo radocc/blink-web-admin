@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Arquivo } from '@radoccmodels/base/arquivo';
+import { Empresa } from '@radoccmodels/base/empresa';
 import { Conteudo } from '@radoccmodels/conteudo';
 import { Player } from '@radoccmodels/player';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
@@ -25,11 +26,12 @@ export class PlayerCadastroComponent implements OnInit {
     localizacao:new FormControl(),
     dataImplantacao:new FormControl(),
     identificacao:new FormControl(),
-    orientacao:new FormControl(),
+    orientacao:new FormControl('1'),
     grupos:new FormControl()
   }) 
   
   public player:Player;
+  public empresas:Empresa[] = [];
 
   constructor(public arquivoService:ArquivoService, private msgService:MessageService, private playerService:PlayerService) {
 

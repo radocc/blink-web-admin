@@ -1,7 +1,6 @@
-@mixin app-player-cadastro($videotheme) {
+@mixin app-publicacao-imagem($theme) {
  
-    app-player-cadastro {
-        flex: 1;
+    app-publicacao-imagem {
         height: 100%;
         display: flex;
         .label-field{
@@ -16,6 +15,10 @@
         .p-fileupload .p-fileupload-content{
             padding: 0px !important;
         }
+        .arquivo {
+            line-height: 40px;
+            margin-left: 16px;
+        }
         .p-fileupload{
             margin-bottom: 8px;
         }
@@ -25,6 +28,12 @@
             border-width: 1px;
             border-color: black;
             padding: 16px;
+        }
+        .image-container{
+            width: 900px;
+            height: 600px;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
         }
         
     }
