@@ -11,7 +11,7 @@ import { LoteriaCadastroComponent } from './loteria-cadastro/loteria-cadastro.co
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'cadastro',
+    redirectTo:'pesquisa',
     pathMatch:'full'
   },
   {

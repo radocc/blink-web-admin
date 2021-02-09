@@ -71,7 +71,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tv-blink:build"
+            "browserTarget": "tv-blink:build",
+            "sslKey": "ssl/radocc.com.key",
+            "sslCert": "ssl/radocc.com.crt"
           },
           "configurations": {
             "production": {

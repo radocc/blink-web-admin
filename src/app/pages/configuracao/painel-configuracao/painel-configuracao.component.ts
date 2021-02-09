@@ -6,14 +6,14 @@ import { MenuService } from '@radoccservices/base/menu-service';
 import { TelaService } from '@radoccservices/base/tela-service';
 
 @Component({
-  selector: 'app-panel-configuracao',
-  templateUrl: './panel-configuracao.component.html',
-  styleUrls: ['./panel-configuracao.component.scss'],
+  selector: 'app-painel-configuracao',
+  templateUrl: './painel-configuracao.component.html',
+  styleUrls: ['./painel-configuracao.component.scss'],
   providers:[
     MenuService, TelaService
   ]
 })
-export class PanelConfiguracaoComponent implements OnInit {
+export class PainelConfiguracaoComponent implements OnInit {
 
   public nomeBusca:string = "";
   public grupos:GrupoPlayers[] = [];

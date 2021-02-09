@@ -12,7 +12,11 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
+      "@angular/": ["node_modules/@angular/"],
       "@radoccpages/*": ["app/pages/*"],
       "@radoccmodels/*": ["app/models/*"],
       "@radoccservices/*": ["app/services/*"],
@@ -21,6 +25,11 @@
       "es2018",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableIvy": false
   }
 
 }
