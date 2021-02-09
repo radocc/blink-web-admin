@@ -36,6 +36,10 @@ const routes: Routes = [
       {
         path:'relatorio',
         loadChildren: '@radoccpages/relatorio/relatorio.module#RelatorioModule'
+      },
+      {
+        path:'configuracao',
+        loadChildren: '@radoccpages/configuracao/configuracao.module#ConfiguracaoModule'
       }
     ] 
   },

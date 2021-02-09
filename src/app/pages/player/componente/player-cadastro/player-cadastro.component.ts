@@ -5,6 +5,7 @@ import { Empresa } from '@radoccmodels/base/empresa';
 import { Conteudo } from '@radoccmodels/conteudo';
 import { Player } from '@radoccmodels/player';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
+import { EmpresaService } from '@radoccservices/base/empresa-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { PlayerService } from '@radoccservices/player-services';
 import { MessageService } from 'primeng/api';
@@ -15,7 +16,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./player-cadastro.component.scss'],
   providers:[
     ArquivoService,
-    MessageService,PlayerService
+    MessageService,PlayerService, EmpresaService
   ]
 })
 export class PlayerCadastroComponent implements OnInit {
@@ -33,11 +34,18 @@ export class PlayerCadastroComponent implements OnInit {
   public player:Player;
   public empresas:Empresa[] = [];
 
-  constructor(public arquivoService:ArquivoService, private msgService:MessageService, private playerService:PlayerService) {
+  constructor(public arquivoService:ArquivoService, private msgService:MessageService, private playerService:PlayerService,
+    private empresaService:EmpresaService) {
 
   }
 
   ngOnInit(): void { 
+  }
+
+  public pesquisarEmpresa(nome){
+    this.empresaService.buscarPorNome(nome).subscribe((lista)=>{
+      this.empresas = lista;
+    });
   }
   
   public salvar(){

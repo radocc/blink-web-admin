@@ -12,7 +12,9 @@ import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
 import {ListboxModule} from 'primeng/listbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
+import {TableModule} from 'primeng/table';
+import {DividerModule} from 'primeng/divider';
+import {ToolbarModule} from 'primeng/toolbar';
 @NgModule({
   declarations: [],
   imports: [
@@ -28,7 +30,10 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     MessageModule,
     DialogModule,
     ListboxModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    TableModule,
+    DividerModule,
+    ToolbarModule
   ],
   exports:[
     ButtonModule,
@@ -42,7 +47,10 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     MessageModule,
     DialogModule,
     ListboxModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    TableModule,
+    DividerModule,
+    ToolbarModule
   ]
 })
 export class NgPrimeModule { }

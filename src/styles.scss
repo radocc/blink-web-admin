@@ -3,6 +3,8 @@
 @import 'primeng/resources/themes/bootstrap4-light-blue/theme.css';
 @import './app/componentes/layouts/painel-site/painel-site.component.scss';
 @import './app/pages/conteudo/panel-conteudo/panel-conteudo.component.scss';
+@import './app/componentes/gridpesquisa/gridpesquisa.component.scss';
+
 @import './app/pages/login/login.scss';
 @import './app/pages/conteudo/componente/panel-agendamento/panel-agendamento.component.scss';
 @import './app/pages/conteudo/componente/template-imagem/template-imagem.component.scss';
@@ -17,6 +19,10 @@
 
 @import './app/pages/player/panel-player/panel-player.component.scss';
 @import './app/pages/player/componente/player-cadastro/player-cadastro.component.scss';
+
+@import './app/pages/configuracao/panel-configuracao/panel-configuracao.component.scss';
+@import './app/pages/configuracao/pages/loteria/loteria-cadastro/loteria-cadastro.component.scss';
+@import './app/pages/configuracao/pages/loteria/loteria-pesquisa/loteria-pesquisa.component.scss';
 
 @import './app/pages/grupo/panel-grupo/panel-grupo.component.scss';
 
@@ -65,6 +71,10 @@ PLAYER
 @include app-player-cadastro($theme);
 
 @include app-panel-grupo-player($theme);
+
+@include app-panel-configuracao($theme);
+@include page-loteria-cadastro($theme);
+@include page-loteria-pesquisa($theme);
 
 @include login-page-layout($theme);
 @include register-action($theme);

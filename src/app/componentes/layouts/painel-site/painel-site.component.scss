@@ -41,7 +41,7 @@
                 cursor: pointer;
             }
             .item-menu.selected {
-                background: #0b0feb59;
+                background: map-get($theme , light);
             }
         }
 

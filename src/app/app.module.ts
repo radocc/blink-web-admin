@@ -14,17 +14,14 @@ import { ShareTranslateModule } from './modules/share-translate/share-translate.
 import { NoopInterceptor } from '@radoccservices/base/interceptor-http';
 import { Router } from '@angular/router';
 import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { RegisterActionComponent } from './componentes/register-action/register-action.component';
 import { DevComponentModule } from './modules/devcomponent/devcomponent.module';
 import { DevionnTranslateLoader } from './modules/share-translate/devionn-translate-loader';
-import { PublicacaoModule } from '@radoccpages/publicacao/publicacao.module';
-import { PlayerModule } from '@radoccpages/player/player.module';
-import { GrupoModule } from '@radoccpages/grupo/grupo.module';
+import { ConfiguracaoModule } from '@radoccpages/configuracao/configuracao.module'; 
 @NgModule({
   declarations: [
     AppComponent,
     PainelSiteComponent,
-    LoginPage
+    LoginPage,
   ],
   exports:[
     ShareTranslateModule
@@ -39,7 +36,8 @@ import { GrupoModule } from '@radoccpages/grupo/grupo.module';
     DevComponentModule,
     FormsModule,
     ReactiveFormsModule,
-    GrupoModule
+    ConfiguracaoModule
+    
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },

@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RegisterActionComponent } from 'app/componentes/register-action/register-action.component';
 import { NgPrimeModule } from 'app/ngprime/ngprime.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GridPesquisaComponent } from 'app/componentes/gridpesquisa/gridpesquisa.component';
+import { ShareTranslateModule } from '../share-translate/share-translate.module';
+import { GridPesquisaModule } from 'app/componentes/gridpesquisa/gridpesquisa.module';
 
 
 
@@ -10,14 +13,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     RegisterActionComponent
   ],
-  exports:[
-    RegisterActionComponent
-  ],
   imports: [
     CommonModule,
     NgPrimeModule,
+    ShareTranslateModule,
     ReactiveFormsModule,
-    FormsModule
-  ]
+    FormsModule,
+    GridPesquisaModule
+  ],
+  exports:[
+    RegisterActionComponent,
+    GridPesquisaModule
+  ],
 })
 export class DevComponentModule { }
