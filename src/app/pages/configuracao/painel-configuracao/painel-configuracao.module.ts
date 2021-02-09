@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { PanelConfiguracaoComponent } from './panel-configuracao/panel-configuracao.component';
 import { NgPrimeModule } from 'app/ngprime/ngprime.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DevComponentModule } from 'app/modules/devcomponent/devcomponent.module';
 import { ShareTranslateModule } from 'app/modules/share-translate/share-translate.module';
-import { LoteriaCadastroComponent } from './pages/loteria/loteria-cadastro/loteria-cadastro.component';
-import { LoteriaPesquisaComponent } from './pages/loteria/loteria-pesquisa/loteria-pesquisa.component';
-import { GridPesquisaComponent } from 'app/componentes/gridpesquisa/gridpesquisa.component';
+import { PainelConfiguracaoComponent } from './painel-configuracao.component';
+import { LoteriaModule } from '../pages/loteria/loteria.module';
 
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'panel',
+    redirectTo:'painel',
     pathMatch:'full'
   },    
   {
-    path:'panel',
-    component:PanelConfiguracaoComponent,
+    path:'painel',
+    component: PainelConfiguracaoComponent,
     children:[
       {
         path:'',
@@ -27,7 +25,7 @@ const routes: Routes = [
       },
       {
         path:'loteria',
-        loadChildren: '@radoccpages/configuracao/pages/loteria/loteria.module#LoteriaModule'
+        loadChildren: () => import('@radoccpages/configuracao/pages/loteria/loteria.module').then(m => m.LoteriaModule)
       },
     ]
   }
@@ -35,7 +33,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    PanelConfiguracaoComponent    
+    PainelConfiguracaoComponent    
   ],
   imports: [
     CommonModule,
@@ -44,7 +42,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     DevComponentModule,
     ShareTranslateModule,
+    LoteriaModule,
     RouterModule.forChild(routes)
   ]
 })
-export class ConfiguracaoModule { }
+export class PainelConfiguracaoModule { }

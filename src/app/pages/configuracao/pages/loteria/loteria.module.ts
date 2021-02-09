@@ -13,7 +13,7 @@ import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'cadastro',
+    redirectTo:'pesquisa',
     pathMatch:'full'
   },
   {

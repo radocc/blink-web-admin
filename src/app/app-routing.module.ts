@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PainelConfiguracaoModule } from '@radoccpages/configuracao/painel-configuracao/painel-configuracao.module';
 import { LoginPage } from '@radoccpages/login/login.page';
 import { PainelSiteComponent } from './componentes/layouts/painel-site/painel-site.component';
 
@@ -19,27 +20,27 @@ const routes: Routes = [
     children:[
       {
         path:'conteudo',
-        loadChildren: '@radoccpages/conteudo/conteudo.module#ConteudoModule'
+        loadChildren: () => import('@radoccpages/conteudo/conteudo.module').then(m => m.ConteudoModule)
       },
       {
         path:'publicacao',        
-        loadChildren: '@radoccpages/publicacao/publicacao.module#PublicacaoModule'
+        loadChildren: () => import('@radoccpages/publicacao/publicacao.module').then(m => m.PublicacaoModule)
       },
       {
         path:'player',
-        loadChildren: '@radoccpages/player/player.module#PlayerModule'
+        loadChildren: () => import('@radoccpages/player/player.module').then(m => m.PlayerModule)
       },
       {
         path:'grupo',
-        loadChildren: '@radoccpages/grupo/grupo.module#GrupoModule'
+        loadChildren: () => import('@radoccpages/grupo/grupo.module').then(m => m.GrupoModule)
       },
       {
         path:'relatorio',
-        loadChildren: '@radoccpages/relatorio/relatorio.module#RelatorioModule'
+        loadChildren: () => import('@radoccpages/relatorio/relatorio.module').then(m => m.RelatorioModule)
       },
       {
         path:'configuracao',
-        loadChildren: '@radoccpages/configuracao/configuracao.module#ConfiguracaoModule'
+        loadChildren: () => import('@radoccpages/configuracao/painel-configuracao/painel-configuracao.module').then(m => m.PainelConfiguracaoModule)
       }
     ] 
   },

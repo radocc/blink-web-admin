@@ -11,7 +11,8 @@ import { FiltroPanel } from './filtropanel';
 @Component({
   selector: 'app-grid-pesquisa',
   templateUrl: './gridpesquisa.component.html',
-  styleUrls: ['./gridpesquisa.component.scss']
+  styleUrls: ['./gridpesquisa.component.scss'],
+  providers: [FiltroService, DireitoGrupoService]
 })
 export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
