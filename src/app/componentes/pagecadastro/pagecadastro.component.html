@@ -1,0 +1,30 @@
+<div class="app-page-cadastro">
+    <p-toolbar class="barra-cadastro">
+        <div fxLayout="column" fxFlex>
+            <div fxLayout="row" fxFlex>
+                <p-button *ngIf="mostraVoltar" class="btn-voltar" title="{{'VOLTAR'|translate}}"  (click)="voltar()">
+                    <i class="pi pi-arrow_back"></i>
+                </p-button>
+                <label class="titulo" fxFlex>{{config?.titulo | translate}}</label>                    
+            </div>
+            <label fxFlex class="subTitulo" [translate]="config?.subTitle" [translateParams]="translateParams"></label>
+        </div>
+        <ng-content select="[page-header]"></ng-content>
+    </p-toolbar>
+    <p-card id="page-cadastro" fxLayout="column">        
+        <ng-template class="page-content" pTemplate="header">
+            <ng-content>
+                
+            </ng-content>
+        </ng-template>
+        <ng-template pTemplate="footer" >            
+            <p-button mat-raised-button class="disabled-loading" (click)="cancelar()">
+                {{'CANCELAR'|translate}}
+            </p-button>
+            <p-button class="disabled-loading" color="primary" (click)="salvar()">
+                <i class="pi pi-save"></i>
+                {{'SALVAR'|translate}}
+            </p-button>
+        </ng-template>
+    </p-card>
+</div>    

@@ -7,6 +7,8 @@ import { ShareTranslateModule } from 'app/modules/share-translate/share-translat
 import { LoteriaPesquisaComponent } from './loteria-pesquisa/loteria-pesquisa.component'; 
 import { GridPesquisaModule } from 'app/componentes/gridpesquisa/gridpesquisa.module';
 import { LoteriaCadastroComponent } from './loteria-cadastro/loteria-cadastro.component';
+import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
+import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
 
 const routes: Routes = [
   {
@@ -35,6 +37,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgPrimeModule,    
     GridPesquisaModule,
+    PagecadastroModule,
     ShareTranslateModule,
     RouterModule.forChild(routes)
   ]

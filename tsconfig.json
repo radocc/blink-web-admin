@@ -13,6 +13,8 @@
     "target": "es2015",
     "module": "es2020",
     "paths": {
+      "@radoccmodules/*": ["app/modules/*"],
+      "@radocccomponentes/*": ["app/componentes/*"],
       "@radoccpages/*": ["app/pages/*"],
       "@radoccmodels/*": ["app/models/*"],
       "@radoccservices/*": ["app/services/*"],

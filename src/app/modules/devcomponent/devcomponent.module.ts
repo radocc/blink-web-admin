@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GridPesquisaComponent } from 'app/componentes/gridpesquisa/gridpesquisa.component';
 import { ShareTranslateModule } from '../share-translate/share-translate.module';
 import { GridPesquisaModule } from 'app/componentes/gridpesquisa/gridpesquisa.module';
+import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
 
 
 
@@ -19,11 +20,13 @@ import { GridPesquisaModule } from 'app/componentes/gridpesquisa/gridpesquisa.mo
     ShareTranslateModule,
     ReactiveFormsModule,
     FormsModule,
-    GridPesquisaModule
+    GridPesquisaModule,
+    PagecadastroModule
   ],
   exports:[
     RegisterActionComponent,
-    GridPesquisaModule
+    GridPesquisaModule,
+    PagecadastroModule
   ],
 })
 export class DevComponentModule { }
