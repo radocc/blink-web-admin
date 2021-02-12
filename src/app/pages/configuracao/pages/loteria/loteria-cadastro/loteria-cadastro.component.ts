@@ -37,7 +37,7 @@ export class LoteriaCadastroComponent implements OnInit {
   ngOnInit(): void { 
   } 
   
-  public salvar(){    
+  public salvar(event){    
     if (this.form.invalid){
       this.msgService.add({
         severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'

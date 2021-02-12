@@ -11,11 +11,11 @@ import { LoteriaModule } from '../pages/loteria/loteria.module';
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'painel',
+    redirectTo:'panel',
     pathMatch:'full'
   },    
   {
-    path:'painel',
+    path:'panel',
     component: PainelConfiguracaoComponent,
     children:[
       {
