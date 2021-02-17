@@ -359,7 +359,7 @@ export abstract class FiltroPanel {
                 let col = {
                     prop: coluna.propriedade,
                     name: coluna.titulo,
-                    width: coluna.largura,
+                    width: parseInt((coluna.largura/10).toString()),
                     tipo: coluna.tipo,
                     mascara: coluna.mascara,
                     headerClass: '',
@@ -521,11 +521,11 @@ export abstract class FiltroPanel {
                         this.aposFiltrar();
                     }, err => {
                         this.webSocketOn = false;
-                        this.buscarDados().then(()=>{
-                            this.buscandoDados = false;
-                        }).catch(()=>{
-                            this.buscandoDados = false;
-                        });
+                        // this.buscarDados().then(()=>{
+                        //     this.buscandoDados = false;
+                        // }).catch(()=>{
+                        //     this.buscandoDados = false;
+                        // });
                         throw err;
                     }, () => {
                         

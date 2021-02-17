@@ -6,14 +6,14 @@ import { MenuService } from '@radoccservices/base/menu-service';
 import { TelaService } from '@radoccservices/base/tela-service';
 
 @Component({
-  selector: 'app-painel-configuracao',
-  templateUrl: './painel-configuracao.component.html',
-  styleUrls: ['./painel-configuracao.component.scss'],
+  selector: 'app-panel-configuracao',
+  templateUrl: './panel-configuracao.component.html',
+  styleUrls: ['./panel-configuracao.component.scss'],
   providers:[
     MenuService, TelaService
   ]
 })
-export class PainelConfiguracaoComponent implements OnInit {
+export class PanelConfiguracaoComponent implements OnInit {
 
   public nomeBusca:string = "";
   public grupos:GrupoPlayers[] = [];
@@ -26,9 +26,7 @@ export class PainelConfiguracaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.telaService.findTelasPorAcessoIdMenu(10001).subscribe((lista)=>{
-      this.telas = lista;
-    });
+    
     
   }
 

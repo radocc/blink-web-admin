@@ -1,7 +1,8 @@
 <div class="gridpesquisa slide" #page>
+    <p-card class="box box-stretched" [header]="nomeTela | translate">
     <p-toolbar color="primary" fxLayout="row" fxLayout.xs="column" class="barra-ferramentas">
         <div class="rd-row">
-            <span class="text">{{nomeTela | translate}}</span>
+            <input pInputText type="text" placeholder="Pesquisar"/>
             <span class="rd-flex"></span>
         </div>
         <div class="rd-row">
@@ -20,20 +21,25 @@
     <div class="grid-container" id="print-section" fxLayout="column" fxFlex="100%" #table>
         <p-table #dataTable [value]="dataSource">
             <ng-template pTemplate="header">
-                <th >
-                    
-                </th>
-                <td >
-                    
-                </td>
+                <tr >
+                    <th *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
+                        {{coluna.name}}
+                    </th>
+                </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
                 <tr>
-                    <td *ngFor='let coluna of colunas'>{{coluna.nome}}</td>
+                    <td *ngFor='let coluna of colunas'>
+                        <span *ngIf="coluna.tipo.toUpperCase() != 'timestamp'.toUpperCase()">{{item[coluna.prop]}}</span>
+                        <span *ngIf="coluna.tipo.toUpperCase() == 'timestamp'.toUpperCase()">{{item[coluna.prop] | date: coluna.mascara}}</span>
+                    </td>
                 </tr>
             </ng-template>
         </p-table>
+        
+        
     </div>    
+    </p-card>
 </div>
 <div class="loading">
 </div>

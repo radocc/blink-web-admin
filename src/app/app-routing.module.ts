@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PainelConfiguracaoModule } from '@radoccpages/configuracao/painel-configuracao/painel-configuracao.module';
 import { LoginPage } from '@radoccpages/login/login.page';
 import { PainelSiteComponent } from './componentes/layouts/painel-site/painel-site.component';
 
@@ -40,7 +39,7 @@ const routes: Routes = [
       },
       {
         path:'configuracao',
-        loadChildren: () => import('@radoccpages/configuracao/painel-configuracao/painel-configuracao.module').then(m => m.PainelConfiguracaoModule)
+        loadChildren: () => import('@radoccpages/configuracao/configuracao.module').then(m => m.ConfiguracaoModule)
       }
     ] 
   },

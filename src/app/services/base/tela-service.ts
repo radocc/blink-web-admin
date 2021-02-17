@@ -22,9 +22,9 @@ export class TelaService extends AbstractService<Tela> {
         return this.http.get(url);
     }
 
-    public findTelasPorAcessoIdMenu(idMenu: number): Observable<any> {
+    public findTelasPorAcessoIdMenu(idMenu: number): Observable<Tela[]> {
         let url = this.urlWebBase + "/findtelasporacesso/" + idMenu;
-        return this.http.get(url);
+        return this.http.get<Tela[]>(url);
     }
 
     public findPorNome(nome: string): Observable<any> {

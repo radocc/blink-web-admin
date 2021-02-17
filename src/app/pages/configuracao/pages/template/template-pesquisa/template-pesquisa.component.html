@@ -1,0 +1,17 @@
+<div class="p-d-flex rd-h-100">
+    <div class="div-menu p-mr-2 p-col-3">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText> 
+            <label for="float-input" translate>OPCOES</label>
+        </span>
+        <div *ngFor="let item of tiposConteudos">
+            <div class="item-menu" [ngClass]="{'selected':item.id == tipoConteudo?.id }" (click)="filtrarTipo(item)">{{item.nome}}</div>
+        </div>
+    </div>
+    <app-grid-pesquisa #gridpesquisa [idTela]="1006" class="p-d-flex" 
+    [urlToNovo]="'admin/configuracao/panel/template/cadastro'" 
+    [urlToAlterar]="'admin/configuracao/panel/template/cadastro'"
+    [getGridPesquisa]="gridPesquisa" [service]="filtroService" >
+    </app-grid-pesquisa>
+</div>
+

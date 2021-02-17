@@ -20,7 +20,7 @@
 @import './app/pages/player/panel-player/panel-player.component.scss';
 @import './app/pages/player/componente/player-cadastro/player-cadastro.component.scss';
 
-@import './app/pages/configuracao/painel-configuracao/painel-configuracao.component.scss';
+@import './app/pages/configuracao/panel-configuracao/panel-configuracao.component.scss';
 @import './app/pages/configuracao/pages/loteria/loteria-cadastro/loteria-cadastro.component.scss';
 @import './app/pages/configuracao/pages/loteria/loteria-pesquisa/loteria-pesquisa.component.scss';
 
@@ -50,6 +50,7 @@ $theme:(
 }
 
 @include painel-site-component($theme);
+@include gridpesquisa($theme);
 @include app-panel-conteudo($theme);
 @include panel-agendamento-conteudo($theme);
 @include template-imagem-conteudo($theme);

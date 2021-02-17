@@ -1,5 +1,14 @@
-<div class="rd-col rd-flex"> 
-    <div class="rd-row rd-flex rd-gap">
+<div class="pagina p-d-flex p-m-4">
+    <div class="lado p-mb-2 p-col-6">
+        <router-outlet name="pesquisa"></router-outlet>
+    </div>
+    <div class="lado p-mb-2 p-col-6">
+        <router-outlet name="cadastro"></router-outlet>
+    </div>
+</div>
+
+<!-- <div class="rd-col rd-flex"> 
+    <div class="p-d-flex p-flex-row">
         <div class="rd-col rd-flex">
             <div class="p-d-flex p-jc-end ">
                 <span class="p-float-label field-busca">
@@ -18,9 +27,12 @@
                     </div>
                 </div>
                 <div class="rd-flex pesquisa-list">
-                    
+                    <router-outlet></router-outlet>        
                 </div>
             </div>
-        </div>        
+        </div>     
+        <div class="rd-row rd-flex cadastro">
+            <router-outlet name="cadastro"></router-outlet>
+        </div>   
     </div>
-</div>
+</div> -->

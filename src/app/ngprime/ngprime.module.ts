@@ -15,6 +15,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {TableModule} from 'primeng/table';
 import {DividerModule} from 'primeng/divider';
 import {ToolbarModule} from 'primeng/toolbar';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import {CardModule} from 'primeng/card';
 @NgModule({
   declarations: [],
   imports: [
@@ -33,7 +35,9 @@ import {ToolbarModule} from 'primeng/toolbar';
     AutoCompleteModule,
     TableModule,
     DividerModule,
-    ToolbarModule
+    ToolbarModule,
+    VirtualScrollerModule,
+    CardModule
   ],
   exports:[
     ButtonModule,
@@ -50,7 +54,9 @@ import {ToolbarModule} from 'primeng/toolbar';
     AutoCompleteModule,
     TableModule,
     DividerModule,
-    ToolbarModule
+    ToolbarModule,
+    VirtualScrollerModule,
+    CardModule
   ]
 })
 export class NgPrimeModule { }

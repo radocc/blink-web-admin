@@ -24,8 +24,9 @@
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='usuario'}">
                 <span routerLink="usuario" (click)="navegar('usuario')"  translate>USUARIOS</span>
             </div>
-            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='configuracao'}">
-                <span routerLink="configuracao" (click)="navegar('configuracao')"  translate>CONFIGURACAO</span>
+            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='configuracao'}" >
+                <span (click)="navegar('configuracao');menu.toggle($event)"  translate>CONFIGURACAO</span>
+                <p-menu #menu [popup]="true" [model]="itens"></p-menu>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='ajuda'}">
                 <span routerLink="ajuda" (click)="navegar('ajuda')" translate>AJUDA</span>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';  
 import { environment } from 'environments/environment';
+import { Filter } from '@radoccmodels/base/filter';
 
 @Injectable()
 export abstract class AbstractService<T>{
@@ -50,5 +51,6 @@ export abstract class AbstractService<T>{
         let url = this.urlBase + "filtro/getconfiguracaoportela/" + idTela;
         return this.http.get<any>(url).pipe();
     } 
+
 
 }

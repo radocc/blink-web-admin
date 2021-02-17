@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { Loteria } from '@radoccmodels/loteria'; 
+import { FiltroService } from '@radoccservices/base/filtro-service';
 import { LoteriaService } from '@radoccservices/loteria-services';
 import { MessageService } from 'primeng/api';
 
@@ -9,7 +10,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './loteria-pesquisa.component.html',
   styleUrls: ['./loteria-pesquisa.component.scss'],
   providers:[ 
-    MessageService,LoteriaService
+    MessageService,LoteriaService, FiltroService
   ]
 })
 export class LoteriaPesquisaComponent implements OnInit {
@@ -22,7 +23,7 @@ export class LoteriaPesquisaComponent implements OnInit {
   public gridpesquisa;
 
   
-  constructor(private msgService:MessageService, public loteriaService:LoteriaService) {
+  constructor(private msgService:MessageService, public loteriaService:LoteriaService, public filtroService: FiltroService) {
 
   }
 

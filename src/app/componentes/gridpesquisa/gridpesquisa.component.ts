@@ -43,11 +43,31 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
    }
 
   ngOnInit(): void {
+    
+  }
+
+  ngAfterViewChecked(): void {
+      if (this.getGridPesquisa) {
+          this.getGridPesquisa(this);
+      }
   }
 
   public buscarDados():Promise<void>{
-    // return this.loadLessonsPage();
-    return null;
+    return new Promise((resolve, reject) => {
+      this.selection.clear();
+      let filTemp = {...this.filter};
+      filTemp.page = 1;
+      filTemp.start = 0;
+      filTemp.limit = 100;
+      filTemp.variaveis = this.variaveis;
+      this.service.filter(filTemp).subscribe((data) => {
+        this.dataSource = data.data;
+        resolve();
+      }, (error) => {
+        reject(error);
+      });
+    });
+    
   }
 
   abrirPesquisa() {
@@ -100,5 +120,9 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
     public getService() {
         return this.service;
     }
+
+    public alterar() {}
+    public visualizar() {}
+    public excluir() {}
 
 }
