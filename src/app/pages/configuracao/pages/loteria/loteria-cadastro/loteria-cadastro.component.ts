@@ -14,7 +14,16 @@ import { MessageService } from 'primeng/api';
   ]
 })
 export class LoteriaCadastroComponent implements OnInit {
-
+  public config:{
+    titulo:string,
+    subTitle:string,
+    btnSalvar:string;
+  }={
+    titulo:'LOTERIA',
+    subTitle:'',
+    btnSalvar:'SALVAR'
+  }
+  
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required)    
   }) 
@@ -28,7 +37,7 @@ export class LoteriaCadastroComponent implements OnInit {
   ngOnInit(): void { 
   } 
   
-  public salvar(){    
+  public salvar(event){    
     if (this.form.invalid){
       this.msgService.add({
         severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'
@@ -46,17 +55,6 @@ export class LoteriaCadastroComponent implements OnInit {
       console.log(error);
     })
   }
-
-  public publicar(){
-
-  }
-
-  public preview(){
-
-  }
-
-  public importar(){
-
-  }
+ 
 
 }
