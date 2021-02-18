@@ -1,1 +1,122 @@
-<p>template-cadastro works!</p>
+<!-- <p-card header="Cadastro de template"> -->
+<app-pagecadastro [config]="{titulo: 'Cadastro de template'}">
+    <form class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-9">
+            <label for="txtNome">{{'Nome' | translate}}</label>
+            <input type="text" id="txtNome" pInputText>
+        </div>
+        <div class="p-field-checkbox p-col-3 p-mt-4">
+            <p-checkbox value="true" inputId="chkTodos"></p-checkbox>
+            <label for="chkTodos">{{'Todas as empresas' | translate}}</label>
+        </div>
+        <div class="p-col p-mb-1">
+            <p-fileUpload #fileupload  mode="basic" cancelLabel="CANCELAR" chooseLabel="Adicionar imagem" [auto]="true"  
+                name="filename" customUpload="true" (uploadHandler)="adicionarImagem($event)" ></p-fileUpload>
+        </div>
+
+        <div #imageContainer id="image-container" class="p-d-flex p-ml-2 p-mr-2 image-container" devImage [bgImage]="arquivo?.url" position="left top">
+            
+            <div [id]="campo.hash" class="dragdrop" cdkDragBoundary=".image-container" cdkDrag *ngFor="let campo of camposAdicionais" 
+                (cdkDragMoved)="movendoCampo($event, campo)" [cdkDragFreeDragPosition]="campo.drag">
+                <p-inplace closable="closable">
+                    <ng-template pTemplate="display">
+                        <span 
+                            [ngStyle]="{
+                                'font-family': campo.fonte,
+                                'font-size': campo.fonteTamanho + 'px',
+                                'font-weight': campo.fonteEspessura,
+                                'color': campo.fonteCor
+                            }">
+                            {{campo.valorTeste}}
+                        </span>
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <input type="text" [(ngModel)]="campo.valorTeste" pInputText [ngModelOptions]="{standalone: true}">
+                    </ng-template>
+                </p-inplace>
+            </div>
+        </div>
+        <div class="p-field p-col-12 p-mt-2">
+            <button type="button" class="p-button p-button-raised p-button-secondary rd-w-100 p-jc-center" (click)="adicionarCampo()">
+                <i class="pi pi-plus p-mr-2"></i>
+                <span>{{'ADICIONAR_CAMPO' | translate}}</span>
+            </button>
+        </div>
+        <div class="p-field p-mt-2 p-col-12 campo-container" *ngFor="let campo of camposAdicionais">
+            <div class="p-d-flex">
+                <div class="p-field p-col-6">
+                    <label for="txtCampoNome">{{'NOME' | translate}}</label>
+                    <input type="text" id="txtCampoNome" pInputText [(ngModel)]="campo.nome" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="p-field p-col-4">
+                    <label for="txtCampoTipo">{{'TIPO' | translate}}</label>
+                    <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+                <div class="p-field-checkbox p-col-2 p-mt-4">
+                    <p-checkbox value="true" inputId="chkCadastro" [(ngModel)]="campo.cadastro" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                    <label for="chkCadastro">{{'CADASTRO' | translate}}</label>
+                </div>
+            </div>
+            <div class="p-d-flex">
+                <div class="p-field p-col-3">
+                    <label for="txtCampoFonte">{{'FONTE' | translate}}</label>
+                    <p-dropdown id="txtCampoFonte" [(ngModel)]="campo.fonte" optionValue="name" [options]="fontes" placeholder="{{'Selecione uma fonte' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+                <div class="p-field p-col-3">
+                    <label for="txtCampoEspessura">{{'ESPESSURA' | translate}}</label>
+                    <p-dropdown id="txtCampoEspessura" [(ngModel)]="campo.fonteEspessura" optionValue="value" [options]="espessuras" placeholder="{{'Selecione uma espessura' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+                <div class="p-field p-col-3">
+                    <label for="txtCampoFonteTamanho">{{'TAMANHO' | translate}}</label>
+                    <p-inputNumber [(ngModel)]="campo.fonteTamanho" mode="decimal" [showButtons]="true" inputId="txtCampoFonteTamanho" [min]="0" [max]="100" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                </div>
+                <div class="p-field p-col-3 p-d-flex">
+                    <div class="p-d-flex p-flex-column p-field">
+                        <label>{{'COR' | translate}}</label>
+                        <p-colorPicker [(ngModel)]="campo.fonteCor" [ngModelOptions]="{standalone: true}" format="hex"></p-colorPicker>
+                    </div>
+                    <div class="p-field p-col p-mt-4">
+                        <input type="text" id="txtCampoFonteCor" pInputText [(ngModel)]="campo.fonteCor" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+            </div>
+            <div class="p-d-flex">
+                <div class="p-field p-col-4">
+                    <label for="txtCampoLeft">{{'DISTANCIA_ESQUERDA' | translate}}</label>
+                    <p-inputNumber [(ngModel)]="campo.left" (keypress)="onKeyPress($event, campo)" (onBlur)="setDistancia(campo)" mode="decimal" inputId="txtCampoLeft" [minFractionDigits]="2" suffix="%" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                </div>
+                <div class="p-field p-col-4">
+                    <label for="txtCampoTop">{{'DISTANCIA_TOPO' | translate}}</label>
+                    <p-inputNumber [(ngModel)]="campo.top" (keypress)="onKeyPress($event, campo)" (onBlur)="setDistancia(campo)"  mode="decimal" inputId="txtCampoTop" [minFractionDigits]="2" suffix="%" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                </div>
+                <div class="p-field p-col-4">
+                    <label for="txtCampoAngulo">{{'ANGULO' | translate}}</label>
+                    <p-inputNumber [(ngModel)]="campo.angulo" mode="decimal" inputId="txtCampoAngulo" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                </div>
+            </div>
+            <!--CAMPOS PARA IMAGEM -->
+            <div class="p-d-flex" *ngIf="campo.tipo == 4">
+                <div class="p-field p-col-6">
+                    <label for="txtCampoResolucao">{{'RESOLUCAO' | translate}}</label>
+                    <p-inputNumber [(ngModel)]="campo.resolucaoImagem" mode="decimal" inputId="txtCampoResolucao" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                </div>
+                <div class="p-field p-col-6">
+                    <label for="txtCampoFormato">{{'FORMATO' | translate}}</label>
+                    <p-dropdown id="txtCampoFormato" [(ngModel)]="campo.imagemFormato" optionValue="cod" [options]="formatos" placeholder="{{'Selecione o formato' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                </div>
+            </div>
+            <!--CAMPOS PARA IMAGEM -->
+            <div class="p-d-flex" *ngIf="campo.tipo == 1">
+                <div class="p-field p-col-6">
+                    <label for="txtCampoLimite">{{'LIMITE' | translate}}</label>
+                    <p-inputNumber [(ngModel)]="campo.limite" mode="decimal" inputId="txtCampoLimite" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                </div>
+                <div class="p-field p-col-6">
+                    <label for="txtCampoLinhas">{{'LINHAS' | translate}}</label>
+                    <p-inputNumber [(ngModel)]="campo.numeroLinhas" mode="decimal" inputId="txtCampoLinhas" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                </div>
+            </div>
+        </div>
+    </form>
+</app-pagecadastro>
+<!-- </p-card> -->

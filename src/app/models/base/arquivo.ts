@@ -10,4 +10,6 @@ export class Arquivo extends AbstractEntity {
     public tipo:number;
     public descricao:string;
     public idArquivo: number;
+    public width: number;
+    public height: number;
 }

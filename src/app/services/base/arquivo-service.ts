@@ -47,7 +47,8 @@ export class ArquivoService extends AbstractService<Arquivo> {
                     reject(evnt);
                 };
                 xhr.open("POST", endpoint, true);
-                xhr.setRequestHeader('Accept', 'multipart/mixed');
+                // xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+                xhr.setRequestHeader('Accept', 'application/json');
                 xhr.send(formData);
             }else{
                 resolve(false);

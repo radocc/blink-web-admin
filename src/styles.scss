@@ -25,6 +25,7 @@
 @import './app/pages/configuracao/pages/loteria/loteria-pesquisa/loteria-pesquisa.component.scss';
 
 @import './app/pages/grupo/panel-grupo/panel-grupo.component.scss';
+@import './app/pages/configuracao/pages/template/template-cadastro/template-cadastro.component.scss';
 
 // @include mat-core();
 
@@ -79,6 +80,8 @@ PLAYER
 
 @include login-page-layout($theme);
 @include register-action($theme);
+
+@include page-template-cadastro($theme);
 
 
 html, body { 
