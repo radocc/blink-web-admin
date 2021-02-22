@@ -17,6 +17,10 @@ import {DividerModule} from 'primeng/divider';
 import {ToolbarModule} from 'primeng/toolbar';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import {CardModule} from 'primeng/card';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {ColorPickerModule} from 'primeng/colorpicker';
+import {InplaceModule} from 'primeng/inplace';
 @NgModule({
   declarations: [],
   imports: [
@@ -37,7 +41,11 @@ import {CardModule} from 'primeng/card';
     DividerModule,
     ToolbarModule,
     VirtualScrollerModule,
-    CardModule
+    CardModule,
+    DropdownModule,
+    InputNumberModule,
+    ColorPickerModule,
+    InplaceModule
   ],
   exports:[
     ButtonModule,
@@ -56,7 +64,11 @@ import {CardModule} from 'primeng/card';
     DividerModule,
     ToolbarModule,
     VirtualScrollerModule,
-    CardModule
+    CardModule,
+    DropdownModule,
+    InputNumberModule,
+    ColorPickerModule,
+    InplaceModule
   ]
 })
 export class NgPrimeModule { }

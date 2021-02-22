@@ -10,6 +10,8 @@ import { LoteriaPesquisaComponent } from './pages/loteria/loteria-pesquisa/loter
 import { PanelConfiguracaoComponent } from './panel-configuracao/panel-configuracao.component';
 import { TemplateCadastroComponent } from './pages/template/template-cadastro/template-cadastro.component';
 import { TemplatePesquisaComponent } from './pages/template/template-pesquisa/template-pesquisa.component';
+import { DevImageDirective } from 'app/directives/dev-image.directive';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
     {
@@ -51,6 +53,7 @@ const routes: Routes = [
   
   @NgModule({
     declarations: [
+      DevImageDirective,
       PanelConfiguracaoComponent,
       LoteriaCadastroComponent,
       LoteriaPesquisaComponent,
@@ -64,7 +67,8 @@ const routes: Routes = [
       ReactiveFormsModule,
       DevComponentModule,
       ShareTranslateModule,
-      RouterModule.forChild(routes)
+      RouterModule.forChild(routes),
+      DragDropModule
     ]
   })
   export class ConfiguracaoModule { }
