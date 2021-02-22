@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { ShareTranslateModule } from '@radoccmodules/share-translate/share-translate.module';
 
 
-
 @NgModule({
   declarations: [
     PageCadastroComponent

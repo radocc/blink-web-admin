@@ -31,7 +31,7 @@ import { DevionnTranslateLoader } from './modules/share-translate/devionn-transl
     BrowserAnimationsModule,
     NgPrimeModule, 
     HttpClientModule,
-    ShareTranslateModule
+    ShareTranslateModule,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },

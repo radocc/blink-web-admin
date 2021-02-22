@@ -13,6 +13,7 @@ import EImagemFormato from '@radoccmodels/enum/imagem-formato-enum';
 import EFonteEspessura from '@radoccmodels/enum/fonte-espessura-enum';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Portal } from '@angular/cdk/portal';
+import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -20,7 +21,7 @@ import { Portal } from '@angular/cdk/portal';
   styleUrls: ['./template-cadastro.component.scss'],
   providers: [ArquivoService]
 })
-export class TemplateCadastroComponent implements OnInit {
+export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   @ViewChild('fileupload', {static: true}) inputFile: FileUpload;
   @ViewChild('imageContainer', {static: false}) imageContainer: ElementRef;
@@ -40,7 +41,9 @@ export class TemplateCadastroComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private imagemService: ImagemService,
-    private arquivoService: ArquivoService) { }
+    private arquivoService: ArquivoService) { 
+      super();
+  }
 
   ngOnInit(): void {
   }
@@ -93,15 +96,22 @@ export class TemplateCadastroComponent implements OnInit {
   }
 
   public adicionarCampo() {
+    if (this.arquivo == null) {
+      this.page.showWarnMsg('Necessário carregar uma imagem antes de adicionar um campo');
+      // return;
+    }
     this.camposAdicionais.push(new TemplateCampoAdicional());
-    
   }
 
   public movendoCampo(event: CdkDragMove, campo: TemplateCampoAdicional) {
-    
+    var content: any = event.source.element.nativeElement.children.namedItem('drag-content');
     let width = this.arquivo.width / this.proportion;
     console.log('width: ', width);
     let position = event.source.getFreeDragPosition();
+    let childPos = content.offset();
+    console.log('childPos: ', childPos);
+    position = {x: childPos.top - position.x, y: childPos.left - position.y};
+    
     console.log('position: ', position);
     let left = (Math.round(position.x) / width) * 100;
     let top = (Math.round(position.y) / this.imageHeight) * 100;

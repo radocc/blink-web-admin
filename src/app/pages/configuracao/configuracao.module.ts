@@ -12,6 +12,7 @@ import { TemplateCadastroComponent } from './pages/template/template-cadastro/te
 import { TemplatePesquisaComponent } from './pages/template/template-pesquisa/template-pesquisa.component';
 import { DevImageDirective } from 'app/directives/dev-image.directive';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
     {
@@ -68,7 +69,8 @@ const routes: Routes = [
       DevComponentModule,
       ShareTranslateModule,
       RouterModule.forChild(routes),
-      DragDropModule
+      DragDropModule,
+      MatIconModule
     ]
   })
   export class ConfiguracaoModule { }

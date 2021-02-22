@@ -18,22 +18,29 @@
             
             <div [id]="campo.hash" class="dragdrop" cdkDragBoundary=".image-container" cdkDrag *ngFor="let campo of camposAdicionais" 
                 (cdkDragMoved)="movendoCampo($event, campo)" [cdkDragFreeDragPosition]="campo.drag">
-                <p-inplace closable="closable">
-                    <ng-template pTemplate="display">
-                        <span 
-                            [ngStyle]="{
-                                'font-family': campo.fonte,
-                                'font-size': campo.fonteTamanho + 'px',
-                                'font-weight': campo.fonteEspessura,
-                                'color': campo.fonteCor
-                            }">
-                            {{campo.valorTeste}}
-                        </span>
-                    </ng-template>
-                    <ng-template pTemplate="content">
-                        <input type="text" [(ngModel)]="campo.valorTeste" pInputText [ngModelOptions]="{standalone: true}">
-                    </ng-template>
-                </p-inplace>
+                <div class="drag-header p-d-flex p-ai-center" cdkDragHandle>
+                    <div class="btnDrag"><mat-icon>open_with</mat-icon></div>
+                    <div class="grad-name p-m-1">{{campo.nome}}</div>
+                </div>
+                <div class="drag-content" name="drag-content">
+                    <p-inplace closable="closable">
+                        <ng-template pTemplate="display">
+                            <span 
+                                [ngStyle]="{
+                                    'font-family': campo.fonte,
+                                    'font-size': campo.fonteTamanho + 'px',
+                                    'font-weight': campo.fonteEspessura,
+                                    'color': campo.fonteCor
+                                }">
+                                {{campo.valorTeste}}
+                            </span>
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <input type="text" [(ngModel)]="campo.valorTeste" pInputText [ngModelOptions]="{standalone: true}">
+                        </ng-template>
+                    </p-inplace>
+                </div>
+                
             </div>
         </div>
         <div class="p-field p-col-12 p-mt-2">
