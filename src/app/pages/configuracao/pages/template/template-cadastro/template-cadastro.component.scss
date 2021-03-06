@@ -1,5 +1,7 @@
 @mixin page-template-cadastro($theme) {
     app-template-cadastro {
+        flex: 0 0 auto;
+        position: relative;
 
         .image-container {
             height: 400px;
@@ -21,6 +23,7 @@
                 border: 1px dashed var(--surface-d);
                 resize: both;
                 overflow: auto;
+                position: relative;
             }
 
             .p-inplace .p-inplace-display {
