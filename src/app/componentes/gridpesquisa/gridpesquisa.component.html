@@ -23,15 +23,15 @@
             <ng-template pTemplate="header">
                 <tr >
                     <th *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
-                        {{coluna.name}}
+                        {{coluna.name |translate}}
                     </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
                 <tr>
                     <td *ngFor='let coluna of colunas'>
-                        <span *ngIf="coluna.tipo.toUpperCase() != 'timestamp'.toUpperCase()">{{item[coluna.prop]}}</span>
-                        <span *ngIf="coluna.tipo.toUpperCase() == 'timestamp'.toUpperCase()">{{item[coluna.prop] | date: coluna.mascara}}</span>
+                        <span *ngIf="coluna.tipo.toUpperCase() != 'timestamp'.toUpperCase()" translate>{{item[coluna.prop]}}</span>
+                        <span *ngIf="coluna.tipo.toUpperCase() == 'timestamp'.toUpperCase()" translate>{{item[coluna.prop] | date: coluna.mascara}}</span>
                     </td>
                 </tr>
             </ng-template>

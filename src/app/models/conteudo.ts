@@ -2,7 +2,7 @@ import { Arquivo } from "./base/arquivo";
 import { BaseEntityImpl } from "./baseentityimpl";
 import { ConteudoAgendamento } from "./conteudoagendamento";
 import { ConteudoFiltro } from "./conteudofiltro";
-import { ConteudoNoticiaFonte } from "./conteudonoticiafonte";
+import { ConteudoFonteNoticia } from "./conteudofontenoticia";
 import { ConteudoPrevisao } from "./conteudoprevisao";
 import { Template } from "./template";
 
@@ -16,7 +16,7 @@ export class Conteudo extends BaseEntityImpl {
     public tempoExibicao:number;
     public agendamento:ConteudoAgendamento;
     public arquivo:Arquivo;
-    public fontes:ConteudoNoticiaFonte[] = [];
+    public fontes:ConteudoFonteNoticia[] = [];
     public filtro:ConteudoFiltro;
     public previsaoTempo:ConteudoPrevisao;
     

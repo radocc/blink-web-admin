@@ -2,7 +2,7 @@ import { BaseEntityImpl } from "./baseentityimpl";
 import { FonteNoticia } from "./fontenoticia";
 import { NoticiaEditoria } from "./noticiaeditoria";
 
-export class ConteudoNoticiaFonte extends BaseEntityImpl {
+export class ConteudoFonteNoticia extends BaseEntityImpl {
     
     public idConteudo:number;
     public idFonteNoticia:number;

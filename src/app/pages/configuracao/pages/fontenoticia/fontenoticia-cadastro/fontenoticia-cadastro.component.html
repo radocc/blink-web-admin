@@ -1,0 +1,24 @@
+<p-card class="box box-stretched" header="Cadastro de Fonte de Noticia">
+    <div class="page-tipoconteudo-cadastro rd-flex rd-col rd-gap-8">
+        <div class="rd-col rd-flex rd-gap">
+            <div class="div-edicao rd-flex rd-col">
+                <form [formGroup]="form">
+                    <div class="rd-flex rd-col ">
+                        <div class="p-field rd-col">
+                            <label for="nome" translate>NOME</label>
+                            <input id="nome" required formControlName="nome" type="text" pInputText>
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="sequencia" translate>SEQUENCIA</label>
+                            <input id="sequencia" required formControlName="sequencia" type="number" pInputText>
+                        </div> 
+                    </div> 
+                </form>      
+            </div>
+            <div>
+                <button pButton type="button" label="SALVAR" translate (click)="salvar($event)"></button>
+            </div>
+                 
+        </div>    
+    </div>            
+</p-card>
