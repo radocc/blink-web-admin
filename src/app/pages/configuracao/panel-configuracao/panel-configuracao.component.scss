@@ -6,14 +6,15 @@
         display: flex;
 
         .pagina {
-            // height: 100%;
-
+            flex: auto;
+            display: flex;
             .lado {
                 // height: 100%;
+                flex: auto;
 
-                p-card .p-card {
-                    // height: 100%;
-                }
+                // p-card .p-card {
+                //     height: 100%;
+                // }
             }
         }
     }

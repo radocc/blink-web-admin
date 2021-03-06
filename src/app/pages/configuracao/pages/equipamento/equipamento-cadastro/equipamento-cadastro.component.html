@@ -1,0 +1,36 @@
+<p-card class="box box-stretched" header="Cadastro de Equipamento">
+    <div class="page-loteria-cadastro rd-flex rd-col rd-gap-8">
+        <div class="rd-col rd-flex rd-gap">
+            <div class="div-edicao rd-flex rd-col">
+                <form [formGroup]="form">
+                    <div class="rd-flex rd-col ">
+                        <div class="p-field rd-col">
+                            <label for="nome" translate>NOME</label>
+                            <input id="nome" required formControlName="nome" type="text" pInputText>
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="identificador" translate>IDENTIFICADOR</label>
+                            <input id="identificador" required formControlName="identificador" type="text" pInputText>
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="uuid" translate>UUID</label>
+                            <input id="uuid" required formControlName="uuid" type="text" pInputText>                     
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="fornecedor" translate>FORNECEDOR</label>
+                            <input id="fornecedor" required formControlName="fornecedor" type="text" pInputText>                     
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="dataCompra" translate>DATA_DA_COMPRA</label>
+                            <p-calendar [showTime]="false" formControlName="dataCompra"  inputId="dataCompra"></p-calendar>
+                        </div> 
+                    </div> 
+                </form>      
+            </div>
+            <div>
+                <button pButton type="button" label="SALVAR" translate (click)="salvar($event)"></button>
+            </div>
+                 
+        </div>    
+    </div>            
+</p-card>

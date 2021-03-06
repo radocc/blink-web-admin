@@ -5,10 +5,25 @@
   
     app-grid-pesquisa {
         width: 100%;
+        flex: auto;
+        display: flex;
+        flex-direction: column;
         // height: 100%;
-
-        .gridpesquisa {
-            // height: 100%;
+        .gridpesquisa{
+            display: flex;
+            flex-direction: column;
+            flex: auto;
+            .p-card{
+                flex: auto;
+                display: flex;
+                flex-direction: column;
+            }
+            .grid-container{
+                flex: 1;
+            }
+        }
+        .p-toolbar{
+            flex: 1;
         }
 
         .item-image {

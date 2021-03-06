@@ -1,7 +1,7 @@
-@mixin page-configuracao-loteria-pesquisa($videotheme) {
+@mixin page-configuracao-fontenoticia-pesquisa($videotheme) {
  
-    app-loteria-pesquisa {
-        height: 100%;
+    app-fontenoticia-pesquisa {
+        flex: auto;
         display: flex;
         .label-field{
             line-height: 20px;

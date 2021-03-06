@@ -13,6 +13,12 @@ import { TemplatePesquisaComponent } from './pages/template/template-pesquisa/te
 import { DevImageDirective } from 'app/directives/dev-image.directive';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
+import { EquipamentoPesquisaComponent } from './pages/equipamento/equipamento-pesquisa/equipamento-pesquisa.component';
+import { EquipamentoCadastroComponent } from './pages/equipamento/equipamento-cadastro/equipamento-cadastro.component';
+import { TipoConteudoPesquisaComponent } from './pages/tipoconteudo/tipoconteudo-pesquisa/tipoconteudo-pesquisa.component';
+import { TipoConteudoCadastroComponent } from './pages/tipoconteudo/tipoconteudo-cadastro/tipoconteudo-cadastro.component';
+import { FonteNoticiaCadastroComponent } from './pages/fontenoticia/fontenoticia-cadastro/fontenoticia-cadastro.component';
+import { FonteNoticiaPesquisaComponent } from './pages/fontenoticia/fontenoticia-pesquisa/fontenoticia-pesquisa.component';
 
 const routes: Routes = [
     {
@@ -30,11 +36,12 @@ const routes: Routes = [
         //   pathMatch:'full'
         // },
         {
-          path:'',
-          component: LoteriaPesquisaComponent
+          path:'loteria-pesquisa',
+          component: LoteriaPesquisaComponent,
+          outlet: 'pesquisa'
         },
         {
-          path:'',
+          path:'loteria-cadastro',
           outlet: 'cadastro',
           component: LoteriaCadastroComponent
         },
@@ -47,7 +54,37 @@ const routes: Routes = [
           path: 'template-cadastro',
           component: TemplateCadastroComponent,
           outlet: 'cadastro'
-        }
+        },
+        {
+          path:'equipamento-pesquisa',
+          component: EquipamentoPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'equipamento-cadastro',
+          outlet: 'cadastro',
+          component: EquipamentoCadastroComponent
+        },
+        {
+          path:'tipoconteudo-pesquisa',
+          component: TipoConteudoPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'tipoconteudo-cadastro',
+          outlet: 'cadastro',
+          component: TipoConteudoCadastroComponent
+        },
+        {
+          path:'fontenoticia-pesquisa',
+          component: FonteNoticiaPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'fontenoticia-cadastro',
+          outlet: 'cadastro',
+          component: FonteNoticiaCadastroComponent
+        },
       ]
     }
   ]
@@ -59,7 +96,13 @@ const routes: Routes = [
       LoteriaCadastroComponent,
       LoteriaPesquisaComponent,
       TemplateCadastroComponent,
-      TemplatePesquisaComponent    
+      TemplatePesquisaComponent,
+      EquipamentoCadastroComponent,
+      EquipamentoPesquisaComponent,
+      TipoConteudoCadastroComponent,
+      TipoConteudoPesquisaComponent,
+      FonteNoticiaCadastroComponent,
+      FonteNoticiaPesquisaComponent
     ],
     imports: [
       CommonModule,

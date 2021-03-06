@@ -1,0 +1,14 @@
+@mixin page-configuracao-fontenoticia-cadastro($videotheme) {
+ 
+    app-fontenoticia-cadastro {
+        flex: auto;
+        display: flex;
+        flex-direction: column;
+        .p-card, p-card{
+            flex: auto;
+            display: flex;
+            flex-direction: column;
+               
+        }
+    }
+}

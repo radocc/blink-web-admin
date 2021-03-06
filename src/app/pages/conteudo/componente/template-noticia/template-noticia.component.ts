@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { Conteudo } from '@radoccmodels/conteudo';
 import { ConteudoFiltro } from '@radoccmodels/conteudofiltro';
-import { ConteudoNoticiaFonte } from '@radoccmodels/conteudonoticiafonte';
+import { ConteudoFonteNoticia } from '@radoccmodels/conteudofontenoticia';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { FonteNoticia } from '@radoccmodels/fontenoticia';
 import { NoticiaEditoria } from '@radoccmodels/noticiaeditoria';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
-import { ConteudoFonteNoticiaService } from '@radoccservices/conteudonoticia-services';
+import { ConteudoFonteNoticiaService } from '@radoccservices/conteudofontenoticia-services';
 import { FonteNoticiaService } from '@radoccservices/fontenoticia-services';
 import { NoticiaEditoriaService } from '@radoccservices/noticiaeditoria-services';
 import { MessageService } from 'primeng/api';
@@ -32,8 +32,8 @@ export class TemplateNoticiaComponent implements OnInit {
     filtroAssuntos:new FormControl('')
   }) 
   
-  public conteudoNoticias:ConteudoNoticiaFonte[] = [];
-  public editorias:ConteudoNoticiaFonte[] = [];
+  public conteudoNoticias:ConteudoFonteNoticia[] = [];
+  public editorias:ConteudoFonteNoticia[] = [];
   public filtro:ConteudoFiltro;
   public conteudo:Conteudo;
 

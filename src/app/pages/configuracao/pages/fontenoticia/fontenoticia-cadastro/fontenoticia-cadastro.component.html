@@ -1,0 +1,33 @@
+<p-card class="box box-stretched" header="Cadastro de Fonte de Noticia">
+    <div class="page-fontenoticia-cadastro rd-flex rd-col rd-gap-8">
+        <div class="rd-col rd-flex rd-gap">
+            <div class="div-edicao rd-flex rd-col">
+                <form [formGroup]="form">
+                    <div class="rd-flex rd-col ">
+                        <div class="p-field rd-col">
+                            <label for="nome" translate>NOME</label>
+                            <input id="nome" required formControlName="nome" type="text" pInputText>
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="url" translate>URL</label>
+                            <input id="url" required formControlName="url" type="url" pInputText>
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="template" translate>TEMPLATE</label>
+                            <p-autoComplete formControlName="template" class="rd-flex"
+                            [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
+                            <ng-template let-template pTemplate="item">
+                                <div>{{template.nome}} </div>
+                            </ng-template>
+                        </p-autoComplete>
+                        </div> 
+                    </div> 
+                </form>      
+            </div>
+            <div>
+                <button pButton type="button" label="SALVAR" translate (click)="salvar($event)"></button>
+            </div>
+                 
+        </div>    
+    </div>            
+</p-card>
