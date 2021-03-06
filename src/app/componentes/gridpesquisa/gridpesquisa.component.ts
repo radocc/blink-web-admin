@@ -74,6 +74,10 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
     // this.mostrapesquisa = !this.mostrapesquisa;
   }
 
+  selectRecord(obj: any) {
+    this.selection.select(obj);
+  }
+
   public onCliclPesquisar(){
     this.pesquisar();
   } 
