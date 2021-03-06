@@ -19,3 +19,9 @@
         }
     }
 }
+
+:host ::ng-deep .p-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

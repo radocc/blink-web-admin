@@ -1,12 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Events } from '@radoccmodels/enum/events';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { FiltroService } from '@radoccservices/base/filtro-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
 import { GridPesquisaComponent } from 'app/componentes/gridpesquisa/gridpesquisa.component';
+import { EventEmitter } from 'events';
+import { EventBrokerService } from 'ng-event-broker';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-template-pesquisa',
@@ -28,24 +32,33 @@ export class TemplatePesquisaComponent implements OnInit {
   public tiposConteudos: TipoConteudo[] = [ ]
   public conteudos:ConteudoResult[] = [];
   public tipoConteudo:TipoConteudo= null;
- 
+  public atualizarListaEvent: Subscription;
 
   
   constructor(public filtroService: FiltroService, 
     private tipoConteudoService: TipoConteudoService,
     private router: Router,
-    private conteudoService: ConteudoService) {
+    private conteudoService: ConteudoService,
+    private eventService: EventBrokerService) {
 
   }
 
   ngOnInit(): void { 
     this.buscarTipos();
+    this.atualizarListaEvent = this.eventService.subscribeEvent(Events.atualizarLista).subscribe(
+      () => {this.grid.pesquisar()},
+      (err) => console.error(err)
+    )
   } 
 
   ngAfterViewInit(): void {
-    console.log(window.innerHeight);
-    let div = document.getElementById('template-pesquisa');
-    div.style.height = ((window.innerHeight - div.offsetTop) * 0.98) + 'px';
+    // console.log(window.innerHeight);
+    // let div = document.getElementById('template-pesquisa');
+    // div.style.height = ((window.innerHeight - div.offsetTop) * 0.98) + 'px';
+  }
+
+  ngOnDestroy(): void {
+    this.atualizarListaEvent.unsubscribe();
   }
   
   public gridPesquisa(grid) {

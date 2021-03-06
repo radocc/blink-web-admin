@@ -1,17 +1,21 @@
 <!-- <p-card header="Cadastro de template"> -->
-<app-pagecadastro [config]="{titulo: 'Cadastro de template'}" class="p-d-flex p-flex-column">
+<app-pagecadastro [config]="{titulo: 'Cadastro de template'}" class="p-d-flex p-flex-column" (save)="salvar()">
     <form class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-9">
             <label for="txtNome">{{'Nome' | translate}}</label>
-            <input type="text" id="txtNome" pInputText>
+            <input type="text" id="txtNome" pInputText [(ngModel)]="template.nome" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="p-field-checkbox p-col-3 p-mt-4">
-            <p-checkbox value="true" inputId="chkTodos"></p-checkbox>
+            <p-checkbox [binary]="true" inputId="chkTodos" [(ngModel)]="template.todasEmpresas" [ngModelOptions]="{standalone: true}"></p-checkbox>
             <label for="chkTodos">{{'Todas as empresas' | translate}}</label>
         </div>
-        <div class="p-col p-mb-1">
+        <div class="p-field p-col-6 p-mt-4">
             <p-fileUpload #fileupload  mode="basic" cancelLabel="CANCELAR" chooseLabel="Adicionar imagem" [auto]="true"  
                 name="filename" customUpload="true" (uploadHandler)="adicionarImagem($event)" ></p-fileUpload>
+        </div>
+        <div class="p-field p-col-6">
+            <label for="txtTipoConteudo">{{'TIPO_CONTEUDO' | translate}}</label>
+            <p-dropdown id="txtTipoConteudo" [(ngModel)]="template.idTipoConteudo" optionValue="id" optionLabel="nome" [options]="tiposConteudos" placeholder="{{'SELECIONE_UM_TIPO' | translate}}" [ngModelOptions]="{standalone: true}"></p-dropdown>
         </div>
 
         <div #imageContainer id="image-container" class="p-d-flex p-ml-2 p-mr-2 image-container" devImage [bgImage]="arquivo?.url" position="left top">

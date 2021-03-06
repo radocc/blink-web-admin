@@ -14,6 +14,7 @@ import { NoopInterceptor } from '@radoccservices/base/interceptor-http';
 import { Router } from '@angular/router';
 import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DevionnTranslateLoader } from './modules/share-translate/devionn-translate-loader';
+import { EventBrokerModule } from 'ng-event-broker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { DevionnTranslateLoader } from './modules/share-translate/devionn-transl
     NgPrimeModule, 
     HttpClientModule,
     ShareTranslateModule,
+    EventBrokerModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },

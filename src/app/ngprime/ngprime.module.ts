@@ -22,6 +22,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {InplaceModule} from 'primeng/inplace';
 import {AccordionModule} from 'primeng/accordion';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [],
@@ -48,7 +49,8 @@ import {AccordionModule} from 'primeng/accordion';
     InputNumberModule,
     ColorPickerModule,
     InplaceModule,
-    AccordionModule
+    AccordionModule,
+    ScrollPanelModule
   ],
   exports:[
     ButtonModule,
@@ -72,7 +74,8 @@ import {AccordionModule} from 'primeng/accordion';
     InputNumberModule,
     ColorPickerModule,
     InplaceModule,
-    AccordionModule
+    AccordionModule,
+    ScrollPanelModule
   ]
 })
 export class NgPrimeModule { }
