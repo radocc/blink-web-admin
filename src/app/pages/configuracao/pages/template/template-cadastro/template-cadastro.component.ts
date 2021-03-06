@@ -14,6 +14,7 @@ import EFonteEspessura from '@radoccmodels/enum/fonte-espessura-enum';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Portal } from '@angular/cdk/portal';
 import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
+import { ResizeObserver } from '@juggle/resize-observer';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -50,14 +51,15 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   ngAfterViewInit(): void {
     let me = this;
-    this.setHeight(me.imageContainer.nativeElement);
+    this.setContainerImageHeight(me.imageContainer.nativeElement);
     window.addEventListener('resize', function(event) {
-      me.setHeight(me.imageContainer.nativeElement);
+      me.setContainerImageHeight(me.imageContainer.nativeElement);
     });
+
   }
 
   //** Seta a altura para manter a proporção 16:9 */
-  private setHeight(div: HTMLDivElement) {
+  private setContainerImageHeight(div: HTMLDivElement) {
     this.imageHeight = div.offsetWidth * 0.5625;
     div.style.setProperty('height', this.imageHeight + 'px');
     if (this.arquivo != null) {
@@ -87,30 +89,39 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     }    
   }
 
-  public toArrayBuffer(file, retorno) {
-    var reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = function () {
-        retorno(reader.result);
-    };
-  }
-
   public adicionarCampo() {
     if (this.arquivo == null) {
       this.page.showWarnMsg('Necessário carregar uma imagem antes de adicionar um campo');
       // return;
     }
-    this.camposAdicionais.push(new TemplateCampoAdicional());
+    let campo = new TemplateCampoAdicional();
+    this.camposAdicionais.push(campo);
+
+    setTimeout(() => {
+      let drag = document.getElementById(campo.hash);
+      campo.height = drag.offsetHeight;
+      campo.width = drag.offsetWidth;
+
+      //**Detecta alteração de tamanho do campo */
+      new ResizeObserver(() => {
+        campo.height = drag.offsetHeight;
+        campo.width = drag.offsetWidth;
+      }).observe(drag);
+    }, 300);
+  }
+
+  public onResize(event) {
+    console.log('resize');
   }
 
   public movendoCampo(event: CdkDragMove, campo: TemplateCampoAdicional) {
-    var content: any = event.source.element.nativeElement.children.namedItem('drag-content');
+    // var content: any = event.source.element.nativeElement.children.namedItem('drag-content');
     let width = this.arquivo.width / this.proportion;
     console.log('width: ', width);
     let position = event.source.getFreeDragPosition();
-    let childPos = content.offset();
-    console.log('childPos: ', childPos);
-    position = {x: childPos.top - position.x, y: childPos.left - position.y};
+    // let childPos = content.offset();
+    // console.log('childPos: ', childPos);
+    // position = {x: childPos.top - position.x, y: childPos.left - position.y};
     
     console.log('position: ', position);
     let left = (Math.round(position.x) / width) * 100;
@@ -134,5 +145,17 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     if (event.key == 'Enter') {
       this.setDistancia(campo);
     }
+  }
+
+  public setFieldWidth(event, campo: TemplateCampoAdicional) {
+    let drag = document.getElementById(campo.hash);
+    let content: any = drag.children.namedItem('drag-content');
+    content.style.width = campo.width + 'px';
+  }
+
+  public setFieldHeight(event, campo: TemplateCampoAdicional) {
+    let drag = document.getElementById(campo.hash);
+    let content: any = drag.children.namedItem('drag-content');
+    content.style.height = campo.height + 'px';
   }
 }

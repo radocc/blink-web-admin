@@ -21,6 +21,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {InplaceModule} from 'primeng/inplace';
+import {AccordionModule} from 'primeng/accordion';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -45,7 +47,8 @@ import {InplaceModule} from 'primeng/inplace';
     DropdownModule,
     InputNumberModule,
     ColorPickerModule,
-    InplaceModule
+    InplaceModule,
+    AccordionModule
   ],
   exports:[
     ButtonModule,
@@ -68,7 +71,8 @@ import {InplaceModule} from 'primeng/inplace';
     DropdownModule,
     InputNumberModule,
     ColorPickerModule,
-    InplaceModule
+    InplaceModule,
+    AccordionModule
   ]
 })
 export class NgPrimeModule { }

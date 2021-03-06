@@ -41,6 +41,12 @@ export class TemplatePesquisaComponent implements OnInit {
   ngOnInit(): void { 
     this.buscarTipos();
   } 
+
+  ngAfterViewInit(): void {
+    console.log(window.innerHeight);
+    let div = document.getElementById('template-pesquisa');
+    div.style.height = ((window.innerHeight - div.offsetTop) * 0.98) + 'px';
+  }
   
   public gridPesquisa(grid) {
     this.gridpesquisa = grid;

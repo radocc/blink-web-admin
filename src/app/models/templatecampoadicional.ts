@@ -21,6 +21,8 @@ export class TemplateCampoAdicional extends BaseEntityImpl {
     public imagemFormato: number;
     public numeroLinhas: number;
     public sequencia: number;
+    public height: number;
+    public width: number;
 
     @jsonIgnore() public valorTeste: string = 'Texto aqui';
     @jsonIgnore() public drag = {x: 0, y: 0};

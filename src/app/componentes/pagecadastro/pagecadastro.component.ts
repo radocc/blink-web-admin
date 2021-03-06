@@ -30,12 +30,19 @@ export class PageCadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    // console.log(window.innerHeight);
+    // let appCadastro = document.getElementById('app-page-cadastro');
+    // appCadastro.style.height = ((window.innerHeight - appCadastro.offsetTop) * 0.98) + 'px';
+    // let cardBody: any = appCadastro.querySelector('.p-card-body');
+    // cardBody.style.height =  '100%';
+
+  }
+
   public validarForm():boolean{
 
     return true;
   }
-
-  
 
   public salvar(){
     this.onSave.emit(this.form);
