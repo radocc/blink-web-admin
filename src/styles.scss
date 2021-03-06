@@ -26,6 +26,14 @@
 
 @import './app/pages/grupo/panel-grupo/panel-grupo.component.scss';
 @import './app/pages/configuracao/pages/template/template-cadastro/template-cadastro.component.scss';
+@import './app/pages/configuracao/pages/equipamento/equipamento-cadastro/equipamento-cadastro.component.scss';
+@import './app/pages/configuracao/pages/equipamento/equipamento-pesquisa/equipamento-pesquisa.component.scss';
+@import './app/pages/configuracao/pages/tipoconteudo/tipoconteudo-cadastro/tipoconteudo-cadastro.component.scss';
+@import './app/pages/configuracao/pages/tipoconteudo/tipoconteudo-pesquisa/tipoconteudo-pesquisa.component.scss';
+@import './app/pages/configuracao/pages/fontenoticia/fontenoticia-cadastro/fontenoticia-cadastro.component.scss';
+@import './app/pages/configuracao/pages/fontenoticia/fontenoticia-pesquisa/fontenoticia-pesquisa.component.scss';
+
+
 @import './app/componentes/pagecadastro/pagecadastro.component.scss';
 
 // @include mat-core();
@@ -76,13 +84,21 @@ PLAYER
 @include app-panel-grupo-player($theme);
 
 @include app-panel-configuracao($theme);
-@include page-loteria-cadastro($theme);
-@include page-loteria-pesquisa($theme);
+
 
 @include login-page-layout($theme);
 @include register-action($theme);
 
 @include page-template-cadastro($theme);
+@include page-configuracao-fontenoticia-pesquisa($theme);
+@include page-configuracao-fontenoticia-cadastro($theme);
+@include page-configuracao-tipoconteudo-pesquisa($theme);
+@include page-configuracao-tipoconteudo-cadastro($theme);
+@include page-configuracao-loteria-pesquisa($theme);
+@include page-configuracao-loteria-cadastro($theme);
+@include page-configuracao-equipamento-pesquisa($theme);
+@include page-configuracao-equipamento-cadastro($theme);
+
 @include page-cadastro($theme);
 
 
@@ -132,4 +148,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .rd-txt-center{
     text-align: center;
+}
+.rd-over-hidden{
+    overflow: hidden;
 }

@@ -1,7 +1,14 @@
-@mixin page-tipoconteudo-cadastro($videotheme) {
+@mixin page-configuracao-fontenoticia-cadastro($videotheme) {
  
-    page-tipoconteudo-cadastro {
-        
+    app-fontenoticia-cadastro {
+        flex: auto;
         display: flex;
+        flex-direction: column;
+        .p-card, p-card{
+            flex: auto;
+            display: flex;
+            flex-direction: column;
+               
+        }
     }
 }

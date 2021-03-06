@@ -1,25 +1,24 @@
 <div class="gridpesquisa slide" #page>
-    <p-card class="box box-stretched" [header]="nomeTela | translate">
-    <p-toolbar color="primary" fxLayout="row" fxLayout.xs="column" class="barra-ferramentas">
-        <div class="rd-row">
-            <input pInputText type="text" placeholder="Pesquisar"/>
-            <span class="rd-flex"></span>
+    <p-card class="box rd-col rd-flex box-stretched" [header]="nomeTela | translate">
+    <p-toolbar color="primary" class="rd-flex rd-row ">
+        <div class="rd-row rd-flex">
+            <input pInputText class="rd-flex p-mr-2" type="text" placeholder="Pesquisar"/>
         </div>
         <div class="rd-row">
-            <p-button  (click)="abrirPesquisa()">
-                <i *ngIf="!mostrapesquisa" class="pi pi-search"></i>
-                <i *ngIf="mostrapesquisa" class="pi pi-keyboard_arrow_up"></i>
+            <p-button  (click)="onCliclPesquisar()">
+                <!-- <i *ngIf="!mostrapesquisa" class="pi pi-arrow-down"></i> -->
+                <i *ngIf="mostrapesquisa" class="pi pi-search"></i>
             </p-button> 
             <p-divider class="dividir" *ngIf="direitos?.length > 0" layout="vertical"></p-divider>            
-            <p-button class="" tabindex="{{direito.posicao}}" title="{{direito.nome | translate}}" *ngFor="let direito of direitos " (click)="onClickButton(direito)">
-                <i class="pi pi-check">{{direito.icone}}</i>
+            <p-button class="p-mr-2" label="{{direito.nome | translate}}" tabindex="{{direito.posicao}}" title="{{direito.nome | translate}}" *ngFor="let direito of direitos " (click)="onClickButton(direito)">
+                
             </p-button>
         </div>
     </p-toolbar>
     <div *ngIf="mostrapesquisa" class="pesquisa-container">
     </div>
-    <div class="grid-container" id="print-section" fxLayout="column" fxFlex="100%" #table>
-        <p-table #dataTable [value]="dataSource">
+    <div class="grid-container" id="print-section"  #table>
+        <p-table #dataTable selectionMode="single" [(selection)]="selection" [value]="dataSource">
             <ng-template pTemplate="header">
                 <tr >
                     <th *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
@@ -28,7 +27,7 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
-                <tr>
+                <tr [pSelectableRow]="item">
                     <td *ngFor='let coluna of colunas'>
                         <span *ngIf="coluna.tipo.toUpperCase() != 'timestamp'.toUpperCase()" translate>{{item[coluna.prop]}}</span>
                         <span *ngIf="coluna.tipo.toUpperCase() == 'timestamp'.toUpperCase()" translate>{{item[coluna.prop] | date: coluna.mascara}}</span>

@@ -1,5 +1,5 @@
 <p-card class="box box-stretched" header="Cadastro de Fonte de Noticia">
-    <div class="page-tipoconteudo-cadastro rd-flex rd-col rd-gap-8">
+    <div class="page-fontenoticia-cadastro rd-flex rd-col rd-gap-8">
         <div class="rd-col rd-flex rd-gap">
             <div class="div-edicao rd-flex rd-col">
                 <form [formGroup]="form">
@@ -9,8 +9,17 @@
                             <input id="nome" required formControlName="nome" type="text" pInputText>
                         </div> 
                         <div class="p-field rd-col">
-                            <label for="sequencia" translate>SEQUENCIA</label>
-                            <input id="sequencia" required formControlName="sequencia" type="number" pInputText>
+                            <label for="url" translate>URL</label>
+                            <input id="url" required formControlName="url" type="url" pInputText>
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="template" translate>TEMPLATE</label>
+                            <p-autoComplete formControlName="template" class="rd-flex"
+                            [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
+                            <ng-template let-template pTemplate="item">
+                                <div>{{template.nome}} </div>
+                            </ng-template>
+                        </p-autoComplete>
                         </div> 
                     </div> 
                 </form>      

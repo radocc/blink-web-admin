@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
+import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { FonteNoticia } from '@radoccmodels/fontenoticia';
+import { Template } from '@radoccmodels/template';
 import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { FonteNoticiaService } from '@radoccservices/fontenoticia-services';
+import { TemplateService } from '@radoccservices/template-services';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
 import { MessageService } from 'primeng/api';
 
@@ -11,7 +14,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './fontenoticia-cadastro.component.html',
   styleUrls: ['./fontenoticia-cadastro.component.scss'],
   providers:[ 
-    MessageService,FonteNoticiaService
+    MessageService,FonteNoticiaService, TemplateService
   ]
 })
 export class FonteNoticiaCadastroComponent implements OnInit {
@@ -30,15 +33,22 @@ export class FonteNoticiaCadastroComponent implements OnInit {
     url:new FormControl('', Validators.required),
     template:new FormControl('', Validators.required)
   }) 
+  public templates:Template[] = []
   
   public fonteNoticia:FonteNoticia;
 
-  constructor(private msgService:MessageService, private fonteNoticiaService:FonteNoticiaService) {
+  constructor(private msgService:MessageService, private fonteNoticiaService:FonteNoticiaService, private templateService:TemplateService) {
 
   }
 
   ngOnInit(): void { 
   } 
+
+  public pesquisarTemplate(nome){
+    this.templateService.findNomeETipo(nome,ETipoConteudo.Noticias).subscribe((lista)=>{
+      this.templates = lista;
+    })
+  }
   
   public salvar(event){    
     if (this.form.invalid){
