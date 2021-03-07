@@ -19,6 +19,8 @@ import { TipoConteudoPesquisaComponent } from './pages/tipoconteudo/tipoconteudo
 import { TipoConteudoCadastroComponent } from './pages/tipoconteudo/tipoconteudo-cadastro/tipoconteudo-cadastro.component';
 import { FonteNoticiaCadastroComponent } from './pages/fontenoticia/fontenoticia-cadastro/fontenoticia-cadastro.component';
 import { FonteNoticiaPesquisaComponent } from './pages/fontenoticia/fontenoticia-pesquisa/fontenoticia-pesquisa.component';
+import { UsuarioPesquisaComponent } from './pages/usuario/usuario-pesquisa/usuario-pesquisa.component';
+import { UsuarioCadastroComponent } from './pages/usuario/usuario-cadastro/usuario-cadastro.component';
 
 const routes: Routes = [
     {
@@ -85,6 +87,16 @@ const routes: Routes = [
           outlet: 'cadastro',
           component: FonteNoticiaCadastroComponent
         },
+        {
+          path:'usuario-pesquisa',
+          component: UsuarioPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'usuario-cadastro',
+          outlet: 'cadastro',
+          component: UsuarioCadastroComponent
+        },
       ]
     }
   ]
@@ -102,7 +114,9 @@ const routes: Routes = [
       TipoConteudoCadastroComponent,
       TipoConteudoPesquisaComponent,
       FonteNoticiaCadastroComponent,
-      FonteNoticiaPesquisaComponent
+      FonteNoticiaPesquisaComponent,
+      UsuarioCadastroComponent,
+      UsuarioPesquisaComponent
     ],
     imports: [
       CommonModule,

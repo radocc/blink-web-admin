@@ -1,7 +1,12 @@
 @mixin page-configuracao-equipamento-cadastro($videotheme) {
  
-    page-equipamento-cadastro {
-        
+    app-equipamento-cadastro {
+        flex: auto;
         display: flex;
+        .page-equipamento-cadastro{
+            display: flex;
+            flex: auto;
+            flex-direction: column;
+        }
     }
 }

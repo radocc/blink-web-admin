@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
+import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
 import { Loteria } from '@radoccmodels/loteria';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { LoteriaService } from '@radoccservices/loteria-services';
@@ -23,9 +24,11 @@ export class LoteriaCadastroComponent implements OnInit {
     subTitle:'',
     btnSalvar:'SALVAR'
   }
+  @ViewChild("pageCadastro") public pageCadastro:PageCadastroComponent
   
   public form:FormGroup = new FormGroup({
-    nome:new FormControl('', Validators.required)    
+    nome:new FormControl('', Validators.required),
+    url:new FormControl('', Validators.required)    
   }) 
   
   public loteria:Loteria;
@@ -39,20 +42,20 @@ export class LoteriaCadastroComponent implements OnInit {
   
   public salvar(event){    
     if (this.form.invalid){
-      this.msgService.add({
-        severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'
-      })
+      this.pageCadastro.showWarnMsg('EXISTEM_CAMPOS_OBRIGATORIOS');
       return ;
     }
     if (this.loteria == null){
       this.loteria = new Loteria();
     }
     this.loteria.nome = this.form.controls['nome'].value;
-    
+    this.loteria.url = this.form.controls['url'].value;
     this.loteriaService.save(this.loteria).subscribe((loteria)=>{
       this.loteria = loteria;
+      this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
     }, error=>{
       console.log(error);
+      this.pageCadastro.showErrorMsg("FALHA_AO_SALVAR");
     })
   }
  

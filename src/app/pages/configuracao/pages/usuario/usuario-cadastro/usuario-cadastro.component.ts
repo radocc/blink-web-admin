@@ -1,25 +1,27 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
+import { Usuario } from '@radoccmodels/base/usuario';
 import { TipoConteudo } from '@radoccmodels/tipoconteudo';
+import { UsuarioService } from '@radoccservices/base/usuario-service';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-tipoconteudo-cadastro',
-  templateUrl: './tipoconteudo-cadastro.component.html',
-  styleUrls: ['./tipoconteudo-cadastro.component.scss'],
+  selector: 'app-usuario-cadastro',
+  templateUrl: './usuario-cadastro.component.html',
+  styleUrls: ['./usuario-cadastro.component.scss'],
   providers:[ 
-    MessageService,TipoConteudoService
+    MessageService,UsuarioService
   ]
 })
-export class TipoConteudoCadastroComponent implements OnInit {
+export class UsuarioCadastroComponent implements OnInit {
   public config:{
     titulo:string,
     subTitle:string,
     btnSalvar:string;
   }={
-    titulo:'TIPO_DE_CONTEUDO',
+    titulo:'USUARIO',
     subTitle:'',
     btnSalvar:'SALVAR'
   }
@@ -30,9 +32,9 @@ export class TipoConteudoCadastroComponent implements OnInit {
     sequencia:new FormControl('', Validators.required)
   }) 
   
-  public tipo:TipoConteudo;
+  public usuario:Usuario;
 
-  constructor(private msgService:MessageService, private tipoConteudoService:TipoConteudoService) {
+  constructor(private msgService:MessageService, private usuarioService:UsuarioService) {
 
   }
 
@@ -44,19 +46,19 @@ export class TipoConteudoCadastroComponent implements OnInit {
       this.pageCadastro.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
-    if (this.tipo == null){
-      this.tipo = new TipoConteudo();
-    }
-    this.tipo.nome = this.form.controls['nome'].value;
-    this.tipo.sequencia = this.form.controls['sequencia'].value;
+    // if (this.tipo == null){
+    //   this.tipo = new TipoConteudo();
+    // }
+    // this.tipo.nome = this.form.controls['nome'].value;
+    // this.tipo.sequencia = this.form.controls['sequencia'].value;
     
-    this.tipoConteudoService.save(this.tipo).subscribe((equipamento)=>{
-      this.tipo = equipamento;
-      this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
-    }, error=>{
-      this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
-      console.log(error);
-    })
+    // this.tipoConteudoService.save(this.tipo).subscribe((equipamento)=>{
+    //   this.tipo = equipamento;
+    //   this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+    // }, error=>{
+    //   this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
+    //   console.log(error);
+    // })
   }
  
 

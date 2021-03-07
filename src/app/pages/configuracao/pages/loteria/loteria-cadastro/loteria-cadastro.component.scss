@@ -1,7 +1,12 @@
 @mixin page-configuracao-loteria-cadastro($videotheme) {
  
-    page-loteria-cadastro {
-        
+    app-loteria-cadastro {
+        flex: auto;
         display: flex;
+        flex-direction: column;
+        
+        .page-loteria-cadastro{
+            flex: auto;
+        }
     }
 }

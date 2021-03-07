@@ -28,7 +28,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-item>
                 <tr [pSelectableRow]="item">
-                    <td *ngFor='let coluna of colunas'>
+                    <td *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
                         <span *ngIf="coluna.tipo.toUpperCase() != 'timestamp'.toUpperCase()" translate>{{item[coluna.prop]}}</span>
                         <span *ngIf="coluna.tipo.toUpperCase() == 'timestamp'.toUpperCase()" translate>{{item[coluna.prop] | date: coluna.mascara}}</span>
                     </td>

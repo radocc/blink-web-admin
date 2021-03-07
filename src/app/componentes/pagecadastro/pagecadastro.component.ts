@@ -1,13 +1,14 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-pagecadastro',
   templateUrl: './pagecadastro.component.html',
   styleUrls: ['./pagecadastro.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService,TranslateService]
 })
 export class PageCadastroComponent implements OnInit {
 
@@ -25,7 +26,8 @@ export class PageCadastroComponent implements OnInit {
   @Input() mostraVoltar: boolean = true;
   @Output("save") onSave:EventEmitter<any> = new EventEmitter();
 
-  constructor(private location:Location, private msgService: MessageService) { }
+  constructor(private location:Location, private msgService: MessageService,
+    private translateService:TranslateService) { }
 
   ngOnInit(): void {
   }
@@ -57,39 +59,48 @@ export class PageCadastroComponent implements OnInit {
   }
 
   public showSuccessMsg(msg: string) {
-    this.msgService.add({
-      severity: 'success',
-      summary: 'Sucesso!',
-      detail: msg
+    this.translateService.get(msg).subscribe((mensagem)=>{
+      this.msgService.add({
+        severity: 'success',
+        summary: 'Sucesso!',
+        detail: mensagem
+      });
+      this.timerClose();
     });
-    this.timerClose();
+    
   }
 
   public showErrorMsg(msg: string) {
-    this.msgService.add({
-      severity: 'error',
-      summary: 'Ops!',
-      detail: msg
+    this.translateService.get(msg).subscribe((mensagem)=>{
+      this.msgService.add({
+        severity: 'error',
+        summary: 'Ops!',
+        detail: mensagem
+      });
+      this.timerClose();
     });
-    this.timerClose();
   }
 
   public showInfoMsg(msg: string) {
-    this.msgService.add({
-      severity: 'info',
-      summary: 'Informação!',
-      detail: msg
+    this.translateService.get(msg).subscribe((mensagem)=>{
+      this.msgService.add({
+        severity: 'info',
+        summary: 'Informação!',
+        detail: mensagem
+      });
+      this.timerClose();
     });
-    this.timerClose();
   }
 
   public showWarnMsg(msg: string) {
-    this.msgService.add({
-      severity: 'warn',
-      summary: 'Atenção!',
-      detail: msg
+    this.translateService.get(msg).subscribe((mensagem)=>{
+      this.msgService.add({
+        severity: 'warn',
+        summary: 'Atenção!',
+        detail: mensagem
+      });
+      this.timerClose();
     });
-    this.timerClose();
   }
 
   public timerClose() {

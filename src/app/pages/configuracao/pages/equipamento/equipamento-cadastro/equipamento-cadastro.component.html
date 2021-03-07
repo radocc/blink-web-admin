@@ -1,5 +1,5 @@
-<p-card class="box box-stretched" header="Cadastro de Equipamento">
-    <div class="page-loteria-cadastro rd-flex rd-col rd-gap-8">
+<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)">
+    <div class="page-equipamento-cadastro rd-flex rd-col rd-gap-8">
         <div class="rd-col rd-flex rd-gap">
             <div class="div-edicao rd-flex rd-col">
                 <form [formGroup]="form">
@@ -26,11 +26,7 @@
                         </div> 
                     </div> 
                 </form>      
-            </div>
-            <div>
-                <button pButton type="button" label="SALVAR" translate (click)="salvar($event)"></button>
-            </div>
-                 
+            </div>     
         </div>    
     </div>            
-</p-card>
+</app-pagecadastro>

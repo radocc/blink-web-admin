@@ -8,7 +8,10 @@
             flex: auto;
             display: flex;
             flex-direction: column;
-               
+            .p-autocomplete {
+                display: flex;
+            }  
+
         }
     }
 }

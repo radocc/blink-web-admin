@@ -22,7 +22,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {InplaceModule} from 'primeng/inplace';
 import {AccordionModule} from 'primeng/accordion';
-
+import {TabViewModule} from 'primeng/tabview';
 @NgModule({
   declarations: [],
   imports: [
@@ -48,7 +48,8 @@ import {AccordionModule} from 'primeng/accordion';
     InputNumberModule,
     ColorPickerModule,
     InplaceModule,
-    AccordionModule
+    AccordionModule,
+    TabViewModule
   ],
   exports:[
     ButtonModule,
@@ -72,6 +73,7 @@ import {AccordionModule} from 'primeng/accordion';
     InputNumberModule,
     ColorPickerModule,
     InplaceModule,
+    TabViewModule,
     AccordionModule
   ]
 })

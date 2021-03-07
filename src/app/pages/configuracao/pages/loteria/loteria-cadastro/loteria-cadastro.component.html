@@ -1,4 +1,4 @@
-<p-card class="box box-stretched" header="Cadastro de loteria">
+<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)">
     <div class="page-loteria-cadastro rd-flex rd-col rd-gap-8">
         <div class="rd-col rd-flex rd-gap">
             <div class="div-edicao rd-flex rd-col">
@@ -20,4 +20,4 @@
             </div>      
         </div>    
     </div>            
-</p-card>
+</app-pagecadastro>

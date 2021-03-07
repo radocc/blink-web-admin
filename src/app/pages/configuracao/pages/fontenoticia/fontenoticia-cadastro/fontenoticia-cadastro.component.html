@@ -1,33 +1,74 @@
-<p-card class="box box-stretched" header="Cadastro de Fonte de Noticia">
+<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)">
     <div class="page-fontenoticia-cadastro rd-flex rd-col rd-gap-8">
         <div class="rd-col rd-flex rd-gap">
-            <div class="div-edicao rd-flex rd-col">
-                <form [formGroup]="form">
-                    <div class="rd-flex rd-col ">
-                        <div class="p-field rd-col">
-                            <label for="nome" translate>NOME</label>
-                            <input id="nome" required formControlName="nome" type="text" pInputText>
-                        </div> 
-                        <div class="p-field rd-col">
-                            <label for="url" translate>URL</label>
-                            <input id="url" required formControlName="url" type="url" pInputText>
-                        </div> 
-                        <div class="p-field rd-col">
-                            <label for="template" translate>TEMPLATE</label>
-                            <p-autoComplete formControlName="template" class="rd-flex"
-                            [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
-                            <ng-template let-template pTemplate="item">
-                                <div>{{template.nome}} </div>
+            <p-tabView>
+                <p-tabPanel header="DADOS_DA_FONTE" translate>
+                    <div class="div-edicao rd-flex rd-col">
+                        <form [formGroup]="form">
+                            <div class="rd-flex rd-col ">
+                                <div class="p-field rd-col">
+                                    <label for="nome" translate>NOME</label>
+                                    <input id="nome" required formControlName="nome" type="text" pInputText>
+                                </div> 
+                                <div class="p-field rd-col">
+                                    <label for="url" translate>URL</label>
+                                    <input id="url" required formControlName="url" type="url" pInputText>
+                                </div> 
+                                <div class="p-field rd-col">
+                                    <label for="template" translate>TEMPLATE</label>
+                                    <p-autoComplete formControlName="template" class="rd-flex p-field"
+                                    [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
+                                        <ng-template let-template pTemplate="item">
+                                            <div>{{template.nome}} </div>
+                                        </ng-template>
+                                    </p-autoComplete>
+                                </div> 
+                                <div>
+
+                                </div>
+                            </div> 
+                        </form>      
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="EDITORIAS" translate>
+                    <div class="div-edicao rd-flex rd-col">
+                        <form [formGroup]="formEditoria">
+                            <div class="rd-flex rd-col ">
+                                <div class="p-field rd-col">
+                                    <label for="nome" translate>NOME</label>
+                                    <input id="nome" required formControlName="nome" type="text" pInputText>
+                                </div> 
+                                <div class="p-field rd-col">
+                                    <label for="url" translate>URL</label>
+                                    <input id="url" required formControlName="url" type="url" pInputText>
+                                </div>                                  
+                                <div>
+                                    <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate (click)="adicionar($event)"></button>
+                                </div>
+                            </div> 
+                        </form>  
+                        <p-table [value]="editorias" [scrollable]="true" scrollHeight="100%">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th translate>NOME</th>
+                                    <th translate>URL</th>
+                                    <th translate>ACOES</th>
+                                </tr>
                             </ng-template>
-                        </p-autoComplete>
-                        </div> 
-                    </div> 
-                </form>      
-            </div>
-            <div>
-                <button pButton type="button" label="SALVAR" translate (click)="salvar($event)"></button>
-            </div>
-                 
+                            <ng-template pTemplate="body" let-edit>
+                                <tr>
+                                    <td>{{edit.nome}}</td>
+                                    <td>{{edit.url}}</td>
+                                    <td>
+                                        <button type="button" class="p-mr-2" title="EDITAR"  pButton pRipple icon="pi pi-pencil" (click)="alterarEditoria(edit)"></button>
+                                        <button type="button" class="p-mr-2" title="EXCLUIR"  pButton pRipple icon="pi pi-trash" (click)="excluirEditoria(edit)"></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>    
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
         </div>    
-    </div>            
-</p-card>
+    </div>
+</app-pagecadastro>
