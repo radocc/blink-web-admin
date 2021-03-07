@@ -16,6 +16,9 @@
 
         .painel-site-content {
             height: 100%;
+            flex: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .row{
