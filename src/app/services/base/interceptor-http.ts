@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'environments/environment';
+import { jsonIgnoreReplacer } from 'json-ignore';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AdminRoutes } from './rotas';
@@ -28,9 +29,9 @@ export class NoopInterceptor implements HttpInterceptor {
         }
         let newReq;
         if (!req.headers.get('Content-Type')  && req.url.indexOf(environment.serverHost) > 0 ) {
-            newReq = req.clone({setHeaders: { Authorization: token, 'Content-Type': 'application/json', 'idioma': idioma}});
+            newReq = req.clone({body: this.convertBody(req.body) ,setHeaders: { Authorization: token, 'Content-Type': 'application/json', 'idioma': idioma}});
         } else {
-            newReq = req;
+            newReq = req.clone({body: this.convertBody(req.body)});
         }
         
         return next.handle(newReq).pipe(tap(event => {
@@ -61,6 +62,13 @@ export class NoopInterceptor implements HttpInterceptor {
     public abrirLogin(){
         localStorage.clear();
         this.router.navigate(['/login']);
+    }
+
+    private convertBody(body) {
+        if (body != null) {
+            return JSON.stringify(body, jsonIgnoreReplacer);
+        }
+        return body;
     }
     
 }

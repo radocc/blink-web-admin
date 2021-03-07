@@ -22,7 +22,9 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {InplaceModule} from 'primeng/inplace';
 import {AccordionModule} from 'primeng/accordion';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {TabViewModule} from 'primeng/tabview';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -49,6 +51,7 @@ import {TabViewModule} from 'primeng/tabview';
     ColorPickerModule,
     InplaceModule,
     AccordionModule,
+    ScrollPanelModule,
     TabViewModule
   ],
   exports:[
@@ -73,8 +76,9 @@ import {TabViewModule} from 'primeng/tabview';
     InputNumberModule,
     ColorPickerModule,
     InplaceModule,
-    TabViewModule,
-    AccordionModule
+    AccordionModule,
+    ScrollPanelModule,
+    TabViewModule, 
   ]
 })
 export class NgPrimeModule { }

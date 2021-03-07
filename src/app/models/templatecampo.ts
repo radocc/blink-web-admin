@@ -3,7 +3,7 @@ import { BaseEntityImpl } from "./baseentityimpl";
 import EFonteEspessura from "./enum/fonte-espessura-enum";
 import EFontFamily from "./enum/fonte-family-enum";
 
-export class TemplateCampoAdicional extends BaseEntityImpl {
+export class TemplateCampo extends BaseEntityImpl {
     
     public idTemplate: number;
     public nome: string;
@@ -14,15 +14,15 @@ export class TemplateCampoAdicional extends BaseEntityImpl {
     public fonteTamanho: number = 18;
     public fonteCor: string = '#000000';
     public fonteEspessura: string = EFonteEspessura.REGULAR.name;
-    public cadastro: boolean;
+    public cadastro: boolean = false;
     public top: number = 0;
     public left: number = 0;
-    public angulo: number;
+    public angulo: number = 0;
     public imagemFormato: number;
-    public numeroLinhas: number;
+    public numeroLinhas: number = 1;
     public sequencia: number;
-    public height: number;
-    public width: number;
+    public height: number = 0;
+    public width: number = 0;
 
     @jsonIgnore() public valorTeste: string = 'Texto aqui';
     @jsonIgnore() public drag = {x: 0, y: 0};

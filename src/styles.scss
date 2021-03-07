@@ -26,6 +26,7 @@
 
 @import './app/pages/grupo/panel-grupo/panel-grupo.component.scss';
 @import './app/pages/configuracao/pages/template/template-cadastro/template-cadastro.component.scss';
+@import './app/pages/configuracao/pages/template/template-pesquisa/template-pesquisa.component.scss';
 @import './app/pages/configuracao/pages/equipamento/equipamento-cadastro/equipamento-cadastro.component.scss';
 @import './app/pages/configuracao/pages/equipamento/equipamento-pesquisa/equipamento-pesquisa.component.scss';
 @import './app/pages/configuracao/pages/tipoconteudo/tipoconteudo-cadastro/tipoconteudo-cadastro.component.scss';
@@ -100,12 +101,14 @@ PLAYER
 @include page-configuracao-equipamento-cadastro($theme);
 
 @include page-cadastro($theme);
+@include page-template-pesquisa($theme);
 
 
 html, body { 
     height: 100%; 
     @include absoluto();
     @include background-body();
+    overflow-y: hidden;
 }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,25 +1,32 @@
 
-.div-menu{
-    // width: 200px;
-    background: black;
-    border-radius: 5px;
-    // height: 100%;
-    padding: 12px;
-    
-    input {
-        width: 100%;
-    }
+@mixin page-template-pesquisa($theme) {
+    app-template-pesquisa {
+        display: flex;
+        height: 100%;
 
-    .item-menu{
-        color: white;
-        font-weight: 400;
-        margin: 16px;
-        font-size: 14;
-        cursor: pointer;
-    }
-    .item-menu.selected {
-        // background: map-get($theme, dark);
-        font-weight: 800;
-        font-size: 18;
+        .div-menu{
+            // width: 200px;
+            background: black;
+            border-radius: 5px;
+            // height: 100%;
+            padding: 12px;
+            
+            input {
+                width: 100%;
+            }
+        
+            .item-menu{
+                color: white;
+                font-weight: 400;
+                margin: 16px;
+                font-size: 14;
+                cursor: pointer;
+            }
+            .item-menu.selected {
+                // background: map-get($theme, dark);
+                font-weight: 800;
+                font-size: 18;
+            }
+        }
     }
 }
