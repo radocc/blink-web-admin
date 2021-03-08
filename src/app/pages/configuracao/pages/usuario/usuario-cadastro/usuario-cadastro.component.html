@@ -7,10 +7,39 @@
                         <div class="p-field rd-col">
                             <label for="nome" translate>NOME</label>
                             <input id="nome" required formControlName="nome" type="text" pInputText>
-                        </div> 
+                        </div>
+                        <div class="rd-row rd-flex">
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="cnpj" translate>CPF/CNPJ</label>
+                                <input id="cnpj" required formControlName="cnpj" type="text" pInputText>
+                            </div> 
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="login" translate>LOGIN</label>
+                                <input id="login" required formControlName="login" type="text" pInputText>
+                            </div>
+                        </div>
                         <div class="p-field rd-col">
-                            <label for="sequencia" translate>SEQUENCIA</label>
-                            <input id="sequencia" required formControlName="sequencia" type="number" pInputText>
+                            <label for="email" translate>EMAIL</label>
+                            <input id="email" required formControlName="email" type="email" pInputText>
+                        </div>
+                        <div class="rd-row rd-flex">
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="senha" translate>SENHA</label>
+                                <input id="senha" required formControlName="senha" type="password" pInputText>
+                            </div> 
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="confirmeSenha" translate>CONFIRME_A_SENHA</label>
+                                <input id="confirmeSenha" required formControlName="confirmeSenha" type="password" pInputText>
+                            </div>
+                        </div>
+                        <div class="p-field rd-col rd-flex">
+                            <label for="grupoUsuario" translate>GRUPO_DE_USUARIO</label>
+                            <p-autoComplete formControlName="grupoUsuario" class="rd-flex p-field"
+                            [suggestions]="grupos" (completeMethod)="pesquisarGrupo($event.query)" field="nome" [dropdown]="true">
+                                <ng-template let-grupo pTemplate="item">
+                                    <div>{{grupo.nome}} </div>
+                                </ng-template>
+                            </p-autoComplete>
                         </div> 
                     </div> 
                 </form>      
