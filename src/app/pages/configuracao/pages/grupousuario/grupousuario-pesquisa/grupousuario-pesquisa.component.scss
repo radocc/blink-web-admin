@@ -1,0 +1,7 @@
+@mixin page-configuracao-grupousuario-pesquisa($videotheme) {
+ 
+    app-grupousuario-pesquisa {
+        height: 100%;
+        display: flex; 
+    }
+}

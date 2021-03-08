@@ -35,6 +35,8 @@
 @import './app/pages/configuracao/pages/fontenoticia/fontenoticia-pesquisa/fontenoticia-pesquisa.component.scss';
 @import './app/pages/configuracao/pages/usuario/usuario-pesquisa/usuario-pesquisa.component.scss';
 @import './app/pages/configuracao/pages/usuario/usuario-cadastro/usuario-cadastro.component.scss';
+@import './app/pages/configuracao/pages/grupousuario/grupousuario-cadastro/grupousuario-cadastro.component.scss';
+@import './app/pages/configuracao/pages/grupousuario/grupousuario-pesquisa/grupousuario-pesquisa.component.scss';
 
 
 @import './app/componentes/pagecadastro/pagecadastro.component.scss';
@@ -103,6 +105,8 @@ PLAYER
 @include page-configuracao-equipamento-cadastro($theme);
 @include page-configuracao-usuario-cadastro($theme);
 @include page-configuracao-usuario-pesquisa($theme);
+@include page-configuracao-grupousuario-cadastro($theme);
+@include page-configuracao-grupousuario-pesquisa($theme);
 
 @include page-cadastro($theme);
 @include page-template-pesquisa($theme);

@@ -24,7 +24,6 @@ import {InplaceModule} from 'primeng/inplace';
 import {AccordionModule} from 'primeng/accordion';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {TabViewModule} from 'primeng/tabview';
-
 @NgModule({
   declarations: [],
   imports: [
@@ -52,7 +51,7 @@ import {TabViewModule} from 'primeng/tabview';
     InplaceModule,
     AccordionModule,
     ScrollPanelModule,
-    TabViewModule
+    TabViewModule, 
   ],
   exports:[
     ButtonModule,
@@ -78,7 +77,7 @@ import {TabViewModule} from 'primeng/tabview';
     InplaceModule,
     AccordionModule,
     ScrollPanelModule,
-    TabViewModule, 
+    TabViewModule,  
   ]
 })
 export class NgPrimeModule { }

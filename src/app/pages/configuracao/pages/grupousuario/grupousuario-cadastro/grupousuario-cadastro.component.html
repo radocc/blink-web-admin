@@ -1,0 +1,26 @@
+<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)">
+    <div class="page-grupousuario-cadastro rd-flex rd-col rd-gap-8">
+        <div class="rd-col rd-flex rd-gap">
+            <div class="div-edicao rd-flex rd-col">
+                <form [formGroup]="form">
+                    <div class="rd-flex rd-col ">
+                        <div class="p-field rd-col">
+                            <label for="nome" translate>NOME</label>
+                            <input id="nome" required formControlName="nome" type="text" pInputText>
+                        </div>    
+                        <div class="rd-flex rd-row ">
+                            <div class="p-field rd-row rd-flex">                                
+                                <p-colorPicker id="cor" formControlName="cor"></p-colorPicker>                    
+                                <label class="lbl-cor" for="cor" translate>COR</label>
+                            </div>
+                            <div class="p-field rd-col p-mr-8 rd-flex">
+                                <p-checkbox name="ativo" value="true" label="ATIVO" formControlName="ativo"></p-checkbox>
+                            </div>
+                        </div>
+                        
+                    </div> 
+                </form>      
+            </div>  
+        </div>    
+    </div>            
+</app-pagecadastro>
