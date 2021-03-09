@@ -26,9 +26,9 @@ export class GrupoUsuarioCadastroComponent implements OnInit {
   @ViewChild("pageCadastro") public pageCadastro:PageCadastroComponent;
   
   public form:FormGroup = new FormGroup({
-    nome:new FormControl('', Validators.required),
-    cor:new FormControl('', Validators.required),
-    ativo:new FormControl('', Validators.required)
+    nome:new FormControl(null, Validators.required),
+    cor:new FormControl(null, Validators.required),
+    ativo:new FormControl(true, Validators.required)
   }) 
   
   public grupoUsuario:GrupoUsuario;
