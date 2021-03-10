@@ -2,13 +2,16 @@
     <div class="">
         <button pButton  type="button" label="NOVO_CONTEUDO" (click)="novo()" ></button>
     </div>
+    <div>
+        <p-messages></p-messages>
+    </div>
     <div class="rd-row rd-flex rd-gap">
         <div class="div-edicao rd-flex rd-col">
             <form [formGroup]="form">
                 <div class="rd-flex rd-col ">
                     <div class="p-field rd-col">
-                        <label for="titulo">Título</label>
-                        <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
+                        <label for="titulo" translate>TITULO</label>
+                        <input id="titulo" required formControlName="titulo" [ngClass]="{'ng-invalid':form.controls['titulo'].invalid}" type="text" pInputText>                     
                     </div> 
                     <div class="p-field rd-row">
                         <p-fileUpload mode="basic" maxFileSize="90000000" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
@@ -32,7 +35,6 @@
                     </app-panel-agendamento-conteudo> 
                 </div> 
             </form>
-            <p-messages></p-messages>       
         </div>
         <div class="acoes rd-col rd-gap">
             <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">

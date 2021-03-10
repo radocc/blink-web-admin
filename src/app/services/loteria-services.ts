@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; 
@@ -16,4 +17,7 @@ export class LoteriaService extends TVBlinkService<Loteria> {
         return 'loteria';
     }
     
+    public findNome(nome: string): Observable<Array<Loteria>> {
+        return this.http.post<Array<Loteria>>(this.urlWebBase + `/find/nome`, nome).pipe();
+    }
 }

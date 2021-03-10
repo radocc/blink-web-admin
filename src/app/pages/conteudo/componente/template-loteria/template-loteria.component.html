@@ -2,6 +2,9 @@
     <div class="">
         <button pButton  type="button" label="NOVO_CONTEUDO" ></button>
     </div>
+    <div>
+        <p-messages></p-messages>
+    </div>
     <div class="rd-row rd-flex rd-gap">
         <div class="div-edicao rd-flex rd-col">
             <form [formGroup]="form">
@@ -9,6 +12,24 @@
                     <div class="p-field rd-col">
                         <label for="titulo">Título</label>
                         <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
+                    </div>
+                    <div class="p-field rd-col">
+                        <label for="loteria" translate>LOTERIA</label>
+                        <p-autoComplete id="loteria" formControlName="loteria" 
+                            [suggestions]="loterias" (completeMethod)="pesquisarLoteria($event.query)" field="nome" [dropdown]="true">
+                            <ng-template let-loteria pTemplate="item">
+                                <div>{{loteria.nome}}</div>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                    <div class="p-field rd-col">
+                        <label for="template" translate>TEMPLATE</label>
+                        <p-autoComplete id="template" formControlName="template" 
+                            [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
+                            <ng-template let-template pTemplate="item">
+                                <div>{{template.nome}} </div>
+                            </ng-template>
+                        </p-autoComplete>
                     </div> 
                     <div class="tempo rd-row rd-gap">
                         <label class="label-field">Tempo de exibição</label>
@@ -25,8 +46,7 @@
             
                     </app-panel-agendamento-conteudo> 
                 </div> 
-            </form>
-            <p-messages></p-messages>       
+            </form>       
         </div>
         <div class="acoes rd-col rd-gap">
             <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">

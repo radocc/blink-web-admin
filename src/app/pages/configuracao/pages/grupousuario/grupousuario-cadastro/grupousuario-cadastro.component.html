@@ -1,4 +1,4 @@
-<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)">
+<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)" [form]="form">
     <div class="page-grupousuario-cadastro rd-flex rd-col rd-gap-8">
         <div class="rd-col rd-flex rd-gap">
             <div class="div-edicao rd-flex rd-col">
@@ -14,9 +14,14 @@
                                 <label class="lbl-cor" for="cor" translate>COR</label>
                             </div>
                             <div class="p-field rd-col p-mr-8 rd-flex">
-                                <p-checkbox name="ativo" value="true" label="ATIVO" formControlName="ativo"></p-checkbox>
+                                <p-checkbox name="ativo" value="true" label="ATIVO" [(ngModel)]="grupoUsuario.ativo"></p-checkbox>
                             </div>
                         </div>
+                        <div class="p-field rd-col">
+                            <label for="descricao" translate>DESCRICAO</label>
+                            <textarea pInputTextarea  rows="6" formControlName="descricao"></textarea>
+                        </div>    
+                        
                         
                     </div> 
                 </form>      

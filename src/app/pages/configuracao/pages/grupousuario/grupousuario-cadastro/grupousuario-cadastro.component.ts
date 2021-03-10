@@ -27,11 +27,13 @@ export class GrupoUsuarioCadastroComponent implements OnInit {
   
   public form:FormGroup = new FormGroup({
     nome:new FormControl(null, Validators.required),
-    cor:new FormControl(null, Validators.required),
+    descricao:new FormControl(null),
+    cor:new FormControl('#ddd', Validators.required),
     ativo:new FormControl(true, Validators.required)
-  }) 
+  }); 
   
-  public grupoUsuario:GrupoUsuario;
+  public grupoUsuario:GrupoUsuario = new GrupoUsuario();
+
   constructor(private msgService:MessageService, private grupoUsuarioService:GrupoUsuarioService) {
 
   }
@@ -51,6 +53,7 @@ export class GrupoUsuarioCadastroComponent implements OnInit {
     this.grupoUsuario.nome = this.form.controls['nome'].value;
     this.grupoUsuario.cor = this.form.controls['cor'].value;
     this.grupoUsuario.ativo = this.form.controls['ativo'].value;
+    this.grupoUsuario.descricao = this.form.controls['descricao'].value;
     this.grupoUsuarioService.save(this.grupoUsuario).subscribe((grupo)=>{
       this.grupoUsuario = grupo;
       this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');

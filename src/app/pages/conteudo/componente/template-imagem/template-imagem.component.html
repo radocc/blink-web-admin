@@ -2,6 +2,9 @@
     <div class="">
         <button pButton  type="button" label="NOVO_CONTEUDO" (click)="novo()"></button>
     </div>
+    <div>
+        <p-messages></p-messages>
+    </div>
     <div class="rd-row rd-flex rd-gap">
         <div class="div-edicao rd-flex rd-col">
             <form [formGroup]="form">
@@ -38,8 +41,7 @@
             
                     </app-panel-agendamento-conteudo> 
                 </div> 
-            </form>
-            <p-messages></p-messages>       
+            </form>      
         </div>
         <div class="acoes rd-col rd-gap">
             <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">

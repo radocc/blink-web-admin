@@ -1,3 +1,4 @@
+import { Loteria } from './../../../models/loteria';
 import { ETipoConteudo } from './../../../models/enum/etipoConteudo';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
@@ -61,6 +62,9 @@ export class PanelConteudoComponent implements OnInit {
         break;
       case ETipoConteudo.PrevisaoTempo:
         url += 'previsaotempo';
+        break;
+      case ETipoConteudo.Loteria:
+        url += 'loteria';
         break;
       case ETipoConteudo.TemplatesCorporativos:
         url += 'template-corporativo';

@@ -23,9 +23,9 @@ export class TemplateVideoComponent implements OnInit {
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
 
   public form:FormGroup = new FormGroup({
-    titulo:new FormControl('', Validators.required),    
-    minutos:new FormControl(),
-    segundos:new FormControl(),
+    titulo:new FormControl(null, Validators.required),    
+    minutos:new FormControl(0),
+    segundos:new FormControl(10),
   }) 
   
   public arquivo:Arquivo;
