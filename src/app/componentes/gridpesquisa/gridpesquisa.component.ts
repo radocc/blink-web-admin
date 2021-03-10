@@ -56,7 +56,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
   public buscarDados():Promise<void>{
     return new Promise((resolve, reject) => {
-      this.selection.clear();
+      this.selection = null;
       let filTemp = {...this.filter};
       filTemp.page = 1;
       filTemp.start = 0;
