@@ -1,3 +1,4 @@
+import { ETipoConteudo } from './../../../models/enum/etipoConteudo';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
 import { Conteudo } from '@radoccmodels/conteudo';
@@ -46,37 +47,37 @@ export class PanelConteudoComponent implements OnInit {
   public getUrl(tipo:TipoConteudo){
     let url = 'admin/conteudo/panel/';
     switch (tipo.id){
-      case 1:
+      case ETipoConteudo.Video:
         url += 'video';
         break;
-      case 2:
+      case ETipoConteudo.Imagens:
         url += 'imagem';
         break;
-      case 3:
+      case ETipoConteudo.Noticias:
         url += 'noticia';
         break;
-      case 4:
+      case ETipoConteudo.Cotacao:
         url += 'cotacao';
         break;
-      case 5:
+      case ETipoConteudo.PrevisaoTempo:
         url += 'previsaotempo';
         break;
-      case 6:
+      case ETipoConteudo.TemplatesCorporativos:
         url += 'template-corporativo';
         break;
-      case 7:
+      case ETipoConteudo.Curiosidades:
         url += 'curiosidade';
         break;
-      case 8:
+      case ETipoConteudo.Saude:
         url += 'saude';
         break;
-      case 9:
+      case ETipoConteudo.Receitas:
         url += 'receita';
         break;
-      case 10:
+      case ETipoConteudo.Agenda:
         url += 'agenda';
         break;
-      case 11:
+      case ETipoConteudo.Turismo:
         url += 'turismo';
         break;
     }
