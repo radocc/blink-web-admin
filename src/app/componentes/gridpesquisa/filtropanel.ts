@@ -56,8 +56,8 @@ export abstract class FiltroPanel {
     public dataSource: any[];
     public limit = 25;
     public buscandoFiltro: boolean = false;
-    public buscandoDados: boolean = false;
-
+    public buscandoDados: boolean = false; 
+    public widthTable:number = 600;
     public modoColuna: String = 'flex';
     public listaDeTipoOperadores: any[] = [
         {
@@ -338,6 +338,7 @@ export abstract class FiltroPanel {
     public montarTable(filtro: Filtro) {
         this.filtro = filtro;
         this.colunas = [];
+        this.widthTable = 0;
         if (this.selectMultiple){
             this.displayedColumns = this.selectMultiple != undefined ? ["select"] : [];
             this.selection = new SelectionModel(true,[])
@@ -381,6 +382,7 @@ export abstract class FiltroPanel {
 
                 if (coluna.visivel == true) {
                     this.colunas.push(col);
+                    this.widthTable += coluna.largura;
                     this.displayedColumns.push(col.prop);
                 }
 

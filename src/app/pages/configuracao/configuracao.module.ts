@@ -21,6 +21,8 @@ import { FonteNoticiaCadastroComponent } from './pages/fontenoticia/fontenoticia
 import { FonteNoticiaPesquisaComponent } from './pages/fontenoticia/fontenoticia-pesquisa/fontenoticia-pesquisa.component';
 import { UsuarioPesquisaComponent } from './pages/usuario/usuario-pesquisa/usuario-pesquisa.component';
 import { UsuarioCadastroComponent } from './pages/usuario/usuario-cadastro/usuario-cadastro.component';
+import { GrupoUsuarioCadastroComponent } from './pages/grupousuario/grupousuario-cadastro/grupousuario-cadastro.component';
+import { GrupoUsuarioPesquisaComponent } from './pages/grupousuario/grupousuario-pesquisa/grupousuario-pesquisa.component';
 
 const routes: Routes = [
     {
@@ -97,6 +99,16 @@ const routes: Routes = [
           outlet: 'cadastro',
           component: UsuarioCadastroComponent
         },
+        {
+          path:'grupousuario-pesquisa',
+          component: GrupoUsuarioPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'grupousuario-cadastro',
+          outlet: 'cadastro',
+          component: GrupoUsuarioCadastroComponent
+        },
       ]
     }
   ]
@@ -116,7 +128,9 @@ const routes: Routes = [
       FonteNoticiaCadastroComponent,
       FonteNoticiaPesquisaComponent,
       UsuarioCadastroComponent,
-      UsuarioPesquisaComponent
+      UsuarioPesquisaComponent,
+      GrupoUsuarioCadastroComponent,
+      GrupoUsuarioPesquisaComponent
     ],
     imports: [
       CommonModule,

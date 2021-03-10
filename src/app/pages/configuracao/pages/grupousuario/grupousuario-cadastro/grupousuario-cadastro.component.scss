@@ -1,0 +1,10 @@
+@mixin page-configuracao-grupousuario-cadastro($videotheme) {
+ 
+    app-grupousuario-cadastro {        
+        display: flex;
+        .lbl-cor{
+            line-height: 30px;
+            margin-left: 8px;
+        }
+    }
+}

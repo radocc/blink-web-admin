@@ -18,7 +18,7 @@
     <div *ngIf="mostrapesquisa" class="pesquisa-container">
     </div>
     <div class="grid-container p-col-12" id="print-section"  #table>
-        <p-table #dataTable class="rd-h-100" selectionMode="single" [(selection)]="selection" [value]="dataSource" [scrollable]="true" [scrollHeight]="'flex'">
+        <p-table #dataTable class="rd-h-100" selectionMode="single" [(selection)]="selection" [value]="dataSource" [scrollable]="true" [scrollHeight]="'flex'"  [style]="{width:'100%'}">
             <ng-template pTemplate="header">
                 <tr >
                     <th *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
