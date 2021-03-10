@@ -70,7 +70,7 @@
                                 <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                             <div class="p-field-checkbox p-col-2 p-mt-4">
-                                <p-checkbox value="true" inputId="chkCadastro" [(ngModel)]="campo.cadastro" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                                <p-checkbox [binary]="true" inputId="chkCadastro" [(ngModel)]="campo.cadastro" [ngModelOptions]="{standalone: true}"></p-checkbox>
                                 <label for="chkCadastro">{{'CADASTRO' | translate}}</label>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                                 <p-dropdown id="txtCampoFormato" [(ngModel)]="campo.imagemFormato" optionValue="cod" [options]="formatos" placeholder="{{'Selecione o formato' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                         </div>
-                        <!--CAMPOS PARA IMAGEM -->
+                        <!--CAMPOS PARA TEXTO -->
                         <div class="p-d-flex" *ngIf="campo.tipo == 1">
                             <div class="p-field p-col-6">
                                 <label for="txtCampoLimite">{{'LIMITE' | translate}}</label>

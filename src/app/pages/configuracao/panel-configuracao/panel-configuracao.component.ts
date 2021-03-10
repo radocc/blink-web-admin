@@ -29,6 +29,7 @@ export class PanelConfiguracaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventService.registerEvent(Events.atualizarLista);
+    this.eventService.registerEvent(Events.editar);
     
   }
  

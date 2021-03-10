@@ -47,7 +47,7 @@ export abstract class FiltroPanel {
     // public selected: any[] = [];
     public operadores: any = [];
     public variaveis: any[] = [];
-    selection = new SelectionModel<any>(true, []);
+    selection;
     public selectedIndex: number = null;
     public tableheader;
     private startMousePosition;
@@ -341,10 +341,10 @@ export abstract class FiltroPanel {
         this.widthTable = 0;
         if (this.selectMultiple){
             this.displayedColumns = this.selectMultiple != undefined ? ["select"] : [];
-            this.selection = new SelectionModel(true,[])
+            this.selection = {};
         }else {
             this.displayedColumns = [];
-            this.selection = new SelectionModel(false,[])
+            this.selection = {};
         }
         
         if (filtro != null) {
@@ -419,7 +419,7 @@ export abstract class FiltroPanel {
         contextMenuEvent.preventDefault();
         contextMenuEvent.stopPropagation();
 
-        this.selection.selected[0] = item;
+        this.selection = item;
 
         if (this.contextMenuButtons && this.contextMenuButtons[0]) {
             let position = {
@@ -459,7 +459,7 @@ export abstract class FiltroPanel {
         this.filter.idFiltro = this.filtro.id;
         let novaBusca = true;
         this.buscandoDados = true;
-        this.selection.clear(); //selected = [];
+        this.selection = null; //selected = [];
         if (this.filtro.atualiza && this.webSocketOn) {
             this.filter.intervalo = this.filtro.intervaloAtualizacao;
             this.aposFiltrar();

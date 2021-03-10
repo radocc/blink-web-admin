@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Direito } from '@radoccmodels/base/direito';
 import { Filtro } from '@radoccmodels/base/filtro';
+import { Events } from '@radoccmodels/enum/events';
 import { DireitoGrupoService } from '@radoccservices/base/direitogrupo-service';
 import { FiltroService } from '@radoccservices/base/filtro-service';
+import { EventBrokerService } from 'ng-event-broker';
 import { FiltroPanel } from './filtropanel';
 
 @Component({
@@ -38,7 +40,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
   public direitos: Direito[];
   
   constructor(private router: Router,public filtroService: FiltroService,private direitoGrupoService: DireitoGrupoService,
-    public translate: TranslateService, public zone: NgZone, public fb: FormBuilder) {
+    public translate: TranslateService, public zone: NgZone, public fb: FormBuilder, private events: EventBrokerService) {
     super(filtroService, zone, fb, translate);
    }
 
@@ -54,7 +56,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
   public buscarDados():Promise<void>{
     return new Promise((resolve, reject) => {
-      this.selection.clear();
+      this.selection = null;
       let filTemp = {...this.filter};
       filTemp.page = 1;
       filTemp.start = 0;
@@ -111,25 +113,38 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
                 this.contextMenuButtons.push(button);
             });
         });
-    }
+  }
 
-    get idTela() {
-        return this._idTela;
-    }
+  get idTela() {
+      return this._idTela;
+  }
 
-    public getUrlToNovo() {
-        return this.urlToNovo;
-    }
+  public getUrlToNovo() {
+      return this.urlToNovo;
+  }
 
-    public getUrlToAlterar() {
-        return this.urlToAlterar;
-    }
+  public getUrlToAlterar() {
+      return this.urlToAlterar;
+  }
 
-    public getService() {
-        return this.service;
-    }
+  public getService() {
+      return this.service;
+  }
 
-    public alterar() {}
+  public alterar() {
+    // if (this.selection) {
+    //     this.translateService.get('FAVOR_SELECIONAR_APENAS_UM_REGISTRO').subscribe(FAVOR_SELECIONAR_APENAS_UM_REGISTRO => {
+    //         // this.showMessage(FAVOR_SELECIONAR_APENAS_UM_REGISTRO, '');
+    //     });
+    // } else 
+    if (this.selection == null) {
+        this.translateService.get('FAVOR_SELECIONAR_UM_REGISTRO').subscribe(FAVOR_SELECIONAR_UM_REGISTRO => {
+            // this.showMessage(FAVOR_SELECIONAR_UM_REGISTRO, '');
+        });
+    } else {
+      this.events.publishEvent(Events.editar, {id: this.selection.id});
+    }
+  }
     public visualizar() {}
     public excluir() {}
 
