@@ -25,6 +25,7 @@ export class GrupoUsuarioService extends AbstractService<GrupoUsuario> {
     // }
 
     public buscarPorNome(nome:string): Observable<Array<GrupoUsuario>> {
+        console.log('Tamanho da String ',nome.length);
         return this.http.post<Array<GrupoUsuario>>(this.urlWebBase + "/buscarpornome", nome);
     }
 
