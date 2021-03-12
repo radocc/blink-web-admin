@@ -1,3 +1,5 @@
+import { Events } from './../../../../../models/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
@@ -42,7 +44,7 @@ export class UsuarioCadastroComponent implements OnInit {
   public usuario:Usuario;
   public grupos:GrupoUsuario[] = [];
 
-  constructor(private msgService:MessageService, private usuarioService:UsuarioService,
+  constructor(private eventService:EventBrokerService, private usuarioService:UsuarioService,
     private grupoUsuarioService:GrupoUsuarioService) {
 
   }
@@ -64,16 +66,21 @@ export class UsuarioCadastroComponent implements OnInit {
     if (this.usuario == null){
       this.usuario = new Usuario();
     }
-    // this.tipo.nome = this.form.controls['nome'].value;
-    // this.tipo.sequencia = this.form.controls['sequencia'].value;
+    this.usuario.razaoSocial = this.form.controls['nome'].value;
+    this.usuario.login = this.form.controls['login'].value;
+    this.usuario.email = this.form.controls['email'].value;
+    this.usuario.cnpj = this.form.controls['cnpj'].value;
+    this.usuario.senha = this.form.controls['senha'].value;
+    this.usuario.grupoUsuario = this.form.controls['grupoUsuario'].value;
     
-    // this.tipoConteudoService.save(this.tipo).subscribe((equipamento)=>{
-    //   this.tipo = equipamento;
-    //   this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
-    // }, error=>{
-    //   this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
-    //   console.log(error);
-    // })
+    this.usuarioService.save(this.usuario).subscribe((usuario)=>{
+      this.usuario = usuario;
+      this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.eventService.publishEvent(Events.atualizarLista);
+    }, error=>{
+      this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
+      console.log(error);
+    })
   }
  
 

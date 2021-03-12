@@ -1,3 +1,5 @@
+import { Events } from './../../../../../models/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
@@ -34,7 +36,8 @@ export class EquipamentoCadastroComponent implements OnInit {
   
   public equipamento:Equipamento;
 
-  constructor(private msgService:MessageService, private equipamentoService:EquipamentoService) {
+  constructor(private msgService:MessageService, private equipamentoService:EquipamentoService,
+    private eventService:EventBrokerService) {
 
   }
 
@@ -58,6 +61,7 @@ export class EquipamentoCadastroComponent implements OnInit {
     this.equipamentoService.save(this.equipamento).subscribe((equipamento)=>{
       this.equipamento = equipamento;
       this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{
       console.log(error);
       this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');

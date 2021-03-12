@@ -1,3 +1,5 @@
+import { Events } from './../../../../../models/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
@@ -45,7 +47,8 @@ export class FonteNoticiaCadastroComponent implements OnInit {
   public editorias:NoticiaEditoria[] = [];
   public editoria:NoticiaEditoria;
 
-  constructor(private msgService:MessageService, private fonteNoticiaService:FonteNoticiaService, private templateService:TemplateService) {
+  constructor(private msgService:MessageService, private fonteNoticiaService:FonteNoticiaService, private templateService:TemplateService,
+    private eventService:EventBrokerService) {
 
   }
 
@@ -74,6 +77,7 @@ export class FonteNoticiaCadastroComponent implements OnInit {
     this.fonteNoticiaService.save(this.fonteNoticia).subscribe((fonteNoticia)=>{
       this.fonteNoticia = fonteNoticia;
       this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{
       this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
       console.log(error);

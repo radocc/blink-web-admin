@@ -38,20 +38,31 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
   protected idFiltro: number;
   protected _idTela: number;
   public direitos: Direito[];
-  
+  private atualizarListaEvent: any;
+
   constructor(private router: Router,public filtroService: FiltroService,private direitoGrupoService: DireitoGrupoService,
     public translate: TranslateService, public zone: NgZone, public fb: FormBuilder, private events: EventBrokerService) {
     super(filtroService, zone, fb, translate);
    }
 
   ngOnInit(): void {
-    
+    this.atualizarListaEvent = this.events.subscribeEvent(Events.atualizarLista).subscribe(
+      () => {
+        this.pesquisar();
+      },
+      (err) => {
+        console.error(err)
+    });
   }
 
   ngAfterViewChecked(): void {
       if (this.getGridPesquisa) {
           this.getGridPesquisa(this);
       }
+  }
+  
+  ngOnDestroy(): void {
+    this.atualizarListaEvent.unsubscribe();
   }
 
   public buscarDados():Promise<void>{

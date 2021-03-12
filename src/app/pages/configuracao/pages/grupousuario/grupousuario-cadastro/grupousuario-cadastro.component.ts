@@ -1,3 +1,5 @@
+import { Events } from './../../../../../models/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
@@ -34,7 +36,7 @@ export class GrupoUsuarioCadastroComponent implements OnInit {
   
   public grupoUsuario:GrupoUsuario = new GrupoUsuario();
 
-  constructor(private msgService:MessageService, private grupoUsuarioService:GrupoUsuarioService) {
+  constructor(private grupoUsuarioService:GrupoUsuarioService,private eventService:EventBrokerService) {
 
   }
 
@@ -57,6 +59,7 @@ export class GrupoUsuarioCadastroComponent implements OnInit {
     this.grupoUsuarioService.save(this.grupoUsuario).subscribe((grupo)=>{
       this.grupoUsuario = grupo;
       this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{
       this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
       console.log(error);

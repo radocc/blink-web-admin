@@ -1,3 +1,5 @@
+import { Events } from './../../../../../models/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
@@ -33,7 +35,8 @@ export class LoteriaCadastroComponent implements OnInit {
   
   public loteria:Loteria;
 
-  constructor(private msgService:MessageService, private loteriaService:LoteriaService) {
+  constructor(private msgService:MessageService, private loteriaService:LoteriaService,
+    private eventService: EventBrokerService) {
 
   }
 
@@ -53,6 +56,7 @@ export class LoteriaCadastroComponent implements OnInit {
     this.loteriaService.save(this.loteria).subscribe((loteria)=>{
       this.loteria = loteria;
       this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{
       console.log(error);
       this.pageCadastro.showErrorMsg("FALHA_AO_SALVAR");
