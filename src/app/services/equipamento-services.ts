@@ -15,5 +15,9 @@ export class EquipamentoService extends TVBlinkService<Equipamento> {
     public getWebService(): string {
         return 'equipamento';
     }
+
+    // public findNome(nome: string): Observable<Array<Loteria>> {
+    //     return this.http.post<Array<Loteria>>(this.urlWebBase + `/find/nome`, nome).pipe();
+    // }
     
 }

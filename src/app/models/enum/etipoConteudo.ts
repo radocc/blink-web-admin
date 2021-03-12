@@ -1,15 +1,16 @@
 
 export enum ETipoConteudo{
-    Imagens = 1,
-    Video = 2,
+    Video = 1,
+    Imagens = 2,    
     Noticias = 3,
     Cotacao = 4,
-    PrevisaoTempo = 5,
-    TemplatesCorporativos = 6,
-    Curiosidades = 7,
-    Saude = 8,
-    Receitas = 9,
-    Agenda = 10,
-    Turismo = 11
+    Loteria = 5,
+    PrevisaoTempo = 6,
+    TemplatesCorporativos = 7,
+    Curiosidades = 8,
+    Saude = 9,
+    Receitas = 10,
+    Agenda = 11,
+    Turismo = 12
 
 }

@@ -22,6 +22,7 @@ export class DevionnTranslateLoader extends AbstractService<any> implements Tran
         if (translate == null){
             return this.http.get<any>(this.urlWebBase + '/getbyidioma?idioma=' + lang).pipe( map( (values) =>{
                 sessionStorage.setItem('translate', JSON.stringify(values));
+                return values;
             }));
         }else {
             let obs = new Observable((observer)=>{

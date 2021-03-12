@@ -36,7 +36,7 @@ export class UsuarioCadastroComponent implements OnInit {
     email:new FormControl('', Validators.required),
     senha:new FormControl('', Validators.required),
     confirmeSenha:new FormControl('', Validators.required),
-    grupoUsuario:new FormControl('', Validators.required)
+    grupoUsuario:new FormControl(null, Validators.required)
   }) 
   
   public usuario:Usuario;
@@ -50,7 +50,7 @@ export class UsuarioCadastroComponent implements OnInit {
   ngOnInit(): void { 
   } 
   
-  public pesquisarGrupo(nome){
+  public pesquisarGrupo(nome:string){ 
     this.grupoUsuarioService.buscarPorNome(nome).subscribe((lista)=>{
       this.grupos = lista;
     })

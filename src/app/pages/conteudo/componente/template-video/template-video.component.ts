@@ -1,3 +1,4 @@
+import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,9 +23,9 @@ export class TemplateVideoComponent implements OnInit {
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
 
   public form:FormGroup = new FormGroup({
-    titulo:new FormControl('', Validators.required),    
-    minutos:new FormControl(),
-    segundos:new FormControl(),
+    titulo:new FormControl(null, Validators.required),    
+    minutos:new FormControl(0),
+    segundos:new FormControl(10),
   }) 
   
   public arquivo:Arquivo;
@@ -81,7 +82,7 @@ export class TemplateVideoComponent implements OnInit {
       this.conteudo = new Conteudo();
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
-    this.conteudo.idTipoConteudo = 1//Imagens
+    this.conteudo.idTipoConteudo = ETipoConteudo.Video;
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;

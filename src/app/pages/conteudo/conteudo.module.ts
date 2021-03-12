@@ -1,5 +1,6 @@
+import localePt  from '@angular/common/locales/pt';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { PanelConteudoComponent } from './panel-conteudo/panel-conteudo.component'; 
 import { NgPrimeModule } from 'app/ngprime/ngprime.module';
 import { RouterModule, Routes } from '@angular/router';
@@ -13,6 +14,7 @@ import { TemplateCotacaoComponent } from './componente/template-cotacao/template
 import { TemplateLoteriaComponent } from './componente/template-loteria/template-loteria.component';
 import { ShareTranslateModule } from 'app/modules/share-translate/share-translate.module';
 import { TemplatePrevisaoTempoComponent } from './componente/template-previsaotempo/template-previsaotempo.component';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 const routes: Routes = [
   {
@@ -81,7 +83,18 @@ const routes: Routes = [
   }
   
 ];
-
+registerLocaleData(localePt);
+export const MY_FORMATS = {
+    parse: {
+      dateInput: 'DD/MM/YYYY',
+    },
+    display: {
+      dateInput: 'DD/MM/YYYY',
+      monthYearLabel: 'MMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY',
+    },
+  };
 @NgModule({
   declarations: [
     PanelConteudoComponent,
@@ -101,7 +114,11 @@ const routes: Routes = [
     DevComponentModule,
     ShareTranslateModule,
     RouterModule.forChild(routes)
-  ],exports:[
+  ],
+  providers:[
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ],
+  exports:[
     PanelConteudoComponent,
     PanelAgendamentoComponent
   ]

@@ -24,7 +24,7 @@ export class PlayerCadastroComponent implements OnInit {
   
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),    
-    localizacao:new FormControl(),
+    empresa:new FormControl(),
     dataImplantacao:new FormControl(),
     identificacao:new FormControl(),
     orientacao:new FormControl('1'),

@@ -23,7 +23,7 @@
                         {{tipoConteudo?.nome}}
                     </div>
                     <div class="item-conteudo rd-row" *ngFor="let conteudo of conteudos">
-                        <div class="view" [ngStyle]="{'background':'url(' + conteudo.url +')'}">
+                        <div class="view" *ngIf="conteudo.idTipoConteudo == 1 || conteudo.idTipoConteudo == 2 " [ngStyle]="{'background':'url(' + conteudo.url +')'}">
     
                         </div>
                         <div class="rd-col rd-flex">

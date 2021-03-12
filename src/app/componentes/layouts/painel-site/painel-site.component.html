@@ -5,7 +5,7 @@
                 Blink
             </div>
         </div> 
-        <div class="menu-conteiner">
+        <div class="menu-conteiner">            
             <div class="item-menu " [ngClass]="{'selected':rotaSelecionada=='conteudo'}">
                 <span routerLink="conteudo" (click)="navegar('conteudo')" translate>CONTEUDOS</span>
             </div>
@@ -26,10 +26,14 @@
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='configuracao'}" >
                 <span (click)="navegar('configuracao');menu.toggle($event)"  translate>CONFIGURACAO</span>
-                <p-menu #menu [popup]="true" [model]="itens"></p-menu>
+                <p-menu #menu [popup]="true" [model]="itensConfiguracao"></p-menu>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='ajuda'}">
                 <span routerLink="ajuda" (click)="navegar('ajuda')" translate>AJUDA</span>
+            </div>
+            <div>
+                <p-avatar image="{{usuario?.foto}}"  size="large" (click)="menuUsuario.toggle($event)"></p-avatar>
+                <p-menu #menuUsuario [popup]="true" [model]="itemsMenuUsuario"></p-menu>
             </div>
         </div>
     </div>
