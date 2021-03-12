@@ -30,8 +30,10 @@ export class NoopInterceptor implements HttpInterceptor {
         let newReq;
         if (!req.headers.get('Content-Type')  && req.url.indexOf(environment.serverHost) > 0 ) {
             newReq = req.clone({body: this.convertBody(req.body) ,setHeaders: { Authorization: token, 'Content-Type': 'application/json', 'idioma': idioma}});
+            // newReq = req.clone({setHeaders: { Authorization: token, 'Content-Type': 'application/json', 'idioma': idioma}});
         } else {
             newReq = req.clone({body: this.convertBody(req.body)});
+            // newReq = req;
         }
         
         return next.handle(newReq).pipe(tap(event => {
@@ -59,6 +61,8 @@ export class NoopInterceptor implements HttpInterceptor {
         
     }
 
+    recurse
+
     public abrirLogin(){
         localStorage.clear();
         this.router.navigate(['/login']);
@@ -66,7 +70,9 @@ export class NoopInterceptor implements HttpInterceptor {
 
     private convertBody(body) {
         if (body != null) {
-            return JSON.stringify(body, jsonIgnoreReplacer);
+            if (typeof body === 'object' || typeof body === 'boolean' || Array.isArray(body)) {
+                return JSON.stringify(body, jsonIgnoreReplacer);
+            }
         }
         return body;
     }
