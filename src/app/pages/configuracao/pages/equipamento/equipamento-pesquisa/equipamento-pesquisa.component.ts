@@ -1,3 +1,4 @@
+import { EquipamentoService } from './../../../../../services/equipamento-services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { Loteria } from '@radoccmodels/loteria'; 
@@ -10,7 +11,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './equipamento-pesquisa.component.html',
   styleUrls: ['./equipamento-pesquisa.component.scss'],
   providers:[ 
-    MessageService,LoteriaService, FiltroService
+    MessageService,EquipamentoService, FiltroService
   ]
 })
 export class EquipamentoPesquisaComponent implements OnInit {
@@ -23,7 +24,7 @@ export class EquipamentoPesquisaComponent implements OnInit {
   public gridpesquisa;
 
   
-  constructor(private msgService:MessageService, public loteriaService:LoteriaService, public filtroService: FiltroService) {
+  constructor(private msgService:MessageService, public equipamentoService:EquipamentoService) {
 
   }
 

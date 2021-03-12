@@ -25,6 +25,7 @@ export class PageCadastroComponent implements OnInit {
   @Input() translateParams: any[];
   @Input() mostraVoltar: boolean = true;
   @Output("save") onSave:EventEmitter<any> = new EventEmitter();
+  public _disabledSalvar:boolean = false;
 
   constructor(private location:Location, private msgService: MessageService,
     private translateService:TranslateService) { }
@@ -56,6 +57,14 @@ export class PageCadastroComponent implements OnInit {
 
   public voltar() {
     this.location.back();
+  }
+
+  public disableSalvar(){
+    this._disabledSalvar = true;
+  }
+
+  public enableSalvar(){
+    this._disabledSalvar = false;
   }
 
   public showSuccessMsg(msg: string) {

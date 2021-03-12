@@ -1,10 +1,10 @@
+import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { Events } from './../../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
 import { Loteria } from '@radoccmodels/loteria';
-import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { LoteriaService } from '@radoccservices/loteria-services';
 import { MessageService } from 'primeng/api';
 
@@ -16,7 +16,7 @@ import { MessageService } from 'primeng/api';
     MessageService,LoteriaService
   ]
 })
-export class LoteriaCadastroComponent implements OnInit {
+export class LoteriaCadastroComponent extends CadForm implements OnInit {
   public config:{
     titulo:string,
     subTitle:string,
@@ -36,13 +36,30 @@ export class LoteriaCadastroComponent implements OnInit {
   public loteria:Loteria;
 
   constructor(private msgService:MessageService, private loteriaService:LoteriaService,
-    private eventService: EventBrokerService) {
+    public eventService: EventBrokerService) {
+      super(eventService)
 
   }
 
   ngOnInit(): void { 
   } 
   
+  public buscar(id:number, editavel:boolean){
+    this.loteriaService.findById(id).subscribe((loteria)=>{
+      this.montarForm(loteria,editavel);
+    })
+  }
+
+  public montarForm(loteria:Loteria, editavel){
+    this.loteria = loteria;
+    this.form.controls['nome'].setValue(loteria.nome, {emitEvent:false});
+    this.form.controls['url'].setValue(loteria.url, {emitEvent:false});
+    
+    if (editavel == false){
+      this.form.disable();
+    }    
+  }
+
   public salvar(event){    
     if (this.form.invalid){
       this.pageCadastro.showWarnMsg('EXISTEM_CAMPOS_OBRIGATORIOS');

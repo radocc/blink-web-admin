@@ -8,7 +8,7 @@
                     <div >{{config?.titulo | translate}}</div>
                     <div class="p-d-flex p-ml-auto">    
                         <button pButton label="{{'CANCELAR'|translate}}" class="p-button p-button-secondary p-mr-2 p-ml-auto" (click)="cancelar()"></button>
-                        <p-button class="disabled-loading" label="{{'SALVAR' | translate}}" icon="pi pi-save" (click)="salvar()"></p-button>
+                        <p-button [disabled]="_disabledSalvar" class="disabled-loading" label="{{'SALVAR' | translate}}" icon="pi pi-save" (click)="salvar()"></p-button>
                     </div>
                 </div>
                 <span fxFlex [translate]="config?.subTitle" [translateParams]="translateParams"></span>

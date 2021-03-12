@@ -55,8 +55,8 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     private route:ActivatedRoute,
     private service: TemplateService,
     private tipoConteudoService: TipoConteudoService,
-    private eventService: EventBrokerService) { 
-      super();
+    public eventService: EventBrokerService) { 
+      super(eventService);
   }
 
   ngOnInit(): void {

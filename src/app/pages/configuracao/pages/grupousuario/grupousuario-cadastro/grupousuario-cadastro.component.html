@@ -14,15 +14,13 @@
                                 <label class="lbl-cor" for="cor" translate>COR</label>
                             </div>
                             <div class="p-field rd-col p-mr-8 rd-flex">
-                                <p-checkbox name="ativo" value="true" label="ATIVO" [(ngModel)]="grupoUsuario.ativo"></p-checkbox>
+                                <p-checkbox name="ativo" value="true" label="ATIVO" [(ngModel)]="grupoUsuario.ativo" [ngModelOptions]="{standalone: true}"></p-checkbox>
                             </div>
                         </div>
                         <div class="p-field rd-col">
                             <label for="descricao" translate>DESCRICAO</label>
                             <textarea pInputTextarea  rows="6" formControlName="descricao"></textarea>
-                        </div>    
-                        
-                        
+                        </div>
                     </div> 
                 </form>      
             </div>  

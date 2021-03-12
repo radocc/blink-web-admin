@@ -1,3 +1,4 @@
+import { TemplateService } from './../../../../../services/template-services';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +17,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-template-pesquisa',
   templateUrl: './template-pesquisa.component.html',
   styleUrls: ['./template-pesquisa.component.scss'],
-  providers: [ FiltroService, TipoConteudoService, ConteudoService ]
+  providers: [ FiltroService, TipoConteudoService, TemplateService ]
 })
 export class TemplatePesquisaComponent implements OnInit {
 
@@ -38,7 +39,7 @@ export class TemplatePesquisaComponent implements OnInit {
   constructor(public filtroService: FiltroService, 
     private tipoConteudoService: TipoConteudoService,
     private router: Router,
-    private conteudoService: ConteudoService,
+    public templateService: TemplateService,
     private eventService: EventBrokerService) {
 
   }

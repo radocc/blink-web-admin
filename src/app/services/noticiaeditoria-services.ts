@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; 
@@ -16,6 +17,7 @@ export class NoticiaEditoriaService extends TVBlinkService<NoticiaEditoria> {
         return 'noticiaeditoria';
     }
 
-    
-    
+    public findPorFonte(idFonte:number): Observable<Array<NoticiaEditoria>> {
+        return this.http.get<Array<NoticiaEditoria>>(this.urlWebBase + `/ativas/fonte/${idFonte}`).pipe();
+    }    
 }

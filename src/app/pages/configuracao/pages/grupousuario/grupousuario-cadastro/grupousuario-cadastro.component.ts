@@ -43,6 +43,23 @@ export class GrupoUsuarioCadastroComponent implements OnInit {
   ngOnInit(): void { 
   } 
    
+  public buscar(id:number, editavel:boolean){
+    this.grupoUsuarioService.findById(id).subscribe((grupo)=>{
+      this.montarForm(grupo,editavel);
+    })
+  }
+
+  public montarForm(grupo:GrupoUsuario, editavel){
+    this.grupoUsuario = grupo;
+    this.form.controls['nome'].setValue(grupo.nome, {emitEvent:false});
+    this.form.controls['descricao'].setValue(grupo.descricao, {emitEvent:false});
+    this.form.controls['ativo'].setValue(grupo.ativo, {emitEvent:false});
+    this.form.controls['cor'].setValue(grupo.cor, {emitEvent:false});
+    
+    if (editavel == false){
+      this.form.disable();
+    }    
+  }
 
   public salvar(event){    
     if (this.form.invalid){

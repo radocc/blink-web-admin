@@ -1,3 +1,4 @@
+import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { Events } from './../../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -15,7 +16,7 @@ import { MessageService } from 'primeng/api';
     MessageService,EquipamentoService
   ]
 })
-export class EquipamentoCadastroComponent implements OnInit {
+export class EquipamentoCadastroComponent extends CadForm implements OnInit {
   public config:{
     titulo:string,
     subTitle:string,
@@ -36,13 +37,31 @@ export class EquipamentoCadastroComponent implements OnInit {
   
   public equipamento:Equipamento;
 
-  constructor(private msgService:MessageService, private equipamentoService:EquipamentoService,
-    private eventService:EventBrokerService) {
-
+  constructor(private equipamentoService:EquipamentoService,
+    public eventService:EventBrokerService) {
+      super(eventService)
   }
 
   ngOnInit(): void { 
   } 
+
+  public buscar(id:number, editavel:boolean){
+    this.equipamentoService.findById(id).subscribe((fonte)=>{
+      this.montarForm(fonte,editavel);
+    })
+  }
+
+  public montarForm(equipamento:Equipamento, editavel){
+    this.equipamento = equipamento;
+    this.form.controls['nome'].setValue(equipamento.nome, {emitEvent:false});
+    this.form.controls['identificador'].setValue(equipamento.identificador, {emitEvent:false});
+    this.form.controls['uuid'].setValue(equipamento.uuid, {emitEvent:false});
+    this.form.controls['dataCompra'].setValue(equipamento.dataCompra, {emitEvent:false});
+    this.form.controls['fornecedor'].setValue(equipamento.fornecedor, {emitEvent:false});
+    if (editavel == false){
+      this.form.disable();
+    }    
+  }
   
   public salvar(event){    
     if (this.form.invalid){

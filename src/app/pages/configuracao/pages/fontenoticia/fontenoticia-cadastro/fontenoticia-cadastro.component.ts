@@ -1,3 +1,5 @@
+import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
+import { NoticiaEditoriaService } from '@radoccservices/noticiaeditoria-services';
 import { Events } from './../../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -12,16 +14,17 @@ import { FonteNoticiaService } from '@radoccservices/fontenoticia-services';
 import { TemplateService } from '@radoccservices/template-services';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
 import { MessageService } from 'primeng/api';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-fontenoticia-cadastro',
   templateUrl: './fontenoticia-cadastro.component.html',
   styleUrls: ['./fontenoticia-cadastro.component.scss'],
   providers:[ 
-    MessageService,FonteNoticiaService, TemplateService
+    MessageService,FonteNoticiaService, TemplateService,NoticiaEditoriaService
   ]
 })
-export class FonteNoticiaCadastroComponent implements OnInit {
+export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
   public config:{
     titulo:string,
     subTitle:string,
@@ -47,14 +50,35 @@ export class FonteNoticiaCadastroComponent implements OnInit {
   public editorias:NoticiaEditoria[] = [];
   public editoria:NoticiaEditoria;
 
-  constructor(private msgService:MessageService, private fonteNoticiaService:FonteNoticiaService, private templateService:TemplateService,
-    private eventService:EventBrokerService) {
+  constructor(private fonteNoticiaService:FonteNoticiaService, private templateService:TemplateService,
+    public eventService:EventBrokerService,
+    private editoriaService:NoticiaEditoriaService) {
+      super(eventService);
 
   }
 
   ngOnInit(): void { 
-
+    super.ngOnInit();
   } 
+
+  public buscar(id:number, editavel:boolean){
+      this.fonteNoticiaService.findById(id).subscribe((fonte)=>{
+        this.montarForm(fonte,editavel);
+      })
+  };
+
+  public montarForm(fonte:FonteNoticia, editavel:boolean){
+    this.fonteNoticia = fonte;
+    this.form.controls['nome'].setValue(fonte.nome,{emitEvent:false});
+    this.form.controls['url'].setValue(fonte.url,{emitEvent:false});
+    this.form.controls['template'].setValue(fonte.template,{emitEvent:false});
+    this.editoriaService.findPorFonte(fonte.id).subscribe((lista)=>{
+      this.editorias = lista;
+    })
+    if (editavel == false){
+      this.form.disable();
+    }    
+  }
 
   public pesquisarTemplate(nome){
     this.templateService.findNomeETipo(nome,ETipoConteudo.Noticias).subscribe((lista)=>{
