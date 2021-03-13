@@ -1,29 +1,9 @@
-<div class="rd-col rd-flex"> 
-    <div class="rd-row rd-flex rd-gap">
-        <div class="rd-col rd-flex">
-            <div class="p-d-flex p-jc-end ">
-                <span class="p-float-label field-busca">
-                    <input id="float-input" type="text" pInputText> 
-                    <label for="float-input" >{{'BUSCAR'|translate}}</label>
-                </span>
-            </div>
-            <div class="rd-row rd-flex pesquisa ">
-                <div class="div-menu">
-                    <span class="p-float-label">
-                        <input id="float-input" type="text" [(ngModel)]="nomePlayer" pInputText> 
-                        <label for="float-input" translate>PLAYERS</label>
-                    </span>
-                    <div *ngFor="let item of players">
-                        <div class="item-menu" [ngClass]="{'selected':item.id == playerSelecionado?.id }" (click)="abrirPlayer(item)">{{item.nome}}</div>
-                    </div>
-                </div>
-                <div class="rd-flex pesquisa-list">
-                    
-                </div>
-            </div>
-        </div>        
-        <div class="rd-row rd-flex cadastro">
-            <app-player-cadastro></app-player-cadastro>   
-        </div>
+<div class="pagina p-d-flex p-flex-row p-mt-4 p-mb-4">
+    <div class="lado p-mb-2 p-col-6">
+        <router-outlet name="pesquisa"></router-outlet>
+    </div>
+    <div class="lado p-mb-2 p-col-6">
+        <router-outlet name="cadastro"></router-outlet>
     </div>
 </div>
+ 

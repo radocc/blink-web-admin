@@ -1,3 +1,4 @@
+import { PlayerPesquisaComponent } from './componente/player-pesquisa/player-pesquisa.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PanelPlayerComponent } from './panel-player/panel-player.component';
@@ -16,14 +17,27 @@ const routes: Routes = [
   },    
   {
     path:'panel',
-    component:PanelPlayerComponent
+    component:PanelPlayerComponent,
+    children:[
+      {
+        path:'player-pesquisa',
+        component: PlayerPesquisaComponent,
+        outlet: 'pesquisa'
+      },
+      {
+        path:'player-cadastro',
+        component: PlayerCadastroComponent,
+        outlet: 'cadastro'
+      },
+    ]
   }
 ]
 
 @NgModule({
   declarations: [
     PanelPlayerComponent,
-    PlayerCadastroComponent
+    PlayerCadastroComponent,
+    PlayerPesquisaComponent
   ],
   imports: [
     CommonModule,

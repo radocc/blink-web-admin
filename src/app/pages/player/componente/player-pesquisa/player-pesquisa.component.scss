@@ -1,0 +1,8 @@
+@mixin page-player-pesquisa($videotheme) {
+ 
+    app-player-pesquisa {
+        height: 100%;
+        display: flex;
+        
+    }
+}

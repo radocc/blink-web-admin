@@ -13,29 +13,12 @@ import { PlayerService } from '@radoccservices/player-services';
 })
 export class PanelPlayerComponent implements OnInit {
 
-  public nomeBusca:string = "";
-  public players:Player[] = [];
-  public playerSelecionado:Player;
-  public nomePlayer:string = '';
-
+  
   constructor(private router:Router, private playerService:PlayerService) { }
 
   ngOnInit(): void {
     
   }
-
-  public pesquisarPlayer(){
-    this.playerService.findNome(this.nomePlayer).subscribe((lista)=>{
-      this.players = lista;
-    })
-  }
  
-  public abrirPlayer(player){
-
-  }
-
-  public salvar(){
-    
-  }
 
 }

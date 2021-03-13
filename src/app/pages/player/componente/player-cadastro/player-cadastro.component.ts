@@ -1,3 +1,6 @@
+import { EventBrokerService } from 'ng-event-broker';
+import { TranslateService } from '@ngx-translate/core';
+import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Arquivo } from '@radoccmodels/base/arquivo';
@@ -19,49 +22,64 @@ import { MessageService } from 'primeng/api';
     MessageService,PlayerService, EmpresaService
   ]
 })
-export class PlayerCadastroComponent implements OnInit {
+export class PlayerCadastroComponent extends CadForm implements OnInit {
 
-  
+  public config:{
+    titulo:string,
+    subTitle:string,
+    btnSalvar:string;
+  }={
+    titulo:'PLAYER',
+    subTitle:'',
+    btnSalvar:'SALVAR'
+  }
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),    
     empresa:new FormControl(),
     dataImplantacao:new FormControl(),
     identificacao:new FormControl(),
     orientacao:new FormControl('1'),
-    grupos:new FormControl()
+    dataRemovido:new FormControl(),
+    horaInicio:new FormControl(),
+    horaFim:new FormControl()
   }) 
   
   public player:Player;
   public empresas:Empresa[] = [];
 
-  constructor(public arquivoService:ArquivoService, private msgService:MessageService, private playerService:PlayerService,
-    private empresaService:EmpresaService) {
-
+  constructor(public arquivoService:ArquivoService, public msgService:MessageService, private playerService:PlayerService,
+    private empresaService:EmpresaService, public eventService:EventBrokerService) {
+      super(eventService);
   }
 
   ngOnInit(): void { 
+    super.ngOnInit();
+  } 
+
+  public buscar(id:number, editavel:boolean){
+      this.playerService.findById(id).subscribe((player)=>{
+        this.montarForm(player,editavel);
+      })
+  };
+
+  public montarForm(player:Player, editavel:boolean){
+    this.player = player;
+    this.form.controls['nome'].setValue(player.nome,{emitEvent:false});
+    this.form.controls['orientacao'].setValue(player.orientacao,{emitEvent:false});
+    this.form.controls['empresa'].setValue(player.empresa, {emitEvent:false});
+    
+    if (editavel == false){
+      this.form.disable();
+    }    
   }
 
-  public pesquisarEmpresa(nome){
+  public pesquisarEmpresa(nome:string){
     this.empresaService.buscarPorNome(nome).subscribe((lista)=>{
       this.empresas = lista;
     });
   }
   
-  public salvar(){
+  public salvar(event:any){
     
-  }
-
-  public publicar(){
-
-  }
-
-  public preview(){
-
-  }
-
-  public importar(){
-
-  }
-
+  } 
 }
