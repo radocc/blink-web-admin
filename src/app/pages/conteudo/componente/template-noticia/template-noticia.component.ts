@@ -1,3 +1,7 @@
+import { Events } from './../../../../models/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
+import { TranslateService } from '@ngx-translate/core';
+import { CadConteudoComponent } from './../cad-conteuo/cad-conteudo.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +30,7 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
     ConteudoFonteNoticiaService
   ]
 })
-export class TemplateNoticiaComponent implements OnInit {
+export class TemplateNoticiaComponent extends CadConteudoComponent implements OnInit {
 
   public form:FormGroup = new FormGroup({
     filtroAssuntos:new FormControl('')
@@ -37,10 +41,10 @@ export class TemplateNoticiaComponent implements OnInit {
   public filtro:ConteudoFiltro;
   public conteudo:Conteudo;
 
-  constructor(private msgService:MessageService, private conteudoService:ConteudoService, private fonteService:FonteNoticiaService,
-    private editoriaService:NoticiaEditoriaService, private conteudoFonteService:ConteudoFonteNoticiaService,
-    private route:ActivatedRoute, private router:Router) {
-
+  constructor(public msgService:MessageService, private conteudoService:ConteudoService, private fonteService:FonteNoticiaService,
+    private editoriaService:NoticiaEditoriaService, private conteudoFonteService:ConteudoFonteNoticiaService, public translateService:TranslateService,
+    private route:ActivatedRoute, private router:Router, private eventService:EventBrokerService) {
+      super(msgService, translateService);
   }
 
   ngOnInit(): void { 
@@ -68,13 +72,14 @@ export class TemplateNoticiaComponent implements OnInit {
     
   }
 
-  
+  public novo(){
+    this.form.reset();
+    this.conteudo = null;
+  }
   
   public salvar(){    
     if (this.form.invalid ){
-      this.msgService.add({
-        severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'
-      })
+      this.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
     if (this.conteudo == null){
@@ -112,8 +117,10 @@ export class TemplateNoticiaComponent implements OnInit {
     
     this.conteudoService.salvarNoticia(this.conteudo).subscribe((conteudo)=>{
       this.conteudo = conteudo;
-      // this.panelAgendamento.setAgendamento(conteudo.agendamento);
+      this.eventService.publishEvent(Events.atualizarLista);
+      this.showSuccessMsg('SALVO_COM_SUCESSO');
     }, error=>{
+      this.showErrorMsg('FALHA_AO_SALVAR');
       console.log(error);
     })
   }

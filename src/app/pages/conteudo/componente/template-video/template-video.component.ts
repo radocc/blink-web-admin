@@ -1,3 +1,5 @@
+import { TranslateService } from '@ngx-translate/core';
+import { CadConteudoComponent } from './../cad-conteuo/cad-conteudo.component';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -18,7 +20,7 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
     MessageService,ConteudoService
   ]
 })
-export class TemplateVideoComponent implements OnInit {
+export class TemplateVideoComponent extends CadConteudoComponent implements OnInit {
 
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
 
@@ -31,9 +33,9 @@ export class TemplateVideoComponent implements OnInit {
   public arquivo:Arquivo;
   public conteudo:Conteudo;
 
-  constructor(public arquivoService:ArquivoService, private msgService:MessageService, private conteudoService:ConteudoService,private router:Router,
-    private route:ActivatedRoute) {
-
+  constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,private router:Router,
+    private route:ActivatedRoute, public translateService:TranslateService) {
+      super(msgService, translateService);
   }
 
   ngOnInit(): void { 
@@ -73,9 +75,7 @@ export class TemplateVideoComponent implements OnInit {
   
   public salvar(){    
     if (this.form.invalid || this.panelAgendamento.validar()==false && this.arquivo != null){
-      this.msgService.add({
-        severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'
-      })
+      this.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
     if (this.conteudo == null){
@@ -92,12 +92,10 @@ export class TemplateVideoComponent implements OnInit {
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{
       this.conteudo = conteudo;
       this.panelAgendamento.setAgendamento(conteudo.agendamento);
-      this.msgService.add({
-        detail:'SALVO_COM_SUCESSO',
-        summary:'ESTA SALVO'
-      })
+      this.showSuccessMsg('SALVO_COM_SUCESSO');
       this.novo();
     }, error=>{
+      this.showErrorMsg('FALHA_AO_SALVAR');
       console.log(error);
     })
   }
@@ -118,6 +116,6 @@ export class TemplateVideoComponent implements OnInit {
     this.form.reset();
     this.arquivo = null;
     this.panelAgendamento.reset();
-    this.router.navigate(['admin/conteudo/panel/video']);
+    // this.router.navigate(['admin/conteudo/panel/video']);
   }
 }

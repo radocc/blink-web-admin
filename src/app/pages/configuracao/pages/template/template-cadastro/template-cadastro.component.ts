@@ -60,6 +60,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   }
 
   ngOnInit(): void {
+    super.ngOnInit()
     this.route.params.subscribe((param)=>{
       if (param['id']){
         this.buscar(param['id']);

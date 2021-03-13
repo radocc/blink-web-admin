@@ -87,14 +87,19 @@ export class PanelAgendamentoComponent implements OnInit {
       let dtFim = new Date(agendamento.dataFim);
       this.form.controls['dataFim'].setValue(dtFim);
     }
-    this.form.controls['horaInicio'].setValue(agendamento.horaInicio);
-    this.form.controls['horaFim'].setValue(agendamento.horaFim);
-    this.diaSemana = agendamento.diasSemana.split(',');
+    if (agendamento.horaInicio != null){
+      let horaInicio = new Date(agendamento.horaInicio);
+      this.form.controls['horaInicio'].setValue(horaInicio);
 
+      let horaFim = new Date(agendamento.horaFim);
+      this.form.controls['horaFim'].setValue(horaFim);
+    }
+    this.diaSemana = agendamento.diasSemana.split(',');
   }
 
   public reset(){
     this.form.reset();
     this.conteudoAgendamento = null;
+    this.diaSemana = ['0','1','2','3','4','5','6','7'];
   }
 }

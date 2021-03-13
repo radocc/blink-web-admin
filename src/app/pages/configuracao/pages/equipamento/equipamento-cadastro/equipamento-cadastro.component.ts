@@ -25,8 +25,7 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
     titulo:'EQUIPAMENTO',
     subTitle:'',
     btnSalvar:'SALVAR'
-  }
-  @ViewChild("pageCadastro") public pageCadastro:PageCadastroComponent;
+  } 
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),
     identificador:new FormControl('', Validators.required),
@@ -43,6 +42,7 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
   }
 
   ngOnInit(): void { 
+    super.ngOnInit();
   } 
 
   public buscar(id:number, editavel:boolean){
@@ -65,7 +65,7 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
   
   public salvar(event){    
     if (this.form.invalid){
-      this.pageCadastro.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
+      this.page.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
     if (this.equipamento == null){
@@ -79,11 +79,11 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
     
     this.equipamentoService.save(this.equipamento).subscribe((equipamento)=>{
       this.equipamento = equipamento;
-      this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.page.showSuccessMsg('SALVO_COM_SUCESSO');
       this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{
       console.log(error);
-      this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
+      this.page.showErrorMsg('FALHA_AO_SALVAR');
     })
   }
  

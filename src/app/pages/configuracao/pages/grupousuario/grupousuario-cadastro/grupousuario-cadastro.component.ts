@@ -1,3 +1,4 @@
+import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { Events } from './../../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -15,7 +16,7 @@ import { MessageService } from 'primeng/api';
     MessageService,GrupoUsuarioService
   ]
 })
-export class GrupoUsuarioCadastroComponent implements OnInit {
+export class GrupoUsuarioCadastroComponent extends CadForm implements OnInit {
   public config:{
     titulo:string,
     subTitle:string,
@@ -36,11 +37,13 @@ export class GrupoUsuarioCadastroComponent implements OnInit {
   
   public grupoUsuario:GrupoUsuario = new GrupoUsuario();
 
-  constructor(private grupoUsuarioService:GrupoUsuarioService,private eventService:EventBrokerService) {
+  constructor(private grupoUsuarioService:GrupoUsuarioService,public eventService:EventBrokerService) {
+    super(eventService);
 
   }
 
   ngOnInit(): void { 
+    super.ngOnInit();
   } 
    
   public buscar(id:number, editavel:boolean){

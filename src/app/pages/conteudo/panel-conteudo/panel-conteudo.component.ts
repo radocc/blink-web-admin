@@ -1,3 +1,6 @@
+import { OnDestroy, EventEmitter } from '@angular/core';
+import { Events } from './../../../models/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
 import { Loteria } from './../../../models/loteria';
 import { ETipoConteudo } from './../../../models/enum/etipoConteudo';
 import { Component, OnInit } from '@angular/core';
@@ -16,17 +19,27 @@ import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
     TipoConteudoService, ConteudoService
   ]
 })
-export class PanelConteudoComponent implements OnInit {
+export class PanelConteudoComponent implements OnInit, OnDestroy {
 
   public nomeBusca:string = "";
   public tiposConteudos: TipoConteudo[] = [ ]
   public conteudos:ConteudoResult[] = [];
   public tipoConteudo:TipoConteudo= null;
+  public eventLista = null;
 
-  constructor(private router:Router, private tipoConteudoService:TipoConteudoService, private conteudoService:ConteudoService) { }
+  constructor(private router:Router, private tipoConteudoService:TipoConteudoService, private conteudoService:ConteudoService,
+    private eventService:EventBrokerService) { }
 
   ngOnInit(): void {
     this.buscarTipos();
+    this.eventService.registerEvent(Events.atualizarLista);
+    this.eventLista = this.eventService.subscribeEvent(Events.atualizarLista).subscribe((value)=>{
+      this.filtrarTipo(this.tipoConteudo);
+    })
+  }
+
+  public ngOnDestroy(){
+    this.eventLista.unsubscribe();
   }
 
   public buscarTipos(){

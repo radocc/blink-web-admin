@@ -1,3 +1,4 @@
+import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { Events } from './../../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -19,7 +20,7 @@ import { MessageService } from 'primeng/api';
     MessageService,UsuarioService,GrupoUsuarioService
   ]
 })
-export class UsuarioCadastroComponent implements OnInit {
+export class UsuarioCadastroComponent extends CadForm implements OnInit {
   public config:{
     titulo:string,
     subTitle:string,
@@ -29,7 +30,6 @@ export class UsuarioCadastroComponent implements OnInit {
     subTitle:'',
     btnSalvar:'SALVAR'
   }
-  @ViewChild("pageCadastro") public pageCadastro:PageCadastroComponent;
   
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),
@@ -44,13 +44,34 @@ export class UsuarioCadastroComponent implements OnInit {
   public usuario:Usuario;
   public grupos:GrupoUsuario[] = [];
 
-  constructor(private eventService:EventBrokerService, private usuarioService:UsuarioService,
+  constructor(public eventService:EventBrokerService, private usuarioService:UsuarioService,
     private grupoUsuarioService:GrupoUsuarioService) {
-
+      super(eventService)
   }
 
   ngOnInit(): void { 
+    super.ngOnInit();
   } 
+
+  public buscar(id:number, editavel:boolean){
+    this.usuarioService.findById(id).subscribe((usuario)=>{
+      this.montarForm(usuario,editavel);
+    })
+  }
+
+  public montarForm(usuario:Usuario, editavel:boolean){
+    this.usuario = usuario;
+    this.form.controls['nome'].setValue(usuario.razaoSocial, {emitEvent:false});
+    this.form.controls['login'].setValue(usuario.login, {emitEvent:false});
+    this.form.controls['email'].setValue(usuario.email, {emitEvent:false});
+    this.form.controls['cnpj'].setValue(usuario.cnpj, {emitEvent:false});
+    this.form.controls['grupoUsuario'].setValue(usuario.grupoUsuario, {emitEvent:false});
+    this.form.controls['senha'].setValue(usuario.senha, {emitEvent:false});
+    this.form.controls['confirmeSenha'].setValue(usuario.senha, {emitEvent:false});
+    if (editavel == false){
+      this.form.disable();
+    }    
+  }
   
   public pesquisarGrupo(nome:string){ 
     this.grupoUsuarioService.buscarPorNome(nome).subscribe((lista)=>{
@@ -60,7 +81,7 @@ export class UsuarioCadastroComponent implements OnInit {
 
   public salvar(event){    
     if (this.form.invalid){
-      this.pageCadastro.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
+      this.page.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
     if (this.usuario == null){
@@ -75,10 +96,10 @@ export class UsuarioCadastroComponent implements OnInit {
     
     this.usuarioService.save(this.usuario).subscribe((usuario)=>{
       this.usuario = usuario;
-      this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.page.showSuccessMsg('SALVO_COM_SUCESSO');
       this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{
-      this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
+      this.page.showErrorMsg('FALHA_AO_SALVAR');
       console.log(error);
     })
   }

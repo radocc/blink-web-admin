@@ -1,3 +1,4 @@
+import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { Events } from './../../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -15,7 +16,7 @@ import { MessageService } from 'primeng/api';
     MessageService,TipoConteudoService
   ]
 })
-export class TipoConteudoCadastroComponent implements OnInit {
+export class TipoConteudoCadastroComponent extends CadForm implements OnInit {
   public config:{
     titulo:string,
     subTitle:string,
@@ -25,7 +26,6 @@ export class TipoConteudoCadastroComponent implements OnInit {
     subTitle:'',
     btnSalvar:'SALVAR'
   }
-  @ViewChild("pageCadastro") public pageCadastro:PageCadastroComponent;
   
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),
@@ -34,16 +34,32 @@ export class TipoConteudoCadastroComponent implements OnInit {
   
   public tipo:TipoConteudo;
 
-  constructor(private eventService:EventBrokerService, private tipoConteudoService:TipoConteudoService) {
-
+  constructor(public eventService:EventBrokerService, private tipoConteudoService:TipoConteudoService) {
+    super(eventService)
   }
 
   ngOnInit(): void { 
+    super.ngOnInit();
   } 
+
+  public buscar(id:number, editavel:boolean){
+    this.tipoConteudoService.findById(id).subscribe((tipo)=>{
+      this.montarForm(tipo,editavel);
+    })
+  }
+
+  public montarForm(tipo:TipoConteudo, editavel:boolean){
+    this.tipo = tipo;
+    this.form.controls['nome'].setValue(tipo.nome, {emitEvent:false});
+    this.form.controls['sequencia'].setValue(tipo.sequencia, {emitEvent:false});
+    if (editavel == false){
+      this.form.disable();
+    }    
+  }
   
   public salvar(event){    
     if (this.form.invalid){
-      this.pageCadastro.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
+      this.page.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
     if (this.tipo == null){
@@ -54,10 +70,10 @@ export class TipoConteudoCadastroComponent implements OnInit {
     
     this.tipoConteudoService.save(this.tipo).subscribe((equipamento)=>{
       this.tipo = equipamento;
-      this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.page.showSuccessMsg('SALVO_COM_SUCESSO');
       this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{
-      this.pageCadastro.showErrorMsg('FALHA_AO_SALVAR');
+      this.page.showErrorMsg('FALHA_AO_SALVAR');
       console.log(error);
     })
   }

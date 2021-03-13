@@ -43,11 +43,11 @@ export class ConteudoService extends TVBlinkService<Conteudo> {
     }
 
     public findConteudoLoteria(id: number): Observable<Conteudo> {
-        return this.http.get<Conteudo>(this.urlWebBase + `/find/${id}/tipo/loterias`).pipe();
+        return this.http.get<Conteudo>(this.urlWebBase + `/find/${id}/tipo/loteria`).pipe();
     }
 
-    public salvarLoterias(conteudo: Conteudo): Observable<Conteudo> {
-        return this.http.post<Conteudo>(this.urlWebBase + `/salvar/loterias`, conteudo).pipe();
+    public salvarLoteria(conteudo: Conteudo): Observable<Conteudo> {
+        return this.http.post<Conteudo>(this.urlWebBase + `/salvar/loteria`, conteudo).pipe();
     }
 
 }

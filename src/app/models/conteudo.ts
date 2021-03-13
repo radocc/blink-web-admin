@@ -1,3 +1,4 @@
+import { ConteudoLoteria } from './conteudoloteria';
 import { Arquivo } from "./base/arquivo";
 import { BaseEntityImpl } from "./baseentityimpl";
 import { ConteudoAgendamento } from "./conteudoagendamento";
@@ -19,6 +20,7 @@ export class Conteudo extends BaseEntityImpl {
     public fontes:ConteudoFonteNoticia[] = [];
     public filtro:ConteudoFiltro;
     public previsaoTempo:ConteudoPrevisao;
+    public conteudoLoteria:ConteudoLoteria;
     
     
 }

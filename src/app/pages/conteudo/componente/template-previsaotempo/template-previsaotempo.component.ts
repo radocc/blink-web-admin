@@ -1,3 +1,7 @@
+import { TranslateService } from '@ngx-translate/core';
+import { CadConteudoComponent } from './../cad-conteuo/cad-conteudo.component';
+import { Events } from './../../../../models/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +28,7 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
     CidadeService, TemplateService
   ]
 })
-export class TemplatePrevisaoTempoComponent implements OnInit {
+export class TemplatePrevisaoTempoComponent extends CadConteudoComponent implements OnInit {
 
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
 
@@ -40,12 +44,14 @@ export class TemplatePrevisaoTempoComponent implements OnInit {
   public previsao:ConteudoPrevisao;
   public conteudo:Conteudo;
 
-  constructor(private msgService:MessageService, private conteudoService:ConteudoService,private conteudoPrevisaoService:ConteudoPrevisaoService,
-    private route:ActivatedRoute, private router:Router, private cidadeService:CidadeService, private templateService:TemplateService) {
-
+  constructor(public msgService:MessageService, private conteudoService:ConteudoService,private conteudoPrevisaoService:ConteudoPrevisaoService,
+    private route:ActivatedRoute, private router:Router, private cidadeService:CidadeService, private templateService:TemplateService,
+    private eventService:EventBrokerService, public translateService:TranslateService) {
+      super(msgService, translateService);
   }
 
   ngOnInit(): void { 
+    
     this.route.params.subscribe((param)=>{
       if (param['id']){
           this.conteudoService.findConteudoPrevisao(param['id']).subscribe((conteudo)=>{
@@ -72,13 +78,16 @@ export class TemplatePrevisaoTempoComponent implements OnInit {
     
   }
 
+  public novo(){
+    this.form.reset();
+    this.conteudo = null;
+    this.previsao = null;
+  }
   
   
   public salvar(){    
     if (this.form.invalid && !this.panelAgendamento.validar()){
-      this.msgService.add({
-        severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'
-      })
+      this.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
     if (this.conteudo == null){
@@ -100,7 +109,10 @@ export class TemplatePrevisaoTempoComponent implements OnInit {
     this.conteudoService.salvarPrevisao(this.conteudo).subscribe((conteudo)=>{
       this.conteudo = conteudo;
       this.panelAgendamento.setAgendamento(conteudo.agendamento);
+      this.eventService.publishEvent(Events.atualizarLista);
+      this.showSuccessMsg('SALVO_COM_SUCESSO');
     }, error=>{
+      this.showErrorMsg('FALHA_AO_SALVAR');
       console.log(error);
     })
   }
@@ -117,13 +129,13 @@ export class TemplatePrevisaoTempoComponent implements OnInit {
 
   }
 
-  public pesquisarCidade(nome){
+  public pesquisarCidade(nome:string){
     this.cidadeService.findNome(nome).subscribe((lista)=>{
       this.cidades = lista;
     })
   }
 
-  public pesquisarTemplate(nome){
+  public pesquisarTemplate(nome:string){
     this.templateService.findNomeETipo(nome,ETipoConteudo.PrevisaoTempo).subscribe((lista)=>{
       this.templates = lista;
     })

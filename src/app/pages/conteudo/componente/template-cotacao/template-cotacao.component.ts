@@ -1,3 +1,7 @@
+import { EventBrokerService } from 'ng-event-broker';
+import { Events } from './../../../../models/enum/events';
+import { TranslateService } from '@ngx-translate/core';
+import { CadConteudoComponent } from './../cad-conteuo/cad-conteudo.component';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +21,7 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
     MessageService,ConteudoService
   ]
 })
-export class TemplateCotacaoComponent implements OnInit {
+export class TemplateCotacaoComponent extends CadConteudoComponent implements OnInit {
 
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
 
@@ -30,8 +34,9 @@ export class TemplateCotacaoComponent implements OnInit {
   public arquivo:Arquivo;
   public conteudo:Conteudo;
 
-  constructor(public arquivoService:ArquivoService, private msgService:MessageService, private conteudoService:ConteudoService) {
-
+  constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,
+    public translateService:TranslateService, private eventService:EventBrokerService) {
+    super(msgService, translateService);
   }
 
   ngOnInit(): void { 
@@ -48,11 +53,14 @@ export class TemplateCotacaoComponent implements OnInit {
     }    
   }  
   
+  public novo(){
+    this.form.reset();
+    this.conteudo = null;
+  }
+
   public salvar(){    
     if (this.form.invalid || this.panelAgendamento.validar()==false && this.arquivo != null){
-      this.msgService.add({
-        severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'
-      })
+      this.showWarnMsg('EXISTE_CAMPOS_INVALIDOS');
       return ;
     }
     if (this.conteudo == null){
@@ -69,7 +77,10 @@ export class TemplateCotacaoComponent implements OnInit {
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{
       this.conteudo = conteudo;
       this.panelAgendamento.setAgendamento(conteudo.agendamento);
+      this.eventService.publishEvent(Events.atualizarLista);
+      this.showSuccessMsg('SALVO_COM_SUCESSO');
     }, error=>{
+      this.showErrorMsg('FALHA_AO_SALVAR');
       console.log(error);
     })
   }
