@@ -58,8 +58,11 @@ export class PainelSiteComponent implements OnInit {
     ]
   }
 
-  public navegar(rota){
+  public navegar(rota:string, url?:string){
     this.rotaSelecionada = rota;
+    if (url != null){
+      this.router.navigateByUrl(url);
+    }
   }
 
 }

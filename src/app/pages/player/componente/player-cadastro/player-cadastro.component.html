@@ -1,4 +1,4 @@
-<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)">
+<app-pagecadastro [config]="config" (save)="salvar($event)">
     <div class="player-cadastro rd-flex rd-col rd-gap-8">        
         <div class="rd-flex rd-col">
             <form [formGroup]="form">
@@ -6,31 +6,13 @@
                     <div class="p-field rd-col">
                         <label for="titulo" translate>NOME</label>
                         <input id="titulo" required formControlName="nome" type="text" pInputText>                     
-                    </div> 
-                    <div class=" p-field rd-col ">
-                        <label class="label-field" translate>EMPRESA</label>
-                        <p-autoComplete formControlName="empresa" 
-                            [suggestions]="empresas" (completeMethod)="pesquisarEmpresa($event.query)" field="razaoSocial" [dropdown]="true">
-                            <ng-template let-empresa pTemplate="item">
-                                <div>{{empresa.razaoSocial}} - {{empresa.fantasia}} </div>
-                            </ng-template>
-                        </p-autoComplete>
-                    </div>
+                    </div>  
                     <div class="p-field rd-row rd-gap">
                         <label class="label-field" translate>ORIENTACAO</label>
                         <p-radioButton name="orientacao" value="1" formControlName="orientacao" label="PAISAGEM"></p-radioButton>
                         <p-radioButton name="orientacao" value="2" formControlName="orientacao" label="RETRATO"></p-radioButton>
                     </div>                                
-                    <div class="rd-flex rd-row rd-gap">
-                        <div class="rd-flex p-field rd-col">
-                            <label class="" for="dataImplantacao" translate>DATA_IMPLANTACAO</label>
-                            <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataImplantaca" inputId="dataImplantacao"></p-calendar>
-                        </div>
-                        <div class="rd-flex p-field rd-col">
-                            <label class="" for="dataRemovido" translate>DATA_REMOVIDO</label>
-                            <p-calendar class="" [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataRemovido"  inputId="dataRemovido"></p-calendar>
-                        </div>
-                    </div>
+                    
                     <div class="p-field rd-row rd-gap">
                         <label class="label-left">HORARIO_DE_EXECUCAO</label> 
                         <label class="label-left" for="horaInicio" translate>INICIO</label> 

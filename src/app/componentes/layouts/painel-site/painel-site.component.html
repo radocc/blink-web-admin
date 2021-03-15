@@ -13,7 +13,7 @@
                 <span routerLink="publicacao"  (click)="navegar('publicacao')" translate>PUBLICACOES</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='player'}">
-                <span routerLink="player"  (click)="navegar('player')" translate>PLAYERS</span>
+                <span (click)="navegar('player','admin/player/panel/(pesquisa:player-pesquisa//cadastro:player-cadastro)')" translate>PLAYERS</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='grupo'}">
                 <span routerLink="grupo"  (click)="navegar('grupo')" translate>GRUPOS</span>

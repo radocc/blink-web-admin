@@ -1,15 +1,12 @@
-import { Empresa } from './base/empresa';
 import { BaseEntityImpl } from "./baseentityimpl";
 
 export class Player extends BaseEntityImpl {
     
     public nome:string;
-    public dataImplantacao:Date;
+    public observacao:string;
     public horaInicio:Date;
     public horaFim:Date;
-    public orientacao:number;
-    public idEmpresa:number;
-    public empresa:Empresa;
+    public orientacao:number;    
 
     
 }

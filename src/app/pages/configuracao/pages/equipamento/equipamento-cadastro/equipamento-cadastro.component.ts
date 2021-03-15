@@ -1,3 +1,6 @@
+import { EmpresaService } from './../../../../../services/base/empresa-service';
+import { Empresa } from './../../../../../models/base/empresa';
+import { PlayerEquipamento } from '@radoccmodels/playerequipamento';
 import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { Events } from './../../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
@@ -13,7 +16,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './equipamento-cadastro.component.html',
   styleUrls: ['./equipamento-cadastro.component.scss'],
   providers:[ 
-    MessageService,EquipamentoService
+    MessageService,EquipamentoService, EmpresaService
   ]
 })
 export class EquipamentoCadastroComponent extends CadForm implements OnInit {
@@ -33,12 +36,21 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
     fornecedor:new FormControl(''),
     dataCompra:new FormControl()
   }) 
+  public formPlayer:FormGroup = new FormGroup({
+    player:new FormControl(null, Validators.required),
+    empresa:new FormControl(null, Validators.required),
+    dataImplantacao:new FormControl(null, Validators.required),
+    dataRemocao:new FormControl()
+  }) 
   
   public equipamento:Equipamento;
+  public players:PlayerEquipamento[] = [];
+  public playerEquipamento:PlayerEquipamento = null;
+  public empresas:Empresa[] = [];
 
   constructor(private equipamentoService:EquipamentoService,
-    public eventService:EventBrokerService) {
-      super(eventService)
+    public eventService:EventBrokerService, private empresaService:EmpresaService) {
+      super(eventService);
   }
 
   ngOnInit(): void { 
@@ -51,7 +63,7 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
     })
   }
 
-  public montarForm(equipamento:Equipamento, editavel){
+  public montarForm(equipamento:Equipamento, editavel:boolean){
     this.equipamento = equipamento;
     this.form.controls['nome'].setValue(equipamento.nome, {emitEvent:false});
     this.form.controls['identificador'].setValue(equipamento.identificador, {emitEvent:false});
@@ -87,5 +99,47 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
     })
   }
  
+  public pesquisarEmpresa(nome:string){
+    this.empresaService.buscarPorNome(nome).subscribe((lista)=>{
+      this.empresas = lista;
+    });
+  }
+
+  public adicionar(event){
+    if (this.formPlayer.invalid){
+
+      return;
+    }
+    let editando = true;
+    if (this.playerEquipamento == null){
+      this.playerEquipamento = new PlayerEquipamento();
+      editando = false;
+    }
+    this.playerEquipamento.empresa = this.formPlayer.controls['empresa'].value;
+    this.playerEquipamento.dataImplantacao = this.formPlayer.controls['dataImplantacao'].value;
+    this.playerEquipamento.dataRemocao = this.formPlayer.controls['dataRemocao'].value;
+    this.playerEquipamento.player = this.formPlayer.controls['player'].value;
+    if (editando){
+      let index = this.players.indexOf(this.playerEquipamento);
+      this.players.splice(index,1,this.playerEquipamento);
+    }else{
+      this.players.push(this.playerEquipamento);
+    }
+    this.playerEquipamento = null;
+    this.formPlayer.reset();
+  }
+
+  public alterarPlayerEquipamento(obj:PlayerEquipamento){
+    this.playerEquipamento = obj;
+    this.formPlayer.controls['empresa'].setValue(obj.empresa);
+    this.formPlayer.controls['player'].setValue(obj.player);
+    this.formPlayer.controls['dataImplantacao'].setValue(obj.dataImplantacao);
+    this.formPlayer.controls['dataRemocao'].setValue(obj.dataRemocao);
+  }
+
+  public excluirPlayerEquipamento(obj){
+    let index = this.players.indexOf(obj);
+    this.players.splice(index,1);
+  }
 
 }
