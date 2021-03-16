@@ -1,10 +1,11 @@
 import { BaseEntityImpl } from "./baseentityimpl";
+import { Player } from "./player";
 
-export class Publicacao extends BaseEntityImpl {
+export class GrupoPlayerItem extends BaseEntityImpl {
     
-    public dataPublicacao:Date;
     public idGrupoPlayer:number;
     public idPlayer:number;
-    public intercalacao:number;
+    public player:Player;
+
     
 }

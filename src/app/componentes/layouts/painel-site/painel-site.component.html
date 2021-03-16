@@ -12,11 +12,14 @@
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='publicacao'}">
                 <span routerLink="publicacao"  (click)="navegar('publicacao')" translate>PUBLICACOES</span>
             </div>
+            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='playlist'}">
+                <span (click)="navegar('playlist','admin/player/panel/(pesquisa:playlist-pesquisa//cadastro:playlist-cadastro)')" translate>PLAYLIST</span>
+            </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='player'}">
                 <span (click)="navegar('player','admin/player/panel/(pesquisa:player-pesquisa//cadastro:player-cadastro)')" translate>PLAYERS</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='grupo'}">
-                <span routerLink="grupo"  (click)="navegar('grupo')" translate>GRUPOS</span>
+                <span (click)="navegar('grupo','admin/player/panel/(pesquisa:grupoplayer-pesquisa//cadastro:grupoplayer-cadastro)')" translate>GRUPO</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='relatorio'}">
                 <span routerLink="relatorio"  (click)="navegar('relatorio')" translate>RELATORIOS</span>

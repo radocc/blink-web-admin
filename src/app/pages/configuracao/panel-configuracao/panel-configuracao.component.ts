@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';  
-import { Tela } from '@radoccmodels/base/tela';
-import { Events } from '@radoccmodels/enum/events';
-import { GrupoPlayers } from '@radoccmodels/grupoplayers'; 
+import { Tela } from '@radoccmodels/base/tela';  
 import { MenuService } from '@radoccservices/base/menu-service';
 import { TelaService } from '@radoccservices/base/tela-service';
 import { EventBrokerService } from 'ng-event-broker';
@@ -17,9 +15,7 @@ import { EventBrokerService } from 'ng-event-broker';
 })
 export class PanelConfiguracaoComponent implements OnInit {
 
-  public nomeBusca:string = "";
-  public grupos:GrupoPlayers[] = [];
-  public grupoSelecionado:GrupoPlayers;
+  public nomeBusca:string = ""; 
   public nomePlayer:string = '';
   public telas:Tela[] = [ ];
 
@@ -28,8 +24,7 @@ export class PanelConfiguracaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.eventService.registerEvent(Events.atualizarLista);
-    this.eventService.registerEvent(Events.editar);
+    
     
   }
  

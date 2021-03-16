@@ -1,7 +1,7 @@
 <app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)">
     <div class="page-equipamento-cadastro rd-flex rd-col rd-gap-8">
         <p-tabView>
-            <p-tabPanel header="DADOS" translate>
+            <p-tabPanel header="{{'DADOS'|translate}}" >
                 <div class="div-edicao rd-flex rd-col">
                     <form [formGroup]="form">
                         <div class="rd-flex rd-col ">
@@ -29,58 +29,21 @@
                     </form>      
                 </div> 
             </p-tabPanel>    
-            <p-tabPanel header="EDITORIAS" translate>
-                <div class="div-edicao rd-flex rd-col">
-                    <form [formGroup]="formPlayer">
-                        <div class="rd-flex rd-col ">
-                            <div class=" p-field rd-col ">
-                                <label class="label-field" translate>EMPRESA</label>
-                                <p-autoComplete formControlName="empresa" 
-                                    [suggestions]="empresas" (completeMethod)="pesquisarEmpresa($event.query)" field="razaoSocial" [dropdown]="true">
-                                    <ng-template let-empresa pTemplate="item">
-                                        <div>{{empresa.razaoSocial}} - {{empresa.fantasia}} </div>
-                                    </ng-template>
-                                </p-autoComplete>
-                            </div>
-                            <div class="rd-flex rd-row rd-gap">
-                                <div class="rd-flex p-field rd-col">
-                                    <label class="" for="dataImplantacao" translate>DATA_IMPLANTACAO</label>
-                                    <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataImplantacao" inputId="dataImplantacao"></p-calendar>
-                                </div>
-                                <div class="rd-flex p-field rd-col">
-                                    <label class="" for="dataRemocao" translate>DATA_REMOCAO</label>
-                                    <p-calendar class="" [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataRemovido"  inputId="dataRemocao"></p-calendar>
-                                </div>
-                            </div>
-                            <div class="p-field rd-col">
-                                <label for="url" translate>URL</label>
-                                <input id="url" required formControlName="url" type="url" pInputText>
-                            </div>                                  
-                            <div>
-                                <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate (click)="adicionar($event)"></button>
-                            </div>
-                        </div> 
-                    </form>  
+            <p-tabPanel header="{{'PLAYERS'|translate}}" >
+                <div class="rd-flex rd-col"> 
                     <p-table [value]="players" [scrollable]="true" scrollHeight="100%">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th translate>EMPRESA</th>
-                                <th translate>PLAYER</th>
                                 <th translate>IMPLANTACAO</th>
-                                <th translate>REMOCAO</th>
-                                <th translate>ACOES</th>
+                                <th translate>REMOCAO</th> 
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-edit>
                             <tr>
                                 <td>{{edit?.empresa.razaoSocial}}</td>
-                                <td>{{edit.player.nome}}</td>
-                                <td>{{edit.dataImplantacao}}</td>
-                                <td>{{edit.dataRemocao}}</td>
-                                <td>
-                                    <button type="button" class="p-mr-2" title="EDITAR"  pButton pRipple icon="pi pi-pencil" (click)="alterarPlayerEquipamento(edit)"></button>
-                                    <button type="button" class="p-mr-2" title="EXCLUIR"  pButton pRipple icon="pi pi-trash" (click)="excluirPlayerEquipamento(edit)"></button>
-                                </td>
+                                <td>{{edit.dataImplantacao | date:'dd/MM/yyyy HH:mm'}}</td>
+                                <td>{{edit.dataRemocao| date:'dd/MM/yyyy HH:mm'}}</td>
                             </tr>
                         </ng-template>
                     </p-table>    

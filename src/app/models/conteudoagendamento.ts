@@ -8,6 +8,7 @@ export class ConteudoAgendamento extends BaseEntityImpl {
     public horaInicio:Date;
     public horaFim:Date;
     public idConteudo:number;
+    public modoHorario:number = 1;
 
     
 }

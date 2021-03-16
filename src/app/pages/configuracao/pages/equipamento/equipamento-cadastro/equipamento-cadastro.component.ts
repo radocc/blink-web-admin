@@ -10,13 +10,14 @@ import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadas
 import { Equipamento } from '@radoccmodels/equipamento';
 import { EquipamentoService } from '@radoccservices/equipamento-services';
 import { MessageService } from 'primeng/api';
+import { PlayerEquipamentoService } from '@radoccservices/playerequipamento-services';
 
 @Component({
   selector: 'app-equipamento-cadastro',
   templateUrl: './equipamento-cadastro.component.html',
   styleUrls: ['./equipamento-cadastro.component.scss'],
   providers:[ 
-    MessageService,EquipamentoService, EmpresaService
+    MessageService,EquipamentoService, EmpresaService, PlayerEquipamentoService
   ]
 })
 export class EquipamentoCadastroComponent extends CadForm implements OnInit {
@@ -37,7 +38,6 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
     dataCompra:new FormControl()
   }) 
   public formPlayer:FormGroup = new FormGroup({
-    player:new FormControl(null, Validators.required),
     empresa:new FormControl(null, Validators.required),
     dataImplantacao:new FormControl(null, Validators.required),
     dataRemocao:new FormControl()
@@ -49,7 +49,7 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
   public empresas:Empresa[] = [];
 
   constructor(private equipamentoService:EquipamentoService,
-    public eventService:EventBrokerService, private empresaService:EmpresaService) {
+    public eventService:EventBrokerService, private empresaService:EmpresaService, private playerEquipamentoService:PlayerEquipamentoService) {
       super(eventService);
   }
 
@@ -68,8 +68,13 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
     this.form.controls['nome'].setValue(equipamento.nome, {emitEvent:false});
     this.form.controls['identificador'].setValue(equipamento.identificador, {emitEvent:false});
     this.form.controls['uuid'].setValue(equipamento.uuid, {emitEvent:false});
-    this.form.controls['dataCompra'].setValue(equipamento.dataCompra, {emitEvent:false});
+    if (equipamento.dataCompra != null){
+      this.form.controls['dataCompra'].setValue(new Date(equipamento.dataCompra), {emitEvent:false});
+    }
     this.form.controls['fornecedor'].setValue(equipamento.fornecedor, {emitEvent:false});
+    this.playerEquipamentoService.findPorEquipamento(equipamento.id).subscribe((lista)=>{
+      this.players = lista;
+    })
     if (editavel == false){
       this.form.disable();
     }    
@@ -118,7 +123,7 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
     this.playerEquipamento.empresa = this.formPlayer.controls['empresa'].value;
     this.playerEquipamento.dataImplantacao = this.formPlayer.controls['dataImplantacao'].value;
     this.playerEquipamento.dataRemocao = this.formPlayer.controls['dataRemocao'].value;
-    this.playerEquipamento.player = this.formPlayer.controls['player'].value;
+    // this.playerEquipamento.player = this.formPlayer.controls['player'].value;
     if (editando){
       let index = this.players.indexOf(this.playerEquipamento);
       this.players.splice(index,1,this.playerEquipamento);
@@ -132,7 +137,7 @@ export class EquipamentoCadastroComponent extends CadForm implements OnInit {
   public alterarPlayerEquipamento(obj:PlayerEquipamento){
     this.playerEquipamento = obj;
     this.formPlayer.controls['empresa'].setValue(obj.empresa);
-    this.formPlayer.controls['player'].setValue(obj.player);
+    // this.formPlayer.controls['player'].setValue(obj.player);
     this.formPlayer.controls['dataImplantacao'].setValue(obj.dataImplantacao);
     this.formPlayer.controls['dataRemocao'].setValue(obj.dataRemocao);
   }

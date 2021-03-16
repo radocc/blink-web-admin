@@ -15,7 +15,7 @@ export abstract class  CadForm implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.eventEditar = this.eventService.subscribeEvent(Events.editar).subscribe((obj:{id:number})=>{
             this.buscar(obj.id,true);            
-        });
+        });        
         this.eventVisualizar = this.eventService.subscribeEvent(Events.visualizar).subscribe((obj:{id:number})=>{
             this.buscar(obj.id,false);
             this.page.disableSalvar();
@@ -23,8 +23,13 @@ export abstract class  CadForm implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(){
-        this.eventEditar.unsubscribe();
-        this.eventVisualizar.unsubscribe();
+        if (this.eventEditar){
+            this.eventEditar.unsubscribe();
+        }
+        if (this.eventVisualizar){
+            this.eventVisualizar.unsubscribe();
+        }
+        
     }
 
     public abstract buscar(id:number, editavel:boolean):void;

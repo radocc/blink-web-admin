@@ -70,9 +70,11 @@ export class PanelAgendamentoComponent implements OnInit {
       let hrFim = new Date();
       hrFim.setHours(23,58);
       this.conteudoAgendamento.horaFim = hrFim;
+      this.conteudoAgendamento.modoHorario = 1;
     }else {
       this.conteudoAgendamento.horaInicio = this.form.controls['horaInicio'].value;
       this.conteudoAgendamento.horaFim = this.form.controls['horaFim'].value;
+      this.conteudoAgendamento.modoHorario = 2;
     }    
     this.conteudoAgendamento.diasSemana = this.diaSemana.join(',');
     
@@ -87,12 +89,21 @@ export class PanelAgendamentoComponent implements OnInit {
       let dtFim = new Date(agendamento.dataFim);
       this.form.controls['dataFim'].setValue(dtFim);
     }
-    if (agendamento.horaInicio != null){
-      let horaInicio = new Date(agendamento.horaInicio);
+    if (agendamento.modoHorario == 2){
+      let horaInicio = new Date();
+      horaInicio.setHours(parseInt( (agendamento.horaInicio+"").split(':')[0]));
+      horaInicio.setMinutes(parseInt( (agendamento.horaInicio+"").split(':')[1]));
       this.form.controls['horaInicio'].setValue(horaInicio);
 
-      let horaFim = new Date(agendamento.horaFim);
+      let horaFim = new Date();
+      horaFim.setHours(parseInt( (agendamento.horaFim+"").split(':')[0]));
+      horaFim.setMinutes(parseInt( (agendamento.horaFim+"").split(':')[1]));
       this.form.controls['horaFim'].setValue(horaFim);
+      this.modoHorario = '2';
+    }else{
+      this.modoHorario = '1';
+      this.form.controls['horaFim'].setValue(null);
+      this.form.controls['horaInicio'].setValue(null);
     }
     this.diaSemana = agendamento.diasSemana.split(',');
   }

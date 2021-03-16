@@ -3,11 +3,11 @@ import { BaseEntityImpl } from "./baseentityimpl";
 export class Playlist extends BaseEntityImpl {
     
     public nome:string;
-    public campanha:string;
+    public campanha:boolean;
     public dataInicio:Date;
     public dataFim:Date;
-    public regraExibicao:number;
-    public idPublicacao:number;
+    public status:number;
+    public idOrigem:number;
 
     
 }

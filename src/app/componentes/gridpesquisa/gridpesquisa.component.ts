@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Direito } from '@radoccmodels/base/direito';
 import { Filtro } from '@radoccmodels/base/filtro';
-import { Events } from '@radoccmodels/enum/events';
-import { AbstractService } from '@radoccservices/base/abstract-service';
+import { Events } from '@radoccmodels/enum/events'; 
 import { DireitoGrupoService } from '@radoccservices/base/direitogrupo-service';
 import { FiltroService } from '@radoccservices/base/filtro-service';
 import { EventBrokerService } from 'ng-event-broker';
@@ -16,7 +15,7 @@ import { FiltroPanel } from './filtropanel';
   selector: 'app-grid-pesquisa',
   templateUrl: './gridpesquisa.component.html',
   styleUrls: ['./gridpesquisa.component.scss'],
-  providers: [FiltroService, DireitoGrupoService]
+  providers: [FiltroService, DireitoGrupoService, MessageService]
 })
 export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
@@ -43,13 +42,13 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
   private atualizarListaEvent: any;
 
   constructor(private router: Router,public filtroService: FiltroService,private direitoGrupoService: DireitoGrupoService,
-    public translate: TranslateService, public zone: NgZone, public fb: FormBuilder, private events: EventBrokerService,
+    public translate: TranslateService, public zone: NgZone, public fb: FormBuilder, private eventService: EventBrokerService,
     private msgService:MessageService) {
     super(filtroService, zone, fb, translate);
    }
 
   ngOnInit(): void {
-    this.atualizarListaEvent = this.events.subscribeEvent(Events.atualizarLista).subscribe(
+    this.atualizarListaEvent = this.eventService.subscribeEvent(Events.atualizarLista).subscribe(
       () => {
         this.pesquisar();
       },
@@ -65,7 +64,9 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.atualizarListaEvent.unsubscribe();
+    if (this.atualizarListaEvent){
+      this.atualizarListaEvent.unsubscribe();
+    }    
   }
 
   public buscarDados():Promise<void>{
@@ -157,10 +158,11 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
               });
         });
     } else {
-      this.events.publishEvent(Events.editar, {id: this.selection.id});
+      this.eventService.publishEvent(Events.editar, {id: this.selection.id});
     }
   }
-    public visualizar() {
+  
+  public visualizar() {
       if (this.selection == null) {
         this.translateService.get('FAVOR_SELECIONAR_UM_REGISTRO').subscribe(frase => {
             this.msgService.add(
@@ -171,29 +173,30 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
               });
         });
       } else {
-        this.events.publishEvent(Events.visualizar, {id: this.selection.id});
+        this.eventService.publishEvent(Events.visualizar, {id: this.selection.id});
       }
-    }
-    public excluir() {
-      if (this.selection == null) {
-        this.translateService.get('FAVOR_SELECIONAR_UM_REGISTRO').subscribe(frase => {
-          this.msgService.add(
-            {
-              severity: 'info',
-              summary: 'Informação!',
-              detail: frase
-            });
-          });
-      } else {
-        this.getService().remove(this.selection.id).subscribe((result)=>{
-          let index = this.dataSource.indexOf(this.selection);
-          this.dataSource.splice(index,1);
-        });
-      } 
-    }
+  }
 
-    public novo(){
-      this.events.publishEvent(Events.novo);
-    }
+  public excluir() {
+    if (this.selection == null) {
+      this.translateService.get('FAVOR_SELECIONAR_UM_REGISTRO').subscribe(frase => {
+        this.msgService.add(
+          {
+            severity: 'info',
+            summary: 'Informação!',
+            detail: frase
+          });
+        });
+    } else {
+      this.getService().remove(this.selection.id).subscribe((result)=>{
+        let index = this.dataSource.indexOf(this.selection);
+        this.dataSource.splice(index,1);
+      });
+    } 
+  }
+
+  public novo(){
+    this.eventService.publishEvent(Events.novo);
+  }
 
 }

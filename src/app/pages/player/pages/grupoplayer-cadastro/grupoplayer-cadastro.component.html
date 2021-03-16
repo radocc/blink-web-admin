@@ -1,0 +1,30 @@
+<app-pagecadastro [config]="config" (save)="salvar($event)">
+    <div class="grupoplayer-cadastro rd-flex rd-col rd-gap-8">        
+        <div class="rd-flex rd-col">
+            <form [formGroup]="form">
+                <div class="rd-flex rd-col ">
+                    <div class="p-field rd-col">
+                        <label for="titulo" translate>NOME</label>
+                        <input id="titulo" required formControlName="nome" type="text" pInputText>                     
+                    </div>  
+                    <div class="p-field rd-col">
+                        <label for="observacao" translate>OBSERVACAO</label>
+                        <textarea pInputTextarea  rows="6" formControlName="observacao"></textarea>
+                    </div>
+                    <p-listbox [options]="itens" [(ngModel)]="selectedPlayers" [filter]="true" [checkbox]="true" [multiple]="true" optionLabel="nome" [ngModelOptions]="{standalone: true}">
+                        <ng-template pTemplate="header">
+                            {{'SELECIONE_OS_PLAYERS_PARA_O_GRUPO'|translate}}
+                        </ng-template>
+                        <ng-template let-player pTemplate="item">
+                            <div class="rd-row">
+                                <div class="rd-flex">{{player.nome}}</div> <div class="rd-flex">{{player.observacao}}</div>
+                            </div>
+                        </ng-template>
+                    </p-listbox>
+                </div> 
+            </form>
+        </div>
+    </div>            
+</app-pagecadastro>
+
+

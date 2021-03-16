@@ -1,6 +1,6 @@
-@mixin app-player-cadastro($videotheme) {
+@mixin app-grupoplayer-cadastro($videotheme) {
  
-    app-player-cadastro {
+    app-grupoplayer-cadastro {
         flex: 1;
         height: 100%;
         display: flex;
@@ -10,14 +10,11 @@
             margin: 8px;
             margin-left: 0px;
         } 
-        .p-calendar {
-            display: flex !important;
-        }
         p-autocomplete {
             display: flex;
             span {
                 flex: 1;
             };
-        }
+        } 
     }
 }

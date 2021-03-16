@@ -1,0 +1,26 @@
+@mixin app-player-cadastro($videotheme) {
+ 
+    app-player-cadastro {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        .label-field{
+            line-height: 20px;
+            white-space: nowrap;
+            margin: 8px;
+            margin-left: 0px;
+        } 
+        .p-calendar {
+            display: flex !important;
+        }
+        p-autocomplete {
+            display: flex;
+            span {
+                flex: 1;
+            };
+        }
+        .div-btn-trocar {
+            padding-top:26px;
+        }
+    }
+}

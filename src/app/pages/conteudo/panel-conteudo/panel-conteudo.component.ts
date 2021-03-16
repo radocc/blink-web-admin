@@ -32,7 +32,6 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.buscarTipos();
-    this.eventService.registerEvent(Events.atualizarLista);
     this.eventLista = this.eventService.subscribeEvent(Events.atualizarLista).subscribe((value)=>{
       this.filtrarTipo(this.tipoConteudo);
     })

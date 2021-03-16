@@ -1,4 +1,4 @@
-import { PlayerPesquisaComponent } from './componente/player-pesquisa/player-pesquisa.component';
+import { PlayerPesquisaComponent } from './pages/player-pesquisa/player-pesquisa.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PanelPlayerComponent } from './panel-player/panel-player.component';
@@ -7,7 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgPrimeModule } from 'app/ngprime/ngprime.module';
 import { DevComponentModule } from 'app/modules/devcomponent/devcomponent.module';
 import { ShareTranslateModule } from 'app/modules/share-translate/share-translate.module';
-import { PlayerCadastroComponent } from './componente/player-cadastro/player-cadastro.component';
+import { PlayerCadastroComponent } from './pages/player-cadastro/player-cadastro.component';
+import { GrupoPlayerPesquisaComponent } from './pages/grupoplayer-pesquisa/grupoplayer-pesquisa.component';
+import { GrupoPlayerCadastroComponent } from './pages/grupoplayer-cadastro/grupoplayer-cadastro.component';
+import { PlaylistCadastroComponent } from './pages/playlist-cadastro/playlist-cadastro.component';
+import { PlaylistPesquisaComponent } from './pages/playlist-pesquisa/playlist-pesquisa.component';
 
 const routes: Routes = [
   {
@@ -29,6 +33,27 @@ const routes: Routes = [
         component: PlayerCadastroComponent,
         outlet: 'cadastro'
       },
+      {
+        path:'grupoplayer-pesquisa',
+        component: GrupoPlayerPesquisaComponent,
+        outlet: 'pesquisa'
+      },
+      {
+        path:'grupoplayer-cadastro',
+        component: GrupoPlayerCadastroComponent,
+        outlet: 'cadastro'
+      },
+      {
+        path:'playlist-cadastro',
+        component: PlaylistCadastroComponent,
+        outlet: 'cadastro'
+      },
+      {
+        path:'playlist-pesquisa',
+        component: PlaylistPesquisaComponent,
+        outlet: 'pesquisa'
+      }
+
     ]
   }
 ]
@@ -37,7 +62,11 @@ const routes: Routes = [
   declarations: [
     PanelPlayerComponent,
     PlayerCadastroComponent,
-    PlayerPesquisaComponent
+    PlayerPesquisaComponent,    
+    GrupoPlayerCadastroComponent,
+    GrupoPlayerPesquisaComponent,
+    PlaylistCadastroComponent,
+    PlaylistPesquisaComponent
   ],
   imports: [
     CommonModule,

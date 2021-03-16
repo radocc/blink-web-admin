@@ -7,6 +7,19 @@
             display: flex;
             flex: auto;
             flex-direction: column;
+
+            p-autocomplete {
+                display: flex;
+                span {
+                    flex: 1;
+                };
+            }
+            .p-calendar {
+                display: flex !important;
+            }
+            .btn-adicionar{
+                padding-top: 26px;
+            }
         }
     }
 }

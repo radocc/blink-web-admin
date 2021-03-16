@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TelaService } from '@radoccservices/base/tela-service';
 import { MenuItem } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-painel-site',
@@ -19,7 +20,7 @@ export class PainelSiteComponent implements OnInit {
       
   ];
 
-  constructor(private telaService: TelaService, private router: Router) { }
+  constructor(private telaService: TelaService, private router: Router, private translateService:TranslateService) { }
 
   ngOnInit(): void {
     let jsonUser = localStorage.getItem('usuario');
@@ -27,12 +28,15 @@ export class PainelSiteComponent implements OnInit {
 
     this.telaService.findTelasPorAcessoIdMenu(10001).subscribe((lista)=>{
       for (let i = 0; i < lista.length; i++) {
-        this.itensConfiguracao.push({
-          label: lista[i].nome,
-          command: () => {
-            this.router.navigateByUrl(lista[i].url);
-          }
-        });
+        this.translateService.get(lista[i].nome).subscribe((nome)=>{
+          this.itensConfiguracao.push({
+            label: nome,
+            command: () => {
+              this.router.navigateByUrl(lista[i].url);
+            }
+          });
+        })
+        
       }
     });
     this.itemsMenuUsuario = [

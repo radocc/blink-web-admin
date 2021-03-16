@@ -18,13 +18,18 @@
 @import './app/pages/publicacao/componente/publicacao-imagem/publicacao-imagem.component.scss';
 
 @import './app/pages/player/panel-player/panel-player.component.scss';
-@import './app/pages/player/componente/player-cadastro/player-cadastro.component.scss';
+@import './app/pages/player/pages/player-cadastro/player-cadastro.component.scss';
+@import './app/pages/player/pages/player-pesquisa/player-pesquisa.component.scss';
+@import './app/pages/player/pages/grupoplayer-cadastro/grupoplayer-cadastro.component.scss';
+@import './app/pages/player/pages/grupoplayer-pesquisa/grupoplayer-pesquisa.component.scss';
+@import './app/pages/player/pages/playlist-cadastro/playlist-cadastro.component.scss';
+@import './app/pages/player/pages/playlist-pesquisa/playlist-pesquisa.component.scss';
+
 
 @import './app/pages/configuracao/panel-configuracao/panel-configuracao.component.scss';
 @import './app/pages/configuracao/pages/loteria/loteria-cadastro/loteria-cadastro.component.scss';
 @import './app/pages/configuracao/pages/loteria/loteria-pesquisa/loteria-pesquisa.component.scss';
 
-@import './app/pages/grupo/panel-grupo/panel-grupo.component.scss';
 @import './app/pages/configuracao/pages/template/template-cadastro/template-cadastro.component.scss';
 @import './app/pages/configuracao/pages/template/template-pesquisa/template-pesquisa.component.scss';
 @import './app/pages/configuracao/pages/equipamento/equipamento-cadastro/equipamento-cadastro.component.scss';
@@ -85,8 +90,13 @@ PLAYER
 */
 @include app-panel-player($theme);
 @include app-player-cadastro($theme);
+@include app-player-pesquisa($theme);
+@include app-grupoplayer-pesquisa($theme);
+@include app-grupoplayer-cadastro($theme);
+@include app-playlist-cadastro($theme);
+@include app-playlist-pesquisa($theme);
 
-@include app-panel-grupo-player($theme);
+
 
 @include app-panel-configuracao($theme);
 

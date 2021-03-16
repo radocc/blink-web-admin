@@ -2,7 +2,7 @@
     <div class="page-fontenoticia-cadastro rd-flex rd-col rd-gap-8">
         <div class="rd-col rd-flex rd-gap">
             <p-tabView>
-                <p-tabPanel header="DADOS_DA_FONTE" translate>
+                <p-tabPanel header="{{'DADOS_DA_FONTE'|translate}}" translate>
                     <div class="div-edicao rd-flex rd-col">
                         <form [formGroup]="form">
                             <div class="rd-flex rd-col ">
@@ -27,7 +27,7 @@
                         </form>      
                     </div>
                 </p-tabPanel>
-                <p-tabPanel header="EDITORIAS" translate>
+                <p-tabPanel header="{{'EDITORIAS' |translate}}" translate>
                     <div class="div-edicao rd-flex rd-col">
                         <form [formGroup]="formEditoria">
                             <div class="rd-flex rd-col ">
@@ -35,12 +35,14 @@
                                     <label for="nome" translate>NOME</label>
                                     <input id="nome" required formControlName="nome" type="text" pInputText>
                                 </div> 
-                                <div class="p-field rd-col">
-                                    <label for="url" translate>URL</label>
-                                    <input id="url" required formControlName="url" type="url" pInputText>
-                                </div>                                  
-                                <div>
-                                    <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate (click)="adicionar($event)"></button>
+                                <div class="p-field rd-row rd-gap-8">
+                                    <div class="p-field rd-col rd-flex">
+                                        <label for="url" translate>URL</label>
+                                        <input id="url" required formControlName="url" type="url" pInputText>
+                                    </div>                                  
+                                    <div class="btn-adicionar">
+                                        <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate (click)="adicionar($event)"></button>
+                                    </div>
                                 </div>
                             </div> 
                         </form>  
