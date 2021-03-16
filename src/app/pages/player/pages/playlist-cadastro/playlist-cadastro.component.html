@@ -18,10 +18,10 @@
                         </div>
                         <div class="rd-col rd-flex">
                             <label for="status" translate>STATUS</label>
-                            <p-dropdown [options]="listaStatus" [(ngModel)]="status" optionLabel="nome" [ngModelOptions]="{standalone: true}">
-                                <ng-template pTemplate="selectedItem">
-                                    <div class=""  *ngIf="status">
-                                        <div>{{status?.nome |translate}}</div>
+                            <p-dropdown [options]="listaStatus" formControlName="status" optionLabel="nome" optionValue="id" >
+                                <ng-template let-item pTemplate="selectedItem">
+                                    <div class="" >
+                                        <div>{{item?.nome |translate}}</div>
                                     </div>
                                 </ng-template>
                                 <ng-template let-item pTemplate="item">
@@ -36,6 +36,13 @@
                         <div class="btn-adicionar">
                             <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate ></button>
                         </div>
+                        <p-orderList [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
+                            <ng-template let-conteudo pTemplate="item">
+                                <div>
+                                    {{conteudo.nome}}
+                                </div>
+                            </ng-template>
+                        </p-orderList>
                         <div class="item-conteudo rd-row" *ngFor="let itemConteudo of listaConteudo">
                             <div class="view" *ngIf="itemConteudo.conteudo.idTipoConteudo == 1 || itemConteudo.conteudo.idTipoConteudo == 2 " [ngStyle]="{'background':'url(' + itemConteudo.conteudo.url +')'}">
         

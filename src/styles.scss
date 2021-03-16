@@ -45,6 +45,7 @@
 
 
 @import './app/componentes/pagecadastro/pagecadastro.component.scss';
+@import './app/componentes/conteudo-row/conteudo-row.component.scss';
 
 // @include mat-core();
 
@@ -119,6 +120,7 @@ PLAYER
 @include page-configuracao-grupousuario-pesquisa($theme);
 
 @include page-cadastro($theme);
+@include conteudo-row($theme);
 @include page-template-pesquisa($theme);
 
 

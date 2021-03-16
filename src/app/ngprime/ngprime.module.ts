@@ -25,6 +25,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {TabViewModule} from 'primeng/tabview';
 import {AvatarModule} from 'primeng/avatar';
+import {OrderListModule} from 'primeng/orderlist';
 @NgModule({
   declarations: [],
   imports: [
@@ -53,7 +54,8 @@ import {AvatarModule} from 'primeng/avatar';
     AccordionModule,
     ScrollPanelModule,
     TabViewModule, 
-    AvatarModule
+    AvatarModule,
+    OrderListModule
   ],
   exports:[
     ButtonModule,
@@ -80,7 +82,8 @@ import {AvatarModule} from 'primeng/avatar';
     AccordionModule,
     ScrollPanelModule,
     TabViewModule,  
-    AvatarModule
+    AvatarModule,
+    OrderListModule
   ]
 })
 export class NgPrimeModule { }
