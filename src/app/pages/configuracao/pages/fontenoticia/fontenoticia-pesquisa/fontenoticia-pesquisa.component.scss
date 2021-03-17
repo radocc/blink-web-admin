@@ -1,8 +1,7 @@
 @mixin page-configuracao-fontenoticia-pesquisa($videotheme) {
  
     app-fontenoticia-pesquisa {
-        flex: auto;
-        display: flex;
+
         .label-field{
             line-height: 20px;
             white-space: nowrap;

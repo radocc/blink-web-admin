@@ -176,3 +176,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .rd-over-hidden{
     overflow: hidden;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px transparent;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 10px;
+}
