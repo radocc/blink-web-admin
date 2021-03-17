@@ -1,8 +1,4 @@
-<p-dialog header="{{'CONTEUDOS'|translate}}" maximizable="true" [(visible)]="display" [style]="{width: '70vw', height:'80vh'}">
-    <ng-template pTemplate="header">
-        {{'VINCULE_OS_CONTEUDOS_NA_PLAYLIST' |translate }}
-    </ng-template>
-    
+<div class="rd-col">
     <div class="rd-row ">
         <div class="rd-row rd-flex">
             <div class="div-menu">
@@ -19,28 +15,19 @@
                 <div class="title-conteudo" >
                     {{tipoConteudo?.nome}}
                 </div>
-                <div class="item-conteudo rd-row" pDraggable="conteudo" *ngFor="let conteudo of conteudos">
-                    <div class="view" *ngIf="conteudo.idTipoConteudo == 1 || conteudo.idTipoConteudo == 2 " [ngStyle]="{'background':'url(' + conteudo.url +')'}">
-
-                    </div>
-                    <div class="rd-col rd-flex">
-                        <div class="rd-flex">
-                            {{conteudo.titulo}}
-                        </div>
-                        <div class="rd-row rd-gap">
-                            <span>{{conteudo.data |date:'dd/MM/yyyy'}}</span>
-                            <div class="rd-flex"></div>
-                        </div>
-                    </div>
+                <div class="rd-col rd-gap-8" *ngFor="let conteudo of conteudos">
+                    <app-conteudo-row pDraggable="conteudo" (onDragStart)="dragStart(conteudo)" (onDragEnd)="dragEnd($event)" [conteudo]="conteudo"
+                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false"> 
+                    </app-conteudo-row>
                 </div>
             </div>
         </div>
         <div class="rd-col rd-flex">
-            <p-orderList  pDroppable="conteudo" class="rd-flex rd-col" [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
-                <ng-template let-conteudo pTemplate="item">
-                    <div>
-                        {{conteudo.nome}}
-                    </div>
+            <p-orderList  pDroppable="conteudo" (onDrop)="drop($event)"  class="rd-flex rd-col" [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
+                <ng-template let-itemList pTemplate="item">
+                    <app-conteudo-row [conteudo]="itemList.conteudo" 
+                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false">
+                     </app-conteudo-row>
                 </ng-template>
             </p-orderList>
         </div>
@@ -48,4 +35,4 @@
     <div class="div-footer">
         <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="SALVAR" translate (click)="salvar()"></button>
     </div>
-</p-dialog>
+</div>    

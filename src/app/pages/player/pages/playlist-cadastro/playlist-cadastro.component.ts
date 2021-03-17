@@ -9,13 +9,14 @@ import { PlaylistService } from '@radoccservices/playlist-services';
 import { PlaylistConteudoService } from '@radoccservices/playlistconteudo-services';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { ConteudoDialogComponent } from './dialog-conteudo/conteudo-dialog.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-playlist-cadastro',
   templateUrl: './playlist-cadastro.component.html',
   styleUrls: ['./playlist-cadastro.component.scss'],
   providers:[
-    PlaylistService, PlaylistConteudoService, ConteudoService
+    PlaylistService, PlaylistConteudoService, ConteudoService,DialogService
   ]
 })
 export class PlaylistCadastroComponent extends CadForm implements OnInit {
@@ -61,7 +62,7 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
   @ViewChild("dialogConteudo")public dialogConteudo:ConteudoDialogComponent;
 
   constructor(private playlistService:PlaylistService, private playlistConteudoService:PlaylistConteudoService,
-     public eventService:EventBrokerService) {
+     public eventService:EventBrokerService, public dialogService:DialogService) {
       super(eventService);
   }
 
@@ -81,7 +82,9 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     this.form.controls['status'].setValue(playlist.status,{emitEvent:false});
     this.form.controls['dataInicio'].setValue(new Date(playlist.dataInicio),{emitEvent:false});    
     this.form.controls['dataFim'].setValue(new Date(playlist.dataFim),{emitEvent:false});    
-    
+    this.playlistConteudoService.buscarPorPlayList(playlist.id).subscribe((lista)=>{
+      this.listaConteudo = lista;
+    })
     if (editavel == false){
       this.form.disable();
     }    
@@ -107,7 +110,7 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     this.playlist.dataInicio = this.form.controls['dataInicio'].value;
     this.playlist.dataFim = this.form.controls['dataFim'].value;    
     this.playlist.status = this.form.controls['status'].value;
-
+    this.playlist.playlistConteudos = this.listaConteudo;
     
     this.playlistService.save(this.playlist).subscribe((playlist)=>{
       this.playlist = playlist;
@@ -120,8 +123,21 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
   } 
 
   public abrirLista(){
-    this.dialogConteudo.montarAmbiente(this.listaConteudo);
-    this.dialogConteudo.showDialog();
+    const dialog = this.dialogService.open(ConteudoDialogComponent, {
+      data:this.listaConteudo,
+      width: '80%',
+      height:'80%',
+      modal:true,
+      showHeader:false,
+      closable:false,
+      closeOnEscape:false
+    });
+    // this.dialogConteudo.montarAmbiente(this.listaConteudo);
+    dialog.onClose.toPromise().then((lista)=>{
+      this.listaConteudo = lista;
+    });
+    // dialog.
+    // this.dialogConteudo.showDialog();
   }
 
 }

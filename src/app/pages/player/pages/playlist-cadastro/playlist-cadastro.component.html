@@ -1,7 +1,7 @@
 <app-pagecadastro [config]="config" (save)="salvar($event)">
     <div class="playlist-cadastro rd-flex rd-col rd-gap-8">        
         <div class="rd-flex rd-col">
-            <form [formGroup]="form">
+            <form [formGroup]="form" class="rd-flex rd-col">
                 <div class="rd-flex rd-col ">
                     <div class="p-field rd-col">
                         <label for="titulo" translate>NOME</label>
@@ -32,29 +32,23 @@
                             </p-dropdown>
                         </div> 
                     </div>
-                    <div class="rd-col rd-gap">
-                        <div class="btn-adicionar">
-                            <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate (click)="abrirLista()"></button>
-                        </div>
-                        <p-orderList [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
-                            <ng-template let-conteudo pTemplate="item">
-                                <div>
-                                    {{conteudo.nome}}
-                                </div>
-                            </ng-template>
-                        </p-orderList>
-                        <div class="item-conteudo rd-row" *ngFor="let itemConteudo of listaConteudo">
-                            <div class="view" *ngIf="itemConteudo.conteudo.idTipoConteudo == 1 || itemConteudo.conteudo.idTipoConteudo == 2 " [ngStyle]="{'background':'url(' + itemConteudo.conteudo.url +')'}">
-        
-                            </div>
-                            <div class="rd-col rd-flex">
+                    <div class="rd-col rd-flex ">
+                        <div class="div-container-orderlist rd-col">
+                            <div class="rd-row header">
                                 <div class="rd-flex">
-                                    {{itemConteudo.conteudo.titulo}}
+                                    {{'CONTEUDOS'|translate}}
                                 </div>
-                                <div class="rd-row rd-gap">
-                                    <span>{{itemConteudo.conteudo.data |date:'dd/MM/yyyy'}}</span>
+                                <div>
+                                    <button pButton type="button" icon="pi pi-plus" class="p-button-raised p-button-rounded btn-add" translate (click)="abrirLista()"></button>
                                 </div>
                             </div>
+                            <p-orderList class="rd-flex rd-col" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
+                                <ng-template let-itemList pTemplate="item">
+                                    <app-conteudo-row [conteudo]="itemList.conteudo" 
+                                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false">
+                                    </app-conteudo-row>
+                                </ng-template>
+                            </p-orderList>
                         </div>
                     </div>
                 </div> 
@@ -62,5 +56,5 @@
         </div>
     </div>            
 </app-pagecadastro>
-<app-conteudo-dialog-playlist #dialogConteudo></app-conteudo-dialog-playlist>
+<!-- <app-conteudo-dialog-playlist #dialogConteudo></app-conteudo-dialog-playlist> -->
 

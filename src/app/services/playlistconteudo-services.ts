@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; 
 import { TVBlinkService } from './tvblink-services';
 import { PlaylistConteudo } from '@radoccmodels/playlistconteudo';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class PlaylistConteudoService extends TVBlinkService<PlaylistConteudo> {
@@ -16,4 +17,7 @@ export class PlaylistConteudoService extends TVBlinkService<PlaylistConteudo> {
         return 'playlistconteudo';
     }
     
+    public buscarPorPlayList(idPlaylist:number): Observable<Array<PlaylistConteudo>> {
+        return this.http.get<Array<PlaylistConteudo>>(this.urlWebBase + `/idPlaylist/${idPlaylist}`).pipe();
+    }
 }

@@ -9,6 +9,10 @@ import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 export class ConteudoRowComponent implements OnInit {
 
   @Input("conteudo") public conteudo:ConteudoResult;
+  @Input("exibiBtnAlterar") public exibiBtnAlterar:boolean = true;
+  @Input("exibiBtnExcluir") public exibiBtnExcluir:boolean = true;
+  @Input("exibiBtnVisualizar") public exibiBtnVisualizar:boolean = true;
+  @Input("exibiBtnArquivo") public exibiBtnArquivo:boolean = true;
   @Output("onAlterar") public btnAlterar: EventEmitter<any> = new EventEmitter();
   @Output("onExcluir") public btnExcluir: EventEmitter<any> = new EventEmitter();
   @Output("onVisualizar") public btnVisualizar: EventEmitter<any> = new EventEmitter();
