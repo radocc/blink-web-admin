@@ -1,43 +1,66 @@
 <div class="gridpesquisa slide rd-h-100" #page>
-    <p-card class="box box-stretched rd-h-100" [header]="nomeTela | translate">
-    <p-toolbar color="primary" class="p-col-12">
-        <div class="rd-row rd-flex">
-            <input pInputText class="rd-flex p-mr-2" type="text" placeholder="Pesquisar"/>
-        </div>
-        <div class="rd-row">
-            <p-button  (click)="onCliclPesquisar()">
-                <!-- <i *ngIf="!mostrapesquisa" class="pi pi-arrow-down"></i> -->
-                <i *ngIf="mostrapesquisa" class="pi pi-search"></i>
-            </p-button> 
-            <p-divider class="dividir" *ngIf="direitos?.length > 0" layout="vertical"></p-divider>            
-            <p-button class="p-mr-2" label="{{direito.nome | translate}}" tabindex="{{direito.posicao}}" title="{{direito.nome | translate}}" *ngFor="let direito of direitos " (click)="onClickButton(direito)">
+    <p-card class="box box-stretched rd-h-100">
+        <ng-template pTemplate="header">
+            <div class="p-d-flex p-flex-column p-pl-4 p-pt-4 p-pr-4">
+                <div class="p-card-title p-d-flex p-flex-row">
+                    <div class="p-col">{{nomeTela | translate}}</div>
+                    <div class="p-col p-d-flex p-flex-row p-ai-start">
+                        <div class="p-d-flex p-ml-auto p-flex-row-reverse p-ai-center">  
+                            <button pButton pRipple type="button" icon="{{'pi ' + direito.icone}}" 
+                                class="p-button-rounded p-mr-1" 
+                                [ngClass]="{'p-button-outlined' : direito.posicao != 1, 'primary-button-header' : direito.posicao == 1}"
+                                label="{{'' | translate}}" 
+                                tabindex="{{direito.posicao}}" 
+                                title="{{direito.nome | translate}}" 
+                                *ngFor="let direito of direitos" 
+                                (click)="onClickButton(direito)">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <p-messages></p-messages>
+            </div>
+        </ng-template>
+    
+        <div class="p-d-flex p-flex-column rd-h-100">
+
+            <div class="p-d-flex p-flex-row">
+                <div class="p-col">
+                    <input pInputText class="rd-w-100" type="text" placeholder="Pesquisar"/>
+                </div>
+                <div class="p-col-fixed">
+                    <p-button  (click)="onCliclPesquisar()">
+                        <i *ngIf="mostrapesquisa" class="pi pi-search"></i>
+                    </p-button> 
+                </div>
+            </div>
+
+            <div class="p-d-flex p-flex-column rd-h-100" id="print-section"  #divTable>
+                <!-- <div class="rd-h-100 rd-w-100">
+
+                </div> -->
+                <p-table #pTable [hidden]="true" selectionMode="single" [(selection)]="selection" [value]="dataSource" 
+                    [scrollable]="true" [scrollHeight]="'flex'" [style]="{width:'100%'}">
+                    <ng-template pTemplate="header">
+                        <tr >
+                            <th *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
+                                {{coluna.name |translate}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr [pSelectableRow]="item">
+                            <td *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
+                                <span *ngIf="coluna.tipo.toUpperCase() != 'timestamp'.toUpperCase()" translate>{{item[coluna.prop]}}</span>
+                                <span *ngIf="coluna.tipo.toUpperCase() == 'timestamp'.toUpperCase()" translate>{{item[coluna.prop] | date: coluna.mascara}}</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
                 
-            </p-button>
-        </div>
-    </p-toolbar>
-    <div *ngIf="mostrapesquisa" class="pesquisa-container">
-    </div>
-    <div class="grid-container p-col-12" id="print-section"  #table>
-        <p-table #dataTable class="rd-h-100" selectionMode="single" [(selection)]="selection" [value]="dataSource" [scrollable]="true" [scrollHeight]="'flex'"  [style]="{width:'100%'}">
-            <ng-template pTemplate="header">
-                <tr >
-                    <th *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
-                        {{coluna.name |translate}}
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-                <tr [pSelectableRow]="item">
-                    <td *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">
-                        <span *ngIf="coluna.tipo.toUpperCase() != 'timestamp'.toUpperCase()" translate>{{item[coluna.prop]}}</span>
-                        <span *ngIf="coluna.tipo.toUpperCase() == 'timestamp'.toUpperCase()" translate>{{item[coluna.prop] | date: coluna.mascara}}</span>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-        
-        
-    </div>    
+                
+            </div>   
+        </div> 
     </p-card>
 </div>
 <div class="loading">
