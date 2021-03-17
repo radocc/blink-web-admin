@@ -59,7 +59,6 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     id:5,
     nome:'REPROVADO'
   }];
-  @ViewChild("dialogConteudo")public dialogConteudo:ConteudoDialogComponent;
 
   constructor(private playlistService:PlaylistService, private playlistConteudoService:PlaylistConteudoService,
      public eventService:EventBrokerService, public dialogService:DialogService) {
@@ -139,5 +138,8 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
       this.listaConteudo = lista;
     }); 
   }
-
+  public excluirConteudo(itemConteudo:PlaylistConteudo){
+    let index = this.listaConteudo.indexOf(itemConteudo);
+    this.listaConteudo.splice(index,1);
+  }
 }

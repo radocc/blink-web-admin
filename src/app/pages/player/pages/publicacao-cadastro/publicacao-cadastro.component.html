@@ -7,31 +7,7 @@
                         <label for="titulo" translate>NOME</label>
                         <input id="titulo" required formControlName="nome" type="text" pInputText>                     
                     </div>
-                    <div class="rd-row rd-gap">
-                        <div class="rd-col rd-flex">
-                            <label for="dataInicio" translate>Início as</label>
-                            <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataInicio" inputId="dataInicio"></p-calendar>
-                        </div>
-                        <div class="rd-col rd-flex">
-                            <label for="dataFim" translate>Término as</label>
-                            <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataFim"  inputId="dataFim"></p-calendar>
-                        </div>
-                        <div class="rd-col rd-flex">
-                            <label for="status" translate>STATUS</label>
-                            <p-dropdown [options]="listaStatus" formControlName="status" optionLabel="nome" optionValue="id" >
-                                <ng-template let-item pTemplate="selectedItem">
-                                    <div class="" >
-                                        <div>{{item?.nome |translate}}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-item pTemplate="item">
-                                    <div class="country-item">
-                                        <div>{{item.nome|translate}}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </div> 
-                    </div>
+                    
                     <div class="rd-col rd-flex ">
                         <div class="div-container-orderlist rd-col">
                             <div class="rd-row header">
@@ -56,5 +32,4 @@
         </div>
     </div>            
 </app-pagecadastro>
-<!-- <app-conteudo-dialog-playlist #dialogConteudo></app-conteudo-dialog-playlist> -->
 

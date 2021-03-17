@@ -2,50 +2,61 @@
     <div class="player-cadastro rd-flex rd-col rd-gap-8">        
         <div class="rd-flex rd-col">
             <form [formGroup]="form"> 
-                <div class="rd-flex rd-col ">
-                    <div class="p-field rd-col">
-                        <label for="titulo" translate>NOME</label>
-                        <input id="titulo" required formControlName="nome" type="text" pInputText>                     
-                    </div>  
-                    <div class="p-field rd-row rd-gap">
-                        <label class="label-field" translate>ORIENTACAO</label>
-                        <p-radioButton name="orientacao" value="1" formControlName="orientacao" label="{{'PAISAGEM'|translate}}"></p-radioButton>
-                        <p-radioButton name="orientacao" value="2" formControlName="orientacao"  label="{{'RETRATO'|translate}}"></p-radioButton>
-                    </div>                          
-                    <div class="p-field rd-row rd-gap">
-                        <label class="label-left" translate>HORARIO_DE_EXECUCAO</label> 
-                        <label class="label-left" for="horaInicio" translate>INICIO</label> 
-                        <p-calendar [timeOnly]="true" formControlName="horaInicio" imputId="horaInicio"></p-calendar>
-                        <label class="label-left" for="horaFim" translate>FIM</label> 
-                        <p-calendar [timeOnly]="true" formControlName="horaFim"  imputId="horaFim"></p-calendar>
-                    </div>
-                    <div class="p-field rd-col">
-                        <label for="observacao" translate>OBSERVACAO</label>
-                        <textarea pInputTextarea  rows="6" formControlName="observacao"></textarea>
-                    </div>
-                    <div class=" p-field rd-col ">
-                        <label class="label-field" translate>EQUIPAMENTO</label>
-                        <p-autoComplete formControlName="equipamento" 
-                            [suggestions]="equipamentos" (completeMethod)="pesquisarEquipamento($event.query)" field="nome" [dropdown]="true">
-                            <ng-template let-equipamento pTemplate="item">
-                                <div>{{equipamento.nome}} - {{equipamento.uuid}} </div>
-                            </ng-template>
-                        </p-autoComplete>
-                    </div>                           
-                    <div class="rd-flex rd-row rd-gap">
-                        <div class="rd-flex p-field rd-col">
-                            <label class="" for="dataImplantacao" translate>DATA_IMPLANTACAO</label>
-                            <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataImplantacao" inputId="dataImplantacao"></p-calendar>
-                        </div>
-                        <div class="rd-flex p-field rd-col">
-                            <label class="" for="dataRemocao" translate>DATA_REMOCAO</label>
-                            <p-calendar class="" [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataRemocao"  inputId="dataRemocao"></p-calendar>
-                        </div>
-                        <div class="div-btn-trocar" *ngIf="form.controls['dataRemocao'].value != null">
-                            <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="TROCAR_EQUIPAMENTO" translate (click)="trocarEquipamento($event)"></button>
-                        </div>
-                    </div>
-                </div> 
+                <p-tabView>
+                    <p-tabPanel header="{{'DADOS' | translate}}">
+                        <div class="rd-flex rd-col ">
+                            <div class="p-field rd-row rd-gap">
+                                <div class="p-field rd-col">
+                                    <label for="titulo" translate>NOME</label>
+                                    <input id="titulo" required formControlName="nome" type="text" pInputText>                     
+                                </div>  
+                                <div class="p-field rd-col">
+                                    <label class="" for="horaInicio" translate>INICIO</label> 
+                                    <p-calendar [timeOnly]="true" formControlName="horaInicio" imputId="horaInicio"></p-calendar>
+                                </div>
+                                <div class="p-field rd-col">
+                                    <label class="" for="horaFim" translate>FIM</label> 
+                                    <p-calendar [timeOnly]="true" formControlName="horaFim"  imputId="horaFim"></p-calendar>
+                                </div>
+                            </div>
+                            <div class="p-field rd-row rd-gap">
+                                <label class="label-field" translate>ORIENTACAO</label>                                
+                                <p-radioButton name="orientacao" value="1" formControlName="orientacao" label="{{'PAISAGEM'|translate}}"></p-radioButton>
+                                <p-radioButton name="orientacao" value="2" formControlName="orientacao"  label="{{'RETRATO'|translate}}"></p-radioButton>
+                            </div>
+                            <p-fieldset legend="{{'EQUIPAMENTO'|translate}}">
+                                <div class=" p-field rd-col ">
+                                    <label class="label-field" translate>EQUIPAMENTO</label>
+                                    <p-autoComplete formControlName="equipamento" 
+                                        [suggestions]="equipamentos" (completeMethod)="pesquisarEquipamento($event.query)" field="nome" [dropdown]="true">
+                                        <ng-template let-equipamento pTemplate="item">
+                                            <div>{{equipamento.nome}} - {{equipamento.uuid}} </div>
+                                        </ng-template>
+                                    </p-autoComplete>
+                                </div>                           
+                                <div class="rd-flex rd-row rd-gap">
+                                    <div class="rd-flex p-field rd-col">
+                                        <label class="" for="dataImplantacao" translate>DATA_IMPLANTACAO</label>
+                                        <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataImplantacao" inputId="dataImplantacao"></p-calendar>
+                                    </div>
+                                    <div class="rd-flex p-field rd-col">
+                                        <label class="" for="dataRemocao" translate>DATA_REMOCAO</label>
+                                        <p-calendar class="" [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataRemocao"  inputId="dataRemocao"></p-calendar>
+                                    </div>
+                                    <div class="div-btn-trocar" *ngIf="form.controls['dataRemocao'].value != null">
+                                        <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="TROCAR_EQUIPAMENTO" translate (click)="trocarEquipamento($event)"></button>
+                                    </div>
+                                </div>
+                            </p-fieldset>
+                        </div> 
+                  </p-tabPanel>
+                  <p-tabPanel class="rd-row" header="{{'OBSERVACAO' | translate}}">
+                    <textarea class="rd-flex txt-observacao" pInputTextarea  rows="16" formControlName="observacao"></textarea>
+                  </p-tabPanel>
+                  <p-tabPanel header="{{'USO' | translate}}">
+                    
+                  </p-tabPanel>
+                </p-tabView>
             </form>
         </div>
     </div>            

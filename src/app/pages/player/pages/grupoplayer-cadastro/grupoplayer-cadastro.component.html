@@ -1,7 +1,7 @@
 <app-pagecadastro [config]="config" (save)="salvar($event)">
     <div class="grupoplayer-cadastro rd-flex rd-col rd-gap-8">        
         <div class="rd-flex rd-col">
-            <form [formGroup]="form">
+            <form class="rd-flex" [formGroup]="form">
                 <p-tabView>
                     <p-tabPanel header="{{'DADOS' | translate}}">
                         <div class="rd-flex rd-col ">

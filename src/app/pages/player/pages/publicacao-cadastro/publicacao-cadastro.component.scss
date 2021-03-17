@@ -1,0 +1,64 @@
+@mixin app-playlist-cadastro($videotheme) {
+ 
+    app-playlist-cadastro {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        .label-field{
+            line-height: 20px;
+            white-space: nowrap;
+            margin: 8px;
+            margin-left: 0px;
+        } 
+        .p-calendar, .p-dropdown {
+            display: flex !important;
+        }
+        p-autocomplete {
+            display: flex;
+            span {
+                flex: 1;
+            };
+        }
+        .p-card-body{
+            display: flex;
+            flex-direction: column;
+        }
+        .p-card-content{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .div-container-orderlist{
+            border: 1px solid #dee2e6;
+            margin-top: 8px;
+            flex: auto;
+            .header{
+                background: #f8f9fa;
+                color: #495057;
+                border: 1px solid #dee2e6;
+                padding: 8px;
+                border-bottom: 0 none;
+                border-top-right-radius: 3px;
+                border-top-left-radius: 3px;
+                align-items: center;
+                font-weight: 500;
+                .btn-add{
+                    margin-right: 1rem;
+                }
+            }
+        }
+        .p-orderlist{
+            display: flex;
+            flex: auto;
+
+            .p-orderlist-list{
+                flex: auto;
+                max-height: max-content !important; 
+            }
+            .p-orderlist-list-container{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}
