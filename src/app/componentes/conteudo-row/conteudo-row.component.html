@@ -1,0 +1,18 @@
+<div class="conteudo-row">
+    <div class="view" *ngIf="conteudo.idTipoConteudo == 1 || conteudo.idTipoConteudo == 2 " [ngStyle]="{'background':'url(' + conteudo.url +')'}">
+    
+    </div>
+    <div class="rd-col rd-flex">
+        <div class="rd-flex">
+            {{conteudo.titulo}}
+        </div>
+        <div class="rd-row rd-gap">
+            <span>{{conteudo.data |date:'dd/MM/yyyy'}}</span>
+            <div class="rd-flex"></div>
+            <button pButton pRipple type="button" (click)="alterarConteudo(conteudo)" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+            <button pButton pRipple type="button" (click)="visualizarConteudo(conteudo)" icon="pi pi-desktop" class="p-button-rounded  p-button-text"></button>
+            <button pButton pRipple type="button" (click)="arquivoConteudo(conteudo)" icon="pi pi-file" class="p-button-rounded p-button-text"></button>
+            <button pButton pRipple type="button" (click)="excluirConteudo(conteudo)" icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
+        </div>
+    </div>
+</div>

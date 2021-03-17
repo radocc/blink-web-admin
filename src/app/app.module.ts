@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { DevionnTranslateLoader } from './modules/share-translate/devionn-translate-loader';
 import { EventBrokerModule } from 'ng-event-broker';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MAT_DATE_FORMATS } from '@angular/material/core'; 
 
 registerLocaleData(localePt);
 export const MY_FORMATS = {
@@ -34,7 +34,7 @@ export const MY_FORMATS = {
   declarations: [
     AppComponent,
     PainelSiteComponent,
-    LoginPage,
+    LoginPage, 
   ],
   exports:[
     ShareTranslateModule
