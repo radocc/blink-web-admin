@@ -11,6 +11,7 @@ import { Filter } from '@radoccmodels/base/filter';
 import { Filtro } from '@radoccmodels/base/filtro';
 import { Sort } from '@radoccmodels/base/sort';
 import { FiltroService } from '@radoccservices/base/filtro-service';
+import { Table } from 'primeng/table';
 import { fromEvent } from 'rxjs';
 
 @Directive()
@@ -18,7 +19,6 @@ export abstract class FiltroPanel {
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
     @ViewChild('page', { static: true }) page;
-    @ViewChild('table', { static: true }) table: MatTable<any>;
 
     public form: FormGroup; 
     public filter: Filter = new Filter();

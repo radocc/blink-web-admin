@@ -1,4 +1,4 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,6 +9,7 @@ import { DireitoGrupoService } from '@radoccservices/base/direitogrupo-service';
 import { FiltroService } from '@radoccservices/base/filtro-service';
 import { EventBrokerService } from 'ng-event-broker';
 import { MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { FiltroPanel } from './filtropanel';
 
 @Component({
@@ -18,6 +19,9 @@ import { FiltroPanel } from './filtropanel';
   providers: [FiltroService, DireitoGrupoService, MessageService]
 })
 export class GridPesquisaComponent extends FiltroPanel implements OnInit {
+
+  @ViewChild('divTable', { static: true }) divTable: ElementRef;
+  @ViewChild('pTable', { static: true }) table: Table;
 
   @Input() public urlToNovo = "";
   @Input() public urlToAlterar = "";
@@ -40,6 +44,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
   protected _idTela: number;
   public direitos: Direito[];
   private atualizarListaEvent: any;
+  private time: any;
 
   constructor(private router: Router,public filtroService: FiltroService,private direitoGrupoService: DireitoGrupoService,
     public translate: TranslateService, public zone: NgZone, public fb: FormBuilder, private eventService: EventBrokerService,
@@ -63,10 +68,34 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
       }
   }
 
+  ngAfterViewInit(): void {
+    var me = this;
+
+    window.addEventListener('resize', function(event) {
+      if (me.time == null) {
+        me.time = setTimeout(() => {
+          me.setGridHeight();   
+          me.time = null;
+        }, 300);
+      }
+    });
+
+    me.setGridHeight();   
+  }
+
   ngOnDestroy(): void {
     if (this.atualizarListaEvent){
       this.atualizarListaEvent.unsubscribe();
     }    
+    window.removeEventListener('resize', (event) => {
+      console.log('removido evento de resize');
+    });
+  }
+
+  private setGridHeight() {
+    //** Seta o tamanho fixo para a grid */
+    this.table.el.nativeElement.style.height = this.divTable.nativeElement.offsetHeight + 'px';
+    this.table.el.nativeElement.style.display = 'flex';
   }
 
   public buscarDados():Promise<void>{
