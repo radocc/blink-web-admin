@@ -18,6 +18,6 @@ export class PlaylistConteudoService extends TVBlinkService<PlaylistConteudo> {
     }
     
     public buscarPorPlayList(idPlaylist:number): Observable<Array<PlaylistConteudo>> {
-        return this.http.get<Array<PlaylistConteudo>>(this.urlWebBase + `/idPlaylist/${idPlaylist}`).pipe();
+        return this.http.get<Array<PlaylistConteudo>>(this.urlWebBase + `/playlist/${idPlaylist}`).pipe();
     }
 }

@@ -4,12 +4,23 @@
         flex: 1;
         height: 100%;
         display: flex;
+        .p-card-content {
+            display: flex;
+            flex-direction: column;
+        }
         .label-field{
             line-height: 20px;
             white-space: nowrap;
             margin: 8px;
             margin-left: 0px;
         } 
+        .p-tabview-panel{ 
+            flex: 1;
+        }
+        .txt-observacao{
+            min-width: 100%;
+            min-height: 100%;
+        }
         p-autocomplete {
             display: flex;
             span {

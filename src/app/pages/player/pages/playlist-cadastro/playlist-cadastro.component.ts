@@ -110,6 +110,9 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     this.playlist.dataInicio = this.form.controls['dataInicio'].value;
     this.playlist.dataFim = this.form.controls['dataFim'].value;    
     this.playlist.status = this.form.controls['status'].value;
+    for (let w =0; w < this.listaConteudo.length;w++){
+      this.listaConteudo[w].sequencia = w+1;
+    }
     this.playlist.playlistConteudos = this.listaConteudo;
     
     this.playlistService.save(this.playlist).subscribe((playlist)=>{
@@ -132,12 +135,9 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
       closable:false,
       closeOnEscape:false
     });
-    // this.dialogConteudo.montarAmbiente(this.listaConteudo);
-    dialog.onClose.toPromise().then((lista)=>{
+    dialog.onClose.subscribe((lista)=>{
       this.listaConteudo = lista;
-    });
-    // dialog.
-    // this.dialogConteudo.showDialog();
+    }); 
   }
 
 }
