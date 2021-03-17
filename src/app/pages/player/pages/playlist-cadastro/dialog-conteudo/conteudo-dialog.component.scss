@@ -1,6 +1,15 @@
 @mixin app-dialog-conteudo-playlist($videotheme) {
  
-    app-dialog-conteudo-playlist {
+    app-conteudo-dialog-playlist {
+        .p-dialog{
+            display: flex;
+            flex-direction: column;
+
+            .p-dialog-content{
+                flex: 1;
+                padding: 0px !important;
+            }
+        }
         .div-menu{
             width: 250px;
             background: black;
@@ -50,6 +59,24 @@
                     background-position: center !important;                    
                 }
             }
+        }
+        
+        .p-orderlist{
+            display: flex;
+            flex: auto;
+
+            .p-orderlist-list{
+                flex: auto;
+                max-height: max-content !important; 
+            }
+            .p-orderlist-list-container{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        .div-footer{
+            text-align: right;
+            padding: 1rem;
         }
     }
 }

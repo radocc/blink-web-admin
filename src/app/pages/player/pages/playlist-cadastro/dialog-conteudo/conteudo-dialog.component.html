@@ -1,4 +1,4 @@
-<p-dialog header="{{'CONTEUDOS'|translate}}" [(visible)]="display" [style]="{width: '70vw', heigth:'80vh'}">
+<p-dialog header="{{'CONTEUDOS'|translate}}" maximizable="true" [(visible)]="display" [style]="{width: '70vw', height:'80vh'}">
     <ng-template pTemplate="header">
         {{'VINCULE_OS_CONTEUDOS_NA_PLAYLIST' |translate }}
     </ng-template>
@@ -19,7 +19,7 @@
                 <div class="title-conteudo" >
                     {{tipoConteudo?.nome}}
                 </div>
-                <div class="item-conteudo rd-row" *ngFor="let conteudo of conteudos">
+                <div class="item-conteudo rd-row" pDraggable="conteudo" *ngFor="let conteudo of conteudos">
                     <div class="view" *ngIf="conteudo.idTipoConteudo == 1 || conteudo.idTipoConteudo == 2 " [ngStyle]="{'background':'url(' + conteudo.url +')'}">
 
                     </div>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="rd-col rd-flex">
-            <p-orderList class="rd-flex" [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
+            <p-orderList  pDroppable="conteudo" class="rd-flex rd-col" [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
                 <ng-template let-conteudo pTemplate="item">
                     <div>
                         {{conteudo.nome}}
@@ -45,7 +45,7 @@
             </p-orderList>
         </div>
     </div>
-    <p-footer>
-        
-    </p-footer>
+    <div class="div-footer">
+        <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="SALVAR" translate (click)="salvar()"></button>
+    </div>
 </p-dialog>

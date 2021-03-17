@@ -7,6 +7,7 @@ import { ConteudoService } from '@radoccservices/conteudo-services';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
+import { Conteudo } from '@radoccmodels/conteudo';
 
 @Component({
   selector: 'app-conteudo-dialog-playlist',
@@ -28,6 +29,7 @@ export class ConteudoDialogComponent implements OnInit {
   public tipoConteudos:TipoConteudo[] = [];
   public display:boolean = false; 
   public tipoConteudo:TipoConteudo;
+  public conteudo:ConteudoResult;
 
   constructor(private playlistConteudoService:PlaylistConteudoService,
      public conteudoService:ConteudoService, private tipoConteudoService:TipoConteudoService) {
@@ -60,5 +62,29 @@ export class ConteudoDialogComponent implements OnInit {
       this.conteudos = lista;
     })
   }
+
+  public salvar(){
+
+  }
+
+  dragStart(event,conteudo: ConteudoResult) {
+    this.conteudo = conteudo;
+  }
+
+  drop(event) {
+      if (this.conteudo) {
+        let playConteudo = new PlaylistConteudo();
+        playConteudo.conteudo = this.conteudo;
+        playConteudo.idConteudo = this.conteudo.id;
+        playConteudo.sequencia = this.listaConteudo.length;
+        
+        this.listaConteudo.push(playConteudo);
+        this.conteudo = null;
+      }
+  }
+
+  dragEnd(event) {
+      this.conteudo = null;
+  } 
 
 }

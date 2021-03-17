@@ -19,8 +19,28 @@
                 flex: 1;
             };
         }
-        .div-btn-trocar {
-            padding-top:26px;
+        .p-card-body{
+            display: flex;
+            flex-direction: column;
+        }
+        .p-card-content{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .p-orderlist{
+            display: flex;
+            flex: auto;
+
+            .p-orderlist-list{
+                flex: auto;
+                max-height: max-content !important; 
+            }
+            .p-orderlist-list-container{
+                display: flex;
+                flex-direction: column;
+            }
         }
     }
 }
