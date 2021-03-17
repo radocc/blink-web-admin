@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 
@@ -21,7 +22,7 @@ export class PageCadastroComponent implements OnInit {
     subTitle:'',
     btnSalvar:'SALVAR'
   }
-  @Input('form') public form:FormBuilder;
+  @Input('form') public form : FormGroup;
   @Input() translateParams: any[];
   @Input() mostraVoltar: boolean = true;
   @Output("save") onSave:EventEmitter<any> = new EventEmitter();
@@ -31,6 +32,7 @@ export class PageCadastroComponent implements OnInit {
     private translateService:TranslateService) { }
 
   ngOnInit(): void {
+    
   }
 
   ngAfterViewInit(): void {
@@ -52,7 +54,7 @@ export class PageCadastroComponent implements OnInit {
   }
 
   public cancelar(){
-    this.location.back();    
+    this.novo(); 
   }
 
   public voltar() {
@@ -65,6 +67,11 @@ export class PageCadastroComponent implements OnInit {
 
   public enableSalvar(){
     this._disabledSalvar = false;
+  }
+
+  public novo() {
+    if (this.form != null)
+      this.form.reset();
   }
 
   public showSuccessMsg(msg: string) {

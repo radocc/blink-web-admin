@@ -81,6 +81,10 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   }
 
+  public novo() {
+    this.clearForm();
+  }
+
   //** Seta a altura para manter a proporção 16:9 */
   private setContainerImageHeight(div: HTMLDivElement) {
     this.imageHeight = div.offsetWidth * 0.5625;

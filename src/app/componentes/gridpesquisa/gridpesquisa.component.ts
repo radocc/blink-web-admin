@@ -124,6 +124,12 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
     this.pesquisar();
   } 
 
+  public onKeyPress(event: KeyboardEvent) {
+    if (event.key.toUpperCase() == 'ENTER') {
+      this.pesquisar();
+    }
+  }
+
   public onClickButton(direito) {
     let me = this;
     let fn = new Function('direito, me', ' me.' + direito.action + '();   ');
@@ -226,6 +232,11 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
   public novo(){
     this.eventService.publishEvent(Events.novo);
+  }
+
+  public onRowSelect(item) {
+    this.selection = item;
+    this.alterar();
   }
 
 }

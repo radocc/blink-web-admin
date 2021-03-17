@@ -42,6 +42,11 @@ export class TipoConteudoCadastroComponent extends CadForm implements OnInit {
     super.ngOnInit();
   } 
 
+  public novo() {
+    this.tipo = new TipoConteudo();
+    super.novo();
+  }
+
   public buscar(id:number, editavel:boolean){
     this.tipoConteudoService.findById(id).subscribe((tipo)=>{
       this.montarForm(tipo,editavel);

@@ -15,15 +15,10 @@ import { MessageService } from 'primeng/api';
 })
 export class LoteriaPesquisaComponent implements OnInit {
 
-  public form:FormGroup = new FormGroup({
-    nome:new FormControl('', Validators.required)    
-  }) 
-  
-  public loteria:Loteria;
   public gridpesquisa;
 
   
-  constructor(private msgService:MessageService, public loteriaService:LoteriaService, public filtroService: FiltroService) {
+  constructor(public loteriaService:LoteriaService) {
 
   }
 
