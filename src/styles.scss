@@ -24,6 +24,7 @@
 @import './app/pages/player/pages/grupoplayer-pesquisa/grupoplayer-pesquisa.component.scss';
 @import './app/pages/player/pages/playlist-cadastro/playlist-cadastro.component.scss';
 @import './app/pages/player/pages/playlist-pesquisa/playlist-pesquisa.component.scss';
+@import './app/pages/player/pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component.scss';
 
 
 @import './app/pages/configuracao/panel-configuracao/panel-configuracao.component.scss';
@@ -96,7 +97,7 @@ PLAYER
 @include app-grupoplayer-cadastro($theme);
 @include app-playlist-cadastro($theme);
 @include app-playlist-pesquisa($theme);
-
+@include app-dialog-conteudo-playlist($theme);
 
 
 @include app-panel-configuracao($theme);

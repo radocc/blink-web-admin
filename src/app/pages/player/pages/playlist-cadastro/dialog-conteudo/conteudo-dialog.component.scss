@@ -1,0 +1,55 @@
+@mixin app-dialog-conteudo-playlist($videotheme) {
+ 
+    app-dialog-conteudo-playlist {
+        .div-menu{
+            width: 250px;
+            background: black;
+            border-radius: 5px;
+            height: 100%;
+            padding: 12px;
+            
+            .item-menu{
+                color: white;
+                font-weight: 400;
+                margin: 16px;
+                font-size: 14;
+                cursor: pointer;
+            }
+            .item-menu.selected {
+                // background: map-get($theme, dark);
+                font-weight: 800;
+                font-size: 18;
+            }
+        }
+        .pesquisa-list{
+            margin: 8px;
+
+            .div-filtro{
+                text-align: end;
+            }
+
+            .item-conteudo{
+                margin-top: 16px;
+                margin-bottom: 16px;
+                padding: 8px;
+                padding-left: 16px;
+                padding-right: 16px;
+                border-radius: 5px;
+                background: map-get($theme, secondary);                    
+                .view{
+                    width: 120px;
+                    height: 70px;
+                    background: green;
+                    border-radius: 5px;
+                    margin-left: 8px;
+                    margin-right: 8px;
+                    border-width: 1px;
+                    border-style: solid;
+                    background-repeat: no-repeat !important;
+                    background-size: contain !important;
+                    background-position: center !important;                    
+                }
+            }
+        }
+    }
+}

@@ -34,7 +34,7 @@
                     </div>
                     <div class="rd-col rd-gap">
                         <div class="btn-adicionar">
-                            <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate ></button>
+                            <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate (click)="abrirLista()"></button>
                         </div>
                         <p-orderList [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
                             <ng-template let-conteudo pTemplate="item">
@@ -62,5 +62,5 @@
         </div>
     </div>            
 </app-pagecadastro>
-
+<app-conteudo-dialog-playlist #dialogConteudo></app-conteudo-dialog-playlist>
 

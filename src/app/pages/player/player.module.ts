@@ -12,6 +12,7 @@ import { GrupoPlayerPesquisaComponent } from './pages/grupoplayer-pesquisa/grupo
 import { GrupoPlayerCadastroComponent } from './pages/grupoplayer-cadastro/grupoplayer-cadastro.component';
 import { PlaylistCadastroComponent } from './pages/playlist-cadastro/playlist-cadastro.component';
 import { PlaylistPesquisaComponent } from './pages/playlist-pesquisa/playlist-pesquisa.component';
+import { ConteudoDialogComponent } from './pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component';
 
 const routes: Routes = [
   {
@@ -66,7 +67,8 @@ const routes: Routes = [
     GrupoPlayerCadastroComponent,
     GrupoPlayerPesquisaComponent,
     PlaylistCadastroComponent,
-    PlaylistPesquisaComponent
+    PlaylistPesquisaComponent,
+    ConteudoDialogComponent
   ],
   imports: [
     CommonModule,

@@ -1,13 +1,14 @@
 import { Events } from '../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { Playlist } from '@radoccmodels/playlist';
 import { PlaylistConteudo } from '@radoccmodels/playlistconteudo';
 import { PlaylistService } from '@radoccservices/playlist-services';
 import { PlaylistConteudoService } from '@radoccservices/playlistconteudo-services';
 import { ConteudoService } from '@radoccservices/conteudo-services';
+import { ConteudoDialogComponent } from './dialog-conteudo/conteudo-dialog.component';
 
 @Component({
   selector: 'app-playlist-cadastro',
@@ -34,7 +35,7 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     dataInicio:new FormControl(),
     dataFim:new FormControl(),
     regraExibicao:new FormControl(),
-    status:new FormControl()
+    status:new FormControl(2)
   }) 
   
   public playlist:Playlist;
@@ -57,6 +58,8 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     id:5,
     nome:'REPROVADO'
   }];
+  @ViewChild("dialogConteudo")public dialogConteudo:ConteudoDialogComponent;
+
   constructor(private playlistService:PlaylistService, private playlistConteudoService:PlaylistConteudoService,
      public eventService:EventBrokerService) {
       super(eventService);
@@ -115,5 +118,10 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
       console.log(error);
     })
   } 
+
+  public abrirLista(){
+    this.dialogConteudo.montarAmbiente(this.listaConteudo);
+    this.dialogConteudo.showDialog();
+  }
 
 }
