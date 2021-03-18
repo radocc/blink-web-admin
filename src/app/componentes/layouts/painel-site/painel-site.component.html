@@ -21,12 +21,12 @@
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='grupo'}">
                 <span (click)="navegar('grupo','admin/player/panel/(pesquisa:grupoplayer-pesquisa//cadastro:grupoplayer-cadastro)')" translate>GRUPO</span>
             </div>
-            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='relatorio'}">
+            <!-- <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='relatorio'}">
                 <span routerLink="relatorio"  (click)="navegar('relatorio')" translate>RELATORIOS</span>
-            </div>
-            <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='usuario'}">
+            </div> -->
+            <!-- <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='usuario'}">
                 <span routerLink="usuario" (click)="navegar('usuario')"  translate>USUARIOS</span>
-            </div>
+            </div> -->
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='configuracao'}" >
                 <span (click)="navegar('configuracao');menu.toggle($event)"  translate>CONFIGURACAO</span>
                 <p-menu #menu [popup]="true" [model]="itensConfiguracao"></p-menu>

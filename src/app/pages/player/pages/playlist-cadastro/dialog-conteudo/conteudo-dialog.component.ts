@@ -8,6 +8,7 @@ import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
 import { Conteudo } from '@radoccmodels/conteudo';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-conteudo-dialog-playlist',
@@ -27,24 +28,25 @@ export class ConteudoDialogComponent implements OnInit {
   public listaConteudo:PlaylistConteudo[] = [];
   public conteudos:ConteudoResult[] = [];
   public tipoConteudos:TipoConteudo[] = [];
-  public display:boolean = false; 
+  public display:boolean = true; 
   public tipoConteudo:TipoConteudo;
   public conteudo:ConteudoResult;
 
   constructor(private playlistConteudoService:PlaylistConteudoService,
-     public conteudoService:ConteudoService, private tipoConteudoService:TipoConteudoService) {
-      
+     public conteudoService:ConteudoService, private tipoConteudoService:TipoConteudoService,
+     public config: DynamicDialogConfig,public ref: DynamicDialogRef) {
+    this.listaConteudo = config.data;
   }
 
   ngOnInit(): void { 
-
+    this.montarAmbiente();
   } 
 
-  public montarAmbiente(listaConteudo:PlaylistConteudo[]){
+  public montarAmbiente(){
     this.tipoConteudoService.findAll().subscribe((lista)=>{
       this.tipoConteudos = lista;
     });
-    this.listaConteudo = listaConteudo;
+    
     
   }
 
@@ -64,10 +66,10 @@ export class ConteudoDialogComponent implements OnInit {
   }
 
   public salvar(){
-
+    this.ref.close(this.listaConteudo);
   }
 
-  dragStart(event,conteudo: ConteudoResult) {
+  dragStart(conteudo: ConteudoResult) {
     this.conteudo = conteudo;
   }
 

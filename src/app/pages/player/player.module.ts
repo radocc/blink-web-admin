@@ -13,6 +13,7 @@ import { GrupoPlayerCadastroComponent } from './pages/grupoplayer-cadastro/grupo
 import { PlaylistCadastroComponent } from './pages/playlist-cadastro/playlist-cadastro.component';
 import { PlaylistPesquisaComponent } from './pages/playlist-pesquisa/playlist-pesquisa.component';
 import { ConteudoDialogComponent } from './pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component';
+import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
 
 const routes: Routes = [
   {
@@ -70,12 +71,16 @@ const routes: Routes = [
     PlaylistPesquisaComponent,
     ConteudoDialogComponent
   ],
+  entryComponents:[
+    ConteudoDialogComponent
+  ],
   imports: [
     CommonModule,
     NgPrimeModule,
     FormsModule,
     ReactiveFormsModule,
     DevComponentModule,
+    ConteudoRowModule,
     ShareTranslateModule,
     RouterModule.forChild(routes)
   ]

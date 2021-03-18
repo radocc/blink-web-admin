@@ -15,6 +15,7 @@ import { TemplateLoteriaComponent } from './componente/template-loteria/template
 import { ShareTranslateModule } from 'app/modules/share-translate/share-translate.module';
 import { TemplatePrevisaoTempoComponent } from './componente/template-previsaotempo/template-previsaotempo.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
 
 const routes: Routes = [
   {
@@ -113,6 +114,7 @@ export const MY_FORMATS = {
     ReactiveFormsModule,
     DevComponentModule,
     ShareTranslateModule,
+    ConteudoRowModule,
     RouterModule.forChild(routes)
   ],
   providers:[

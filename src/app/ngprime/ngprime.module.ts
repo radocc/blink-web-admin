@@ -27,7 +27,8 @@ import {TabViewModule} from 'primeng/tabview';
 import {AvatarModule} from 'primeng/avatar';
 import {OrderListModule} from 'primeng/orderlist';
 import {DragDropModule} from 'primeng/dragdrop';
-
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {FieldsetModule} from 'primeng/fieldset';
 @NgModule({
   declarations: [],
   imports: [
@@ -58,7 +59,9 @@ import {DragDropModule} from 'primeng/dragdrop';
     TabViewModule, 
     AvatarModule,
     OrderListModule,
-    DragDropModule
+    DragDropModule,
+    DynamicDialogModule,
+    FieldsetModule
   ],
   exports:[
     ButtonModule,
@@ -87,7 +90,9 @@ import {DragDropModule} from 'primeng/dragdrop';
     TabViewModule,  
     AvatarModule,
     OrderListModule,
-    DragDropModule
+    DragDropModule,
+    DynamicDialogModule,
+    FieldsetModule
   ]
 })
 export class NgPrimeModule { }
