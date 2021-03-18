@@ -22,12 +22,13 @@ import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
 import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { EventBrokerService } from 'ng-event-broker';
 import { Events } from '@radoccmodels/enum/events';
+import { TemplateCampoService } from '@radoccservices/templatecampo-services';
 
 @Component({
   selector: 'app-template-cadastro',
   templateUrl: './template-cadastro.component.html',
   styleUrls: ['./template-cadastro.component.scss'],
-  providers: [ ArquivoService, TemplateService, TipoConteudoService ]
+  providers: [ ArquivoService, TemplateService, TipoConteudoService, TemplateCampoService ]
 })
 export class TemplateCadastroComponent extends CadForm implements OnInit {
 
@@ -55,7 +56,8 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     private route:ActivatedRoute,
     private service: TemplateService,
     private tipoConteudoService: TipoConteudoService,
-    public eventService: EventBrokerService) { 
+    public eventService: EventBrokerService,
+    private campoService : TemplateCampoService) { 
       super(eventService);
   }
 
@@ -99,7 +101,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   }
 
   public salvar() {
-    this.template.campos = this.camposAdicionais;
+    this.prepararCampos();
     this.template.idArquivo = this.arquivo.id;
 
     this.service.save(this.template).subscribe(
@@ -115,15 +117,23 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     );
   }
 
-  public buscar(id) {
-    this.service.findById(id).subscribe(
-      (data) => {
-        this.template = data;
-      },
-      (err) => {
-        console.error(err);
+  private prepararCampos() {
+    this.camposAdicionais.forEach((campo) => {
+      if (campo.tipo == 4) {
+        campo.width = campo.width * this.proportion;
+        campo.height = campo.height * this.proportion;
       }
-    );
+    });
+
+    this.template.campos = this.camposAdicionais;
+  }
+
+  public async buscar(id) {
+    this.template = await this.service.findById(id).toPromise();
+    if (this.template != null) 
+      this.arquivo = await this.arquivoService.findById(this.template.idArquivo).toPromise();
+    this.camposAdicionais = await this.campoService.getByTemplate(this.template.id).toPromise();
+    this.camposAdicionais.forEach(campo => campo.valorTeste = 'Texto aqui');
   }
 
   public async buscarTiposConteudo() {
@@ -156,6 +166,18 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     }    
   }
 
+  public adicionarImagemCampo(event, campo: TemplateCampo) {
+    if (event.files.length > 0){
+      event.progress = 10;
+      this.arquivoService.postFile(event.files[0]).then((res)=>{
+        event.progress = 100;
+        this.arquivo = res;
+        this.proportion = this.arquivo.height / this.imageHeight;
+        console.log(res);
+      })
+    }   
+  }
+
 
   //** Métodos dos campos adicionais */
 
@@ -177,6 +199,11 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       new ResizeObserver(() => {
         campo.height = drag.offsetHeight;
         campo.width = drag.offsetWidth;
+        
+        let campoImagem = document.getElementById(campo.hash+'-imagem');
+        campoImagem.style.height = (drag.offsetHeight - 2) + 'px';
+        campoImagem.style.width = (drag.offsetWidth - 2) + 'px';
+
       }).observe(drag);
     }, 300);
   }
@@ -202,14 +229,14 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
     // console.log('left: ', left);
     // console.log('top: ', top);
-    campo.left = left;
-    campo.top = top;
+    campo.positionLeft = left;
+    campo.positionTop = top;
 
 
   }
 
   public setDistancia(campo: TemplateCampo) {
-    campo.drag = {x: (campo.left * (this.arquivo.width / this.proportion)) / 100, y: (campo.top * this.imageHeight) / 100};
+    campo.drag = {x: (campo.positionLeft * (this.arquivo.width / this.proportion)) / 100, y: (campo.positionTop * this.imageHeight) / 100};
   }
 
   public onKeyPress(event: KeyboardEvent, campo: TemplateCampo) {

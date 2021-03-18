@@ -60,4 +60,7 @@ export class ArquivoService extends AbstractService<Arquivo> {
     //     return this.http.post<ImagemReq>(this.urlWebBase + '/salvarimagem', obj)
     // }
 
+    public getUrl(id: number): Observable<string> {
+        return this.http.get<string>(this.urlWebBase + `url/${id}`).pipe();
+    }
 }

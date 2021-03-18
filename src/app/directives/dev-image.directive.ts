@@ -32,4 +32,20 @@ export class DevImageDirective{
     @HostBinding('style.backgroundSize') bgSize: string = 'contain';
     @HostBinding('style.backgroundRepeat') bgRepeat: string = 'no-repeat';
     @HostBinding('style.backgroundPosition') bgPosition: string = 'center';
+
+    @Input('file')
+    set file(file: File) {
+        if (file != null) {
+            this._toBase64(file).then(base64 => this.bgImage = `url(${base64})`);
+        }
+    }
+
+    _toBase64(file: File) : Promise<string>{
+        return new Promise<any>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
 }

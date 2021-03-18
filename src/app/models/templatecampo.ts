@@ -15,8 +15,8 @@ export class TemplateCampo extends BaseEntityImpl {
     public fonteCor: string = '#000000';
     public fonteEspessura: string = EFonteEspessura.REGULAR.name;
     public cadastro: boolean = false;
-    public top: number = 0;
-    public left: number = 0;
+    public positionTop: number = 0;
+    public positionLeft: number = 0;
     public angulo: number = 0;
     public imagemFormato: number;
     public numeroLinhas: number = 1;
@@ -24,7 +24,9 @@ export class TemplateCampo extends BaseEntityImpl {
     public height: number = 0;
     public width: number = 0;
 
-    @jsonIgnore() public valorTeste: string = 'Texto aqui';
+    @jsonIgnore() public valorTeste: any = 'Texto aqui';
     @jsonIgnore() public drag = {x: 0, y: 0};
     @jsonIgnore() public hash: string = Date.now().toString();
+    @jsonIgnore() public file: File;
+
 }
