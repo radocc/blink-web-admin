@@ -128,7 +128,7 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     const dialog = this.dialogService.open(ConteudoDialogComponent, {
       data:this.listaConteudo,
       width: '80%',
-      height:'80%',
+      // height:'80%',
       modal:true,
       showHeader:false,
       closable:false,
