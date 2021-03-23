@@ -7,6 +7,7 @@
                         <div class="p-field rd-col">
                             <label for="nome" translate>NOME</label>
                             <input id="nome" required formControlName="nome" type="text" pInputText>
+                            <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>    
                         <div class="rd-flex rd-row ">
                             <div class="p-field rd-row rd-flex">                                

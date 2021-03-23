@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { CadConteudoComponent } from './../cad-conteuo/cad-conteudo.component';
+import { CadConteudoComponent } from '../cad-conteudo/cad-conteudo.component';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';

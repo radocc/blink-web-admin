@@ -7,29 +7,35 @@
                         <div class="p-field rd-col">
                             <label for="nome" translate>NOME</label>
                             <input id="nome" required formControlName="nome" type="text" pInputText>
+                            <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>
                         <div class="rd-row rd-flex">
                             <div class="p-field rd-col p-mr-2 rd-flex">
                                 <label for="cnpj" translate>CPF/CNPJ</label>
                                 <input id="cnpj" required formControlName="cnpj" type="text" pInputText>
+                                <small id="cnpj" *ngIf="form.controls['cnpj'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                             </div> 
                             <div class="p-field rd-col p-mr-2 rd-flex">
                                 <label for="login" translate>LOGIN</label>
                                 <input id="login" required formControlName="login" type="text" pInputText>
+                                <small id="login" *ngIf="form.controls['login'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                             </div>
                         </div>
                         <div class="p-field rd-col">
                             <label for="email" translate>EMAIL</label>
                             <input id="email" required formControlName="email" type="email" pInputText>
+                            <small id="email" *ngIf="form.controls['email'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>
                         <div class="rd-row rd-flex">
                             <div class="p-field rd-col p-mr-2 rd-flex">
                                 <label for="senha" translate>SENHA</label>
                                 <input id="senha" required formControlName="senha" type="password" pInputText>
+                                <small id="senha" *ngIf="form.controls['senha'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                             </div> 
                             <div class="p-field rd-col p-mr-2 rd-flex">
                                 <label for="confirmeSenha" translate>CONFIRME_A_SENHA</label>
                                 <input id="confirmeSenha" required formControlName="confirmeSenha" type="password" pInputText>
+                                <small id="confirmeSenha" *ngIf="form.controls['confirmeSenha'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                             </div>
                         </div>
                         <div class="p-field rd-col rd-flex">
@@ -40,6 +46,7 @@
                                     <div>{{grupo.nome}} </div>
                                 </ng-template>
                             </p-autoComplete>
+                            <small id="grupoUsuario" *ngIf="form.controls['grupoUsuario'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
                     </div> 
                 </form>      

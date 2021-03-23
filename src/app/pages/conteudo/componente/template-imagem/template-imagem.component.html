@@ -1,6 +1,6 @@
 <div class="template-imagem-conteudo rd-flex rd-col rd-gap-8">
     <div class="">
-        <button pButton  type="button" label="NOVO_CONTEUDO" (click)="novo()"></button>
+        <button pButton  type="button" label="{{'NOVO_CONTEUDO'|translate}}" (click)="novo()"></button>
     </div>
     <div>
         <p-messages></p-messages>
@@ -12,6 +12,7 @@
                     <div class="p-field rd-col">
                         <label for="titulo">Título</label>
                         <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
+                        <small id="titulo" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
                     <div class="p-field rd-row">
                         <p-fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
@@ -44,7 +45,7 @@
             </form>      
         </div>
         <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">
+            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
         
             </app-register-action> 
         </div>      

@@ -7,13 +7,20 @@
                         <form [formGroup]="form">
                             <div class="rd-flex rd-col ">
                                 <div class="p-field rd-col">
-                                    <label for="nome" translate>NOME</label>
-                                    <input id="nome" required formControlName="nome" type="text" pInputText>
+                                    <label for="nome" translate>NOME<span class="obrigatorio">*</span> </label>
+                                    <input id="nome" formControlName="nome" type="text" pInputText>
+                                    <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div> 
                                 <div class="p-field rd-col">
                                     <label for="url" translate>URL</label>
-                                    <input id="url" required formControlName="url" type="url" pInputText>
+                                    <input id="url" required formControlName="url" type="url" pInputText >
+                                    <small id="url" *ngIf="form.controls['url'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div> 
+                                <div class="p-field rd-col">
+                                    <label for="codificacao" translate>CODIFICACAO</label>
+                                    <input id="codificacao" required formControlName="codificacao" type="text" pInputText>                                    
+                                    <small id="codificacao" *ngIf="form.controls['codificacao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                                </div>
                                 <div class="p-field rd-col">
                                     <label for="template" translate>TEMPLATE</label>
                                     <p-autoComplete formControlName="template" class="rd-flex p-field"
@@ -22,6 +29,7 @@
                                             <div>{{template.nome}} </div>
                                         </ng-template>
                                     </p-autoComplete>
+                                    <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div>  
                             </div> 
                         </form>      
@@ -34,11 +42,13 @@
                                 <div class="p-field rd-col">
                                     <label for="nome" translate>NOME</label>
                                     <input id="nome" required formControlName="nome" type="text" pInputText>
+                                    <small id="nome" *ngIf="formEditoria.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div> 
                                 <div class="p-field rd-row rd-gap-8">
                                     <div class="p-field rd-col rd-flex">
                                         <label for="url" translate>URL</label>
                                         <input id="url" required formControlName="url" type="url" pInputText>
+                                        <small id="url" *ngIf="formEditoria.controls['url'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                     </div>                                  
                                     <div class="btn-adicionar">
                                         <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate (click)="adicionar($event)"></button>

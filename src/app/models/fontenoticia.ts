@@ -6,6 +6,7 @@ export class FonteNoticia extends BaseEntityImpl {
     
     public nome:string;
     public url:string;
+    public codificacao:string;
     public idTemplate:number;
     public template:Template;
     public editorias:NoticiaEditoria[] = [];

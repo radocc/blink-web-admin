@@ -1,6 +1,6 @@
 <div class="template-cotacao-conteudo rd-flex rd-col rd-gap-8">
     <div class="">
-        <button pButton  type="button" label="NOVO_CONTEUDO" (click)="novo()"></button>
+        <button pButton  type="button" label="{{'NOVO_CONTEUDO'|translate}}" (click)="novo()"></button>
     </div>
     <div>
         <p-messages></p-messages>
@@ -31,7 +31,7 @@
             </form> 
         </div>
         <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">
+            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
         
             </app-register-action> 
         </div>      

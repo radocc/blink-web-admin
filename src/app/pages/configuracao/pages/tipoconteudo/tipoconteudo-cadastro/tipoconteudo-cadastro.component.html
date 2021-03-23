@@ -7,10 +7,12 @@
                         <div class="p-field rd-col">
                             <label for="nome" translate>NOME</label>
                             <input id="nome" required formControlName="nome" type="text" pInputText>
+                            <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
                         <div class="p-field rd-col">
                             <label for="sequencia" translate>SEQUENCIA</label>
                             <input id="sequencia" required formControlName="sequencia" type="number" pInputText>
+                            <small id="sequencia" *ngIf="form.controls['sequencia'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
                     </div> 
                 </form>      

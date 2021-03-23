@@ -10,21 +10,21 @@
             <div class="rd-row rd-flex pesquisa ">
                 <div class="div-menu">
                     <span class="p-float-label">
-                        <input id="float-input" type="text" pInputText> 
-                        <label for="float-input" translate>OPCOES</label>
+                        <input id="pesquisaTipo" [(ngModel)]="pesquisaTipo" (ngModelChange)="pesquisarTipo($event)" type="text" pInputText> 
+                        <label for="pesquisaTipo" translate>OPCOES</label>
                     </span>
                     <div *ngFor="let item of tiposConteudos">
                         <div class="item-menu" [ngClass]="{'selected':item.id == tipoConteudo?.id }" (click)="filtrarTipo(item)">{{item.nome}}</div>
                     </div>
                 </div>
                 <div class="rd-flex pesquisa-list">
-                    <div class="div-filtro"> filtro: Data / Nome / Recentes / Antigos</div>
+                    <!-- <div class="div-filtro"> filtro: Data / Nome / Recentes / Antigos</div> -->
                     <div class="title-conteudo" >
                         {{tipoConteudo?.nome}}
                     </div>
                     <div class="item-conteudo rd-row" *ngFor="let conteudo of conteudos">
-                        <app-conteudo-row [conteudo]="conteudo" (btnAbrirArquivo)="arquivoConteudo(conteudo)" (btnVisualizar)="visualizarConteudo(conteudo)"
-                            (btnAlterar)="alterarConteudo(conteudo)" (btnExcluir)="excluirConteudo(conteudo)" > 
+                        <app-conteudo-row [conteudo]="conteudo" (onAbrirArquivo)="arquivoConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
+                            (onAlterar)="alterarConteudo(conteudo)" (onExcluir)="excluirConteudo(conteudo)" > 
                         </app-conteudo-row>
                     </div>
                 </div>

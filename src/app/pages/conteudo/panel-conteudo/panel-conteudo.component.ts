@@ -26,7 +26,7 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
   public conteudos:ConteudoResult[] = [];
   public tipoConteudo:TipoConteudo= null;
   public eventLista = null;
-
+  public pesquisaTipo:string;
   constructor(private router:Router, private tipoConteudoService:TipoConteudoService, private conteudoService:ConteudoService,
     private eventService:EventBrokerService) { }
 
@@ -43,6 +43,12 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
 
   public buscarTipos(){
     this.tipoConteudoService.findAll().subscribe( (lista) =>{
+      this.tiposConteudos = lista;
+    })
+  }
+
+  public pesquisarTipo(nome:string){
+    this.tipoConteudoService.findNome(nome).subscribe((lista)=>{
       this.tiposConteudos = lista;
     })
   }

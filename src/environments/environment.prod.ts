@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  serverHost: 'developer-tv.radocc.com',
-  serverPort: '8468', 
+  serverHost: 'server.radocc.com',
+  serverPort: '38443', 
   protocol:'https', 
   ws:'wss', 
 };
