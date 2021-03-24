@@ -56,6 +56,12 @@ export class PlayerCadastroComponent extends CadForm implements OnInit {
     super.ngOnInit();
   } 
 
+  public novo(){
+    super.novo();
+    this.player = null;
+    this.equipamentos = [];
+  }
+
   public buscar(id:number, editavel:boolean){
       this.playerService.findById(id).subscribe((player)=>{
         this.montarForm(player,editavel);

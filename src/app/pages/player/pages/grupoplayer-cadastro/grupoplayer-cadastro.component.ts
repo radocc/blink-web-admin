@@ -57,6 +57,11 @@ export class GrupoPlayerCadastroComponent extends CadForm implements OnInit {
     })
   } 
 
+  public novo(){
+    super.novo();
+    this.grupoPlayer = null;
+  }
+
   public buscar(id:number, editavel:boolean){
       this.grupoPlayerService.findById(id).subscribe((player)=>{
         this.montarForm(player,editavel);

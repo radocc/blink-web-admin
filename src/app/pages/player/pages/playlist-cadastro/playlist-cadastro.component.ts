@@ -69,6 +69,11 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     super.ngOnInit();
   } 
 
+  public novo(){
+    super.novo();
+    this.playlist = null;
+  }
+
   public buscar(id:number, editavel:boolean){
       this.playlistService.findById(id).subscribe((player)=>{
         this.montarForm(player,editavel);

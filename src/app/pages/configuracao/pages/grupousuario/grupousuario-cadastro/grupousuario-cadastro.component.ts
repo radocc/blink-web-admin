@@ -45,6 +45,11 @@ export class GrupoUsuarioCadastroComponent extends CadForm implements OnInit {
   ngOnInit(): void { 
     super.ngOnInit();
   } 
+
+  public novo(){
+    super.novo();
+    this.grupoUsuario = null;
+  }
    
   public buscar(id:number, editavel:boolean){
     this.grupoUsuarioService.findById(id).subscribe((grupo)=>{

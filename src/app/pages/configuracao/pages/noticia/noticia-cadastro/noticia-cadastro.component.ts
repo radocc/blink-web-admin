@@ -46,6 +46,11 @@ export class NoticiaCadastroComponent extends CadForm implements OnInit {
   ngOnInit(): void { 
     super.ngOnInit();
   } 
+
+  public novo(){
+    super.novo();
+    this.noticia = null;
+  }
   
   public buscar(id:number, editavel:boolean){
     this.noticiaService.findById(id).subscribe((loteria)=>{

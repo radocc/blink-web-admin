@@ -62,6 +62,12 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
     super.ngOnInit();
   } 
 
+  public novo(){
+    super.novo();
+    this.fonteNoticia = null; 
+    this.editorias = [];
+  }
+
   public buscar(id:number, editavel:boolean){
       this.fonteNoticiaService.findById(id).subscribe((fonte)=>{
         this.montarForm(fonte,editavel);
