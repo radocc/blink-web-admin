@@ -25,6 +25,8 @@ import { GrupoUsuarioCadastroComponent } from './pages/grupousuario/grupousuario
 import { GrupoUsuarioPesquisaComponent } from './pages/grupousuario/grupousuario-pesquisa/grupousuario-pesquisa.component';
 import { NoticiaCadastroComponent } from './pages/noticia/noticia-cadastro/noticia-cadastro.component';
 import { NoticiaPesquisaComponent } from './pages/noticia/noticia-pesquisa/noticia-pesquisa.component';
+import { PrevisaoTempoImagemCadastroComponent } from './pages/previsaotempoimagem/previsaotempoimagem-cadastro/previsaotempoimagem-cadastro.component';
+import { PrevisaoTempoImagemPesquisaComponent } from './pages/previsaotempoimagem/previsaotempoimagem-pesquisa/previsaotempoimagem-pesquisa.component';
 
 const routes: Routes = [
     {
@@ -120,6 +122,16 @@ const routes: Routes = [
           path:'noticia-cadastro',
           outlet: 'cadastro',
           component: NoticiaCadastroComponent
+        },
+        {
+          path:'previsaotempoimagem-pesquisa',
+          component: PrevisaoTempoImagemPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'previsaotempoimagem-cadastro',
+          outlet: 'cadastro',
+          component: PrevisaoTempoImagemCadastroComponent
         }
       ]
     }
@@ -144,7 +156,9 @@ const routes: Routes = [
       GrupoUsuarioCadastroComponent,
       GrupoUsuarioPesquisaComponent,
       NoticiaCadastroComponent,
-      NoticiaPesquisaComponent 
+      NoticiaPesquisaComponent,
+      PrevisaoTempoImagemCadastroComponent,
+      PrevisaoTempoImagemPesquisaComponent 
     ],
     imports: [
       CommonModule,
