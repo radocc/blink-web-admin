@@ -5,7 +5,9 @@
                 Blink
             </div>
         </div> 
-        <div class="menu-conteiner">            
+        <div class="menu-conteiner">
+            <p-dropdown [options]="empresas" [(ngModel)]="empresaSelecionada" placeholder="Empresas" optionLabel="razaoSocial" [showClear]="true"></p-dropdown>
+
             <div class="item-menu " [ngClass]="{'selected':rotaSelecionada=='conteudo'}">
                 <span routerLink="conteudo" (click)="navegar('conteudo')" translate>CONTEUDOS</span>
             </div>
