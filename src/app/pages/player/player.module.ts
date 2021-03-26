@@ -14,6 +14,7 @@ import { PlaylistCadastroComponent } from './pages/playlist-cadastro/playlist-ca
 import { PlaylistPesquisaComponent } from './pages/playlist-pesquisa/playlist-pesquisa.component';
 import { ConteudoDialogComponent } from './pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component';
 import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
+import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
 
 const routes: Routes = [
   {
@@ -82,7 +83,8 @@ const routes: Routes = [
     DevComponentModule,
     ConteudoRowModule,
     ShareTranslateModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    PagecadastroModule
   ]
 })
 export class PlayerModule { }

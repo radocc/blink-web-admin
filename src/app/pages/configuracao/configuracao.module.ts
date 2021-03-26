@@ -27,6 +27,7 @@ import { NoticiaCadastroComponent } from './pages/noticia/noticia-cadastro/notic
 import { NoticiaPesquisaComponent } from './pages/noticia/noticia-pesquisa/noticia-pesquisa.component';
 import { PrevisaoTempoImagemCadastroComponent } from './pages/previsaotempoimagem/previsaotempoimagem-cadastro/previsaotempoimagem-cadastro.component';
 import { PrevisaoTempoImagemPesquisaComponent } from './pages/previsaotempoimagem/previsaotempoimagem-pesquisa/previsaotempoimagem-pesquisa.component';
+import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
 
 const routes: Routes = [
     {
@@ -169,7 +170,8 @@ const routes: Routes = [
       ShareTranslateModule,
       RouterModule.forChild(routes),
       DragDropModule,
-      MatIconModule
+      MatIconModule,
+      PagecadastroModule
     ]
   })
   export class ConfiguracaoModule { }

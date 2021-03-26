@@ -16,6 +16,7 @@ import { ShareTranslateModule } from 'app/modules/share-translate/share-translat
 import { TemplatePrevisaoTempoComponent } from './componente/template-previsaotempo/template-previsaotempo.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
+import { PageCadastroConteudoModule } from '@radocccomponentes/pagecadastro-conteudo/pagecadastro-conteudo.module';
 
 const routes: Routes = [
   {
@@ -105,7 +106,7 @@ export const MY_FORMATS = {
     TemplateNoticiaComponent,
     TemplateCotacaoComponent,
     TemplateLoteriaComponent,
-    TemplatePrevisaoTempoComponent
+    TemplatePrevisaoTempoComponent,
   ],
   imports: [
     CommonModule,
@@ -115,6 +116,7 @@ export const MY_FORMATS = {
     DevComponentModule,
     ShareTranslateModule,
     ConteudoRowModule,
+    PageCadastroConteudoModule,
     RouterModule.forChild(routes)
   ],
   providers:[
