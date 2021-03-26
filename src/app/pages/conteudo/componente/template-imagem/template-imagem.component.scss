@@ -3,6 +3,7 @@
     app-template-imagem-conteudo {
         height: 100%;
         display: flex;
+        
         .label-field{
             line-height: 20px;
             white-space: nowrap;
@@ -10,7 +11,7 @@
             margin-left: 0px;
         }
         .input-tempo{
-            width: 70px;
+            // width: 70px;
         }
         .p-fileupload .p-fileupload-content{
             padding: 0px !important;

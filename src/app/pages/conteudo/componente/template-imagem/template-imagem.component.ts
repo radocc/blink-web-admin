@@ -10,7 +10,6 @@ import { Conteudo } from '@radoccmodels/conteudo';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
-import { RegisterActionComponent } from 'app/componentes/register-action/register-action.component';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
 

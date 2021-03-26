@@ -1,23 +1,17 @@
-<div class="template-imagem-conteudo rd-flex rd-col rd-gap-8">
-    <div class="">
-        <button pButton  type="button" label="{{'NOVO_CONTEUDO'|translate}}" (click)="novo()"></button>
-    </div>
-    <div>
-        <p-messages></p-messages>
-    </div>
-    <div class="rd-row rd-flex rd-gap">
-        <div class="div-edicao rd-flex rd-col">
+<app-pagecadastro-conteudo [content]="content" [botaoNovo]="'NOVO_CONTEUDO'" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
+    <ng-template #content>
+    
             <form [formGroup]="form">
-                <div class="rd-flex rd-col ">
-                    <div class="p-field rd-col">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12">
                         <label for="titulo">Título</label>
                         <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
-                        <small id="titulo" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        <small id="titulo-error" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
-                    <div class="p-field rd-row">
+                    <div class="p-field p-d-flex p-flex-row">
                         <p-fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                         name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" ></p-fileUpload>
-                        <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
+                        <div class="p-col arquivo">{{arquivo?.nome}}</div>
                         <p-dialog [(visible)]="mostrarPreview" >
                             <div class="image-container" [ngStyle]="{'background':'url(' + arquivo?.url+')'}" ></div>
                             <ng-template pTemplate="footer">
@@ -27,30 +21,22 @@
                     </div> 
                     
                         <!-- [url]="arquivoService.getUrlUpload()" -->
-                    <div class="tempo rd-row rd-gap">
+                    <div class="p-field p-d-flex p-flex-row">
                         <label class="label-field">Tempo de exibição</label>
-                        <span class=" rd-row">                
-                            <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
-                            <label class="label-field" for="minutos">&nbsp; Minutos</label>
-                        </span>
-                        <span class=" rd-row">                
+                        <div class="p-d-flex p-flex-row">                
+                            <input id="minutos" class="p-col" formControlName="minutos" min="0"  type="number" pInputText>                         
+                            <label class="label-field p-col" for="minutos">&nbsp; Minutos</label>
+                        </div>
+                        <div class="p-d-flex p-flex-row">                
                             <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
                             <label class="label-field" for="segundos">&nbsp;Segundos</label>
-                        </span>
+                        </div>
                     </div>
                     <app-panel-agendamento-conteudo #panelAgendamento>
             
                     </app-panel-agendamento-conteudo> 
                 </div> 
             </form>      
-        </div>
-        <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
-        
-            </app-register-action> 
-        </div>      
-    </div>    
-</div>            
-
-
+    </ng-template>
+</app-pagecadastro-conteudo>
 

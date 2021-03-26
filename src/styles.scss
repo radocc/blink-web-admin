@@ -176,6 +176,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .rd-over-hidden{
     overflow: hidden;
 }
+.rd-flex-auto {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
 .obrigatorio{
     color: red;
     font-weight: 100;
