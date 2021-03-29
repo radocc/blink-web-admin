@@ -6,12 +6,13 @@ import { Router } from '@angular/router';
 import { TelaService } from '@radoccservices/base/tela-service';
 import { MenuItem } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { DispositivoService } from '@radoccservices/base/dispositivo-service';
 
 @Component({
   selector: 'app-painel-site',
   templateUrl: './painel-site.component.html',
   styleUrls: ['./painel-site.component.scss'],
-  providers: [ TelaService, EmpresaService ]
+  providers: [ TelaService, EmpresaService, DispositivoService ]
 })
 export class PainelSiteComponent implements OnInit {
 
@@ -19,13 +20,14 @@ export class PainelSiteComponent implements OnInit {
   public itensConfiguracao: MenuItem[] = [];
   public empresas: Empresa[] = [];
   public empresaSelecionada: any;
+
   public usuario:Usuario;
   public itemsMenuUsuario:MenuItem[] = [    
       
   ];
 
   constructor(private telaService: TelaService, private router: Router, private translateService:TranslateService,
-   private empresaService: EmpresaService) { }
+   private empresaService: EmpresaService,private dispositivoService: DispositivoService) { }
 
   ngOnInit(): void {
     let jsonUser = localStorage.getItem('usuario');
@@ -79,6 +81,11 @@ export class PainelSiteComponent implements OnInit {
      this.empresaService.findPorUsuario().subscribe((empresa: Empresa)=>{
        this.empresaSelecionada = empresa;
      })
+   }
+   public alterarEmpresa() {
+    this.dispositivoService.alterarEmpresa(this.empresaSelecionada.id).subscribe(()=>{
+      window.location.reload();
+    })
    }
 
   public navegar(rota:string, url?:string){
