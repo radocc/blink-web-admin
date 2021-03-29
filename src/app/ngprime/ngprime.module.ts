@@ -31,7 +31,7 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {FieldsetModule} from 'primeng/fieldset';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {FocusTrapModule} from 'primeng/focustrap';
-
+import {SplitButtonModule} from 'primeng/splitbutton';
 @NgModule({
   declarations: [],
   imports: [
@@ -66,7 +66,8 @@ import {FocusTrapModule} from 'primeng/focustrap';
     DynamicDialogModule,
     FieldsetModule,
     SelectButtonModule,
-    FocusTrapModule
+    FocusTrapModule,
+    SplitButtonModule
   ],
   exports:[
     ButtonModule,
@@ -99,7 +100,8 @@ import {FocusTrapModule} from 'primeng/focustrap';
     DynamicDialogModule,
     FieldsetModule,
     SelectButtonModule,
-    FocusTrapModule
+    FocusTrapModule,
+    SplitButtonModule
   ]
 })
 export class NgPrimeModule { }

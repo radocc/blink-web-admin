@@ -38,10 +38,12 @@ export class PanelPublicacaoComponent implements OnInit {
   public tipoConteudo:TipoConteudo= null;
   public eventLista = null;
   public pesquisaTipo:string;
+  public tempoLista:number = 0;
   public form:FormGroup = new FormGroup({
     grupoPlayer:new FormControl(null),    
     player:new FormControl(null),
     tipoPublicacao:new FormControl(1),
+    tipoIntercalacao:new FormControl(),
   })   
   
   public mostrarPreview:boolean = false;
@@ -56,7 +58,33 @@ export class PanelPublicacaoComponent implements OnInit {
   public listaConteudo:PlaylistConteudo[] = [];
   public conteudo:ConteudoResult;
   public playlist:Playlist;
-  public publicacao:Publicacao;
+  public publicacao:Publicacao; 
+  public tiposIntercalacao:any[] = [
+    {
+      label: '1|1', 
+      command: () => {
+        this.form.controls['tipoIntercalacao'].setValue(1);
+      }
+    },
+    { 
+      label: '2|2', 
+      command: () => {
+        this.form.controls['tipoIntercalacao'].setValue(2);
+      }
+    },
+    { 
+      label: '3|3', 
+      command: () => {
+        this.form.controls['tipoIntercalacao'].setValue(3);
+      }
+    },
+    { 
+      label: '4|4', 
+      command: () => {
+        this.form.controls['tipoIntercalacao'].setValue(4);
+      }
+    },
+  ];
 
   constructor(private router:Router, private tipoConteudoService:TipoConteudoService, private conteudoService:ConteudoService,private msgService:MessageService,
     private playlistService:PlaylistService,
@@ -75,7 +103,12 @@ export class PanelPublicacaoComponent implements OnInit {
     })
   }
 
-  
+  public atualizarTempo(){
+    this.tempoLista = 0;
+    for (let w = 0; w < this.listaConteudo.length;w++){
+      this.tempoLista += this.listaConteudo[w].conteudo.tempoExibicao;
+    }
+  }
 
   public buscarTipos(){
     this.tipoConteudoService.findAll().subscribe( (lista) =>{
@@ -107,6 +140,7 @@ export class PanelPublicacaoComponent implements OnInit {
   public excluirConteudo(itemConteudo:PlaylistConteudo){
     let index = this.listaConteudo.indexOf(itemConteudo);
     this.listaConteudo.splice(index,1);
+    this.atualizarTempo();
   }
 
   public visualizarConteudo(conteudo){
@@ -132,19 +166,23 @@ export class PanelPublicacaoComponent implements OnInit {
   public buscarPlayListConteudo(idPlaylist:number){
     this.playlistConteudoService.buscarPorPlayList(idPlaylist).subscribe((lista)=>{
       this.listaConteudo = lista;
+      this.atualizarTempo();
     })
   }
 
   public buscarPublicacaoPorGrupo(){
     this.publicacaoService.buscarPorGrupoPlayer(this.form.controls['grupoPlayer'].value.id).subscribe((publicacao)=>{
       this.publicacao = publicacao;
+      
       if (publicacao != null){
+        this.form.controls['tipoIntercalacao'].setValue(publicacao.intercalacao);
         this.playlist = publicacao.playlist;
         this.listaConteudo = this.playlist.playlistConteudos;
       }else {
         this.playlist = null;
         this.listaConteudo = [];
       }
+      this.atualizarTempo();
     })
   }
 
@@ -152,12 +190,14 @@ export class PanelPublicacaoComponent implements OnInit {
     this.publicacaoService.buscarPorPlayer(this.form.controls['player'].value.id).subscribe((publicacao)=>{
       this.publicacao = publicacao;
       if (publicacao != null){
+        this.form.controls['tipoIntercalacao'].setValue(publicacao.intercalacao);
         this.playlist = publicacao.playlist;
         this.listaConteudo = this.playlist.playlistConteudos;
       }else {
         this.playlist = null;
         this.listaConteudo = [];
       }      
+      this.atualizarTempo();
     })
   }
 
@@ -229,7 +269,7 @@ export class PanelPublicacaoComponent implements OnInit {
       this.publicacao.idGrupoPlayer = this.form.controls['grupoPlayer'].value.id;
     }
     this.publicacao.dataPublicado = new Date();
-    this.publicacao.intercalacao = 1;
+    this.publicacao.intercalacao = this.form.controls['tipoIntercalaca'].value;
     if (this.playlist == null){
       this.playlist = new Playlist();
       if (this.idTipoPublicacao == 1){
@@ -285,6 +325,7 @@ export class PanelPublicacaoComponent implements OnInit {
         
         this.listaConteudo.push(playConteudo);
         this.conteudo = null;
+        this.atualizarTempo();
       }
   }
 
