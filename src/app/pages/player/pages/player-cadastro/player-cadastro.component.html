@@ -7,16 +7,19 @@
                         <div class="rd-flex rd-col ">
                             <div class="p-field rd-row rd-gap">
                                 <div class="p-field rd-col">
-                                    <label for="titulo" translate>NOME</label>
-                                    <input id="titulo" required formControlName="nome" type="text" pInputText>                     
+                                    <label for="nome" translate>NOME</label>
+                                    <input id="nome" required formControlName="nome" type="text" pInputText>                     
+                                    <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div>  
                                 <div class="p-field rd-col">
                                     <label class="" for="horaInicio" translate>INICIO</label> 
                                     <p-calendar [timeOnly]="true" formControlName="horaInicio" imputId="horaInicio"></p-calendar>
+                                    <small id="inicio" *ngIf="form.controls['horaInicio'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div>
                                 <div class="p-field rd-col">
                                     <label class="" for="horaFim" translate>FIM</label> 
                                     <p-calendar [timeOnly]="true" formControlName="horaFim"  imputId="horaFim"></p-calendar>
+                                    <small id="horaFim" *ngIf="form.controls['horaFim'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div>
                             </div>
                             <div class="p-field rd-row rd-gap">
@@ -33,15 +36,18 @@
                                             <div>{{equipamento.nome}} - {{equipamento.uuid}} </div>
                                         </ng-template>
                                     </p-autoComplete>
+                                    <small id="equipamento" *ngIf="form.controls['equipamento'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div>                           
                                 <div class="rd-flex rd-row rd-gap">
                                     <div class="rd-flex p-field rd-col">
                                         <label class="" for="dataImplantacao" translate>DATA_IMPLANTACAO</label>
                                         <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataImplantacao" inputId="dataImplantacao"></p-calendar>
+                                        <small id="dataImplantacao" *ngIf="form.controls['dataImplantacao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                     </div>
                                     <div class="rd-flex p-field rd-col">
                                         <label class="" for="dataRemocao" translate>DATA_REMOCAO</label>
                                         <p-calendar class="" [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataRemocao"  inputId="dataRemocao"></p-calendar>
+                                        <small id="dataRemocao" *ngIf="form.controls['dataRemocao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                     </div>
                                     <div class="div-btn-trocar" *ngIf="form.controls['dataRemocao'].value != null">
                                         <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="TROCAR_EQUIPAMENTO" translate (click)="trocarEquipamento($event)"></button>

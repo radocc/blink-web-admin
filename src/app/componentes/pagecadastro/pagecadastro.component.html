@@ -6,8 +6,8 @@
                 <div class="p-card-title p-d-flex p-flex-row">
                     <!-- <button pButton pRipple *ngIf="mostraVoltar" type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-text" (click)="voltar()"></button> -->
                     <div >{{config?.titulo | translate}}</div>
-                    <div class="p-d-flex p-ml-auto">    
-                        <button pButton label="{{'CANCELAR'|translate}}" class="p-button p-button-secondary p-mr-2 p-ml-auto" (click)="cancelar()"></button>
+                    <div *ngIf="actions" class="p-d-flex p-ml-auto">    
+                        <p-button label="{{'CANCELAR'|translate}}" styleClass="p-button-secondary" class="p-mr-2" (click)="cancelar()"></p-button>
                         <p-button [disabled]="_disabledSalvar" class="disabled-loading" label="{{'SALVAR' | translate}}" icon="pi pi-save" (click)="salvar()"></p-button>
                     </div>
                 </div>

@@ -23,6 +23,11 @@ import { UsuarioPesquisaComponent } from './pages/usuario/usuario-pesquisa/usuar
 import { UsuarioCadastroComponent } from './pages/usuario/usuario-cadastro/usuario-cadastro.component';
 import { GrupoUsuarioCadastroComponent } from './pages/grupousuario/grupousuario-cadastro/grupousuario-cadastro.component';
 import { GrupoUsuarioPesquisaComponent } from './pages/grupousuario/grupousuario-pesquisa/grupousuario-pesquisa.component';
+import { NoticiaCadastroComponent } from './pages/noticia/noticia-cadastro/noticia-cadastro.component';
+import { NoticiaPesquisaComponent } from './pages/noticia/noticia-pesquisa/noticia-pesquisa.component';
+import { PrevisaoTempoImagemCadastroComponent } from './pages/previsaotempoimagem/previsaotempoimagem-cadastro/previsaotempoimagem-cadastro.component';
+import { PrevisaoTempoImagemPesquisaComponent } from './pages/previsaotempoimagem/previsaotempoimagem-pesquisa/previsaotempoimagem-pesquisa.component';
+import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
 
 const routes: Routes = [
     {
@@ -109,6 +114,26 @@ const routes: Routes = [
           outlet: 'cadastro',
           component: GrupoUsuarioCadastroComponent
         },
+        {
+          path:'noticia-pesquisa',
+          component: NoticiaPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'noticia-cadastro',
+          outlet: 'cadastro',
+          component: NoticiaCadastroComponent
+        },
+        {
+          path:'previsaotempoimagem-pesquisa',
+          component: PrevisaoTempoImagemPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'previsaotempoimagem-cadastro',
+          outlet: 'cadastro',
+          component: PrevisaoTempoImagemCadastroComponent
+        }
       ]
     }
   ]
@@ -130,7 +155,11 @@ const routes: Routes = [
       UsuarioCadastroComponent,
       UsuarioPesquisaComponent,
       GrupoUsuarioCadastroComponent,
-      GrupoUsuarioPesquisaComponent
+      GrupoUsuarioPesquisaComponent,
+      NoticiaCadastroComponent,
+      NoticiaPesquisaComponent,
+      PrevisaoTempoImagemCadastroComponent,
+      PrevisaoTempoImagemPesquisaComponent 
     ],
     imports: [
       CommonModule,
@@ -141,7 +170,8 @@ const routes: Routes = [
       ShareTranslateModule,
       RouterModule.forChild(routes),
       DragDropModule,
-      MatIconModule
+      MatIconModule,
+      PagecadastroModule
     ]
   })
   export class ConfiguracaoModule { }

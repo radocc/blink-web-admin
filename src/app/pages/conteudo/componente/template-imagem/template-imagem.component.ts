@@ -1,7 +1,7 @@
 import { EventBrokerService } from 'ng-event-broker';
 import { Events } from './../../../../models/enum/events';
 import { TranslateService } from '@ngx-translate/core';
-import { CadConteudoComponent } from './../cad-conteuo/cad-conteudo.component';
+import { CadConteudoComponent } from '../cad-conteudo/cad-conteudo.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +10,6 @@ import { Conteudo } from '@radoccmodels/conteudo';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
-import { RegisterActionComponent } from 'app/componentes/register-action/register-action.component';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
 

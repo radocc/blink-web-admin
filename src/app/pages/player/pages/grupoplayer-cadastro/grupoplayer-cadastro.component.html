@@ -6,16 +6,17 @@
                     <p-tabPanel header="{{'DADOS' | translate}}">
                         <div class="rd-flex rd-col ">
                             <div class="p-field rd-col">
-                                <label for="titulo" translate>NOME</label>
-                                <input id="titulo" required formControlName="nome" type="text" pInputText>                     
+                                <label for="nome" translate>NOME</label>
+                                <input id="nome" required formControlName="nome" type="text" pInputText>                     
+                                <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                             </div>  
                             <p-listbox class="rd-flex" [options]="itens" [(ngModel)]="selectedPlayers" [filter]="true" [checkbox]="true" [multiple]="true" optionLabel="nome" [ngModelOptions]="{standalone: true}">
                                 <ng-template pTemplate="header">
                                     {{'SELECIONE_OS_PLAYERS_PARA_O_GRUPO'|translate}}
                                 </ng-template>
                                 <ng-template let-player pTemplate="item">
-                                    <div class="rd-row">
-                                        <div class="rd-flex">{{player.nome}}</div> <div class="rd-flex">{{player.observacao}}</div>
+                                    <div class="dv-player">
+                                        <div class="nome-player">{{player.identificacao}}&nbsp;&nbsp;{{player.nome}}</div>
                                     </div>
                                 </ng-template>
                             </p-listbox>

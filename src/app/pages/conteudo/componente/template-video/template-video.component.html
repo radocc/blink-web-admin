@@ -1,6 +1,6 @@
 <div class="template-video-conteudo rd-flex rd-col rd-gap-8">
     <div class="">
-        <button pButton  type="button" label="NOVO_CONTEUDO" (click)="novo()" ></button>
+        <button pButton  type="button" label="{{'NOVO_CONTEUDO'|translate}}" (click)="novo()" ></button>
     </div>
     <div>
         <p-messages></p-messages>
@@ -12,9 +12,10 @@
                     <div class="p-field rd-col">
                         <label for="titulo" translate>TITULO</label>
                         <input id="titulo" required formControlName="titulo" [ngClass]="{'ng-invalid':form.controls['titulo'].invalid}" type="text" pInputText>                     
+                        <small id="titulo" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div> 
                     <div class="p-field rd-row">
-                        <p-fileUpload mode="basic" maxFileSize="90000000" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
+                        <p-fileUpload mode="basic" maxFileSize="99999999" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                         name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" ></p-fileUpload>
                         <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
                         <!-- <div class="rd-flex">{{arquivo.url}}</div> -->
@@ -36,11 +37,11 @@
                 </div> 
             </form>
         </div>
-        <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">
+        <!-- <div class="acoes rd-col rd-gap">
+            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
         
             </app-register-action> 
-        </div>      
+        </div>       -->
     </div>    
 </div>            
 

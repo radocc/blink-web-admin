@@ -4,17 +4,20 @@
             <form [formGroup]="form" class="rd-flex rd-col">
                 <div class="rd-flex rd-col ">
                     <div class="p-field rd-col">
-                        <label for="titulo" translate>NOME</label>
-                        <input id="titulo" required formControlName="nome" type="text" pInputText>                     
+                        <label for="nome" translate>NOME</label>
+                        <input id="nome" required formControlName="nome" type="text" pInputText>                     
+                        <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
                     <div class="rd-row rd-gap">
                         <div class="rd-col rd-flex">
                             <label for="dataInicio" translate>Início as</label>
-                            <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataInicio" inputId="dataInicio"></p-calendar>
+                            <p-calendar [showTime]="true"  hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataInicio" inputId="dataInicio"></p-calendar>
+                            <small id="dataInicio" *ngIf="form.controls['dataInicio'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>
                         <div class="rd-col rd-flex">
                             <label for="dataFim" translate>Término as</label>
                             <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataFim"  inputId="dataFim"></p-calendar>
+                            <small id="dataFim" *ngIf="form.controls['dataFim'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>
                         <div class="rd-col rd-flex">
                             <label for="status" translate>STATUS</label>
@@ -30,6 +33,7 @@
                                     </div>
                                 </ng-template>
                             </p-dropdown>
+                            <small id="status" *ngIf="form.controls['status'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
                     </div>
                     <div class="rd-col rd-flex ">

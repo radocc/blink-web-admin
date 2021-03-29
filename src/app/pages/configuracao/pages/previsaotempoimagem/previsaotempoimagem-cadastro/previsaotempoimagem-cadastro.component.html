@@ -1,0 +1,33 @@
+<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)" [form]="form">
+    <div class="page-tipoconteudo-cadastro rd-flex rd-col rd-gap-8">
+        <div class="rd-col rd-flex rd-gap">
+            <div class="div-edicao rd-flex rd-col">
+                <form [formGroup]="form">
+                    <div class="p-fluid p-grid p-formgrid ">                         
+                        
+                        <div class="p-field  p-col-12 p-lg-10 ">
+                            <label for="descricao" translate>DESCRICAO</label>
+                            <input id="descricao" required formControlName="descricao" type="text" pInputText>
+                            <small id="descricao-error" *ngIf="form.controls['descricao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div> 
+                        <div class="p-field  p-col-12 p-lg-2">
+                            <label for="sigla" translate>SIGLA</label>
+                            <input id="sigla" aria-describedby="sigla-error" formControlName="sigla" type="text" pInputText>
+                            <small id="sigla-error" *ngIf="form.controls['sigla'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div>
+                        <div class="p-field p-d-flex p-flex-column p-col-12 p-lg-12">
+                            <label for="texto" translate>TEXTO</label>
+                            <textarea id="texto" required formControlName="texto" rows="5" pInputTextarea class="p-inputtextarea"></textarea>
+                            <small id="texto-error" *ngIf="form.controls['texto'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div> 
+                        <div class="p-field p-col-12 p-lg-12">
+                            <p-fileUpload #fileUpload mode="basic" cancelLabel="{{'CANCELAR'|translate}}" [auto]="true" chooseLabel="{{'ESCOLHER'|translate}}" uploadLabel="{{'CARREGAR'|translate}}" 
+                                name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" ></p-fileUpload>
+                            <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
+                        </div>
+                    </div> 
+                </form>      
+            </div>  
+        </div>    
+    </div>            
+</app-pagecadastro>

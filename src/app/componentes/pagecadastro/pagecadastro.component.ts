@@ -26,6 +26,7 @@ export class PageCadastroComponent implements OnInit {
   @Input() translateParams: any[];
   @Input() mostraVoltar: boolean = true;
   @Output("save") onSave:EventEmitter<any> = new EventEmitter();
+  @Input("actions") actions: boolean = true;
   public _disabledSalvar:boolean = false;
 
   constructor(private location:Location, private msgService: MessageService,

@@ -45,6 +45,11 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
     super.ngOnInit();
   } 
   
+  public novo(){
+    super.novo();
+    this.loteria = null;
+  }
+
   public buscar(id:number, editavel:boolean){
     this.loteriaService.findById(id).subscribe((loteria)=>{
       this.montarForm(loteria,editavel);

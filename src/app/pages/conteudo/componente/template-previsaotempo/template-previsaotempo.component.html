@@ -1,6 +1,6 @@
 <div class="template-previsaotempo-conteudo rd-flex rd-col rd-gap-8">
     <div class="">
-        <button pButton  type="button" (click)="novo()" label="NOVO_CONTEUDO" ></button>
+        <button pButton  type="button" (click)="novo()" label="{{'NOVO_CONTEUDO'|translate}}" ></button>
     </div>
     <div>
         <p-messages></p-messages>
@@ -10,22 +10,24 @@
             <form [formGroup]="form" class="rd-flex rd-col">
                 <div class="rd-flex rd-col ">
                     <div class="p-field rd-col">
-                        <label for="titulo" translate>CIDADE</label>
+                        <label for="cidade" translate>CIDADE</label>
                         <p-autoComplete formControlName="cidade" 
                             [suggestions]="cidades" (completeMethod)="pesquisarCidade($event.query)" field="nome" [dropdown]="true">
                             <ng-template let-cidade pTemplate="item">
                                 <div>{{cidade.nome}} - {{cidade.uf}}</div>
                             </ng-template>
                         </p-autoComplete>
+                        <small id="cidade" *ngIf="form.controls['cidade'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
                     <div class="p-field rd-col">
-                        <label for="titulo" translate>TEMPLATE</label>
+                        <label for="template" translate>TEMPLATE</label>
                         <p-autoComplete formControlName="template" 
                             [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
                             <ng-template let-template pTemplate="item">
                                 <div>{{template.nome}} </div>
                             </ng-template>
                         </p-autoComplete>
+                        <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
                     <div class="tempo rd-row rd-gap">
                         <label class="label-field">Tempo de exibição</label>
@@ -44,11 +46,11 @@
                 </div> 
             </form>      
         </div>
-        <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false">
+        <!-- <div class="acoes rd-col rd-gap">
+            <app-register-action (onPreview)="preview()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
         
             </app-register-action> 
-        </div>      
+        </div>       -->
     </div>    
 </div>            
 

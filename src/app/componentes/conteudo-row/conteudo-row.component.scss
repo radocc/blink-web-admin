@@ -1,23 +1,23 @@
 
 @mixin conteudo-row($theme) {
-    app-conteudo-row{ 
-        padding: 8px;
-        padding-left: 16px;
-        padding-right: 16px;
-        border-radius: 5px;
-        background: map-get($theme, secondary);
-        margin-bottom: 4px;
-        margin-top: 4px;
-        min-width: 350px;
-        width: 100%;
+    app-conteudo-row{       
+        // min-width: 350px;
+        // width: 100%;  
         
         .conteudo-row{
             display: flex;
             flex-direction: row;
+            padding: 8px;
+            padding-left: 16px;
+            padding-right: 16px;
+            border-radius: 5px;
+            background: map-get($theme, secondary);
+            margin-bottom: 4px;
+            margin-top: 4px;            
         }
                             
         .view{
-            width: 120px;
+            // width: 120px;
             height: 70px;
             background: green;
             border-radius: 5px;

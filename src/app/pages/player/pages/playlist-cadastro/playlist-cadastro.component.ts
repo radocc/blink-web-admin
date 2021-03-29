@@ -69,6 +69,11 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     super.ngOnInit();
   } 
 
+  public novo(){
+    super.novo();
+    this.playlist = null;
+  }
+
   public buscar(id:number, editavel:boolean){
       this.playlistService.findById(id).subscribe((player)=>{
         this.montarForm(player,editavel);
@@ -128,7 +133,7 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     const dialog = this.dialogService.open(ConteudoDialogComponent, {
       data:this.listaConteudo,
       width: '80%',
-      height:'80%',
+      // height:'80%',
       modal:true,
       showHeader:false,
       closable:false,

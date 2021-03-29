@@ -1,0 +1,23 @@
+<div class="pagecadastro-conteudo p-d-flex p-flex-column rd-flex rd-h-100">
+    <div class="">
+        <button pButton  type="button" label="{{botaoNovo|translate}}" (click)="novo"></button>
+    </div>
+
+    <div class="p-d-flex p-flex-row p-mt-2 rd-flex rd-gap rd-h-100">
+        <app-pagecadastro class="p-col-10" [config]="{titulo: 'Cadastro de template'}" class="p-d-flex p-flex-column" [actions]="false">
+              <ng-container *ngTemplateOutlet="content">
+
+              </ng-container>
+              
+              
+        </app-pagecadastro>
+        <div class="acoes rd-col rd-gap rd-h-100">
+            <app-register-action (onPreview)="preview" (onPublicar)="publicar" (onSalvar)="salvar" [permiteImportar]="false" [permitePublicar]="false">
+        
+            </app-register-action> 
+        </div>      
+    </div>    
+</div>            
+
+
+

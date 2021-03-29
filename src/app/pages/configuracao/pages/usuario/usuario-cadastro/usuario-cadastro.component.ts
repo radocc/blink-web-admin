@@ -53,6 +53,11 @@ export class UsuarioCadastroComponent extends CadForm implements OnInit {
     super.ngOnInit();
   } 
 
+  public novo(){
+    super.novo();
+    this.usuario = null;
+  }
+
   public buscar(id:number, editavel:boolean){
     this.usuarioService.findById(id).subscribe((usuario)=>{
       this.montarForm(usuario,editavel);

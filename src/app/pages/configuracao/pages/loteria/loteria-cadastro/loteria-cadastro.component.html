@@ -5,12 +5,14 @@
                 <form [formGroup]="form">
                     <div class="rd-flex rd-col ">
                         <div class="p-field rd-col">
-                            <label for="titulo" translate>NOME</label>
-                            <input id="titulo" required formControlName="nome" type="text" pInputText>                     
+                            <label for="nome" translate>NOME</label>
+                            <input id="nome" required formControlName="nome" type="text" pInputText>                     
+                            <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
                         <div class="p-field rd-col">
                             <label for="url" translate>URL</label>
                             <input id="url" required formControlName="url" type="text" pInputText>                     
+                            <small id="url" *ngIf="form.controls['url'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
                     </div> 
                 </form>      

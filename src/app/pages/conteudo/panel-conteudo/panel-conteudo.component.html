@@ -1,40 +1,45 @@
-<div class="rd-col rd-flex"> 
-    <div class="rd-row rd-flex rd-gap">
-        <div class="rd-col rd-flex">
+<div class="app-panel-conteudo rd-flex-auto p-flex-row p-mt-4 p-ml-lg-4 p-mr-lg-4 rd-w-100"> 
+    <!-- <div class="rd-row rd-flex rd-gap"> -->
+        <div class="rd-flex-auto p-mb-2 p-col-6">
             <div class="p-d-flex p-jc-end ">
                 <span class="p-float-label field-busca">
                     <input id="float-input" type="text" pInputText> 
                     <label for="float-input" >{{'BUSCAR'|translate}}</label>
                 </span>
             </div>
-            <div class="rd-row rd-flex pesquisa ">
-                <div class="div-menu">
+            <div class="p-d-flex p-flex-row pesquisa ">
+                <div class="div-menu p-col-3 p-d-flex p-flex-column">
                     <span class="p-float-label">
-                        <input id="float-input" type="text" pInputText> 
-                        <label for="float-input" translate>OPCOES</label>
+                        <input id="pesquisaTipo" class="rd-w-100" [(ngModel)]="pesquisaTipo" (ngModelChange)="pesquisarTipo($event)" type="text" pInputText> 
+                        <label for="pesquisaTipo" translate>OPCOES</label>
                     </span>
-                    <div *ngFor="let item of tiposConteudos">
-                        <div class="item-menu" [ngClass]="{'selected':item.id == tipoConteudo?.id }" (click)="filtrarTipo(item)">{{item.nome}}</div>
+                    <div class="lista-opcoes">
+                        <div *ngFor="let item of tiposConteudos">
+                            <div class="item-menu" [ngClass]="{'selected':item.id == tipoConteudo?.id }" (click)="filtrarTipo(item)">{{item.nome}}</div>
+                        </div>
                     </div>
                 </div>
-                <div class="rd-flex pesquisa-list">
-                    <div class="div-filtro"> filtro: Data / Nome / Recentes / Antigos</div>
+                <div class="p-col-9 p-d-flex p-flex-column pesquisa-list">
                     <div class="title-conteudo" >
                         {{tipoConteudo?.nome}}
                     </div>
-                    <div class="item-conteudo rd-row" *ngFor="let conteudo of conteudos">
-                        <app-conteudo-row [conteudo]="conteudo" (btnAbrirArquivo)="arquivoConteudo(conteudo)" (btnVisualizar)="visualizarConteudo(conteudo)"
-                            (btnAlterar)="alterarConteudo(conteudo)" (btnExcluir)="excluirConteudo(conteudo)" > 
-                        </app-conteudo-row>
+                    <div class="list-conteudo">
+                        <div class="item-conteudo " *ngFor="let conteudo of conteudos">
+                            <app-conteudo-row [conteudo]="conteudo" (onAbrirArquivo)="arquivoConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
+                                (onAlterar)="alterarConteudo(conteudo)" (onExcluir)="excluirConteudo(conteudo)" > 
+                            </app-conteudo-row>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>        
-        <div class="rd-row rd-flex cadastro">
+        <div class="rd-flex-auto p-mb-2 p-col-6">
             <router-outlet>
 
             </router-outlet>
                       
         </div>
-    </div>
-</div>
+    <!-- </div> -->
+</div> 
+
+ 

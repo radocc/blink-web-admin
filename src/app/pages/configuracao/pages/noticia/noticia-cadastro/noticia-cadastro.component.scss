@@ -1,0 +1,9 @@
+@mixin page-configuracao-noticia-cadastro($videotheme) {
+ 
+    app-noticia-cadastro {
+        
+        .page-noticia-cadastro{
+            flex: auto;
+        }
+    }
+}

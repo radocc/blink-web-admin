@@ -4,21 +4,19 @@
             <h2>TV CORPORATIVA</h2>
             <p class="rd-txt-center">Acesse sua conta com nome ou e-mail.</p>
             <div class="p-field rd-col">
-                <label for="f-user">Login</label>
+                <label for="f-user">{{'LOGIN'|translate}}</label>
                 <input id="f-user" type="text" formControlName="login" pInputText> 
             </div>
             <div class="p-field rd-col">
-                <label for="f-user">Senha</label>
+                <label for="f-user">{{'SENHA'|translate}}</label>
                 <input id="f-user" formControlName="senha" (keydown)="keyDownFunction($event)" type="text" pInputText> 
             </div>
             <div class="rd-txt-center ">
-                <button pButton  type="button"  (click)="entrar()" label="Entrar" ></button>
+                <button pButton  type="button"  (click)="entrar()" label="{{'ENTRAR'|translate}}" ></button>
             </div>
             <div class="esqueci-senha rd-txt-center">
-                <a href="">Esqueci minha senha</a>
-            </div>
-            
+                <a href="">{{'ESQUECI_MINHA_SENHA'|translate}}</a>
+            </div>            
         </form>
-
     </div>
 </div>
