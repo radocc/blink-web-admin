@@ -43,7 +43,7 @@ export class PanelPublicacaoComponent implements OnInit {
     grupoPlayer:new FormControl(null),    
     player:new FormControl(null),
     tipoPublicacao:new FormControl(1),
-    tipoIntercalacao:new FormControl(),
+    tipoIntercalacao:new FormControl(1),
   })   
   
   public mostrarPreview:boolean = false;
@@ -61,28 +61,20 @@ export class PanelPublicacaoComponent implements OnInit {
   public publicacao:Publicacao; 
   public tiposIntercalacao:any[] = [
     {
-      label: '1|1', 
-      command: () => {
-        this.form.controls['tipoIntercalacao'].setValue(1);
-      }
+      name: '1|1', 
+      id:1
     },
     { 
-      label: '2|2', 
-      command: () => {
-        this.form.controls['tipoIntercalacao'].setValue(2);
-      }
+      name: '2|2', 
+      id:2
     },
     { 
-      label: '3|3', 
-      command: () => {
-        this.form.controls['tipoIntercalacao'].setValue(3);
-      }
+      name: '3|3', 
+      id:3
     },
     { 
-      label: '4|4', 
-      command: () => {
-        this.form.controls['tipoIntercalacao'].setValue(4);
-      }
+      name: '4|4', 
+      id:4
     },
   ];
 
@@ -108,6 +100,7 @@ export class PanelPublicacaoComponent implements OnInit {
     for (let w = 0; w < this.listaConteudo.length;w++){
       this.tempoLista += this.listaConteudo[w].conteudo.tempoExibicao;
     }
+    this.tempoLista = this.tempoLista;
   }
 
   public buscarTipos(){
@@ -269,7 +262,7 @@ export class PanelPublicacaoComponent implements OnInit {
       this.publicacao.idGrupoPlayer = this.form.controls['grupoPlayer'].value.id;
     }
     this.publicacao.dataPublicado = new Date();
-    this.publicacao.intercalacao = this.form.controls['tipoIntercalaca'].value;
+    this.publicacao.intercalacao = this.form.controls['tipoIntercalacao'].value;
     if (this.playlist == null){
       this.playlist = new Playlist();
       if (this.idTipoPublicacao == 1){

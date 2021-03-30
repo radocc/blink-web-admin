@@ -87,19 +87,23 @@
                     
                 }                
             }
-            .div-intercalacao{
-                .intercalacao{
-                    .p-selectbutton{
-                        display: flex;
-                        flex-direction: column;
-                        gap:2px;
-    
-                        .p-button{
-                            border-radius: 5px;
-                        }
-                    }
-                }
+            .p-dropdown{
+                width: 100%;
             }
+            // .div-intercalacao{
+
+            //     .intercalacao{
+            //         .p-selectbutton{
+            //             display: flex;
+            //             flex-direction: column;
+            //             gap:2px;
+    
+            //             .p-button{
+            //                 border-radius: 5px;
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 }

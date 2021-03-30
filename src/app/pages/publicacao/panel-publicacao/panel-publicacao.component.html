@@ -61,6 +61,7 @@
                     </div> 
                     <div class="rd-row rd-flex p-flex rd-gap">
                         <div class="div-edicao rd-flex rd-col">
+                            <p-messages></p-messages>       
                             <div class="div-resumo rd-row rd-gap">
                                 <div class="rd-flex"></div>
                                 <div class="rd-row"> 
@@ -74,41 +75,41 @@
                                     </div>
                                 </div>
                                 <div>{{listaConteudo.length}}&nbsp; {{'ITENS'|translate}}</div>
-                                <div>{{tempoLista|date:'HH:mm:ss'}}</div>
+                                <div>{{tempoLista | tempoExibicao}}</div>
                             </div>
                             <p-orderList pDroppable="conteudo" (onDrop)="drop($event)" class="rd-flex rd-col" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
                                 <ng-template  let-itemList let-index="index" pTemplate="item">
                                     <div class="rd-row">
                                         <div class="order-index">{{index + 1}}</div>
-                                        <app-conteudo-row [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
+                                        <app-conteudo-row class="rd-flex" [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
                                             [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false">
                                         </app-conteudo-row>
                                     </div>
                                 </ng-template>
                             </p-orderList>
-                            <p-messages></p-messages>       
+                            
                         </div>
                         <div class="acoes rd-col rd-gap">
                             <button pButton (click)="publicar()"  type="button" label="{{'PUBLICAR'|translate}}"></button>
                             <button pButton (click)="preview()" type="button" label="{{'VISUALIZAR'|translate}}"></button>
                             <button pButton (click)="salvar()" type="button" label="{{'SALVAR'|translate}}"></button>
                             <button pButton (click)="importar()" type="button" label="{{'IMPORTAR'|translate}}"></button>
-                            <p-splitButton label="{{'INTERCALACAO'|translate}}" optionLabel="name" formControlName="tipoIntercalacao"  [model]="tiposIntercalacao" >
+                            <div class="p-field rd-col">
+                                <label for="intercalacao" translate>{{'INTERCALACAO'|translate}}</label>
+                                <p-dropdown id="intercalacao" [options]="tiposIntercalacao" optionLabel="name" optionValue="id" formControlName="tipoIntercalacao"></p-dropdown>
+                            </div>
+                            <!-- <p-splitButton label="{{'INTERCALACAO'|translate}}" optionLabel="name" formControlName="tipoIntercalacao"  [model]="tiposIntercalacao" >
                                 <ng-template let-item>
                                     <div>{{item.name}}</div>
                                 </ng-template>
-                            </p-splitButton>
-                            <div class="rd-col">
-                                <label for="intercalacao" translate>{{'INTERCALACAO'|translate}}</label>
-                                <p-dropdown id="intercalacao" [options]="tiposIntercalacao" optionLabel="label" optionValue="id" formControlName="tipoIntercalacao"></p-dropdown>
-                            </div>
-                            <div class="rd-column div-intercalacao">
+                            </p-splitButton> -->
+                            
+                            <!-- <div class="rd-column div-intercalacao">
                                 <span>{{'INTERCALACAO'|translate}}</span>
                                 <p-selectButton class="intercalacao" [options]="tiposIntercalacao" optionLabel="label" optionValue="id" formControlName="tipoIntercalacao">
 
                                 </p-selectButton>
-                            </div>
-                            
+                            </div>                             -->
                         </div>      
                     </div>    
                 </form>
