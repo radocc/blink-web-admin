@@ -4,50 +4,115 @@
             <div class="p-d-flex p-jc-end ">
                 <span class="p-float-label field-busca">
                     <input id="float-input" type="text" pInputText> 
-                    <label for="float-input" translate>BUSCA</label>
+                    <label for="float-input" >{{'BUSCAR'|translate}}</label>
                 </span>
             </div>
             <div class="rd-row rd-flex pesquisa ">
                 <div class="div-menu">
                     <span class="p-float-label">
-                        <input id="float-input" type="text" pInputText> 
-                        <label for="float-input" translate>OPCOES</label>
+                        <input id="pesquisaTipo" [(ngModel)]="pesquisaTipo" (ngModelChange)="pesquisarTipo($event)" type="text" pInputText> 
+                        <label for="pesquisaTipo" translate>OPCOES</label>
                     </span>
                     <div *ngFor="let item of tiposConteudos">
                         <div class="item-menu" [ngClass]="{'selected':item.id == tipoConteudo?.id }" (click)="filtrarTipo(item)">{{item.nome}}</div>
                     </div>
                 </div>
                 <div class="rd-flex pesquisa-list">
-                    <div class="div-filtro"> filtro: Data / Nome / Recentes / Antigos</div>
+                    <!-- <div class="div-filtro"> filtro: Data / Nome / Recentes / Antigos</div> -->
                     <div class="title-conteudo" >
                         {{tipoConteudo?.nome}}
                     </div>
                     <div class="item-conteudo rd-row" *ngFor="let conteudo of conteudos">
-                        <div class="view">
-    
-                        </div>
-                        <div class="rd-col rd-flex">
-                            <div class="rd-flex">
-                                {{conteudo.titulo}}
-                            </div>
-                            <div class="rd-row rd-gap">
-                                <!-- <span>{{conteudo.dataCadastro|date:'dd/MM/yyyy'}}</span> -->
-                                <div class="rd-flex"></div>
-                                <button pButton pRipple type="button" (click)="alterarConteudo(conteudo)" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
-                                <button pButton pRipple type="button" (click)="visualizarConteudo(conteudo)" icon="pi pi-desktop" class="p-button-rounded  p-button-text"></button>
-                                <button pButton pRipple type="button" (click)="arquivoConteudo(conteudo)" icon="pi pi-file" class="p-button-rounded p-button-text"></button>
-                                <button pButton pRipple type="button" (click)="excluirConteudo(conteudo)" icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
-                            </div>
-                        </div>
+                        <app-conteudo-row pDraggable="conteudo" (onDragStart)="dragStart(conteudo)" (onDragEnd)="dragEnd($event)"
+                            [conteudo]="conteudo" (onAbrirArquivo)="arquivoConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
+                            (onAlterar)="alterarConteudo(conteudo)" (onExcluir)="excluirConteudo(conteudo)" > 
+                        </app-conteudo-row>
                     </div>
                 </div>
             </div>
         </div>        
         <div class="rd-row rd-flex cadastro">
-            <router-outlet>
+            <div class="publicacao-cadastro rd-flex rd-col rd-gap-8">    
+                <form [formGroup]="form" class="rd-flex rd-col p-flex-column"> 
+                    <div class="p-field p-grid">
+                        <p-selectButton [options]="tiposPublicacao" [ngModelOptions]="{standalone: true}" [(ngModel)]="idTipoPublicacao" optionValue="id" optionLabel="name">
+                            <ng-template let-item>
+                                {{item.name|translate}}
+                            </ng-template>
+                        </p-selectButton>
+                        <div class="p-field p-col p-flex-column" *ngIf="idTipoPublicacao ==1">
+                            <p-autoComplete class="p-field" id="player" formControlName="player" 
+                                [suggestions]="players" (completeMethod)="pesquisarPlayer($event.query)" field="nome" [dropdown]="true">
+                                <ng-template let-player pTemplate="item">
+                                    <div>{{player.nome}} </div>
+                                </ng-template>
+                            </p-autoComplete>
+                            <small id="player-erro" *ngIf="form.controls['player'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div>
+                        <div class="p-field p-col p-flex-column" *ngIf="idTipoPublicacao ==2">
+                            <p-autoComplete class="p-field" formControlName="grupoPlayer" 
+                                [suggestions]="grupoPlayers" (completeMethod)="pesquisarGrupoPlayer($event.query)" field="nome" [dropdown]="true">
+                                <ng-template let-grupo pTemplate="item">
+                                    <div>{{grupo.nome}} </div>
+                                </ng-template>
+                            </p-autoComplete>
+                            <small id="grupoplayer-erro" *ngIf="form.controls['grupoPlayer'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div>
+                    </div> 
+                    <div class="rd-row rd-flex p-flex rd-gap">
+                        <div class="div-edicao rd-flex rd-col">
+                            <div class="div-resumo rd-row rd-gap">
+                                <div class="rd-flex"></div>
+                                <div class="rd-row"> 
+                                    {{'INTERCALADA'|translate}}&nbsp;  
+                                    <div [ngSwitch]="form.controls['tipoIntercalacao'].value">
+                                        <div *ngSwitchCase="1" translate>1|1</div>
+                                        <div *ngSwitchCase="2" translate>2|2</div>
+                                        <div *ngSwitchCase="3" translate>3|3</div>
+                                        <div *ngSwitchCase="4" translate>4|4</div>
+                                        <div *ngSwitchDefault translate></div>
+                                    </div>
+                                </div>
+                                <div>{{listaConteudo.length}}&nbsp; {{'ITENS'|translate}}</div>
+                                <div>{{tempoLista|date:'HH:mm:ss'}}</div>
+                            </div>
+                            <p-orderList pDroppable="conteudo" (onDrop)="drop($event)" class="rd-flex rd-col" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
+                                <ng-template  let-itemList let-index="index" pTemplate="item">
+                                    <div class="rd-row">
+                                        <div class="order-index">{{index + 1}}</div>
+                                        <app-conteudo-row class="rd-flex" [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
+                                            [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false">
+                                        </app-conteudo-row>
+                                    </div>
+                                </ng-template>
+                            </p-orderList>
+                            <p-messages></p-messages>       
+                        </div>
+                        <div class="acoes rd-col rd-gap">
+                            <button pButton (click)="publicar()"  type="button" label="{{'PUBLICAR'|translate}}"></button>
+                            <button pButton (click)="preview()" type="button" label="{{'VISUALIZAR'|translate}}"></button>
+                            <button pButton (click)="salvar()" type="button" label="{{'SALVAR'|translate}}"></button>
+                            <button pButton (click)="importar()" type="button" label="{{'IMPORTAR'|translate}}"></button>
+                            <div class="p-field rd-col">
+                                <label for="intercalacao" translate>{{'INTERCALACAO'|translate}}</label>
+                                <p-dropdown id="intercalacao" [options]="tiposIntercalacao" optionLabel="name" optionValue="id" formControlName="tipoIntercalacao"></p-dropdown>
+                            </div>
+                            <!-- <p-splitButton label="{{'INTERCALACAO'|translate}}" optionLabel="name" formControlName="tipoIntercalacao"  [model]="tiposIntercalacao" >
+                                <ng-template let-item>
+                                    <div>{{item.name}}</div>
+                                </ng-template>
+                            </p-splitButton> -->
+                            
+                            <!-- <div class="rd-column div-intercalacao">
+                                <span>{{'INTERCALACAO'|translate}}</span>
+                                <p-selectButton class="intercalacao" [options]="tiposIntercalacao" optionLabel="label" optionValue="id" formControlName="tipoIntercalacao">
 
-            </router-outlet>
-                      
+                                </p-selectButton>
+                            </div>                             -->
+                        </div>      
+                    </div>    
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -6,9 +6,9 @@
         <div class="">
             {{conteudo.titulo}}
         </div>
-        <div class="p-d-flex p-flex-row">
-            <span>{{conteudo.data |date:'dd/MM/yyyy'}}</span>
-            <div class="p-d-flex"></div>
+        <div class="p-d-flex p-flex-row div-footer">
+            <div class="tempo">{{conteudo.data |date:'dd/MM/yyyy'}}&nbsp;&nbsp;{{(conteudo.tempoExibicao*1000)|date:'mm:ss'}}</div>
+            <div class="p-d-flex rd-flex"></div>
             <button pButton pRipple type="button" *ngIf="exibiBtnAlterar" (click)="alterarConteudo(conteudo)" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
             <button pButton pRipple type="button" *ngIf="exibiBtnVisualizar" (click)="visualizarConteudo(conteudo)" icon="pi pi-desktop" class="p-button-rounded  p-button-text"></button>
             <button pButton pRipple type="button" *ngIf="exibiBtnArquivo" (click)="arquivoConteudo(conteudo)" icon="pi pi-file" class="p-button-rounded p-button-text"></button>
