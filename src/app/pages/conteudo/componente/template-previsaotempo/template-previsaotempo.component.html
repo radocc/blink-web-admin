@@ -1,58 +1,42 @@
-<div class="template-previsaotempo-conteudo rd-flex rd-col rd-gap-8">
-    <div class="">
-        <button pButton  type="button" (click)="novo()" label="{{'NOVO_CONTEUDO'|translate}}" ></button>
-    </div>
-    <div>
-        <p-messages></p-messages>
-    </div>
-    <div class="rd-row rd-flex rd-gap">
-        <div class="div-edicao rd-flex rd-col">
-            <form [formGroup]="form" class="rd-flex rd-col">
-                <div class="rd-flex rd-col ">
-                    <div class="p-field rd-col">
-                        <label for="cidade" translate>CIDADE</label>
-                        <p-autoComplete formControlName="cidade" 
-                            [suggestions]="cidades" (completeMethod)="pesquisarCidade($event.query)" field="nome" [dropdown]="true">
-                            <ng-template let-cidade pTemplate="item">
-                                <div>{{cidade.nome}} - {{cidade.uf}}</div>
-                            </ng-template>
-                        </p-autoComplete>
-                        <small id="cidade" *ngIf="form.controls['cidade'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                    </div>
-                    <div class="p-field rd-col">
-                        <label for="template" translate>TEMPLATE</label>
-                        <p-autoComplete formControlName="template" 
-                            [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
-                            <ng-template let-template pTemplate="item">
-                                <div>{{template.nome}} </div>
-                            </ng-template>
-                        </p-autoComplete>
-                        <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                    </div>
-                    <div class="tempo rd-row rd-gap">
-                        <label class="label-field">Tempo de exibição</label>
-                        <span class=" rd-row">                
-                            <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
-                            <label class="label-field" for="minutos" translate>&nbsp; MINUTOS</label>
-                        </span>
-                        <span class=" rd-row">                
-                            <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
-                            <label class="label-field" for="segundos" translate>&nbsp;SEGUNDOS</label>
-                        </span>
-                    </div>
-                    <app-panel-agendamento-conteudo #panelAgendamento>
-            
-                    </app-panel-agendamento-conteudo> 
-                </div> 
-            </form>      
-        </div>
-        <!-- <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
+<app-pagecadastro-conteudo [content]="content" [botaoNovo]="'NOVO_CONTEUDO'" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
+    <ng-template #content>
+        <form [formGroup]="form" class="rd-flex rd-col">
+            <div class="rd-flex rd-col ">
+                <div class="p-field rd-col">
+                    <label for="cidade" translate>CIDADE</label>
+                    <p-autoComplete formControlName="cidade" 
+                        [suggestions]="cidades" (completeMethod)="pesquisarCidade($event.query)" field="nome" [dropdown]="true">
+                        <ng-template let-cidade pTemplate="item">
+                            <div>{{cidade.nome}} - {{cidade.uf}}</div>
+                        </ng-template>
+                    </p-autoComplete>
+                    <small id="cidade" *ngIf="form.controls['cidade'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                </div>
+                <div class="p-field rd-col">
+                    <label for="template" translate>TEMPLATE</label>
+                    <p-autoComplete formControlName="template" 
+                        [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
+                        <ng-template let-template pTemplate="item">
+                            <div>{{template.nome}} </div>
+                        </ng-template>
+                    </p-autoComplete>
+                    <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                </div>
+                <div class="tempo rd-row rd-gap">
+                    <label class="label-field">Tempo de exibição</label>
+                    <span class=" rd-row">                
+                        <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
+                        <label class="label-field" for="minutos" translate>&nbsp; MINUTOS</label>
+                    </span>
+                    <span class=" rd-row">                
+                        <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
+                        <label class="label-field" for="segundos" translate>&nbsp;SEGUNDOS</label>
+                    </span>
+                </div>
+                <app-panel-agendamento-conteudo #panelAgendamento>
         
-            </app-register-action> 
-        </div>       -->
-    </div>    
-</div>            
-
-
-
+                </app-panel-agendamento-conteudo> 
+            </div> 
+        </form>      
+    </ng-template>
+</app-pagecadastro-conteudo>

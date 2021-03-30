@@ -1,12 +1,5 @@
-<div class="template-cotacao-conteudo rd-flex rd-col rd-gap-8">
-    <div class="">
-        <button pButton  type="button" label="{{'NOVO_CONTEUDO'|translate}}" (click)="novo()"></button>
-    </div>
-    <div>
-        <p-messages></p-messages>
-    </div>
-    <div class="rd-row rd-flex rd-gap">
-        <div class="div-edicao rd-flex rd-col">
+<app-pagecadastro-conteudo [content]="content" [botaoNovo]="'NOVO_CONTEUDO'" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
+    <ng-template #content> 
             <form [formGroup]="form">
                 <div class="rd-flex rd-col ">
                     <div class="p-field rd-col">
@@ -28,15 +21,8 @@
             
                     </app-panel-agendamento-conteudo> 
                 </div> 
-            </form> 
-        </div>
-        <!-- <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
-        
-            </app-register-action> 
-        </div>       -->
-    </div>    
-</div>            
-
+            </form>     
+</ng-template>
+</app-pagecadastro-conteudo>
 
 

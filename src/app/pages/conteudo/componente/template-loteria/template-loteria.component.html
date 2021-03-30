@@ -1,63 +1,47 @@
-<div class="template-loteria-conteudo rd-flex rd-col rd-gap-8">
-    <div class="">
-        <button pButton  type="button" label="{{'NOVO_CONTEUDO' |translate}}" (click)="novo()"></button>
-    </div>
-    <div>
-        <p-messages></p-messages>
-    </div>
-    <div class="rd-row rd-flex rd-gap">
-        <div class="div-edicao rd-flex rd-col">
-            <form [formGroup]="form">
-                <div class="rd-flex rd-col ">
-                    <div class="p-field rd-col">
-                        <label for="titulo">Título</label>
-                        <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
-                        <small id="titulo" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                    </div>
-                    <div class="p-field rd-col">
-                        <label for="loteria" translate>LOTERIA</label>
-                        <p-autoComplete id="loteria" formControlName="loteria" 
-                            [suggestions]="loterias" (completeMethod)="pesquisarLoteria($event.query)" field="nome" [dropdown]="true">
-                            <ng-template let-loteria pTemplate="item">
-                                <div>{{loteria.nome}}</div>
-                            </ng-template>
-                        </p-autoComplete>
-                        <small id="loteria" *ngIf="form.controls['loteria'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                    </div>
-                    <div class="p-field rd-col">
-                        <label for="template" translate>TEMPLATE</label>
-                        <p-autoComplete id="template" formControlName="template" 
-                            [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
-                            <ng-template let-template pTemplate="item">
-                                <div>{{template.nome}} </div>
-                            </ng-template>
-                        </p-autoComplete>
-                        <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                    </div> 
-                    <div class="tempo rd-row rd-gap">
-                        <label class="label-field">Tempo de exibição</label>
-                        <span class=" rd-row">                
-                            <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
-                            <label class="label-field" for="minutos">&nbsp; Minutos</label>
-                        </span>
-                        <span class=" rd-row">                
-                            <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
-                            <label class="label-field" for="segundos">&nbsp;Segundos</label>
-                        </span>
-                    </div>
-                    <app-panel-agendamento-conteudo #panelAgendamento>
-            
-                    </app-panel-agendamento-conteudo> 
+<app-pagecadastro-conteudo [content]="content" [botaoNovo]="'NOVO_CONTEUDO'" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
+    <ng-template #content>
+        <form [formGroup]="form">
+            <div class="rd-flex rd-col ">
+                <div class="p-field rd-col">
+                    <label for="titulo">Título</label>
+                    <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
+                    <small id="titulo" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                </div>
+                <div class="p-field rd-col">
+                    <label for="loteria" translate>LOTERIA</label>
+                    <p-autoComplete id="loteria" formControlName="loteria" 
+                        [suggestions]="loterias" (completeMethod)="pesquisarLoteria($event.query)" field="nome" [dropdown]="true">
+                        <ng-template let-loteria pTemplate="item">
+                            <div>{{loteria.nome}}</div>
+                        </ng-template>
+                    </p-autoComplete>
+                    <small id="loteria" *ngIf="form.controls['loteria'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                </div>
+                <div class="p-field rd-col">
+                    <label for="template" translate>TEMPLATE</label>
+                    <p-autoComplete id="template" formControlName="template" 
+                        [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
+                        <ng-template let-template pTemplate="item">
+                            <div>{{template.nome}} </div>
+                        </ng-template>
+                    </p-autoComplete>
+                    <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                 </div> 
-            </form>       
-        </div>
-        <!-- <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
+                <div class="tempo rd-row rd-gap">
+                    <label class="label-field">Tempo de exibição</label>
+                    <span class=" rd-row">                
+                        <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
+                        <label class="label-field" for="minutos">&nbsp; Minutos</label>
+                    </span>
+                    <span class=" rd-row">                
+                        <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
+                        <label class="label-field" for="segundos">&nbsp;Segundos</label>
+                    </span>
+                </div>
+                <app-panel-agendamento-conteudo #panelAgendamento>
         
-            </app-register-action> 
-        </div>       -->
-    </div>    
-</div>            
-
-
-
+                </app-panel-agendamento-conteudo> 
+            </div> 
+        </form>       
+    </ng-template>
+</app-pagecadastro-conteudo>
