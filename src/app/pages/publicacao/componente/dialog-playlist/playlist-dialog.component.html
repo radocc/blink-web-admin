@@ -1,0 +1,35 @@
+<ng-template pTemplate="header">
+    <h2>
+        {{'PLAYLIST'|translate}}
+    </h2>
+</ng-template>
+<div class="rd-col">
+   
+    <div class="rd-row ">
+        <form [formGroup]="form" class="rd-flex rd-col">
+            <div class="rd-flex rd-col " pFocusTrap>
+                <div class="p-field rd-col">
+                    <label for="nome" translate>NOME</label>
+                    <input id="nome" required formControlName="nome" type="text" pInputText>                     
+                    <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                </div>
+                <div class="rd-row rd-gap">
+                    <div class="rd-col rd-flex">
+                        <label for="dataInicio" translate>Início as</label>
+                        <p-calendar [inline]="true" dateFormat="dd/mm/yy" formControlName="dataInicio" inputId="dataInicio"></p-calendar>
+                        <small id="dataInicio" *ngIf="form.controls['dataInicio'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                    </div>
+                    <div class="rd-col rd-flex">
+                        <label for="dataFim" translate>Término as</label>
+                        <p-calendar [inline]="true" dateFormat="dd/mm/yy" formControlName="dataFim"  inputId="dataFim"></p-calendar>
+                        <small id="dataFim" *ngIf="form.controls['dataFim'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                    </div> 
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-messages></p-messages>   
+    <div class="div-footer">        
+        <button pButton class="p-mr-2" type="button" label="{{'SALVAR'|translate}}" translate (click)="salvar()"></button>
+    </div>
+</div>    
