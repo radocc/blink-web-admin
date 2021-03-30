@@ -1,4 +1,4 @@
-<app-pagecadastro-conteudo [content]="content" [botaoNovo]="'NOVO_CONTEUDO'" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
+<app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_VIDEO', btnNovo: 'NOVO_CONTEUDO'}" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
     <ng-template #content>
         <form [formGroup]="form">
             <div class="rd-flex rd-col ">
