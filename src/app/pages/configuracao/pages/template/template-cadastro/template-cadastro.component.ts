@@ -23,6 +23,7 @@ import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { EventBrokerService } from 'ng-event-broker';
 import { Events } from '@radoccmodels/enum/events';
 import { TemplateCampoService } from '@radoccservices/templatecampo-services';
+import { VariaveisTipo } from '@radoccmodels/enum/variaveis-tipo-enum';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -49,6 +50,8 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   public espessuras = EFonteEspessura.values;
   public proportion: number = 1;
   public tiposConteudos: TipoConteudo[];
+  public variaveisNoticias = VariaveisTipo.map.noticia;
+  public variaveisPrevisoes = VariaveisTipo.map.previsao;
 
   constructor(private fb: FormBuilder,
     private imagemService: ImagemService,
@@ -155,6 +158,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   }
 
   public adicionarImagem(event) {
+    console.log(event);
     if (event.files.length > 0){
       event.progress = 10;
       this.arquivoService.postFile(event.files[0]).then((res)=>{
@@ -162,7 +166,11 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
         this.arquivo = res;
         this.proportion = this.arquivo.height / this.imageHeight;
         console.log(res);
-      })
+      }).catch(err => {
+        console.error(err);
+        this.page.showErrorMsg(err?.message);
+        this.inputFile.clear();
+      });
     }    
   }
 
@@ -201,9 +209,10 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
         campo.width = drag.offsetWidth;
         
         let campoImagem = document.getElementById(campo.hash+'-imagem');
-        campoImagem.style.height = (drag.offsetHeight - 2) + 'px';
-        campoImagem.style.width = (drag.offsetWidth - 2) + 'px';
-
+        if (campoImagem != null) {
+          campoImagem.style.height = (drag.offsetHeight - 2) + 'px';
+          campoImagem.style.width = (drag.offsetWidth - 2) + 'px';
+        }
       }).observe(drag);
     }, 300);
   }
@@ -217,6 +226,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     let width = this.arquivo.width / this.proportion;
     // console.log('width: ', width);
     let position = event.source.getFreeDragPosition();
+    console.log('drag position', position);
     // let childPos = content.offset();
     // console.log('childPos: ', childPos);
     // position = {x: childPos.top - position.x, y: childPos.left - position.y};
@@ -255,5 +265,20 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     let drag = document.getElementById(campo.hash);
     let content: any = drag.children.namedItem('drag-content');
     content.style.height = campo.height + 'px';
+  }
+
+  public changeCadastro(event, campo: TemplateCampo) {
+    campo.cadastro = !event.checked;
+  }
+
+  public changeVariavel(event, campo: TemplateCampo) {
+    if (campo.preenchimento) {
+      if (this.template.idTipoConteudo == 3) {
+        campo.nome = VariaveisTipo.getNome('noticia', campo.variavel);
+      } else if (this.template.idTipoConteudo == 5) {
+        campo.nome = VariaveisTipo.getNome('previsao', campo.variavel);
+      }
+      
+    }
   }
 }

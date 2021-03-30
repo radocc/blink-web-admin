@@ -29,6 +29,9 @@ import {OrderListModule} from 'primeng/orderlist';
 import {DragDropModule} from 'primeng/dragdrop';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {FieldsetModule} from 'primeng/fieldset';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {FocusTrapModule} from 'primeng/focustrap';
+import {SplitButtonModule} from 'primeng/splitbutton';
 @NgModule({
   declarations: [],
   imports: [
@@ -61,7 +64,10 @@ import {FieldsetModule} from 'primeng/fieldset';
     OrderListModule,
     DragDropModule,
     DynamicDialogModule,
-    FieldsetModule
+    FieldsetModule,
+    SelectButtonModule,
+    FocusTrapModule,
+    SplitButtonModule
   ],
   exports:[
     ButtonModule,
@@ -92,7 +98,10 @@ import {FieldsetModule} from 'primeng/fieldset';
     OrderListModule,
     DragDropModule,
     DynamicDialogModule,
-    FieldsetModule
+    FieldsetModule,
+    SelectButtonModule,
+    FocusTrapModule,
+    SplitButtonModule
   ]
 })
 export class NgPrimeModule { }

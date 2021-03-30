@@ -21,7 +21,10 @@
         <div #imageContainer id="image-container" class="p-d-flex p-ml-2 p-mr-2 image-container" devImage [bgImage]="arquivo?.url" position="left top">
             
             <div [id]="campo.hash" class="dragdrop" cdkDragBoundary=".image-container" cdkDrag *ngFor="let campo of camposAdicionais" 
-                (cdkDragMoved)="movendoCampo($event, campo)" [cdkDragFreeDragPosition]="campo.drag" [ngStyle]="{top: campo.positionLeft+'%', left: campo.positionTop+'%'}">
+                (cdkDragMoved)="movendoCampo($event, campo)" [cdkDragFreeDragPosition]="campo.drag" 
+                
+                >
+                <!-- [ngStyle]="{top: campo.positionLeft+'%', left: campo.positionTop+'%'}" -->
                 <div class="drag-header p-d-flex p-ai-center" cdkDragHandle>
                     <div class="btnDrag"><mat-icon>open_with</mat-icon></div>
                     <div class="grad-name p-m-1">{{campo.nome}}</div>
@@ -65,17 +68,23 @@
                 <ng-template pTemplate="content">
                     <!-- <div class="p-field p-mt-2 p-col-12 campo-container"> -->
                         <div class="p-d-flex">
-                            <div class="p-field p-col-6">
+                            <div class="p-field-checkbox p-col-6 p-mt-4">
+                                <p-checkbox [binary]="true" inputId="chkCadastro" [(ngModel)]="campo.preenchimento" [ngModelOptions]="{standalone: true}" (onChange)="changeCadastro($event, campo)"></p-checkbox>
+                                <label for="chkCadastro">{{'PREENCHIMENTO_AUTOMATICO' | translate}}</label>
+                            </div>
+                            <div class="p-field p-col-6" *ngIf="campo.preenchimento">
+                                <label for="txtCampoTipo">{{'VARIAVEL' | translate}}</label>
+                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 5 ? variaveisPrevisoes : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="p-d-flex">
+                            <div class="p-field p-col-8" *ngIf="!campo.preenchimento">
                                 <label for="txtCampoNome">{{'NOME' | translate}}</label>
                                 <input type="text" id="txtCampoNome" pInputText [(ngModel)]="campo.nome" [ngModelOptions]="{standalone: true}">
                             </div>
-                            <div class="p-field p-col-4">
+                            <div class="p-field p-col-4" [ngClass]="{'p-col-12' : campo.preenchimento}">
                                 <label for="txtCampoTipo">{{'TIPO' | translate}}</label>
                                 <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
-                            </div>
-                            <div class="p-field-checkbox p-col-2 p-mt-4">
-                                <p-checkbox [binary]="true" inputId="chkCadastro" [(ngModel)]="campo.cadastro" [ngModelOptions]="{standalone: true}"></p-checkbox>
-                                <label for="chkCadastro">{{'CADASTRO' | translate}}</label>
                             </div>
                         </div>
                         <div class="p-d-flex">
