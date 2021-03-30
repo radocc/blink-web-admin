@@ -5,10 +5,12 @@ import { NgPrimeModule } from 'app/ngprime/ngprime.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ShareTranslateModule } from '@radoccmodules/share-translate/share-translate.module';
+import { TempoExibicaoPipe } from 'app/directives/tempoExibicao.pipe';
 
 @NgModule({
   declarations: [
-    ConteudoRowComponent
+    ConteudoRowComponent,
+    TempoExibicaoPipe 
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { ShareTranslateModule } from '@radoccmodules/share-translate/share-trans
     ShareTranslateModule,
   ],
   exports:[
-    ConteudoRowComponent
+    ConteudoRowComponent,
+    TempoExibicaoPipe 
   ]
 })
 export class ConteudoRowModule { }

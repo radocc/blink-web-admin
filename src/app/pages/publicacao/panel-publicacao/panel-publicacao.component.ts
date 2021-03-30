@@ -100,7 +100,7 @@ export class PanelPublicacaoComponent implements OnInit {
     for (let w = 0; w < this.listaConteudo.length;w++){
       this.tempoLista += this.listaConteudo[w].conteudo.tempoExibicao;
     }
-    this.tempoLista = this.tempoLista * 1000;
+    this.tempoLista = this.tempoLista;
   }
 
   public buscarTipos(){
@@ -262,7 +262,7 @@ export class PanelPublicacaoComponent implements OnInit {
       this.publicacao.idGrupoPlayer = this.form.controls['grupoPlayer'].value.id;
     }
     this.publicacao.dataPublicado = new Date();
-    this.publicacao.intercalacao = this.form.controls['tipoIntercalaca'].value;
+    this.publicacao.intercalacao = this.form.controls['tipoIntercalacao'].value;
     if (this.playlist == null){
       this.playlist = new Playlist();
       if (this.idTipoPublicacao == 1){
