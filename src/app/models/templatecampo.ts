@@ -23,10 +23,12 @@ export class TemplateCampo extends BaseEntityImpl {
     public sequencia: number;
     public height: number = 0;
     public width: number = 0;
+    public variavel: string;
 
     @jsonIgnore() public valorTeste: any = 'Texto aqui';
     @jsonIgnore() public drag = {x: 0, y: 0};
     @jsonIgnore() public hash: string = Date.now().toString();
     @jsonIgnore() public file: File;
+    @jsonIgnore() public preenchimento: boolean;
 
 }

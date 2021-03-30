@@ -18,6 +18,18 @@ export class PageCadastroConteudoComponent implements OnInit {
 
     @Input("content") content: TemplateRef<any>;
 
+    @Input("config") public config:{
+        titulo:string,
+        subTitle:string,
+        btnSalvar:string;
+        btnNovo:string;
+      }={
+        titulo:'Unidade',
+        subTitle:'',
+        btnSalvar:'SALVAR',
+        btnNovo: 'NOVO'
+      }
+
     ngOnInit(): void {
     
     }

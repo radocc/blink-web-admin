@@ -31,9 +31,13 @@ export class ArquivoService extends AbstractService<Arquivo> {
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = (state) => {
                     if (xhr.readyState === 4) {
-                        resolve(JSON.parse(xhr.response));
+                        if (xhr.status === 200) {
+                            resolve(JSON.parse(xhr.response));
+                        } else {
+                            reject(JSON.parse(xhr.response));
+                        }
                     }
-                }
+                };
                 xhr.upload.onprogress = function (evnt) {
                     if (evnt.lengthComputable) {
                         let progres = Math.round((evnt.loaded / evnt.total) * 100);
