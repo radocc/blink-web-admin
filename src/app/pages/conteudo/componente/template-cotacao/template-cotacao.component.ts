@@ -11,6 +11,8 @@ import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
+import { Template } from '@radoccmodels/template';
+import { TemplateService } from '@radoccservices/template-services';
 
 @Component({
   selector: 'app-template-cotacao-conteudo',
@@ -18,7 +20,7 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
   styleUrls: ['./template-cotacao.component.scss'],
   providers:[
     ArquivoService,
-    MessageService,ConteudoService
+    MessageService,ConteudoService, TemplateService
   ]
 })
 export class TemplateCotacaoComponent extends CadConteudoComponent implements OnInit {
@@ -29,13 +31,14 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
     titulo:new FormControl('', Validators.required),    
     minutos:new FormControl(),
     segundos:new FormControl(),
+    template:new FormControl()
   }) 
   
   public arquivo:Arquivo;
   public conteudo:Conteudo;
-
+  public templates:Template[] = [];
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,
-    public translateService:TranslateService, private eventService:EventBrokerService) {
+    public translateService:TranslateService, private eventService:EventBrokerService,private templateService:TemplateService) {
     super(msgService, translateService);
   }
 
@@ -95,6 +98,12 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
 
   public importar(){
 
+  }
+
+  public pesquisarTemplate(nome:string){
+    this.templateService.findNomeETipo(nome,ETipoConteudo.Loteria).subscribe((lista)=>{
+      this.templates = lista;
+    })
   }
 
 }
