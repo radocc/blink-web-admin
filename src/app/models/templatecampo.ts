@@ -25,7 +25,7 @@ export class TemplateCampo extends BaseEntityImpl {
     public width: number = 0;
     public variavel: string;
 
-    @jsonIgnore() public valorTeste: any = 'Texto aqui';
+    @jsonIgnore() public valor: any = 'Texto aqui';
     @jsonIgnore() public drag = {x: 0, y: 0};
     @jsonIgnore() public hash: string = Date.now().toString();
     @jsonIgnore() public file: File;

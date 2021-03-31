@@ -136,7 +136,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     if (this.template != null) 
       this.arquivo = await this.arquivoService.findById(this.template.idArquivo).toPromise();
     this.camposAdicionais = await this.campoService.getByTemplate(this.template.id).toPromise();
-    this.camposAdicionais.forEach(campo => campo.valorTeste = 'Texto aqui');
+    this.camposAdicionais.forEach(campo => campo.valor = 'Texto aqui');
   }
 
   public async buscarTiposConteudo() {
@@ -234,8 +234,8 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     // console.log('position: ', position);
     let left = (Math.round(position.x) / width) * 100;
     let top = (Math.round(position.y) / this.imageHeight) * 100;
-    if (left < 0) left = 0;
-    if (top < 0) top = 0;
+    if (left < 0 || left == Infinity) left = 0;
+    if (top < 0 || top == Infinity) top = 0;
 
     // console.log('left: ', left);
     // console.log('top: ', top);
