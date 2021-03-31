@@ -1,7 +1,7 @@
 class EFonteEspessura {
     
-    static readonly EXTRA_LIGHT = new EFonteEspessura('EXTRA_LIGTH', 1, 100);
-    static readonly LIGHT = new EFonteEspessura('LIGTH', 2, 300);
+    static readonly EXTRA_LIGHT = new EFonteEspessura('EXTRA_LIGHT', 1, 100);
+    static readonly LIGHT = new EFonteEspessura('LIGHT', 2, 300);
     static readonly REGULAR = new EFonteEspessura('REGULAR', 3, 400);
     static readonly MEDIUM = new EFonteEspessura('MEDIUM', 4, 600);
     static readonly BOLD = new EFonteEspessura('BOLD', 5, 700);

@@ -12,19 +12,12 @@
         .input-tempo{
             width: 70px;
         }
-        .p-fileupload .p-fileupload-content{
-            padding: 0px !important;
-        }
-        .p-fileupload{
-            margin-bottom: 8px;
-        }
-        .div-edicao{
-            border-radius: 5px;
-            border-style: solid;
-            border-width: 1px;
-            border-color: black;
-            padding: 16px;
-        }
+        p-autocomplete {
+            display: flex;
+            span {
+                flex: 1;
+            };
+        } 
         
     }
 }

@@ -11,10 +11,10 @@
         </div>
         <div class="p-field p-col-6 p-mt-4">
             <p-fileUpload #fileupload  mode="basic" cancelLabel="CANCELAR" chooseLabel="Adicionar imagem" [auto]="true"  
-                name="filename" customUpload="true" (uploadHandler)="adicionarImagem($event)" ></p-fileUpload>
+                name="filename" customUpload="true" (uploadHandler)="adicionarImagem($event)" accept="image/.png,.jpg,.jpeg"></p-fileUpload>
         </div>
         <div class="p-field p-col-6">
-            <label for="txtTipoConteudo">{{'TIPO_CONTEUDO' | translate}}</label>
+            <label for="txtTipoConteudo">{{'TIPO_DE_CONTEUDO' | translate}}</label>
             <p-dropdown id="txtTipoConteudo" [(ngModel)]="template.idTipoConteudo" optionValue="id" optionLabel="nome" [options]="tiposConteudos" placeholder="{{'SELECIONE_UM_TIPO' | translate}}" [ngModelOptions]="{standalone: true}"></p-dropdown>
         </div>
 
@@ -39,11 +39,11 @@
                                     'font-weight': campo.fonteEspessura,
                                     'color': campo.fonteCor
                                 }">
-                                {{campo.valorTeste}}
+                                {{campo.valor}}
                             </span>
                         </ng-template>
                         <ng-template pTemplate="content">
-                            <input type="text" [(ngModel)]="campo.valorTeste" pInputText [ngModelOptions]="{standalone: true}">
+                            <input type="text" [(ngModel)]="campo.valor" pInputText [ngModelOptions]="{standalone: true}">
                         </ng-template>
                     </p-inplace>
                     <div [id]="campo.hash+'-imagem'" class="campo-imagem" *ngIf="campo.tipo == 4" style="width: 150px; height: 150px;"
@@ -84,17 +84,17 @@
                             </div>
                             <div class="p-field" [ngClass]="{'p-col-12' : campo.preenchimento, 'p-col-4' : !campo.preenchimento}">
                                 <label for="txtCampoTipo">{{'TIPO' | translate}}</label>
-                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'SELECIONE_UM_TIPO' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                         </div>
                         <div class="p-d-flex">
                             <div class="p-field p-col-3">
                                 <label for="txtCampoFonte">{{'FONTE' | translate}}</label>
-                                <p-dropdown id="txtCampoFonte" [(ngModel)]="campo.fonte" optionValue="name" [options]="fontes" placeholder="{{'Selecione uma fonte' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <p-dropdown id="txtCampoFonte" [(ngModel)]="campo.fonte" optionValue="name" [options]="fontes" placeholder="{{'SELECIONE_UMA_FONTE' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                             <div class="p-field p-col-3">
                                 <label for="txtCampoEspessura">{{'ESPESSURA' | translate}}</label>
-                                <p-dropdown id="txtCampoEspessura" [(ngModel)]="campo.fonteEspessura" optionValue="value" [options]="espessuras" placeholder="{{'Selecione uma espessura' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <p-dropdown id="txtCampoEspessura" [(ngModel)]="campo.fonteEspessura" optionValue="value" [options]="espessuras" placeholder="{{'SELECIONE_UMA_ESPESSURA' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                             <div class="p-field p-col-3">
                                 <label for="txtCampoFonteTamanho">{{'TAMANHO' | translate}}</label>

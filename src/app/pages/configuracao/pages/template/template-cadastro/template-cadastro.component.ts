@@ -157,7 +157,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       )
       .toPromise();
     this.camposAdicionais.forEach((campo) => {
-      campo.valorTeste = 'Texto aqui';
+      campo.valor = 'Texto aqui';
       this.setDistancia(campo);
       setTimeout(() => {
         let drag = document.getElementById(campo.hash);
@@ -272,8 +272,8 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     // console.log('position: ', position);
     let left = (Math.round(position.x) / width) * 100;
     let top = (Math.round(position.y) / this.imageHeight) * 100;
-    if (left < 0) left = 0;
-    if (top < 0) top = 0;
+    if (left < 0 || left == Infinity) left = 0;
+    if (top < 0 || top == Infinity) top = 0;
 
     // console.log('left: ', left);
     // console.log('top: ', top);
