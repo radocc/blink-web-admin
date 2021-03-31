@@ -1,18 +1,15 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ImagemRequest } from '@radoccmodels/request/imagem-request';
 import { ImagemService } from '@radoccservices/base/imagem-service';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { FileUpload } from 'primeng/fileupload';
-import { CampoAdicional } from '@radoccmodels/campoadicional';
 import ECampoTipo from '@radoccmodels/enum/campo-tipo-enum';
 import { TemplateCampo } from '@radoccmodels/templatecampo';
 import EFontFamily from '@radoccmodels/enum/fonte-family-enum';
 import EImagemFormato from '@radoccmodels/enum/imagem-formato-enum';
 import EFonteEspessura from '@radoccmodels/enum/fonte-espessura-enum';
 import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
-import { Portal } from '@angular/cdk/portal';
 import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { ResizeObserver } from '@juggle/resize-observer';
 import { Template } from '@radoccmodels/template';
@@ -24,6 +21,8 @@ import { EventBrokerService } from 'ng-event-broker';
 import { Events } from '@radoccmodels/enum/events';
 import { TemplateCampoService } from '@radoccservices/templatecampo-services';
 import { VariaveisTipo } from '@radoccmodels/enum/variaveis-tipo-enum';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -52,6 +51,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   public tiposConteudos: TipoConteudo[];
   public variaveisNoticias = VariaveisTipo.map.noticia;
   public variaveisPrevisoes = VariaveisTipo.map.previsao;
+  private subscriptionTipo: Subscription;
 
   constructor(private fb: FormBuilder,
     private imagemService: ImagemService,
@@ -84,10 +84,21 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       me.setContainerImageHeight(me.imageContainer.nativeElement);
     });
 
+    this.subscriptionTipo = this.eventService.subscribeEvent(Events.configAtualizaTipoTemplate).subscribe((tipo: TipoConteudo) => {
+      if (this.template.id == null) {
+        this.template.idTipoConteudo = tipo.id;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscriptionTipo.unsubscribe();
   }
 
   public novo() {
+    
     this.clearForm();
+    this.template.idTipoConteudo = parseInt(localStorage.getItem('configTipoConteudo'));
   }
 
   //** Seta a altura para manter a proporção 16:9 */
@@ -135,8 +146,26 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     this.template = await this.service.findById(id).toPromise();
     if (this.template != null) 
       this.arquivo = await this.arquivoService.findById(this.template.idArquivo).toPromise();
-    this.camposAdicionais = await this.campoService.getByTemplate(this.template.id).toPromise();
-    this.camposAdicionais.forEach(campo => campo.valorTeste = 'Texto aqui');
+    this.camposAdicionais = await this.campoService.getByTemplate(this.template.id)
+      .pipe(
+        map((campos) => {
+          campos.forEach(campo => {
+            campo.hash = Date.now().toString();
+          });
+          return campos;
+        })
+      )
+      .toPromise();
+    this.camposAdicionais.forEach((campo) => {
+      campo.valorTeste = 'Texto aqui';
+      this.setDistancia(campo);
+      setTimeout(() => {
+        let drag = document.getElementById(campo.hash);
+        drag.style.width = campo.width + 'px';
+        drag.style.height = campo.height + 'px';
+      }, 300);
+      
+    });
   }
 
   public async buscarTiposConteudo() {
@@ -195,26 +224,35 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       // return;
     }
     let campo = new TemplateCampo();
+    campo.hash = Date.now().toString();
     campo.sequencia = this.camposAdicionais.length + 1;
+    if (campo.sequencia > 1) {
+      campo.positionTop = 10;
+      this.setDistancia(campo);
+    }
     this.camposAdicionais.push(campo);
 
     setTimeout(() => {
-      let drag = document.getElementById(campo.hash);
+      this.setTamanhoCampo(campo);
+    }, 300);
+  }
+
+  private setTamanhoCampo(campo: TemplateCampo) {
+    let drag = document.getElementById(campo.hash);
+    campo.height = drag.offsetHeight;
+    campo.width = drag.offsetWidth;
+
+    //**Detecta alteração de tamanho do campo */
+    new ResizeObserver(() => {
       campo.height = drag.offsetHeight;
       campo.width = drag.offsetWidth;
-
-      //**Detecta alteração de tamanho do campo */
-      new ResizeObserver(() => {
-        campo.height = drag.offsetHeight;
-        campo.width = drag.offsetWidth;
-        
-        let campoImagem = document.getElementById(campo.hash+'-imagem');
-        if (campoImagem != null) {
-          campoImagem.style.height = (drag.offsetHeight - 2) + 'px';
-          campoImagem.style.width = (drag.offsetWidth - 2) + 'px';
-        }
-      }).observe(drag);
-    }, 300);
+      
+      let campoImagem = document.getElementById(campo.hash+'-imagem');
+      if (campoImagem != null) {
+        campoImagem.style.height = (drag.offsetHeight - 2) + 'px';
+        campoImagem.style.width = (drag.offsetWidth - 2) + 'px';
+      }
+    }).observe(drag);
   }
 
   public onResize(event) {

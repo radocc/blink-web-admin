@@ -82,7 +82,7 @@
                                 <label for="txtCampoNome">{{'NOME' | translate}}</label>
                                 <input type="text" id="txtCampoNome" pInputText [(ngModel)]="campo.nome" [ngModelOptions]="{standalone: true}">
                             </div>
-                            <div class="p-field p-col-4" [ngClass]="{'p-col-12' : campo.preenchimento}">
+                            <div class="p-field" [ngClass]="{'p-col-12' : campo.preenchimento, 'p-col-4' : !campo.preenchimento}">
                                 <label for="txtCampoTipo">{{'TIPO' | translate}}</label>
                                 <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>

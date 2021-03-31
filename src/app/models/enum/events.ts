@@ -3,4 +3,5 @@ export class Events {
     static editar:string = 'editar';
     static novo:string = 'novo';
     static visualizar:string = 'visualizar';
+    static configAtualizaTipoTemplate = 'configAtualizaTipoTemplate';
 }
