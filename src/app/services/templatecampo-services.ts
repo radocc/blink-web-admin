@@ -28,5 +28,17 @@ export class TemplateCampoService extends TVBlinkService<TemplateCampo> {
                 return campos;
             })
         );
-    }   
+    } 
+    
+    public getPreenchimentoManuelByTemplate(idTemplate: number): Observable<Array<TemplateCampo>> {
+        return this.http.get<Array<TemplateCampo>>(this.urlWebBase + `/cadastro/manual/template/${idTemplate}`).pipe(
+            map(campos => {
+                campos.map(campo => {
+                    let c = Object.assign(new TemplateCampo(), campo)
+                    return c;
+                });
+                return campos;
+            })
+        );
+    } 
 }
