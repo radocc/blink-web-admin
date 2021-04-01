@@ -136,7 +136,12 @@ html, body {
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
+.label-nowrap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+}
 
 .rd-row{
     display: flex;

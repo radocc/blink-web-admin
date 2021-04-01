@@ -23,6 +23,7 @@ import { TemplateCampoService } from '@radoccservices/templatecampo-services';
 import { VariaveisTipo } from '@radoccmodels/enum/variaveis-tipo-enum';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -52,6 +53,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   public variaveisNoticias = VariaveisTipo.map.noticia;
   public variaveisPrevisoes = VariaveisTipo.map.previsao;
   private subscriptionTipo: Subscription;
+  public campoSelecionado: TemplateCampo;
 
   constructor(private fb: FormBuilder,
     private imagemService: ImagemService,
@@ -116,6 +118,10 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   public salvar() {
     this.prepararCampos();
+    if (this.arquivo == null) {
+      this.page.showErrorMsg('E_NECESSARIO_ADICIONAR_UMA_IMAGEM');
+      return;
+    }
     this.template.idArquivo = this.arquivo.id;
 
     this.service.save(this.template).subscribe(
@@ -150,22 +156,26 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       .pipe(
         map((campos) => {
           campos.forEach(campo => {
-            campo.hash = Date.now().toString();
+            campo.hash = uuidv4();
+            campo.preenchimento = !campo.cadastro;
           });
           return campos;
         })
       )
       .toPromise();
-    this.camposAdicionais.forEach((campo) => {
-      campo.valor = 'Texto aqui';
-      this.setDistancia(campo);
-      setTimeout(() => {
-        let drag = document.getElementById(campo.hash);
-        drag.style.width = campo.width + 'px';
-        drag.style.height = campo.height + 'px';
-      }, 300);
-      
-    });
+    
+    setTimeout(() => {
+      this.setContainerImageHeight(this.imageContainer.nativeElement);
+      this.camposAdicionais.forEach((campo) => {
+        campo.valor = 'Texto aqui';
+        setTimeout(() => {
+          const drag = document.getElementById(campo.hash);
+          const dragContent: any = drag.getElementsByClassName('drag-content').item(0);
+          dragContent.style.width = campo.width + 'px';
+          dragContent.style.height = campo.height + 'px';
+        }, 100);
+      });
+    }, 100);
   }
 
   public async buscarTiposConteudo() {
@@ -224,13 +234,14 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       // return;
     }
     let campo = new TemplateCampo();
-    campo.hash = Date.now().toString();
+    campo.hash = uuidv4();
     campo.sequencia = this.camposAdicionais.length + 1;
     if (campo.sequencia > 1) {
-      campo.positionTop = 10;
+      campo.positionTop = this.camposAdicionais.length * 10;
       this.setDistancia(campo);
     }
     this.camposAdicionais.push(campo);
+    this.campoSelecionado = campo;
 
     setTimeout(() => {
       this.setTamanhoCampo(campo);
@@ -285,6 +296,15 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   public setDistancia(campo: TemplateCampo) {
     campo.drag = {x: (campo.positionLeft * (this.arquivo.width / this.proportion)) / 100, y: (campo.positionTop * this.imageHeight) / 100};
+  }
+
+  public selecionarCampo(event: any, campo: TemplateCampo) {
+    if (!event) {
+      this.campoSelecionado = new TemplateCampo();
+      this.campoSelecionado.hash = '0';
+    } else {
+      this.campoSelecionado = campo;
+    }
   }
 
   public onKeyPress(event: KeyboardEvent, campo: TemplateCampo) {
