@@ -18,7 +18,7 @@
                     </div> 
                     <div class="p-field rd-col" *ngFor="let camp of campos">
                         <label for="titulo">{{camp.nome |translate}}</label>
-                        <input id="titulo" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText>                     
+                        <input id="titulo" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
                     </div> 
                     <!-- <div *ngIf="campos.length > 0">                        
                         <p-table [value]="campos" dataKey="id" editMode="row">

@@ -104,6 +104,7 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
     this.conteudo.idTemplate = null;
     this.conteudo.idArquivo = this.arquivo.id;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
+    this.conteudo.campos = this.campos;
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{
       this.conteudo = conteudo;
       this.panelAgendamento.setAgendamento(conteudo.agendamento);
