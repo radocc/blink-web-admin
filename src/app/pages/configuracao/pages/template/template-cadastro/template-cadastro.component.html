@@ -14,7 +14,7 @@
                 name="filename" customUpload="true" (uploadHandler)="adicionarImagem($event)" ></p-fileUpload>
         </div>
         <div class="p-field p-col-6">
-            <label for="txtTipoConteudo">{{'TIPO_CONTEUDO' | translate}}</label>
+            <label for="txtTipoConteudo">{{'TIPO_DE_CONTEUDO' | translate}}</label>
             <p-dropdown id="txtTipoConteudo" [(ngModel)]="template.idTipoConteudo" optionValue="id" optionLabel="nome" [options]="tiposConteudos" placeholder="{{'SELECIONE_UM_TIPO' | translate}}" [ngModelOptions]="{standalone: true}"></p-dropdown>
         </div>
 

@@ -41,12 +41,12 @@
                                 <div class="rd-flex rd-row rd-gap">
                                     <div class="rd-flex p-field rd-col">
                                         <label class="" for="dataImplantacao" translate>DATA_IMPLANTACAO</label>
-                                        <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataImplantacao" inputId="dataImplantacao"></p-calendar>
+                                        <p-calendar [showTime]="true"  appendTo="body" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataImplantacao" inputId="dataImplantacao"></p-calendar>
                                         <small id="dataImplantacao" *ngIf="form.controls['dataImplantacao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                     </div>
                                     <div class="rd-flex p-field rd-col">
                                         <label class="" for="dataRemocao" translate>DATA_REMOCAO</label>
-                                        <p-calendar class="" [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataRemocao"  inputId="dataRemocao"></p-calendar>
+                                        <p-calendar class="" [showTime]="true"  appendTo="body" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataRemocao"  inputId="dataRemocao"></p-calendar>
                                         <small id="dataRemocao" *ngIf="form.controls['dataRemocao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                     </div>
                                     <div class="div-btn-trocar" *ngIf="form.controls['dataRemocao'].value != null">
