@@ -44,6 +44,9 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
   public buscarTipos(){
     this.tipoConteudoService.findAll().subscribe( (lista) =>{
       this.tiposConteudos = lista;
+      if (lista.length> 0){
+        this.filtrarTipo(lista[0]);
+      }
     })
   }
 

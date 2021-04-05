@@ -69,6 +69,7 @@ export class TemplatePesquisaComponent implements OnInit {
   public buscarTipos(){
     this.tipoConteudoService.findAll().subscribe( (lista) =>{
       this.tiposConteudos = lista;
+      localStorage.setItem('configTipoConteudo', lista[0].id.toString());
     })
   }
 
@@ -84,6 +85,8 @@ export class TemplatePesquisaComponent implements OnInit {
       value:  tipo.id
     });
     this.grid.pesquisar();
+    this.eventService.publishEvent(Events.configAtualizaTipoTemplate, this.tipoConteudo);
+    localStorage.setItem('configTipoConteudo', this.tipoConteudo.id.toString());
     // let url = this.getUrl(tipo);
     // // this.conteudoService.
     // this.router.navigate([url]);

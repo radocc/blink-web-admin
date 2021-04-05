@@ -16,7 +16,8 @@
 @import './app/pages/conteudo/componente/template-previsaotempo/template-previsaotempo.component.scss';
 
 @import './app/pages/publicacao/panel-publicacao/panel-publicacao.component.scss';
-@import './app/pages/publicacao/componente/publicacao-imagem/publicacao-imagem.component.scss';
+@import './app/pages/publicacao/componente/dialog-playlist/playlist-dialog.component.scss';
+@import './app/pages/publicacao/componente/dialog-playlist-pesquisa/playlist-pesquisa-dialog.component.scss';
 
 @import './app/pages/player/panel-player/panel-player.component.scss';
 @import './app/pages/player/pages/player-cadastro/player-cadastro.component.scss';
@@ -86,7 +87,8 @@ $theme:(
 PUBLICACAÇÂO
 */
 @include app-panel-publicacao($theme);
-@include app-publicacao-imagem($theme);
+@include app-dialog-playlist-publicacao($theme);
+@include app-dialog-playlist-pesquisa-publicacao($theme);
 
 /*
 PLAYER
@@ -136,7 +138,12 @@ html, body {
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
+.label-nowrap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+}
 
 .rd-row{
     display: flex;

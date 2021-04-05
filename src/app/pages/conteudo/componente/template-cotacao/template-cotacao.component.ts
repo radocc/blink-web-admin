@@ -11,6 +11,10 @@ import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
+import { Template } from '@radoccmodels/template';
+import { TemplateService } from '@radoccservices/template-services';
+import { TemplateCampoService } from '@radoccservices/templatecampo-services';
+import { ConteudoCampo } from '@radoccmodels/conteudocampo';
 
 @Component({
   selector: 'app-template-cotacao-conteudo',
@@ -18,7 +22,7 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
   styleUrls: ['./template-cotacao.component.scss'],
   providers:[
     ArquivoService,
-    MessageService,ConteudoService
+    MessageService,ConteudoService, TemplateService, TemplateCampoService
   ]
 })
 export class TemplateCotacaoComponent extends CadConteudoComponent implements OnInit {
@@ -29,18 +33,44 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
     titulo:new FormControl('', Validators.required),    
     minutos:new FormControl(),
     segundos:new FormControl(),
+    template:new FormControl()
   }) 
   
   public arquivo:Arquivo;
   public conteudo:Conteudo;
-
+  public templates:Template[] = [];
+  public campos:ConteudoCampo[] = [];
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,
-    public translateService:TranslateService, private eventService:EventBrokerService) {
+    public translateService:TranslateService, private eventService:EventBrokerService,private templateService:TemplateService,
+    private templateCampoService:TemplateCampoService) {
     super(msgService, translateService);
   }
 
   ngOnInit(): void { 
+    this.form.controls['template'].valueChanges.subscribe((template)=>{
+      if (template != null){
+        this.buscarCampos(template)
+      }      
+    })
   }
+
+  public buscarCampos(template){
+    this.templateCampoService.getPreenchimentoManuelByTemplate(template.id).subscribe((lista)=>{
+      this.campos = [];
+      if (lista.length > 0){
+        for (let w = 0; w < lista.length;w++){
+          let camp = new ConteudoCampo();
+          camp.nome = lista[w].nome;
+          camp.tipo = lista[w].tipo;
+          camp.idTemplateCampo = lista[w].id;
+          camp.valor = '';
+          this.campos.push(camp);
+        }
+      }      
+    })
+  }
+
+   
 
   public uploadFile(event){
     if (event.files.length > 0){
@@ -74,6 +104,7 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
     this.conteudo.idTemplate = null;
     this.conteudo.idArquivo = this.arquivo.id;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
+    this.conteudo.campos = this.campos;
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{
       this.conteudo = conteudo;
       this.panelAgendamento.setAgendamento(conteudo.agendamento);
@@ -95,6 +126,12 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
 
   public importar(){
 
+  }
+
+  public pesquisarTemplate(nome:string){
+    this.templateService.findNomeETipo(nome,ETipoConteudo.Cotacao).subscribe((lista)=>{
+      this.templates = lista;
+    })
   }
 
 }

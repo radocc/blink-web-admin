@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
     this.eventService.registerEvent(Events.editar);
     this.eventService.registerEvent(Events.novo);
     this.eventService.registerEvent(Events.visualizar);
+    this.eventService.registerEvent(Events.configAtualizaTipoTemplate);
     this.translate.setDefaultLang('pt');
     this.translate.use('pt');
     sessionStorage.setItem('lang', 'pt')

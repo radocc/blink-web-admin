@@ -2,7 +2,7 @@
 @mixin conteudo-row($theme) {
     app-conteudo-row{       
         // min-width: 350px;
-        // width: 100%;  
+        width: 100%;  
         
         .conteudo-row{
             display: flex;
@@ -17,7 +17,7 @@
         }
                             
         .view{
-            // width: 120px;
+            max-width: 120px;
             height: 70px;
             background: green;
             border-radius: 5px;
@@ -28,6 +28,16 @@
             background-repeat: no-repeat !important;
             background-size: contain !important;
             background-position: center !important;                    
+        }
+        .div-footer{
+            .tempo{
+                top: 0px;
+                bottom: 0px;
+                margin: auto;
+                margin-left: 0px;
+                margin-right: 8px;
+            }
+            
         }
     }
 }

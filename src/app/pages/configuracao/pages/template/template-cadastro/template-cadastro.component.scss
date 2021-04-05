@@ -10,6 +10,8 @@
             width: 100%;
             border: 1px solid var(--surface-d);
             border-radius: 4px;
+            display: block !important;
+            position: relative !important;
         }
 
         .dragdrop {
@@ -17,7 +19,7 @@
             color: rgba(0, 0, 0, 0.87);
             display: inline-flex;
             // background: #fff;
-            position: relative;
+            position: absolute;
             z-index: 1;
             // width: 140px;
 

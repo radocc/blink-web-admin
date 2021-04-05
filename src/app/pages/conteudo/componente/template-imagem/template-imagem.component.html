@@ -1,4 +1,4 @@
-<app-pagecadastro-conteudo [content]="content" [botaoNovo]="'NOVO_CONTEUDO'" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
+<app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_IMAGEM', btnNovo: 'NOVO_CONTEUDO'}" (onNovo)="novo()" (onPreview)="preview()" (onSalvar)="salvar()" (onPublicar)="publicar()">
     <ng-template #content>
     
             <form [formGroup]="form">
@@ -10,7 +10,8 @@
                     </div>
                     <div class="p-field p-d-flex p-flex-row">
                         <p-fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
-                        name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" ></p-fileUpload>
+                        name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
+                        accept="image/.png,.jpg,.jpeg"></p-fileUpload>
                         <div class="p-col arquivo">{{arquivo?.nome}}</div>
                         <p-dialog [(visible)]="mostrarPreview" >
                             <div class="image-container" [ngStyle]="{'background':'url(' + arquivo?.url+')'}" ></div>

@@ -6,7 +6,7 @@ class ECampoTipo {
     static readonly IMAGE = new ECampoTipo('Imagem', 4);
     static readonly DATE = new ECampoTipo('Data', 5);
     static readonly DATETIME = new ECampoTipo('Data e Hora', 6);
-    static readonly COTACAO = new ECampoTipo('Cotacao', 7);
+    static readonly LABEL = new ECampoTipo('Label', 7);
 
     static get values(): ECampoTipo[] {
       return [
@@ -16,7 +16,7 @@ class ECampoTipo {
         this.IMAGE,
         this.DATE,
         this.DATETIME,
-        this.COTACAO
+        this.LABEL
       ];
     }
 

@@ -1,0 +1,9 @@
+
+<div class="rd-col">
+    <p-listbox [options]="lista" [(ngModel)]="playlist" [filter]="true" optionLabel="nome">
+
+    </p-listbox>
+    <div class="div-footer">        
+        <button pButton *ngIf="this.playlist" class="p-mr-2" type="button" label="{{'SELECIONAR'|translate}}" translate (click)="selecionar()"></button>
+    </div>
+</div>    

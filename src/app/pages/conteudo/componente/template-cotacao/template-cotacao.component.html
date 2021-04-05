@@ -1,20 +1,54 @@
-<div class="template-cotacao-conteudo rd-flex rd-col rd-gap-8">
-    <div class="">
-        <button pButton  type="button" label="{{'NOVO_CONTEUDO'|translate}}" (click)="novo()"></button>
-    </div>
-    <div>
-        <p-messages></p-messages>
-    </div>
-    <div class="rd-row rd-flex rd-gap">
-        <div class="div-edicao rd-flex rd-col">
+<app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_COTACAO', btnNovo: 'NOVO_CONTEUDO'}" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
+    <ng-template #content> 
             <form [formGroup]="form">
                 <div class="rd-flex rd-col ">
                     <div class="p-field rd-col">
                         <label for="titulo">{{'TITULO'|translate}}</label>
                         <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
                     </div> 
+                    <div class="p-field rd-col">
+                        <label for="template" translate>TEMPLATE</label>
+                        <p-autoComplete id="template" formControlName="template" 
+                            [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
+                            <ng-template let-template pTemplate="item">
+                                <div>{{template.nome}} </div>
+                            </ng-template>
+                        </p-autoComplete>
+                        <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                    </div> 
+                    <div class="p-field rd-col" *ngFor="let camp of campos">
+                        <label for="titulo">{{camp.nome |translate}}</label>
+                        <input id="titulo" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
+                    </div> 
+                    <!-- <div *ngIf="campos.length > 0">                        
+                        <p-table [value]="campos" dataKey="id" editMode="row">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Valor</th> 
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item let-editing="editing" let-ri="rowIndex">
+                                <tr >
+                                    <td>
+                                        {{item.nome}}
+                                    </td>
+                                    <td pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="item.valor">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{item.valor}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td> 
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div> -->
                     <div class="tempo rd-row rd-gap">
-                        <label class="label-field">Tempo de exibição</label>
+                        <label class="label-field">{{'TEMPO_DE_EXIBICAO'|translate}}</label>
                         <span class=" rd-row">                
                             <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
                             <label class="label-field" for="minutos">&nbsp; {{'MINUTOS'|translate}}</label>
@@ -28,15 +62,8 @@
             
                     </app-panel-agendamento-conteudo> 
                 </div> 
-            </form> 
-        </div>
-        <!-- <div class="acoes rd-col rd-gap">
-            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
-        
-            </app-register-action> 
-        </div>       -->
-    </div>    
-</div>            
-
+            </form>     
+</ng-template>
+</app-pagecadastro-conteudo>
 
 
