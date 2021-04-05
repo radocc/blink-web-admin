@@ -25,7 +25,7 @@
                     <div class="item-conteudo rd-row" *ngFor="let conteudo of conteudos">
                         <app-conteudo-row pDraggable="conteudo" (onDragStart)="dragStart(conteudo)" (onDragEnd)="dragEnd($event)"
                             [conteudo]="conteudo" (onAbrirArquivo)="arquivoConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
-                            (onAlterar)="alterarConteudo(conteudo)" (onExcluir)="excluirConteudo(conteudo)" > 
+                            [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false"> 
                         </app-conteudo-row>
                     </div>
                 </div>

@@ -8,11 +8,11 @@ import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from "@an
 export class PageCadastroConteudoComponent implements OnInit {
 
     
-    @Output("onPreview") public onPreview: EventEmitter<any> = new EventEmitter();
-    @Output("onPublicar") public onPublicar: EventEmitter<any> = new EventEmitter();
-    @Output("onSalvar") public onSalvar: EventEmitter<any> = new EventEmitter();
-    @Output("onImportar") public onImportar: EventEmitter<any> = new EventEmitter();
-    @Output("onNovo") public onNovo: EventEmitter<any> = new EventEmitter();
+    @Output("preview") public onPreview: EventEmitter<any> = new EventEmitter();
+    @Output("publicar") public onPublicar: EventEmitter<any> = new EventEmitter();
+    @Output("salvar") public onSalvar: EventEmitter<any> = new EventEmitter();
+    @Output("importar") public onImportar: EventEmitter<any> = new EventEmitter();
+    @Output("novo") public onNovo: EventEmitter<any> = new EventEmitter();
 
     @Input("botaoNovo") botaoNovo: string;
 

@@ -103,6 +103,7 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
     segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = this.form.controls['template'].value.id;
+    this.conteudo.template = this.form.controls['template'].value;
     this.conteudo.idArquivo = null;  
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
 

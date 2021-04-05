@@ -21,23 +21,27 @@ export class TemplateCampoService extends TVBlinkService<TemplateCampo> {
     public getByTemplate(idTemplate: number): Observable<Array<TemplateCampo>> {
         return this.http.get<Array<TemplateCampo>>(this.urlWebBase + `/template/${idTemplate}`).pipe(
             map(campos => {
+                let lista = [];
                 campos.map(campo => {
                     let c = Object.assign(new TemplateCampo(), campo)
+                    lista.push(c);
                     return c;
                 });
-                return campos;
+                return lista;
             })
         );
     } 
     
-    public getPreenchimentoManuelByTemplate(idTemplate: number): Observable<Array<TemplateCampo>> {
+    public getPreenchimentoManualByTemplate(idTemplate: number): Observable<Array<TemplateCampo>> {
         return this.http.get<Array<TemplateCampo>>(this.urlWebBase + `/cadastro/manual/template/${idTemplate}`).pipe(
             map(campos => {
+                let lista = [];
                 campos.map(campo => {
                     let c = Object.assign(new TemplateCampo(), campo)
+                    lista.push(c);
                     return c;
                 });
-                return campos;
+                return lista;
             })
         );
     } 

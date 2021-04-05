@@ -10,8 +10,17 @@ export class VariaveisTipo {
             {nome: 'DATA', campo: 'data'},
             {nome: 'TEMPO', campo: 'tempo'},
             {nome: 'MAXIMA', campo: 'maxima'},
-            {nome: 'MINIMA', campo: 'minima'},
+            {nome: 'MINIMA', campo: 'minima'},            
             {nome: 'IUV', campo: 'iuv'},
+            {nome: 'URL', campo: 'url'},
+            {nome: 'DESCRICAO', campo: 'descricao'}
+        ],
+        'loteria': [
+            {nome: 'DATA_SORTEIO', campo: 'dataSorteio'},
+            {nome: 'NUMEROS', campo: 'numeros'},
+            {nome: 'CODIGO_SORTEIO', campo: 'codigoSorteio'},
+            {nome: 'DATA_PROXIMO_SORTEIO', campo: 'dataProximoSorteio'},            
+            {nome: 'VALOR_PROXIMO_SORTEIO', campo: 'valorProximoSorteio'},
         ]
     }
 

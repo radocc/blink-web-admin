@@ -62,8 +62,13 @@
         </div>
         <p-accordion class="p-col-12">
             <p-accordionTab *ngFor="let campo of camposAdicionais" [selected]="this.campoSelecionado?.hash == campo?.hash" (selectedChange)="selecionarCampo($event, campo)">
-                <ng-template pTemplate="header">
-                    {{campo.nome ? campo.nome : 'Campo'}}
+                <ng-template class="p-d-flex" pTemplate="header">
+                    <div class="rd-w-100 rd-row">
+                        <div class="rd-flex p-m-auto">
+                            {{campo.nome ? campo.nome : 'Campo'}}
+                        </div>
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="excluirCampo(campo)"></button>
+                    </div>                    
                 </ng-template>
                 <ng-template pTemplate="content">
                     <!-- <div class="p-field p-mt-2 p-col-12 campo-container"> -->
@@ -76,7 +81,7 @@
                             </div>
                             <div class="p-field p-col-6" *ngIf="campo.preenchimento">
                                 <label for="txtCampoTipo">{{'VARIAVEL' | translate}}</label>
-                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 5 ? variaveisPrevisoes : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                         </div>
                         <div class="p-d-flex">

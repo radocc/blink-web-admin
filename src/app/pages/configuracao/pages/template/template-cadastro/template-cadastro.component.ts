@@ -24,6 +24,7 @@ import { VariaveisTipo } from '@radoccmodels/enum/variaveis-tipo-enum';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
+import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -52,6 +53,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   public tiposConteudos: TipoConteudo[];
   public variaveisNoticias = VariaveisTipo.map.noticia;
   public variaveisPrevisoes = VariaveisTipo.map.previsao;
+  public variaveisLoteria = VariaveisTipo.map.loteria;
   private subscriptionTipo: Subscription;
   public campoSelecionado: TemplateCampo;
 
@@ -123,7 +125,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       return;
     }
     this.template.idArquivo = this.arquivo.id;
-
+    this.template.campos = this.camposAdicionais;
     this.service.save(this.template).subscribe(
       (data) => {
         this.page.showSuccessMsg('Template salvo com sucesso!');
@@ -275,7 +277,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     let width = this.arquivo.width / this.proportion;
     // console.log('width: ', width);
     let position = event.source.getFreeDragPosition();
-    console.log('drag position', position);
+    // console.log('drag position', position);
     // let childPos = content.offset();
     // console.log('childPos: ', childPos);
     // position = {x: childPos.top - position.x, y: childPos.left - position.y};
@@ -331,12 +333,19 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   public changeVariavel(event, campo: TemplateCampo) {
     if (campo.preenchimento) {
-      if (this.template.idTipoConteudo == 3) {
+      if (this.template.idTipoConteudo == ETipoConteudo.Noticias) {
         campo.nome = VariaveisTipo.getNome('noticia', campo.variavel);
-      } else if (this.template.idTipoConteudo == 5) {
+      } else if (this.template.idTipoConteudo == ETipoConteudo.PrevisaoTempo) {
         campo.nome = VariaveisTipo.getNome('previsao', campo.variavel);
+      }else if (this.template.idTipoConteudo == ETipoConteudo.Loteria) {
+        campo.nome = VariaveisTipo.getNome('loteria', campo.variavel);
       }
       
     }
+  }
+
+  public excluirCampo(campo){
+    let index = this.camposAdicionais.indexOf(campo);
+    this.camposAdicionais.splice(index,1);
   }
 }
