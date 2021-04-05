@@ -5,7 +5,8 @@
 @import './app/pages/conteudo/panel-conteudo/panel-conteudo.component.scss';
 @import './app/componentes/gridpesquisa/gridpesquisa.component.scss';
 
-@import './app/pages/login/login.scss';
+@import './app/pages/login/panel-login/login.scss';
+@import './app/pages/login/recuperar-senha/recuperar-senha.component.scss';
 @import './app/pages/conteudo/componente/panel-agendamento/panel-agendamento.component.scss';
 @import './app/pages/conteudo/componente/template-imagem/template-imagem.component.scss';
 @import './app/pages/conteudo/componente/template-video/template-video.component.scss';
@@ -107,6 +108,7 @@ PLAYER
 
 @include login-page-layout($theme);
 @include register-action($theme);
+@include recuperar-senha-theme($theme);
 
 @include page-template-cadastro($theme);
 @include page-configuracao-fontenoticia-pesquisa($theme);

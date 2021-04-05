@@ -125,8 +125,12 @@ export class LoginPage implements OnInit {
 
     public esqueciMinhaSenha() {
         let login = this.form.controls['login'].value;
-        if (login != null && login.trim() != '')
-            this.router.navigate(['recuperar-senha', { login: login }]);
+        if (login != null && login.trim() != ''){
+            this.router.navigate(['login/recuperar-senha', { login: login }]);
+        }else{
+            this.router.navigate(['login/recuperar-senha']);
+        }
+            
     }
 }
 

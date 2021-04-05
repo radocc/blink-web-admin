@@ -1,0 +1,24 @@
+<div class="rd-w-100 rd-h-100 p-d-flex p-flex-column p-ai-center">
+    <form class="recuperar-senha" fxLayout="row" fxLayoutAlign="center center">
+        <div class="content">
+            <div class="imagem">
+                <img src="assets/img/logo.png">
+            </div>
+            <p-card>
+                <ng-template pTemplate="header">
+                    <div class="p-p-4">
+                        <div class="p-card-title">{{'SOLICITACAO_ENVIADA' | translate}}</div>
+                    </div>
+                </ng-template>
+                <div>
+                    <div id="content"></div>
+                </div>
+                <ng-template pTemplate="footer">
+                    <div class="p-d-flex p-flex-column p-ai-end">
+                        <button pButton (click)="voltar()" label="{{'VOLTAR' | translate}}"></button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </form>
+</div>

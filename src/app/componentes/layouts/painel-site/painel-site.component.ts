@@ -1,26 +1,33 @@
+import { Empresa } from './../../../models/base/empresa';
+import { EmpresaService } from './../../../services/base/empresa-service';
 import { Usuario } from './../../../models/base/usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TelaService } from '@radoccservices/base/tela-service';
 import { MenuItem } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { DispositivoService } from '@radoccservices/base/dispositivo-service';
 
 @Component({
   selector: 'app-painel-site',
   templateUrl: './painel-site.component.html',
   styleUrls: ['./painel-site.component.scss'],
-  providers: [ TelaService ]
+  providers: [ TelaService, EmpresaService, DispositivoService ]
 })
 export class PainelSiteComponent implements OnInit {
 
   public rotaSelecionada:string = 'conteudo';
   public itensConfiguracao: MenuItem[] = [];
+  public empresas: Empresa[] = [];
+  public empresaSelecionada: any;
+
   public usuario:Usuario;
   public itemsMenuUsuario:MenuItem[] = [    
       
   ];
 
-  constructor(private telaService: TelaService, private router: Router, private translateService:TranslateService) { }
+  constructor(private telaService: TelaService, private router: Router, private translateService:TranslateService,
+   private empresaService: EmpresaService,private dispositivoService: DispositivoService) { }
 
   ngOnInit(): void {
     let jsonUser = localStorage.getItem('usuario');
@@ -60,7 +67,26 @@ export class PainelSiteComponent implements OnInit {
         routerLink:['/login']        
       }
     ]
+    this.pesquisarEmpresa();
+    
   }
+
+   public pesquisarEmpresa(){ 
+     this.empresaService.buscarPorUsuario().subscribe((lista)=>{
+        this.empresas = lista;
+        this.empresaPadrao();
+     })
+   }
+   public empresaPadrao(){
+     this.empresaService.findPorUsuario().subscribe((empresa: Empresa)=>{
+       this.empresaSelecionada = empresa;
+     })
+   }
+   public alterarEmpresa() {
+    this.dispositivoService.alterarEmpresa(this.empresaSelecionada.id).subscribe(()=>{
+      window.location.reload();
+    })
+   }
 
   public navegar(rota:string, url?:string){
     this.rotaSelecionada = rota;
