@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from "@angular/core";
 
 @Component({
     selector: 'app-pagecadastro-conteudo',
@@ -8,11 +8,11 @@ import { Component, Input, OnInit, TemplateRef } from "@angular/core";
 export class PageCadastroConteudoComponent implements OnInit {
 
     
-    @Input("preview") preview: Function;
-    @Input("publicar") publicar: Function;
-    @Input("salvar") salvar: Function;
-    @Input("importar") importar: Function;
-    @Input("novo") novo: Function;
+    @Output("onPreview") public onPreview: EventEmitter<any> = new EventEmitter();
+    @Output("onPublicar") public onPublicar: EventEmitter<any> = new EventEmitter();
+    @Output("onSalvar") public onSalvar: EventEmitter<any> = new EventEmitter();
+    @Output("onImportar") public onImportar: EventEmitter<any> = new EventEmitter();
+    @Output("onNovo") public onNovo: EventEmitter<any> = new EventEmitter();
 
     @Input("botaoNovo") botaoNovo: string;
 
@@ -34,4 +34,23 @@ export class PageCadastroConteudoComponent implements OnInit {
     
     }
 
+    public preview() {
+      this.onPreview.emit();
+    }
+
+    public publicar() {
+      this.onPublicar.emit();
+    }
+
+    public salvar() {
+      this.onSalvar.emit();
+    }
+
+    public importar() {
+      this.onImportar.emit();
+    }
+
+    public novo() {
+      this.onNovo.emit();
+    }
 }

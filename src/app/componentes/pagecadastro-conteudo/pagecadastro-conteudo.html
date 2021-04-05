@@ -1,6 +1,6 @@
 <div class="pagecadastro-conteudo p-d-flex p-flex-column rd-flex rd-h-100">
     <div class="">
-        <button pButton  type="button" label="{{config?.btnNovo|translate}}" (click)="novo"></button>
+        <button pButton  type="button" label="{{config?.btnNovo|translate}}" (click)="novo()"></button>
     </div>
 
     <div class="p-d-flex p-flex-row p-mt-2 rd-flex rd-gap rd-h-100">
@@ -12,7 +12,7 @@
               
         </app-pagecadastro>
         <div class="acoes rd-col rd-gap rd-h-100">
-            <app-register-action (onPreview)="preview" (onPublicar)="publicar" (onSalvar)="salvar" [permiteImportar]="false" [permitePublicar]="false">
+            <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false">
         
             </app-register-action> 
         </div>      

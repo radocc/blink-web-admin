@@ -1,4 +1,4 @@
-<app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_IMAGEM', btnNovo: 'NOVO_CONTEUDO'}" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
+<app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_IMAGEM', btnNovo: 'NOVO_CONTEUDO'}" (onNovo)="novo()" (onPreview)="preview()" (onSalvar)="salvar()" (onPublicar)="publicar()">
     <ng-template #content>
     
             <form [formGroup]="form">
