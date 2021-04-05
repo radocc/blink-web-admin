@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgPrimeModule } from './ngprime/ngprime.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginPage } from '@radoccpages/login/login.page';
+import { LoginPage } from '@radoccpages/login/panel-login/login.page';
 import { ShareTranslateModule } from './modules/share-translate/share-translate.module';
 import { NoopInterceptor } from '@radoccservices/base/interceptor-http';
 import { Router } from '@angular/router';
@@ -34,7 +34,7 @@ export const MY_FORMATS = {
   declarations: [
     AppComponent,
     PainelSiteComponent,
-    LoginPage, 
+    // LoginPage,
   ],
   exports:[
     ShareTranslateModule

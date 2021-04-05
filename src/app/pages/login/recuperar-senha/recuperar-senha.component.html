@@ -1,0 +1,44 @@
+<div class="rd-w-100 rd-h-100 p-d-flex p-flex-column p-ai-center">
+    <form [formGroup]="form" class="recuperar-senha">
+        <div class="content">
+            <div class="imagem">
+                <img src="assets/img/logo.png">
+            </div>
+            <p-card>
+                
+                
+                <ng-template pTemplate="header">
+                    <p-progressBar *ngIf="loading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+                    <div class="p-p-4">
+                        <div class="p-card-title">{{'RECUPERAR_SENHA' | translate}}</div>
+                        <div>{{'MSG_RECUPERAR_SENHA' | translate}}</div>
+                    </div>
+                </ng-template>
+
+                <div class="p-fluid">
+                    <div class="p-field">
+                        <label for="f-login">{{'LOGIN' | translate}}</label>
+                        <input id="f-login" type="text" formControlName="login" required pInputText
+                            [placeholder]="'INFORME_SEU_LOGIN' | translate">
+                        <!-- <small align="start" *ngIf="form.controls['login'].hasError('required')">
+                                {{'CAMPO_OBRIGATORIO' | translate}}
+                            </small> -->
+                        <small id="login-error" *ngIf="form.controls['login'].errors?.required"
+                            class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        <small id="login-error-nao-existe" *ngIf="form.controls['login'].hasError('naoExiste')" fxFlex>
+                            {{ form.controls['login'].getError('naoExiste')}}
+                        </small>
+
+                    </div>
+
+                </div>
+                <ng-template pTemplate="footer">
+                    <div class="p-d-flex p-flex-column p-ai-end">
+                        <button pButton [disabled]="form.invalid || form.disabled" (click)="enviar()"
+                            label="{{'ENVIAR' | translate}}"></button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </form>
+</div>

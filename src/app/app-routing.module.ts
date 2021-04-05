@@ -1,6 +1,6 @@
+import { LoginPage } from '@radoccpages/login/panel-login/login.page';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginPage } from '@radoccpages/login/login.page';
 import { PainelSiteComponent } from './componentes/layouts/painel-site/painel-site.component';
 
 const routes: Routes = [
@@ -9,10 +9,10 @@ const routes: Routes = [
     redirectTo:'login',
     pathMatch:'full'
   },
-  {
-    path:'login',
-    component:LoginPage
-  },
+   {
+     path:'login',
+     loadChildren: () => import('@radoccpages/login/login.module').then(m => m.LoginModule)
+   },
   {
     path:'admin',
     component:PainelSiteComponent,
