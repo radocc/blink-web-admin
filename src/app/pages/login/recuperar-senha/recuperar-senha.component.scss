@@ -1,0 +1,37 @@
+@mixin recuperar-senha-theme($theme) {
+    $primary: map-get($theme, primary);
+    .recuperar-senha{
+        background-color: mat-color($primary);
+        height: 100vh;
+        width: 100vw;
+        padding: 16px;
+        border-radius: 5px;
+        border-width: 2px;
+        box-sizing: border-box;
+        max-width: 600px;
+
+        ng-template{
+            overflow: hidden;
+        }
+
+        .content{
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .loading{
+            position: absolute;
+        }
+
+        .imagem{
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                max-height: 80px;
+                max-width: 100%;
+            }
+        }
+    }
+}
