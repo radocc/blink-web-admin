@@ -6,6 +6,7 @@ import { ConteudoFiltro } from "./conteudofiltro";
 import { ConteudoFonteNoticia } from "./conteudofontenoticia";
 import { ConteudoPrevisao } from "./conteudoprevisao";
 import { Template } from "./template";
+import { ConteudoCampo } from './conteudocampo';
 
 export class Conteudo extends BaseEntityImpl {
     
@@ -21,6 +22,7 @@ export class Conteudo extends BaseEntityImpl {
     public filtro:ConteudoFiltro;
     public previsaoTempo:ConteudoPrevisao;
     public conteudoLoteria:ConteudoLoteria;
+    public campos:ConteudoCampo[] = [];
     
     
 }
