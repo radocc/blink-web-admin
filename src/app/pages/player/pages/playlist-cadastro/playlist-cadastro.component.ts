@@ -143,6 +143,7 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
       this.listaConteudo = lista;
     }); 
   }
+  
   public excluirConteudo(itemConteudo:PlaylistConteudo){
     let index = this.listaConteudo.indexOf(itemConteudo);
     this.listaConteudo.splice(index,1);
