@@ -99,10 +99,10 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     this.subscriptionTipo.unsubscribe();
   }
 
-  public novo() {
-    
+  public novo() {    
     this.clearForm();
     this.template.idTipoConteudo = parseInt(localStorage.getItem('configTipoConteudo'));
+    this.inputFile.clear();
   }
 
   //** Seta a altura para manter a proporção 16:9 */
@@ -130,7 +130,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       (data) => {
         this.page.showSuccessMsg('Template salvo com sucesso!');
         this.eventService.publishEvent(Events.atualizarLista);
-        this.clearForm();
+        this.novo();
       },
       (err) => {
         console.error(err);

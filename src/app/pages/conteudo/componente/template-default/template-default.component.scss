@@ -1,9 +1,9 @@
-@mixin template-previsaotempo-conteudo($videotheme) {
+@mixin template-default-conteudo($videotheme) {
  
-    app-template-previsaotempo-conteudo {
+    app-template-default-conteudo {
         height: 100%;
-        display: flex;
-        flex:1;
+        display: flex; 
+
         .label-field{
             line-height: 20px;
             white-space: nowrap;
@@ -12,13 +12,13 @@
         }
         .input-tempo{
             width: 70px;
-        } 
+        }
+            
         p-autocomplete {
             display: flex;
             span {
                 flex: 1;
             };
-        } 
-        
+        }  
     }
 }

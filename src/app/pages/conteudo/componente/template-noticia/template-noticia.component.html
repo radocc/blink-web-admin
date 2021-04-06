@@ -15,6 +15,17 @@
                     <label for="titulo" translate>FILTROS</label>
                     <input id="titulo" required formControlName="filtroAssuntos" type="text" pInputText>                     
                 </div>
+                <div class="tempo rd-row rd-gap">
+                    <label class="label-field">Tempo de exibição</label>
+                    <span class=" rd-row">                
+                        <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
+                        <label class="label-field" for="minutos" translate>&nbsp; MINUTOS</label>
+                    </span>
+                    <span class=" rd-row">                
+                        <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
+                        <label class="label-field" for="segundos" translate>&nbsp;SEGUNDOS</label>
+                    </span>
+                </div>
             </div> 
         </form>     
     </ng-template>
