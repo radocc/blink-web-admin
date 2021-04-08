@@ -13,6 +13,10 @@ const routes: Routes = [
      path:'login',
      loadChildren: () => import('@radoccpages/login/login.module').then(m => m.LoginModule)
    },
+   {
+    path:'redefinir-senha/:token',
+    loadChildren: () => import('@radoccpages/redefinir/redefinir-senha.module').then(m => m.RedefinirModule)
+  },
   {
     path:'admin',
     component:PainelSiteComponent,

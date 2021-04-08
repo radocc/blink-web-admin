@@ -5,8 +5,6 @@
                 <img src="assets/img/logo.png">
             </div>
             <p-card>
-                
-                
                 <ng-template pTemplate="header">
                     <p-progressBar *ngIf="loading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
                     <div class="p-p-4">
@@ -20,12 +18,9 @@
                         <label for="f-login">{{'LOGIN' | translate}}</label>
                         <input id="f-login" type="text" formControlName="login" required pInputText
                             [placeholder]="'INFORME_SEU_LOGIN' | translate">
-                        <!-- <small align="start" *ngIf="form.controls['login'].hasError('required')">
-                                {{'CAMPO_OBRIGATORIO' | translate}}
-                            </small> -->
-                        <small id="login-error" *ngIf="form.controls['login'].errors?.required"
+                        <small id="f-login" *ngIf="form.controls['login'].errors?.required"
                             class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                        <small id="login-error-nao-existe" *ngIf="form.controls['login'].hasError('naoExiste')" fxFlex>
+                        <small id="login-error-nao-existe" *ngIf="form.controls['login'].hasError('naoExiste')" class="p-error">
                             {{ form.controls['login'].getError('naoExiste')}}
                         </small>
 

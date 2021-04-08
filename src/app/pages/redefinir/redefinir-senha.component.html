@@ -1,0 +1,58 @@
+<div class="rd-w-100 rd-h-100 p-d-flex p-flex-column p-ai-center">
+    <form [formGroup]="form" class="recuperar-senha">
+        <div class="content">
+            <div class="imagem">
+                <img src="assets/img/logo.png">
+            </div>
+            <p-card>
+                <ng-template pTemplate="header">
+                    <p-progressBar *ngIf="loading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+                    <div class="p-p-4">
+                        <div class="p-card-title">{{'REDEFINIR_MINHA_SENHA' | translate}}</div>
+                        <div>{{'MSG_REDEFINIR_SENHA' | translate}}</div>
+                    </div>
+                </ng-template>
+
+                <div class="p-fluid">
+                    <div class="p-field">
+                        <label for="f-senha">{{'NOVA_SENHA' | translate}}</label>
+                        <input id="f-senha" type="password" formControlName="senha" (blur)="validarSenha()" required
+                            pInputText [placeholder]="'DIGITE_SUA_SENHA' | translate">
+                        <small id="f-senha" *ngIf="form.controls['senha'].errors?.required"
+                            class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+
+                    </div>
+                </div>
+
+                <div class="p-fluid">
+                    <div class="p-field">
+                        <label>{{'CONFIRME_SUA_SENHA' | translate}}</label>
+                        <input type="password" required formControlName="confirme" (blur)="validarSenha()" required
+                            pInputText [placeholder]="'DIGITE_SUA_SENHA_NOVAMENTE' | translate">
+                        <small *ngIf="form.controls['confirme'].invalid" class="p-error">{{'SENHAS_NAO_CONFEREM' |
+                            translate}}</small>
+                    </div>
+                </div>
+                <div class="token-expirado">
+                    <small *ngIf="form.controls['token'].hasError('expirado')" class="p-error">
+                        {{ 'O_TOKEN_EXPIROU_O_PRAZO_CONCEDIDO_REALIZE_O_PROCESSO_DE_REDEFINIR_A_SENHA_NOVAMENTE'
+                        |translate}}
+                    </small>
+                </div>
+                <div class="token-expirado">
+                    <small *ngIf="form.controls['token'].hasError('message')" class="p-error">
+                        {{ form.controls['token'].getError('message') |translate}}
+                    </small>
+                </div>
+                <ng-template pTemplate="footer">
+                    <div class="p-card-title p-d-flex p-flex-row">
+                        <button pButton [disabled]="form.valid" class="p-mr-2" (click)="novaSolicitacao()" label="{{'NOVA_SOLICITACAO' |
+                            translate}}"></button>
+                        <button pButton [disabled]="form.invalid" class="p-mr-2" (click)="redefinir()" label="{{'REDEFINIR_SENHA' |
+                            translate}}"></button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </form>
+</div>

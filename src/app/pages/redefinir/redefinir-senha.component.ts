@@ -35,7 +35,7 @@ export class RedefinirSenhaComponent implements OnInit {
                 this.redefinirService.validar(token).subscribe(value =>{
                     if (value != null){
                         this.token = value.token;
-                        this.usuario = value.nome;  
+                        this.usuario = value.nome;
                     }else {
                         this.form.get("token").setErrors({expirado:true})
                     }
@@ -65,9 +65,12 @@ export class RedefinirSenhaComponent implements OnInit {
             token:this.token,
             senha:this.form.get('senha').value
         };
+        this.loading = true;
         this.redefinirService.redefinir(obj).subscribe(value=>{
+            this.loading = false;
             this.rota.navigate(['login']);
         },error =>{
+            this.loading = false;
             this.tratarErro(error);
         });
     }
@@ -84,7 +87,6 @@ export class RedefinirSenhaComponent implements OnInit {
             }
         }
     }
-
     public novaSolicitacao(){
         this.rota.navigate(['login/recuperar-senha']);
     }
