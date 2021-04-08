@@ -33,7 +33,9 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
 export class TemplateNoticiaComponent extends CadConteudoComponent implements OnInit {
 
   public form:FormGroup = new FormGroup({
-    filtroAssuntos:new FormControl('')
+    filtroAssuntos:new FormControl(''),
+    minutos:new FormControl(0),
+    segundos:new FormControl(30)
   }) 
   
   public conteudoNoticias:ConteudoFonteNoticia[] = [];
@@ -56,13 +58,14 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
               this.filtro = conteudo.filtro;
               this.form.controls['filtroAssuntos'].setValue(conteudo.filtro.assuntos);
             }
+            let min = (conteudo.tempoExibicao / 60).toFixed(0);
+            let segundos = (conteudo.tempoExibicao % 60);
+            this.form.controls['minutos'].setValue(min);
+            this.form.controls['segundos'].setValue(segundos);
             if (conteudo.fontes != null){
               this.conteudoNoticias = conteudo.fontes;
             }
-          })
-          // this.conteudoFonteService.prepare(param['id']).subscribe((lista)=>{
-          //   this.conteudoNoticias = lista;
-          // });
+          }) 
       }else {
         this.conteudoFonteService.prepare(0).subscribe((lista)=>{
           this.conteudoNoticias = lista;
@@ -73,7 +76,7 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
   }
 
   public novo(){
-    this.form.reset();
+    this.form.reset({minutos:0,segundos:15});
     this.conteudo = null;
   }
   
@@ -101,7 +104,9 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
     }
     this.conteudo.titulo = titulos.join(',');
     this.conteudo.idTipoConteudo = ETipoConteudo.Noticias;
-    this.conteudo.tempoExibicao = 0;
+    let segundos = this.form.controls['segundos'].value;
+    segundos += (this.form.controls['minutos'].value * 60);
+    this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = null;
     this.conteudo.idArquivo = null;
     this.conteudo.fontes = fontes;

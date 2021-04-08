@@ -17,6 +17,7 @@ import { TemplatePrevisaoTempoComponent } from './componente/template-previsaote
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
 import { PageCadastroConteudoModule } from '@radocccomponentes/pagecadastro-conteudo/pagecadastro-conteudo.module';
+import { TemplateDefaultComponent } from './componente/template-default/template-default.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,14 @@ const routes: Routes = [
         path:'previsaotempo/:id',
         component:TemplatePrevisaoTempoComponent
       },
+      {
+        path:'default/:tipo',
+        component:TemplateDefaultComponent
+      },
+      {
+        path:'default/:tipo/:id',
+        component:TemplateDefaultComponent
+      },
     ]
   }
   
@@ -107,6 +116,7 @@ export const MY_FORMATS = {
     TemplateCotacaoComponent,
     TemplateLoteriaComponent,
     TemplatePrevisaoTempoComponent,
+    TemplateDefaultComponent
   ],
   imports: [
     CommonModule,

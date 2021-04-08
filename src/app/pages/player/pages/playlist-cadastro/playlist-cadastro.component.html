@@ -17,7 +17,7 @@
                         <div class="rd-col rd-flex">
                             <label for="dataFim" translate>Término as</label>
                             <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataFim"  appendTo="body"  inputId="dataFim"></p-calendar>
-                            <small id="dataFim" *ngIf="form.controls['dataFim'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                            <small id="dataFim-error" *ngIf="form.controls['dataFim'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>
                         <div class="rd-col rd-flex">
                             <label for="status" translate>STATUS</label>

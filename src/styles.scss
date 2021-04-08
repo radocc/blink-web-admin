@@ -14,6 +14,7 @@
 @import './app/pages/conteudo/componente/template-cotacao/template-cotacao.component.scss';
 @import './app/pages/conteudo/componente/template-loteria/template-loteria.component.scss';
 @import './app/pages/conteudo/componente/template-previsaotempo/template-previsaotempo.component.scss';
+@import './app/pages/conteudo/componente/template-default/template-default.component.scss';
 
 @import './app/pages/publicacao/panel-publicacao/panel-publicacao.component.scss';
 @import './app/pages/publicacao/componente/dialog-playlist/playlist-dialog.component.scss';
@@ -83,6 +84,7 @@ $theme:(
 @include template-cotacao-conteudo($theme);
 @include template-loteria-conteudo($theme);
 @include template-previsaotempo-conteudo($theme);
+@include template-default-conteudo($theme);
 /**
 PUBLICACAÇÂO
 */

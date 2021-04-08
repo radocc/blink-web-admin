@@ -13,4 +13,6 @@ export enum ETipoConteudo{
     Agenda = 11,
     Turismo = 12
 
+    
+
 }

@@ -12,6 +12,15 @@
                 display: flex;
                 flex: 1;
                 flex-direction: column;
+                .label-field{
+                    line-height: 20px;
+                    white-space: nowrap;
+                    margin: 8px;
+                    margin-left: 0px;
+                }
+                .input-tempo{
+                    width: 70px;
+                } 
             }
             .grid-fonte{
                 display: grid;

@@ -88,22 +88,22 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
         url += 'loteria';
         break;
       case ETipoConteudo.TemplatesCorporativos:
-        url += 'template-corporativo';
+        url += 'default/'+ETipoConteudo.TemplatesCorporativos;
         break;
       case ETipoConteudo.Curiosidades:
-        url += 'curiosidade';
+        url += 'default/'+ETipoConteudo.Curiosidades;
         break;
       case ETipoConteudo.Saude:
-        url += 'saude';
+        url += 'default/'+ETipoConteudo.Saude;
         break;
       case ETipoConteudo.Receitas:
-        url += 'receita';
+        url += 'default/'+ETipoConteudo.Receitas;
         break;
       case ETipoConteudo.Agenda:
-        url += 'agenda';
+        url += 'default/'+ETipoConteudo.Agenda;
         break;
       case ETipoConteudo.Turismo:
-        url += 'turismo';
+        url += 'default/'+ETipoConteudo.Turismo;
         break;
     }
     return url;

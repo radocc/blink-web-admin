@@ -118,7 +118,7 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
   }
 
   public novo(){
-    this.form.reset();
+    this.form.reset({minutos:0,segundos:15});
     this.arquivo = null;
     this.panelAgendamento.reset();
     this.router.navigate(['admin/conteudo/panel/imagem']);

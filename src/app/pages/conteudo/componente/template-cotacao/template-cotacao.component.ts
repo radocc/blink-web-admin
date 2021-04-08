@@ -122,7 +122,7 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
   }  
   
   public novo(){
-    this.form.reset();
+    this.form.reset({minutos:0,segundos:15});
     this.conteudo = null;
   }
 
