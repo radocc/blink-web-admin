@@ -7,7 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShareTranslateModule } from '@radoccmodules/share-translate/share-translate.module';
-import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
 const routes: Routes = [
   {
@@ -27,10 +26,6 @@ const routes: Routes = [
     path: 'recuperar-senha/:login',
     component: RecuperarSenhaComponent
   },
-  {
-    path: 'redefinir-senha/:token',
-    component: RedefinirSenhaComponent
-  }
 ];
 
 @NgModule({
@@ -38,7 +33,6 @@ const routes: Routes = [
     LoginPage,
     RecuperacaoSenhaEnviadaComponent,
     RecuperarSenhaComponent,
-    RedefinirSenhaComponent
   ],
   imports: [
     CommonModule,
