@@ -5,14 +5,20 @@
                 <form [formGroup]="form">
                     <div class="rd-flex rd-col ">
                         <div class="p-field rd-col">
-                            <label for="nome" translate>NOME</label>
-                            <input id="nome" required formControlName="nome" type="text" pInputText>                     
-                            <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                            <label for="titulo" translate>TITULO</label>
+                            <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
+                            <small id="titulo-error" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
-                        <!-- <div class="p-field rd-col">
-                            <label for="url" translate>URL</label>
-                            <input id="url" required formControlName="url" type="text" pInputText>                     
-                        </div>  -->
+                        <div class="p-field rd-col">
+                            <label for="link" translate>LINK</label>
+                            <input id="link" required formControlName="link" type="text" pInputText>                     
+                            <small id="link-error" *ngIf="form.controls['link'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div> 
+                        <div class="p-field rd-col">
+                            <label for="descricao" translate>DESCRICAO</label>
+                            <textarea id="descricao" [rows]="25" required formControlName="descricao" type="text" pInputTextarea></textarea>                     
+                            <small id="descricao-error" *ngIf="form.controls['descricao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div>                         
                     </div> 
                 </form>      
             </div>
