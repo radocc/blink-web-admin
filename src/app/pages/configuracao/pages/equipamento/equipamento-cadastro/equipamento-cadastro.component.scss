@@ -1,7 +1,7 @@
 @mixin page-configuracao-equipamento-cadastro($videotheme) {
  
     app-equipamento-cadastro {
-
+        height: 100%;
         .page-equipamento-cadastro{
             display: flex;
             flex: auto;

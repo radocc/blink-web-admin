@@ -59,11 +59,11 @@
 
 
 $theme:(
-    primary:#ece2e259,
+    primary: #007bff,
     secondary:#f5ededef,
-    dark:#dd823859,
-    light:#2c965859,
-    white:white,
+    dark:#f7862b59,
+    light:#cac62af7 ,
+    white:#ffffff,
     black:black
 );
 
@@ -222,4 +222,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ::-webkit-scrollbar-thumb {
     background: #d9d9d9;
     border-radius: 10px;
+}
+.mat-typography{
+    background: url('/assets/images/fundo-site.jpeg');
+    background-size: cover;
 }

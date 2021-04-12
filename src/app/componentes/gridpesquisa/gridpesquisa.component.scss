@@ -10,13 +10,22 @@
         .gridpesquisa{
             display: flex;
             flex-direction: column;
-            flex: auto;
-            .p-card{
+            flex: auto;  
+            height: 100%;
+            .p-card {
+                // display: flex;
+                // flex-direction: column;
                 height: 100%;
+                .p-card-body,.p-card-content {
+                    height: 100%;
+                    padding-top: 0px;
+                    overflow: hidden;
+                    .p-table {
+                        height: 100%;
+                    }
+                }
             }
-            .grid-container{
-                flex: 1;
-            }
+
         }
         .p-toolbar{
             flex: 1;
@@ -40,17 +49,17 @@
 
 
 
-:host ::ng-deep .p-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+// :host ::ng-deep .p-card {
+//     display: flex;
+//     flex-direction: column;
+//     height: 100%;
+// }
 
-:host ::ng-deep .p-card .p-card-body {
-    height: 100%;
-    padding-top: 0px;
-}
+// :host ::ng-deep .p-card .p-card-body {
+//     height: 100%;
+//     padding-top: 0px;
+// }
 
-:host ::ng-deep .p-card .p-card-content {
-    height: 100%;
-}
+// :host ::ng-deep .p-card .p-card-content {
+//     height: 100%;
+// }

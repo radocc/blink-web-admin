@@ -1,13 +1,13 @@
 <div class="app-panel-conteudo rd-flex-auto p-flex-row p-mt-4 p-ml-lg-4 p-mr-lg-4 rd-w-100"> 
     <!-- <div class="rd-row rd-flex rd-gap"> -->
-        <div class="rd-flex-auto p-mb-2 p-col-6">
+        <div class="rd-flex-auto p-mb-2 p-col-6 pesquisa">
             <div class="p-d-flex p-jc-end ">
                 <span class="p-float-label field-busca">
                     <input id="float-input" type="text" pInputText> 
                     <label for="float-input" >{{'BUSCAR'|translate}}</label>
                 </span>
             </div>
-            <div class="p-d-flex p-flex-row pesquisa ">
+            <div class="p-d-flex p-flex-row pesquisa-content ">
                 <div class="div-menu p-col-3 p-d-flex p-flex-column">
                     <span class="p-float-label">
                         <input id="pesquisaTipo" class="rd-w-100" [(ngModel)]="pesquisaTipo" (ngModelChange)="pesquisarTipo($event)" type="text" pInputText> 
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>        
-        <div class="rd-flex-auto p-mb-2 p-col-6">
+        <div class="rd-flex-auto p-col-6">
             <router-outlet>
 
             </router-outlet>                      

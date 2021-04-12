@@ -43,8 +43,8 @@
                 <!-- <div class="rd-h-100 rd-w-100">
 
                 </div> -->
-                <p-table #pTable [hidden]="true" selectionMode="single" [(selection)]="selection" [value]="dataSource" 
-                    [scrollable]="true" [scrollHeight]="'flex'" [style]="{width:'100%'}" >
+                <p-table #pTable  selectionMode="single" [(selection)]="selection" [value]="dataSource" 
+                    [scrollable]="true" [scrollHeight]="'flex'" [virtualScroll]="true" [style]="{width:'100%'}" >
                     <ng-template pTemplate="header">
                         <tr >
                             <th *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + '%'}">

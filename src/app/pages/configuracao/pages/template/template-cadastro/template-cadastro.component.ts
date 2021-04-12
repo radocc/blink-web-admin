@@ -140,12 +140,12 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   }
 
   private prepararCampos() {
-    this.camposAdicionais.forEach((campo) => {
-      if (campo.tipo == 4) {
-        campo.width = campo.width * this.proportion;
-        campo.height = campo.height * this.proportion;
-      }
-    });
+    // this.camposAdicionais.forEach((campo) => {
+    //   if (campo.tipo == 4) {
+    //     campo.width = campo.width * this.proportion;
+    //     campo.height = campo.height * this.proportion;
+    //   }
+    // });
 
     this.template.campos = this.camposAdicionais;
   }
@@ -269,7 +269,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   }
 
   public onResize(event) {
-    // console.log('resize');
+    console.log('resize', event);
   }
 
   public movendoCampo(event: CdkDragMove, campo: TemplateCampo) {
@@ -333,6 +333,10 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   public changeVariavel(event, campo: TemplateCampo) {
     if (campo.preenchimento) {
+      if (campo.variavel == 'variavelCustomizado'){
+        campo.nome = '';
+        return;
+      }
       if (this.template.idTipoConteudo == ETipoConteudo.Noticias) {
         campo.nome = VariaveisTipo.getNome('noticia', campo.variavel);
       } else if (this.template.idTipoConteudo == ETipoConteudo.PrevisaoTempo) {

@@ -2,9 +2,12 @@
 @mixin app-panel-publicacao($theme) {
     
     app-panel-publicacao{
-        margin: 50px;
         display: flex;
-        flex: 1;
+        height: 100%;
+        .app-panel-publicacao{
+            margin-bottom: 3rem;
+        }
+        
         .field-busca{
             width: 300px;
             input {
@@ -12,16 +15,21 @@
             }
         }
 
-        .pesquisa{
-            border-radius: 5px;
-            background: white;
-            padding: 8px;
-            margin-top: 8px;
+        .pesquisa{            
             height: 100%;
+            overflow: hidden;
+            .pesquisa-content{
+                border-radius: 5px;
+                background: white;
+                padding: 8px;
+                margin-top: 8px;
+                overflow: hidden;
+                height: 100%;
+            }
 
             
             .div-menu{
-                width: 250px;
+                min-width: 200px;
                 background: black;
                 border-radius: 5px;
                 height: 100%;
@@ -42,7 +50,8 @@
             }
             .pesquisa-list{
                 margin: 8px;
-
+                height: 100%;
+                overflow: auto;
                 .div-filtro{
                     text-align: end;
                 }
@@ -54,19 +63,27 @@
         .cadastro{  
             gap: 8px;
             height: 100%;
-            width: 100%;
 
             .p-autocomplete{
                 width: 100%;
             }
+            .div-tipo-grupo{
+                .p-selectbutton{
+                    margin-top: 0.5rem;
+                }
+            }
             .div-edicao{
                 border-radius: 5px;
-                border-style: solid;
-                border-width: 1px;
-                border-color: black;
-                padding: 8px;
+                background: white;
+                padding: 8px; 
+                overflow: hidden;
+                height: 100%;
                 .div-resumo{
-                    margin-bottom: 8px;
+                    
+                   
+                }
+                p-orderList{
+                    height: 100%;
                 }
                 .p-orderlist{
                     flex: 1;
@@ -89,21 +106,7 @@
             }
             .p-dropdown{
                 width: 100%;
-            }
-            // .div-intercalacao{
-
-            //     .intercalacao{
-            //         .p-selectbutton{
-            //             display: flex;
-            //             flex-direction: column;
-            //             gap:2px;
-    
-            //             .p-button{
-            //                 border-radius: 5px;
-            //             }
-            //         }
-            //     }
-            // }
+            } 
         }
     }
 }

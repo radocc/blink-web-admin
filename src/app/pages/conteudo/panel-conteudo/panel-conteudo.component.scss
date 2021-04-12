@@ -6,7 +6,7 @@
         height: 100%;
 
         .app-panel-conteudo {
-            margin-bottom: 4.5rem;
+            margin-bottom: 3rem;
         }
 
         .field-busca{
@@ -17,12 +17,17 @@
         }
 
         .pesquisa{
-            border-radius: 5px;
-            background: white;
-            padding: 8px;
-            margin-top: 8px;
+            
             height: 100%;
-
+            overflow: hidden;
+            .pesquisa-content{
+                border-radius: 5px;
+                background: white;
+                padding: 8px;
+                margin-top: 8px;
+                overflow: hidden;
+                height: 100%;
+            }
             .lista-opcoes {
                 overflow-y: scroll;
                 height: 100%;
@@ -51,7 +56,7 @@
             .pesquisa-list{
                 margin: 8px;
                 height: 100%;
-
+                overflow: auto;
                 .div-filtro{
                     text-align: end;
                 }

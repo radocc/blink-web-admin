@@ -1,14 +1,13 @@
 @mixin painel-site-component($theme) {
  
     app-painel-site{
-        background: map-get($theme,secondary);
         position: absolute;
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
         display: flex;
-        height: 100%;
+        // height: 100%;
         
         .painel-site {
             margin-bottom: 1.5rem;
@@ -32,6 +31,7 @@
             .marca{
                 margin-left: 150px;
                 margin: 16px;
+                font-size: 18px;
             }
         }
 
@@ -41,6 +41,13 @@
             display: flex;
             flex-direction: row;
             padding-right: 25px;
+            .p-dropdown {
+                background: none!important; 
+                border: none !important;
+            }
+            .p-inputtext{
+                font-size: 1.5rem !important;
+            }
 
             .item-menu {
                 margin-left: 8px;
@@ -51,11 +58,16 @@
                 border-bottom-left-radius: 12px;
                 min-width: 70px;
                 text-align: center;
-                font-weight: 600;
+                font-weight: normal;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+                color: map-get($theme, black);
+                text-transform: uppercase;
                 cursor: pointer;
             }
             .item-menu.selected {
                 background: map-get($theme , light);
+                color: map-get($theme, white);
+
             }
         }
         
