@@ -20,10 +20,13 @@
                             <textarea id="texto" required formControlName="texto" rows="15" pInputTextarea class="p-inputtextarea"></textarea>
                             <small id="texto-error" *ngIf="form.controls['texto'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
-                        <div class="p-field p-col-12 p-lg-12">
+                        <div class="p-d-flex p-col-12 p-lg-12">
                             <p-fileUpload #fileUpload mode="basic" cancelLabel="{{'CANCELAR'|translate}}" [auto]="true" chooseLabel="{{'ESCOLHER'|translate}}" uploadLabel="{{'CARREGAR'|translate}}" 
                                 name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" ></p-fileUpload>
                             <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
+                        </div>
+                        <div class="imagem" *ngIf="arquivo">
+                            <img [src]="arquivo?.url" style="width: 100%; display: block;">
                         </div>
                     </div> 
                 </form>      

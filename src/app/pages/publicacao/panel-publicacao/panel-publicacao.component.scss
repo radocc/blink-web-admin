@@ -48,8 +48,7 @@
                     font-size: 18;
                 }
             }
-            .pesquisa-list{
-                margin: 8px;
+            .pesquisa-list{ 
                 height: 100%;
                 overflow: auto;
                 .div-filtro{
@@ -63,7 +62,7 @@
         .cadastro{  
             gap: 8px;
             height: 100%;
-
+            overflow: hidden;
             .p-autocomplete{
                 width: 100%;
             }
@@ -86,10 +85,11 @@
                     height: 100%;
                 }
                 .p-orderlist{
-                    flex: 1;
+                    height: 100%;
                     .p-orderlist-list-container{
                         display: flex;
                         flex-direction: column;
+                        height: 100%;
                         .order-index{
                             margin-right: 8px !important;
                             top: 0px;

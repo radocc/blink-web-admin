@@ -217,12 +217,13 @@ export class PanelPublicacaoComponent implements OnInit {
       this.msgService.add({
         severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'
       })
+      this.timerClose();
       return ;
     }
     if (this.playlist == null){
       const dialog = this.dialogService.open(PlaylistDialogComponent, {
         data:this.playlist,
-        width: '50%',
+        // width: '50%',
         modal:true,
         showHeader:true,
         closable:true,
@@ -239,6 +240,7 @@ export class PanelPublicacaoComponent implements OnInit {
             this.msgService.add({
               severity:'success', summary:'Salvo', detail:'Salvo com sucesso'
             })
+            this.timerClose();
           })
         }
       }); 
@@ -251,6 +253,7 @@ export class PanelPublicacaoComponent implements OnInit {
       this.msgService.add({
         severity:'error', summary:'Campos inválidos', detail:'Verifique os campos com asterisco vermelho'
       })
+      this.timerClose();
       return;
     }
     if (this.publicacao == null){
@@ -281,6 +284,7 @@ export class PanelPublicacaoComponent implements OnInit {
       this.msgService.add({
         severity:'success', summary:'Publicado', detail:'Publicado com sucesso'
       })
+      this.timerClose();
     });
   }
 
@@ -307,6 +311,7 @@ export class PanelPublicacaoComponent implements OnInit {
 
   dragStart(conteudo: ConteudoResult) {
     this.conteudo = conteudo;
+    console.log('DRAG START', conteudo);
   }
 
   drop(event) {
@@ -326,6 +331,11 @@ export class PanelPublicacaoComponent implements OnInit {
       this.conteudo = null;
   } 
 
+  public timerClose() {
+    setTimeout(() => {
+      this.msgService.clear();
+    }, 3000);
+  }
 
 
 }

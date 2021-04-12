@@ -66,6 +66,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
       if (this.getGridPesquisa) {
           this.getGridPesquisa(this);
       }
+      this.setGridHeight();
   }
 
   ngAfterViewInit(): void {
@@ -94,7 +95,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
   private setGridHeight() {
     //** Seta o tamanho fixo para a grid */
-    this.table.el.nativeElement.style.height = this.divTable.nativeElement.offsetHeight + 'px';
+    this.table.el.nativeElement.style.height = (this.divTable.nativeElement.offsetHeight - 70) + 'px';
     this.table.el.nativeElement.style.display = 'flex';
   }
 
