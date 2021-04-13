@@ -1,0 +1,357 @@
+<app-page [title]="'CONFIGURACAO_PARA_NOVO_AMBIENTE'">
+    <div page-content fxFlex fxLayout="column">
+
+        <!-- <div id="ambiente-novo" class="page-cadastro slide" fxFlexFill layout="column"> -->
+        <form [formGroup]="form">
+            <!-- <mat-card class="conteudo">
+            <mat-card-header>
+                <mat-card-title translate>CONFIGURACAO_PARA_NOVO_AMBIENTE</mat-card-title>
+            </mat-card-header>
+            <mat-card-content> -->
+            <mat-tab-group fxFlex [dynamicHeight]="true">
+                <mat-tab label="{{'EMPRESA' | translate}}">
+                    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+                        <div *ngIf="empresa.id" fxFlex="10">
+                            <mat-form-field style="width: 50%">
+                                <input matInput placeholder="{{'CODIGO'|translate}}" formControlName="id"
+                                    disabled="true" tabindex="-1" type="text" required="false">
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex>
+                            <mat-form-field style="width: 100%">
+                                <input matInput type="text" placeholder="{{'RAZAO_SOCIAL' |translate}}"
+                                    name="razaoSocial" formControlName="razaoSocial" required />
+                                <mat-hint align="start"
+                                    *ngIf="form.controls['razaoSocial'].hasError('required') && form.controls['razaoSocial'].touched"
+                                    class="mat-text-warn" translate>FAVOR_INFORMAR_A_RAZAO_SOCIAL_</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex>
+                            <mat-form-field class="mat-block" fxFlex="100%">
+                                <input matInput type="text" placeholder="{{'FANTASIA' |translate}}"
+                                    formControlName="fantasiaEmpresa" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+                        <div fxFlex="50" fxLayout="row" fxLayoutGap="16px">
+                            <div fxFlex="60">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="text" mask="00.000.000/0000-00"
+                                        placeholder="{{'CNPJ' |translate}}" name="cnpjEmpresa"
+                                        formControlName="cnpjEmpresa" required validaCpfCnpj
+                                        (blur)="blurFocusCNPJEmpresa()" />
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['cnpjEmpresa'].hasError('required') && form.controls['cnpjEmpresa'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_O_CNPJ_</mat-hint>
+                                    <mat-error align="end" *ngIf="form.controls['cnpjEmpresa'].hasError('cnpj')" fxFlex
+                                        translate>
+                                        CNPJ_INVALIDO
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="40">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="text" mask="00000-000" placeholder="{{'CEP' |translate}}"
+                                        name="cep" formControlName="cep" required />
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['cep'].hasError('required') && form.controls['cep'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_O_CEP_</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxFlex="50" fxLayout="row" fxLayoutGap="16px">
+                            <div fxLayout="column" fxFlex="40">
+                                <mat-form-field>
+                                    <input matInput type="text" required placeholder="{{'ESTADO' | translate}}"
+                                        [matAutocomplete]="autoEstado" formControlName="estado" name="estado" />
+                                    <mat-error
+                                        *ngIf="form.controls['estado'].hasError('required') && form.controls['estado'].touched">{{'INFORME'
+                                            | translate}}</mat-error>
+                                </mat-form-field>
+                                <mat-autocomplete [displayWith]="displayFn" #autoEstado="matAutocomplete">
+                                    <mat-option *ngFor="let estado of listaEstado" [value]="estado">
+                                        {{ estado.nome }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                            <div fxLayout="column" fxFlex="60">
+                                <mat-form-field>
+                                    <input matInput type="text" placeholder="{{'CIDADE' | translate}}" required
+                                        [matAutocomplete]="autoCidade" formControlName="cidade" name="cidade" />
+                                    <mat-error
+                                        *ngIf="form.controls['cidade'].hasError('required') && form.controls['cidade'].touched">{{'INFORME'
+                                            | translate}}</mat-error>
+                                    <mat-autocomplete [displayWith]="displayFn" #autoCidade="matAutocomplete">
+                                        <mat-option *ngFor="let cidade of listaCidade" [value]="cidade">
+                                            {{ cidade.nome }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+                        <div fxFlex="50" fxLayout="row" fxLayoutGap="16px">
+                            <div fxFlex="60">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="text" placeholder="{{'RUA' |translate}}" name="rua"
+                                        formControlName="rua" required />
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['rua'].hasError('required') && form.controls['rua'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_A_RUA_</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <mat-form-field fxFlex="40">
+                                <input matInput type="text" placeholder="{{'NUMERO' |translate}}" name="numero"
+                                    formControlName="numero" />
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="50" fxLayout="row" fxLayoutGap="16px">
+                            <div fxFlex="60">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="text" placeholder="{{'BAIRRO' |translate}}" name="bairro"
+                                        formControlName="bairro" required />
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['bairro'].hasError('required') && form.controls['bairro'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_O_BAIRRO_</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <mat-form-field fxFlex="40">
+                                <input matInput type="text" placeholder="{{'COMPLEMENTO' |translate}}"
+                                    name="complemento" formControlName="complemento" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+                        <div fxFlex="50">
+                            <mat-form-field style="width: 100%">
+                                <input matInput required placeholder="{{'EMAIL' |translate}}" name="emailEmpresa"
+                                    (blur)="blurFocusEmailEmpresa()" formControlName="emailEmpresa" type="text">
+                                <mat-hint align="start"
+                                    *ngIf="form.controls['emailEmpresa'].hasError('required') && form.controls['emailEmpresa'].touched"
+                                    class="mat-text-warn" translate> FAVOR_INFORMAR_O_EMAIL_</mat-hint>
+                                <mat-hint align="start"
+                                    *ngIf="form.controls['emailEmpresa'].errors?.email && form.controls['emailEmpresa'].touched"
+                                    class="mat-text-warn" translate> VOCE_DEVE_INFORMAR_UM_EMAIL_VALIDO_</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="50" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+                            <mat-form-field fxFlex="50">
+                                <input matInput type="text" mask="(00) 0000-0000"
+                                    [specialCharacters]="['(' ,')','-',' ' ]" placeholder="{{'TELEFONE' |translate}}"
+                                    formControlName="telefoneEmpresa" />
+                            </mat-form-field>
+                            <mat-form-field class="mat-block" fxFlex="50">
+                                <input matInput type="text" placeholder="{{'SITE' |translate}}" required name="site"
+                                    formControlName="site" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="{{'USUARIO' | translate}}">
+                    <div fxLayout="column">
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+
+                            <div fxFlex>
+                                <mat-form-field style="width: 100%">
+                                    <input matInput placeholder="{{'NOME' | translate }}"
+                                        formControlName="razaoSocialUsuario" type="text" required="true">
+                                    <mat-hint align="start"
+                                        *ngIf="( form.controls['razaoSocialUsuario'].hasError('required') && form.controls['razaoSocialUsuario'].touched ) "
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_O_NOME</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex>
+                                <mat-form-field style="width: 100%">
+                                    <input matInput required placeholder="{{'EMAIL' | translate }}" name="email"
+                                        (blur)="blurFocusEmailUsuario()" formControlName="email" type="text">
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_O_EMAIL_</mat-hint>
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched"
+                                        class="mat-text-warn" translate>VOCE_DEVE_INFORMAR_UM_EMAIL_VALIDO_</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+                            <div fxFlex="50">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput required placeholder="{{'LOGIN' | translate }}"
+                                        formControlName="login" type="text">
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['login'].hasError('required') && form.controls['login'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_O_LOGIN_ </mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="50" fxLayoutGap="16px">
+                                <mat-form-field fxFlex>
+                                    <input matInput placeholder="{{'SENHA' | translate }}" formControlName="senha"
+                                        type="password" required />
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['senha'].hasError('required') && form.controls['senha'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_A_SENHA_</mat-hint>
+                                </mat-form-field>
+                                <mat-form-field fxFlex>
+                                    <input matInput placeholder="{{'CONFIRME_A_SENHA' | translate }}"
+                                        formControlName="confirmeSenha" type="password">
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['confirmeSenha'].hasError('required') && form.controls['confirmeSenha'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_A_SENHA_</mat-hint>
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['confirmeSenha'].errors?.equalTo && form.controls['confirmeSenha'].touched"
+                                        class="mat-text-warn" translate>SENHAS_NAO_CONFEREM_</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+                            <div fxFlex>
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="text" placeholder="{{'APELIDO' | translate }}"
+                                        name="fantasiaUsuario" formControlName="fantasiaUsuario" />
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex>
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="text" mask="{{mascara}}"
+                                        placeholder="{{'CNPJ_CPF' | translate }}" formControlName="cnpjUsuario" required
+                                        validaCpfCnpj />
+                                    <mat-hint align="start"
+                                        *ngIf="form.controls['cnpjUsuario'].hasError('required') && form.controls['cnpjUsuario'].touched"
+                                        class="mat-text-warn" translate>FAVOR_INFORMAR_O_CNPJ_CPF</mat-hint>
+                                    <mat-error align="start" *ngIf="form.controls['cnpjUsuario'].hasError('cpf')" fxFlex
+                                        translate>
+                                        CPF_INVALIDO
+                                    </mat-error>
+                                    <mat-error align="start" *ngIf="form.controls['cnpjUsuario'].hasError('cnpj')"
+                                        fxFlex translate>
+                                        CNPJ_INVALIDO
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+                            <div fxLayout="row" fxFlex fxLayoutGap="16px">
+                                <mat-form-field fxFlex>
+                                    <input matInput type="text" mask="(00) 0000-0000"
+                                        [specialCharacters]="['(' ,')','-',' ' ]"
+                                        placeholder="{{'TELEFONE' | translate }}" formControlName="telefoneUsuario" />
+                                </mat-form-field>
+                                <mat-form-field fxFlex>
+                                    <input matInput type="text" [specialCharacters]="['(' ,')','-',' ' ]"
+                                        mask="(00) 0 0000-0000" placeholder="{{'CELULAR' | translate }}"
+                                        formControlName="celularUsuario" />
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxFlex>
+                                <mat-form-field fxFlex>
+                                    <mat-select fxFlex="100%" required placeholder="{{'IDIOMA' | translate }}"
+                                        formControlName="idioma">
+                                        <mat-option *ngFor="let idioma of listaIdioma" [value]="idioma">
+                                            {{ idioma.nome }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="{{'LICENCA' | translate}}">
+                    <div fxLayout="column">
+                        <div fxLayout="column">
+                            <div fxLayout="row" fxLayoutGap="16px">
+                                <mat-form-field fxFlex>
+                                    <mat-select (blur)="buscarAdicional();calcularTotal()" fxFlex
+                                        formControlName="plano" placeholder="{{'PLANO' | translate}}" required>
+                                        <mat-option *ngFor="let plan of listaPlano" (click)="selecionarPlano(plan)"
+                                            [value]="plan">{{plan.nome}}
+                                            {{plan.valor | currency:'BRL':'1.2-2'}}</mat-option>
+                                    </mat-select>
+                                    <mat-error class="error-select"
+                                        *ngIf="form.controls['plano'].hasError('required') && form.controls['plano'].touched">{{'CAMPO_OBRIGATORIO'
+                                            | translate}}</mat-error>
+                                </mat-form-field>
+                                <mat-form-field fxFlex>
+                                    <mat-select (blur)="validarData()" fxFlex formControlName="periodo"
+                                        placeholder="{{'PERIODO' | translate}}" required>
+                                        <mat-option *ngFor="let _periodo of listaPeriodo"
+                                            (click)="selecionarPeriodo(_periodo)" [value]="_periodo">
+                                            {{_periodo.descricao}}</mat-option>
+                                    </mat-select>
+                                    <mat-error class="error-select"
+                                        *ngIf="form.controls['periodo'].hasError('required') && form.controls['periodo'].touched">{{'CAMPO_OBRIGATORIO'
+                                            | translate}}</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field fxFlex="25">
+                                    <input matInput autocomplete="off" type="number" formControlName="numeroUsuario"
+                                        (blur)="calcularTotal()" placeholder="{{'NUMERO_USUARIOS' | translate}}"
+                                        required>
+                                    <mat-error>{{'CAMPO_OBRIGATORIO' | translate}}</mat-error>
+                                </mat-form-field>
+
+                            </div>
+
+                            <div fxLayout="row" fxLayoutGap="16px">
+                                <mat-form-field fxFlex>
+                                    <input matInput autocomplete="off" type="number" (blur)="validarDiaVencimento()"
+                                        formControlName="diaVencimento" placeholder="{{'DIA_VENCIMENTO' | translate}}"
+                                        requied>
+                                    <mat-error>{{'CAMPO_OBRIGATORIO' | translate}}</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field fxFlex>
+                                    <input matInput formControlName="dataInicio" [matDatepicker]="startAtPicker"
+                                        placeholder="{{'DATA_INICIO' | translate}}">
+                                    <mat-error>{{'CAMPO_OBRIGATORIO' | translate}}</mat-error>
+                                    <mat-datepicker-toggle matSuffix [for]="startAtPicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #startAtPicker></mat-datepicker>
+                                </mat-form-field>
+
+                                <mat-form-field fxFlex>
+                                    <input matInput autocomplete="off" type="text" formControlName="dataFim"
+                                        placeholder="{{'DATA_FIM' | translate}}">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput autocomplete="off" type="tel" currencyMask
+                                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                        formControlName="valorTotal" [disabled]="true"
+                                        placeholder="{{'VALOR_TOTAL' | translate}}">
+                                    <mat-error>{{'CAMPO_OBRIGATORIO' | translate}}</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <h3>{{'ADICIONAIS' | translate}}</h3>
+                            <mat-divider></mat-divider>
+
+                            <mat-selection-list>
+                                <mat-list-option color="primary" *ngFor="let adicional of listaAdicional;let i = index;"
+                                    (click)="marcarItem(i)" [selected]="adicional.marcado">
+                                    {{adicional.nome}} - {{adicional.valor | currency:'BRL':"symbol":'1.2-2'}}
+                                </mat-list-option>
+                            </mat-selection-list>
+
+                            <div *ngIf="listaAdicional.length == 0" class="msg-list">{{'SEM_ADICIONAIS_DISPONIVEIS'
+                                    |
+                                    translate}}</div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+            <!-- </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" mat-button class="mat-raised mat-primary btn"
+                    (click)="salvar()"><span translate>SALVAR</span></button>
+            </mat-card-actions>
+            </mat-card> -->
+        </form>
+    </div>
+
+    <div page-actions class="page-actions" fxLayoutAlign="end">
+        <button mat-raised-button class="disabled-loading" color="primary" (click)="salvar()" type="submit"><span
+                translate>SALVAR</span></button>
+    </div>
+</app-page>
+
+<!-- </div> -->
