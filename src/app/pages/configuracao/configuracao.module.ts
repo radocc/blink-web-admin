@@ -28,7 +28,7 @@ import { NoticiaPesquisaComponent } from './pages/noticia/noticia-pesquisa/notic
 import { PrevisaoTempoImagemCadastroComponent } from './pages/previsaotempoimagem/previsaotempoimagem-cadastro/previsaotempoimagem-cadastro.component';
 import { PrevisaoTempoImagemPesquisaComponent } from './pages/previsaotempoimagem/previsaotempoimagem-pesquisa/previsaotempoimagem-pesquisa.component';
 import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
-import { AmbienteNovoCadastroComponent } from './pages/ambientenovo/ambientenovo-cadastro/ambientenovo-cadastro-component';
+// import { AmbienteNovoCadastroComponent } from './pages/ambientenovo/ambientenovo-cadastro/ambientenovo-cadastro.component';
 
 const routes: Routes = [
     {
@@ -138,7 +138,7 @@ const routes: Routes = [
         {
           path:'ambientenovo-cadastro',
           outlet: 'cadastro',
-          component: AmbienteNovoCadastroComponent
+          // component: AmbienteNovoCadastroComponent
         }
       ]
     }
@@ -166,7 +166,7 @@ const routes: Routes = [
       NoticiaPesquisaComponent,
       PrevisaoTempoImagemCadastroComponent,
       PrevisaoTempoImagemPesquisaComponent,
-      AmbienteNovoCadastroComponent
+      // AmbienteNovoCadastroComponent
     ],
     imports: [
       CommonModule,
