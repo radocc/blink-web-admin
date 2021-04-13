@@ -1,0 +1,17 @@
+
+@mixin conteudo-display($theme) {
+    
+    app-conteudo-display{   
+        
+       .view{
+            min-width: 600px;
+            min-height: 600px;
+            background-size: cover;
+            height: 600px;
+            width: 100%;
+        }
+        .div-footer{
+            
+        }
+    }
+}

@@ -46,20 +46,25 @@
 @import './app/pages/configuracao/pages/usuario/usuario-cadastro/usuario-cadastro.component.scss';
 @import './app/pages/configuracao/pages/grupousuario/grupousuario-cadastro/grupousuario-cadastro.component.scss';
 @import './app/pages/configuracao/pages/grupousuario/grupousuario-pesquisa/grupousuario-pesquisa.component.scss';
-
+@import './app/pages/configuracao/pages/noticia/noticia-cadastro/noticia-cadastro.component.scss';
+@import './app/pages/configuracao/pages/noticia/noticia-pesquisa/noticia-pesquisa.component.scss';
+@import './app/pages/configuracao/pages/noticia/noticia-cadastro/noticia-cadastro.component.scss';
+@import './app/pages/configuracao/pages/previsaotempoimagem/previsaotempoimagem-cadastro/previsaotempoimagem-cadastro.component.scss';
+@import './app/pages/configuracao/pages/previsaotempoimagem/previsaotempoimagem-pesquisa/previsaotempoimagem-pesquisa.component.scss';
 
 @import './app/componentes/pagecadastro/pagecadastro.component.scss';
 @import './app/componentes/conteudo-row/conteudo-row.component.scss';
+@import './app/componentes/conteudo-display/conteudo-display.component.scss';
 
 // @include mat-core();
 
 
 $theme:(
-    primary:#ece2e259,
+    primary: #007bff,
     secondary:#f5ededef,
-    dark:#dd823859,
-    light:#2c965859,
-    white:white,
+    dark:#f7862b59,
+    light:#cac62af7 ,
+    white:#ffffff,
     black:black
 );
 
@@ -125,9 +130,15 @@ PLAYER
 @include page-configuracao-usuario-pesquisa($theme);
 @include page-configuracao-grupousuario-cadastro($theme);
 @include page-configuracao-grupousuario-pesquisa($theme);
+@include page-configuracao-noticia-cadastro($theme);
+@include page-configuracao-noticia-pesquisa($theme);
+@include  page-configuracao-previsaotempoimagem-pesquisa($theme);
+@include  page-configuracao-previsaotempoimagem-cadastro($theme);
+
 
 @include page-cadastro($theme);
 @include conteudo-row($theme);
+@include conteudo-display($theme);
 @include page-template-pesquisa($theme);
 
 
@@ -213,4 +224,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ::-webkit-scrollbar-thumb {
     background: #d9d9d9;
     border-radius: 10px;
+}
+.mat-typography{
+    background: url('/assets/images/fundo-site.jpeg');
+    background-size: cover;
 }

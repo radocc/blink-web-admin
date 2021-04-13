@@ -1,7 +1,7 @@
 @mixin page-configuracao-usuario-cadastro($videotheme) {
  
     app-usuario-cadastro {
-
+        height: 100%;
         p-autocomplete {
             display: flex;
             span {

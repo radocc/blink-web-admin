@@ -13,7 +13,8 @@ export class VariaveisTipo {
             {nome: 'MINIMA', campo: 'minima'},            
             {nome: 'IUV', campo: 'iuv'},
             {nome: 'URL', campo: 'url'},
-            {nome: 'DESCRICAO', campo: 'descricao'}
+            {nome: 'DESCRICAO', campo: 'descricao'},
+            {nome: 'CUSTOMIZADO', campo: 'variavelCustomizado'}
         ],
         'loteria': [
             {nome: 'DATA_SORTEIO', campo: 'dataSorteio'},

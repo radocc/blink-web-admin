@@ -1,7 +1,7 @@
 @mixin page-configuracao-tipoconteudo-cadastro($videotheme) {
  
-    page-tipoconteudo-cadastro {
-        
+    app-tipoconteudo-cadastro {
+        height: 100%;
         display: flex;
     }
 }

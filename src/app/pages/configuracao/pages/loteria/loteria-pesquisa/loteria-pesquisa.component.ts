@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'; 
-import { Loteria } from '@radoccmodels/loteria'; 
+import { Component, OnInit } from '@angular/core';
 import { FiltroService } from '@radoccservices/base/filtro-service';
 import { LoteriaService } from '@radoccservices/loteria-services';
 import { MessageService } from 'primeng/api';

@@ -1,6 +1,17 @@
 @mixin page-configuracao-previsaotempoimagem-cadastro($videotheme) {
  
-    page-previsaotempoimagem-cadastro {        
-        display: flex;
+    app-previsaotempoimagem-cadastro {      
+        height: 100%;
+
+        .arquivo{
+            margin: auto;
+            margin-left: 16px;
+        }
+        .imagem{
+            margin:16px;
+            width: 100px;
+            height: 100px;            
+            background-size: cover;
+        }
     }
 }

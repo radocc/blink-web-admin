@@ -1,7 +1,7 @@
 @mixin page-configuracao-noticia-cadastro($videotheme) {
  
     app-noticia-cadastro {
-        
+        height: 100%;
         .page-noticia-cadastro{
             flex: auto;
         }

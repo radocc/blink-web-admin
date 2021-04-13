@@ -4,11 +4,11 @@
             <span class="title" >{{'AGENDAMENTO'|translate}}</span>
             <div class="rd-col rd-gap">            
                 <div class="rd-row rd-gap">
-                    <div class="rd-row">
+                    <div class="rd-row rd-flex">
                         <label class="label-left" for="dataInicio">Início as</label>
                         <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataInicio" appendTo="body" inputId="dataInicio"></p-calendar>
                     </div>
-                    <div class="rd-row">
+                    <div class="rd-row rd-flex">
                         <label class="label-left" for="dataFim">Término as</label>
                         <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataFim" appendTo="body" inputId="dataFim"></p-calendar>
                     </div>

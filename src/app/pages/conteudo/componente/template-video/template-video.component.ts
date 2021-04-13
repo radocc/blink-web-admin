@@ -118,4 +118,8 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
     this.panelAgendamento.reset();
     // this.router.navigate(['admin/conteudo/panel/video']);
   }
+
+  public baixarArquivo(){
+    window.open(this.arquivo.url, 'Download');
+  }
 }

@@ -6,7 +6,7 @@
                     <p-tabPanel header="{{'DADOS' | translate}}">
                         <div class="rd-flex rd-col ">
                             <div class="p-field rd-row rd-gap">
-                                <div class="p-field rd-col">
+                                <div class="p-field rd-col rd-w-100 ">
                                     <label for="nome" translate>NOME</label>
                                     <input id="nome" required formControlName="nome" type="text" pInputText>                     
                                     <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>

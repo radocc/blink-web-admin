@@ -1,10 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ConteudoDisplayComponent } from '@radocccomponentes/conteudo-display/conteudo-display.component';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-conteudo-row',
   templateUrl: './conteudo-row.component.html',
-  styleUrls: ['./conteudo-row.component.scss']
+  styleUrls: ['./conteudo-row.component.scss'],
+  providers:[
+    DialogService
+  ]
 })
 export class ConteudoRowComponent implements OnInit {
 
@@ -18,7 +23,7 @@ export class ConteudoRowComponent implements OnInit {
   @Output("onVisualizar") public btnVisualizar: EventEmitter<any> = new EventEmitter();
   @Output("onAbrirArquivo") public btnAbrirArquivo: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(public dialogService:DialogService) { }
 
   ngOnInit(): void {
   }
@@ -36,9 +41,22 @@ export class ConteudoRowComponent implements OnInit {
   }
 
   public visualizarConteudo(conteudo){
-    if (this.btnVisualizar){
-      this.btnVisualizar.emit(conteudo);
-    }
+    // if (this.btnVisualizar){
+    //   this.btnVisualizar.emit(conteudo);
+    // }
+    const dialog = this.dialogService.open(ConteudoDisplayComponent, {
+      width: '60%',
+      height:'80%',
+      data:this.conteudo,
+      modal:true,
+      showHeader:true,
+      closable:true,
+      header:this.conteudo.titulo,
+      closeOnEscape:true
+    });
+    dialog.onClose.subscribe((playlist)=>{
+      
+    }); 
   }
 
   public arquivoConteudo(conteudo){
