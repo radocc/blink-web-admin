@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ShareTranslateModule } from '@radoccmodules/share-translate/share-translate.module';
 import { TempoExibicaoPipe } from 'app/directives/tempoExibicao.pipe';
+import { ConteudoDisplayModule } from '@radocccomponentes/conteudo-display/conteudo-display.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TempoExibicaoPipe } from 'app/directives/tempoExibicao.pipe';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
+    ConteudoDisplayModule,
     ShareTranslateModule,
   ],
   exports:[

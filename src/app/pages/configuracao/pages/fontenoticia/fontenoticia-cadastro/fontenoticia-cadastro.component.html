@@ -59,16 +59,16 @@
                         <p-table [value]="editorias" [scrollable]="true" scrollHeight="100%">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th translate>NOME</th>
-                                    <th translate>URL</th>
-                                    <th translate>ACOES</th>
+                                    <th translate style="width: 50%;">NOME</th>
+                                    <th translate style="width: 30%;">URL</th>
+                                    <th translate style="width: 20%;">ACOES</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-edit>
                                 <tr>
                                     <td>{{edit.nome}}</td>
                                     <td>{{edit.url}}</td>
-                                    <td>
+                                    <td style="text-align: end;">
                                         <button type="button" class="p-mr-2" title="EDITAR"  pButton pRipple icon="pi pi-pencil" (click)="alterarEditoria(edit)"></button>
                                         <button type="button" class="p-mr-2" title="EXCLUIR"  pButton pRipple icon="pi pi-trash" (click)="excluirEditoria(edit)"></button>
                                     </td>

@@ -10,6 +10,9 @@ import { ConteudoDisplayComponent } from './conteudo-display.component';
   declarations: [
     ConteudoDisplayComponent
   ],
+  entryComponents:[
+    ConteudoDisplayComponent
+  ],
   imports: [
     CommonModule,
     NgPrimeModule,

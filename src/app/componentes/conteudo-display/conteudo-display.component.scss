@@ -1,43 +1,16 @@
 
-@mixin conteudo-row($theme) {
-    app-conteudo-row{       
-        // min-width: 350px;
-        width: 100%;  
+@mixin conteudo-display($theme) {
+    
+    app-conteudo-display{   
         
-        .conteudo-row{
-            display: flex;
-            flex-direction: row;
-            padding: 8px;
-            padding-left: 16px;
-            padding-right: 16px;
-            border-radius: 5px;
-            background: map-get($theme, secondary);
-            margin-bottom: 4px;
-            margin-top: 4px;            
-        }
-                            
-        .view{
-            max-width: 120px;
-            height: 70px;
-            background: green;
-            border-radius: 5px;
-            margin-left: 8px;
-            margin-right: 8px;
-            box-shadow: inset 0 0 5px transparent;
-            // border-width: 0px;
-            // border-style: solid;
-            background-repeat: no-repeat !important;
-            background-size: contain !important;
-            background-position: center !important;                    
+       .view{
+            min-width: 600px;
+            min-height: 600px;
+            background-size: cover;
+            height: 600px;
+            width: 100%;
         }
         .div-footer{
-            .tempo{
-                top: 0px;
-                bottom: 0px;
-                margin: auto;
-                margin-left: 0px;
-                margin-right: 8px;
-            }
             
         }
     }

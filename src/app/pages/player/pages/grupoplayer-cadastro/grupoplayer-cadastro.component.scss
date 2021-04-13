@@ -1,12 +1,13 @@
 @mixin app-grupoplayer-cadastro($videotheme) {
  
     app-grupoplayer-cadastro {
-        flex: 1;
+        
         height: 100%;
-        display: flex;
+        .grupoplayer-cadastro{
+            height: 100%;
+        }
         .p-card-content {
-            display: flex;
-            flex-direction: column;
+            height: 100%;
         }
         .label-field{
             line-height: 20px;
