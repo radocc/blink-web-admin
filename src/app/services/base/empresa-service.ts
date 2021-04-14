@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Empresa } from '@radoccmodels/base/empresa';
+import { NovoAmbiente } from '@radoccmodels/request/novo-ambiente';
+import { Usuario } from '@radoccmodels/base/usuario';
 
 @Injectable()
 export class EmpresaService extends AbstractService<Empresa> {
@@ -21,6 +23,29 @@ export class EmpresaService extends AbstractService<Empresa> {
         return this.http.get<Empresa>(url);
     }
  
+    public novoAmbiente(novoAmbiente: NovoAmbiente): Observable<Empresa> {
+        let url = this.urlWebBase + "/novoambiente";
+        return this.http.post<Empresa>(url, JSON.stringify(novoAmbiente));
+    }
+
+    public criarAmbiente(usuario: Usuario): Observable<Empresa> {
+        let url = this.urlWebBase + "/criarambiente";
+        return this.http.post<Empresa>(url, JSON.stringify(usuario));
+    }
+
+    // public novaOrganizacao(req: ReqPlanoEmpresa): Observable<any> {
+    //     let url = this.urlWebBase + "/nova/organizacao";
+    //     return this.http.post<any>(url, JSON.stringify(req)).pipe(map((res) => {
+    //         return res;
+    //     }));
+    // }
+
+    // public editarOrganizacao(req: ReqPlanoEmpresa): Observable<any> {
+    //     let url = this.urlWebBase + "/editar/organizacao";
+    //     return this.http.post<any>(url, JSON.stringify(req)).pipe(map((res) => {
+    //         return res;
+    //     }));
+    // }
     
     public buscarOrganzizacao(): Observable<any> {
         return this.http.post<any>(this.urlWebBase + "/buscar/organizacao", null);

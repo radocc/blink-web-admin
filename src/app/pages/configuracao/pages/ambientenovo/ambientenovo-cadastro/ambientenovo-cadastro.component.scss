@@ -1,0 +1,19 @@
+#ambiente-novo {
+    .conteudo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        .idioma {
+            padding-top: 10px;
+        }
+        .btn {
+            position: absolute;
+            left: 88%;
+            bottom: 0;
+            margin-bottom: 3%;
+        }
+    }
+}
