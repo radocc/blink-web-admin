@@ -4,3 +4,12 @@
 .p-card .p-card-body {
     padding: 1rem;
 }
+
+@mixin defini-theme($theme) {  
+      
+    .p-button{
+        color: map-get($theme, white);
+        background: map-get($theme, primary);
+        border: 1px solid map-get($theme, primary);
+    }
+}

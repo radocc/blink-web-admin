@@ -360,7 +360,7 @@ export abstract class FiltroPanel {
                 let col = {
                     prop: coluna.propriedade,
                     name: coluna.titulo,
-                    width: parseInt((coluna.largura/10).toString()),
+                    width: coluna.largura,
                     tipo: coluna.tipo,
                     mascara: coluna.mascara,
                     headerClass: '',

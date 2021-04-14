@@ -28,6 +28,11 @@
             }
             .esqueci-senha{
                 margin-top: 16px;
+                text-decoration-color: map-get($theme, light) !important;
+                color: map-get($theme, light) !important;
+                .link-esqueci-senha{
+                    cursor: pointer;
+                }
             }
         }
     }

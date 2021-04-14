@@ -10,32 +10,45 @@
         // height: 100%;
         
         .painel-site {
-            margin-bottom: 1.5rem;
+            // margin-bottom: 1.5rem;
             width: 100%;
+            // display: flex;
+            flex-flow: column;
+            height: 100%;
             .p-dropdown {
                 width: 100%;
                 margin-right: 10px;
             }
+            .header{
+                flex: 0 1 auto;
+                display: flex;
+                flex-direction: row;
+            }
+            .painel-site-content {
+                flex: 1 1 auto;
+            }
         }
 
-        .painel-site-content {
-            height: 100%;
-        }
-
-        .row{
-            display: flex;
-            flex-direction: row;
-        }
+        
         .div-marca{
             flex: 1;
             .marca{
-                margin-left: 150px;
-                margin: 16px;
-                font-size: 18px;
+                left: 2rem;
+                top: 1rem;
+                width: 150px;
+                position: absolute;
+                height: 80px;
+                .img-logo{
+                    width: 300px;
+                    min-height: 50px;
+                    height: 60px;
+                    background-size: cover;
+                }
             }
         }
 
         .menu-conteiner{
+            flex: 0 1 auto;
             min-width: 600px;
             align-self: flex-end;
             display: flex;

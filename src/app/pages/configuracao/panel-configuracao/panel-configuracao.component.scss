@@ -2,9 +2,8 @@
 @mixin app-panel-configuracao($theme) {
     
     app-panel-configuracao{
-        height: 100%;
-        display: flex;
-
+        height: auto;
+        overflow-x: hidden; 
         // .pagina {
         //     flex: auto;
         //     display: flex;

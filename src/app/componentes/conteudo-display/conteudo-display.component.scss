@@ -2,12 +2,21 @@
 @mixin conteudo-display($theme) {
     
     app-conteudo-display{   
-        
+        background: black;
+
+        p.dialog, .p-dialog-content{
+            overflow: hidden;
+            background: black;
+            color: #212529;
+            padding: 0.5rem;
+        }
        .view{
-            min-width: 600px;
-            min-height: 600px;
+            max-height: 600px;
+            max-width: 700px;
+            min-width: 400px;
+            min-height: 400px;
             background-size: cover;
-            height: 600px;
+            height: 500px;
             width: 100%;
         }
         .div-footer{

@@ -26,7 +26,7 @@
                         <div class="item-conteudo " pDraggable="conteudo" (onDragStart)="dragStart(conteudo)" (onDragEnd)="dragEnd($event)" *ngFor="let conteudo of conteudos">
                             <app-conteudo-row 
                                 [conteudo]="conteudo" (onAbrirArquivo)="arquivoConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
-                                [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false"> 
+                                [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnArquivo]="false"> 
                             </app-conteudo-row>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                             
                         </div>
                         <div class="acoes rd-col rd-gap">
-                            <button pButton (click)="publicar()"  type="button" label="{{'PUBLICAR'|translate}}"></button>
+                            <button pButton class="btn-publicar" (click)="publicar()"  type="button" label="{{'PUBLICAR'|translate}}"></button>
                             <button pButton (click)="preview()" type="button" label="{{'VISUALIZAR'|translate}}"></button>
                             <button pButton (click)="salvar()" type="button" label="{{'SALVAR'|translate}}"></button>
                             <button pButton (click)="importar()" type="button" label="{{'IMPORTAR'|translate}}"></button>
