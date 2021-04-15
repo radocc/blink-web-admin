@@ -38,8 +38,8 @@ export class GaleriaConteudoComponent implements OnInit {
     }
     this.activeIndex++;
     this.conteudo = this.conteudos[this.activeIndex].conteudo;
-    // let tempo = this.conteudo.tempoExibicao * 1000;
-    let tempo = 4000;
+    let tempo = this.conteudo.tempoExibicao * 1000;
+    // let tempo = 4000;
     let me = this;
     setTimeout(()=>{
       me.criarTemporizador();

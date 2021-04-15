@@ -3,13 +3,36 @@
     
     app-conteudo-display{   
         background: black;
-
+        // min-width: 600px;
         p.dialog, .p-dialog-content{
             overflow: hidden;
             background: black;
             color: #212529;
             padding: 0.5rem;
         }
+        .conteiner{
+            position: relative;
+            // width: 600px;
+            height: 500px;
+        }
+        .campos-container {
+            height: 100%;
+            width: 100%;            
+            display: block !important;
+            position: absolute;
+            z-index: 200;
+            top: 0;
+            left: 0;
+            .div-campo{
+                height: 100%;
+                width: 100%;
+                position: absolute;
+            }
+        }
+        .drag-content{
+            position: absolute;
+        }
+        
        .view{
             max-height: 600px;
             max-width: 700px;

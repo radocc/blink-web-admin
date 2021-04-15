@@ -1,10 +1,32 @@
 <div class="content-display rd-col">
 
-    <img class="view" *ngIf="conteudoResult?.idTipoConteudo != 1" [src]="conteudoResult?.url">
-    <video class="view" autoplay *ngIf="conteudoResult?.idTipoConteudo == 1" width="600" height="500" controls>
-        <source *ngIf="arquivo" [src]="arquivo?.url" type="video/mp4">
-            Seu navegador não suporta este vídeoe.
-    </video>
+    <div #imageContainer class="conteiner">
+        <img class="view" *ngIf="conteudoResult?.idTipoConteudo != 1" [src]="conteudoResult?.url">
+        <video class="view" autoplay *ngIf="conteudoResult?.idTipoConteudo == 1" height="400" controls>
+            <source *ngIf="arquivo" [src]="arquivo?.url" type="video/mp4">
+                Seu navegador não suporta este vídeoe.
+        </video>
+        <div id="campos-container" class="campos-container">
+            <div [id]="campo.hash" class="div-campo" *ngFor="let campo of campos">
+                <div *ngIf="campo.tipo == 7" class="drag-content " >
+                    <span [ngStyle]="{
+                            'font-family': campo.fonte,
+                            'font-size': campo.fonteTamanho + 'px',
+                            'font-weight': campo.fonteEspessura,
+                            'color': campo.fonteCor
+                        }">{{campo.nome}}</span>
+                </div>
+                <div *ngIf="campo.tipo != 7" class="drag-content " >
+                    <span [ngStyle]="{
+                            'font-family': campo.fonte,
+                            'font-size': campo.fonteTamanho + 'px',
+                            'font-weight': campo.fonteEspessura,
+                            'color': campo.fonteCor
+                        }">{{campo.valor}}</span>
+                </div>
+            </div>        
+        </div>
+    </div>
     <!-- <div class="view ">
     
     </div> -->

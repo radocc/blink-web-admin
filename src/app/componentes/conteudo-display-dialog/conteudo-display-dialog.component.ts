@@ -18,10 +18,10 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 export class ConteudoDisplayDialogComponent implements OnInit {
 
   @Input("conteudo") public conteudoResult:ConteudoResult;
-  public urlVideo:string;
-  public conteudo:Conteudo;
-  public arquivo:Arquivo;
-  public template:Template;
+  // public urlVideo:string;
+  // public conteudo:Conteudo;
+  // public arquivo:Arquivo;
+  // public template:Template;
 
   constructor(public config: DynamicDialogConfig,public ref: DynamicDialogRef, private msgService:MessageService,private conteudoService:ConteudoService) {
     this.conteudoResult = config.data;
@@ -29,11 +29,7 @@ export class ConteudoDisplayDialogComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.conteudoService.findPreview(this.conteudoResult.id).subscribe((conteudo)=>{
-      this.conteudo = conteudo;
-      this.arquivo = conteudo.arquivo;
-      this.template = conteudo.template;
-    })
+     
   }
 
 }

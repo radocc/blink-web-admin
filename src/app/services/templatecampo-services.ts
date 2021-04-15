@@ -45,4 +45,18 @@ export class TemplateCampoService extends TVBlinkService<TemplateCampo> {
             })
         );
     } 
+
+    public getPreviewByConteudoTemplate(idConteudo:number, idTemplate: number): Observable<Array<TemplateCampo>> {
+        return this.http.get<Array<TemplateCampo>>(this.urlWebBase + `/preview/conteudo/${idConteudo}/template/${idTemplate}`).pipe(
+            map(campos => {
+                let lista = [];
+                campos.map(campo => {
+                    let c = Object.assign(new TemplateCampo(), campo)
+                    lista.push(c);
+                    return c;
+                });
+                return lista;
+            })
+        );
+    } 
 }
