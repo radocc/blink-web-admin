@@ -32,6 +32,9 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {FocusTrapModule} from 'primeng/focustrap';
 import {SplitButtonModule} from 'primeng/splitbutton';
+import {InputMaskModule} from 'primeng/inputmask';
+import {PasswordModule} from 'primeng/password';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -67,7 +70,9 @@ import {SplitButtonModule} from 'primeng/splitbutton';
     FieldsetModule,
     SelectButtonModule,
     FocusTrapModule,
-    SplitButtonModule
+    SplitButtonModule,
+    InputMaskModule,
+    PasswordModule
   ],
   exports:[
     ButtonModule,
@@ -101,7 +106,9 @@ import {SplitButtonModule} from 'primeng/splitbutton';
     FieldsetModule,
     SelectButtonModule,
     FocusTrapModule,
-    SplitButtonModule
+    SplitButtonModule,
+    InputMaskModule,
+    PasswordModule
   ]
 })
 export class NgPrimeModule { }
