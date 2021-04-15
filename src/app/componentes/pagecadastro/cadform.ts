@@ -2,11 +2,8 @@ import { Events } from './../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { PageCadastroComponent } from "./pagecadastro.component";
-import { FormGroup } from '@angular/forms';
-import { Table } from 'primeng/table';
-import { BaseEntityImpl } from '@radoccmodels/baseentityimpl';
 
-export abstract class CadForm implements OnInit, OnDestroy {
+export class CadForm implements OnInit, OnDestroy {
     @ViewChild(PageCadastroComponent, {static: true}) page: PageCadastroComponent;
     private eventEditar:any;
     private eventVisualizar:any;
@@ -46,7 +43,7 @@ export abstract class CadForm implements OnInit, OnDestroy {
 
     }
 
-    public abstract buscar(id:number, editavel:boolean):void;
+    public buscar(id:number, editavel:boolean):void{}
     public novo(): void {
         this.page.novo();
     };

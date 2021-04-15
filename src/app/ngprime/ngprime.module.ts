@@ -32,6 +32,8 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {FocusTrapModule} from 'primeng/focustrap';
 import {SplitButtonModule} from 'primeng/splitbutton';
+import {InputMaskModule} from 'primeng/inputmask';
+import {PasswordModule} from 'primeng/password';
 import {GalleriaModule} from 'primeng/galleria';
 
 @NgModule({
@@ -70,6 +72,8 @@ import {GalleriaModule} from 'primeng/galleria';
     SelectButtonModule,
     FocusTrapModule,
     SplitButtonModule,
+    InputMaskModule,
+    PasswordModule,
     GalleriaModule
   ],
   exports:[
@@ -105,6 +109,8 @@ import {GalleriaModule} from 'primeng/galleria';
     SelectButtonModule,
     FocusTrapModule,
     SplitButtonModule,
+    InputMaskModule,
+    PasswordModule,
     GalleriaModule
   ]
 })
