@@ -1,7 +1,13 @@
 <div class="content-display rd-col">
-    <div class="view " [ngStyle]="{'background':'url(' + conteudo.url +')'}">
+
+    <img class="view" *ngIf="conteudoResult?.idTipoConteudo != 1" [src]="conteudoResult?.url">
+    <video class="view" autoplay *ngIf="conteudoResult?.idTipoConteudo == 1" width="600" height="500" controls>
+        <source *ngIf="arquivo" [src]="arquivo?.url" type="video/mp4">
+            Seu navegador não suporta este vídeoe.
+    </video>
+    <!-- <div class="view ">
     
-    </div>
+    </div> -->
     <!-- <div class="div-footer">
         Desenvolvido por nós!
     </div> -->

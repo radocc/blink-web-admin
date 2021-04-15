@@ -95,7 +95,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
   private setGridHeight() {
     //** Seta o tamanho fixo para a grid */
-    this.table.el.nativeElement.style.height = (this.divTable.nativeElement.offsetHeight - 70) + 'px';
+    this.table.el.nativeElement.style.height = (this.divTable.nativeElement.offsetHeight - 100) + 'px';
     this.table.el.nativeElement.style.display = 'flex';
   }
 

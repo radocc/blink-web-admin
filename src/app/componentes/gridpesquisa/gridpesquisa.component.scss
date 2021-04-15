@@ -12,6 +12,15 @@
             flex-direction: column;
             flex: auto;  
             height: 100%;
+            p-table{
+                overflow-x: auto;
+                .grid-cell{
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    width: 100%;
+                }
+            }
             .p-card {
                 // display: flex;
                 // flex-direction: column;

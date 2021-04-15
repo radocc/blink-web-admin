@@ -1,7 +1,7 @@
 
-@mixin conteudo-display($theme) {
+@mixin conteudo-display-dialog($theme) {
     
-    app-conteudo-display{   
+    app-conteudo-display-dialog{   
         background: black;
 
         p.dialog, .p-dialog-content{

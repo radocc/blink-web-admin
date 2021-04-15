@@ -36,11 +36,14 @@
         }
 
         .marca{
-            background:url('/assets/images/logo.jpeg');
             width: 100%;
             height: 200px;
             background-size: cover;
-            margin-bottom: 32px;
+            margin-top: 5rem;
+            .img-logo{
+                width: 100%;
+                background-size: cover;
+            }
         }
     }
 }

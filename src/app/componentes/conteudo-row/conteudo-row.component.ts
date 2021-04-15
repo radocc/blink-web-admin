@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConteudoDisplayComponent } from '@radocccomponentes/conteudo-display/conteudo-display.component';
+import { ConteudoDisplayDialogComponent } from '@radocccomponentes/conteudo-display-dialog/conteudo-display-dialog.component';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { DialogService } from 'primeng/dynamicdialog';
 
@@ -44,9 +44,9 @@ export class ConteudoRowComponent implements OnInit {
     // if (this.btnVisualizar){
     //   this.btnVisualizar.emit(conteudo);
     // }
-    const dialog = this.dialogService.open(ConteudoDisplayComponent, {
-      width: '60%',
-      height:'80%',
+    const dialog = this.dialogService.open(ConteudoDisplayDialogComponent, {
+      // width: '60%',
+      // height:'80%',
       data:this.conteudo,
       modal:true,
       showHeader:true,

@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConteudoRowComponent } from './conteudo-row.component';
 import { NgPrimeModule } from 'app/ngprime/ngprime.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ShareTranslateModule } from '@radoccmodules/share-translate/share-translate.module';
-import { TempoExibicaoPipe } from 'app/directives/tempoExibicao.pipe';
-import { ConteudoDisplayDialogModule } from '@radocccomponentes/conteudo-display-dialog/conteudo-display-dialog.module';
+import { ConteudoDisplayDialogComponent } from './conteudo-display-dialog.component';
+import { ConteudoDisplayModule } from '@radocccomponentes/conteudo-display/conteudo-display.module';
 
 @NgModule({
   declarations: [
-    ConteudoRowComponent,
-    TempoExibicaoPipe 
+    ConteudoDisplayDialogComponent
+  ],
+  entryComponents:[
+    ConteudoDisplayDialogComponent
   ],
   imports: [
     CommonModule,
     NgPrimeModule,
     ReactiveFormsModule,
+    ConteudoDisplayModule,
     FormsModule,
     RouterModule,
-    ConteudoDisplayDialogModule,
     ShareTranslateModule,
   ],
   exports:[
-    ConteudoRowComponent,
-    TempoExibicaoPipe 
+    ConteudoDisplayDialogComponent
   ]
 })
-export class ConteudoRowModule { }
+export class ConteudoDisplayDialogModule { }

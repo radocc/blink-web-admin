@@ -1,0 +1,27 @@
+@mixin app-galeria-conteudo-playlist($videotheme) {
+ 
+    app-galeria-conteudo {
+        .p-dialog{
+            display: flex;
+            flex-direction: column;
+
+            .p-dialog-content{
+                flex: 1;
+                padding: 0px !important;
+                .p-galleria{
+                    width: 100%;
+                }
+                
+            }
+        } 
+
+        .titulo{            
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .div-footer{
+            margin-top: 8px;
+            
+        }
+    }
+}

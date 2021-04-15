@@ -12,6 +12,7 @@ import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
+import { FileUpload } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-template-imagem-conteudo',
@@ -25,11 +26,11 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
 export class TemplateImagemComponent extends CadConteudoComponent implements OnInit {
 
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
-
+  @ViewChild("fileUpload") public fileUpload:FileUpload;
   public form:FormGroup = new FormGroup({
     titulo:new FormControl('', Validators.required),    
-    minutos:new FormControl(),
-    segundos:new FormControl(),
+    minutos:new FormControl(0),
+    segundos:new FormControl(20),
   }) 
   
   public arquivo:Arquivo;
@@ -120,7 +121,9 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
   public novo(){
     this.form.reset({minutos:0,segundos:15});
     this.arquivo = null;
+    this.conteudo = null;
     this.panelAgendamento.reset();
+    this.fileUpload.clear();
     this.router.navigate(['admin/conteudo/panel/imagem']);
   }
 

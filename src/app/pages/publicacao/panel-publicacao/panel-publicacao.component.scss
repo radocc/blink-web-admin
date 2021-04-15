@@ -5,7 +5,7 @@
         display: flex;
         height: 100%;
         .app-panel-publicacao{
-            margin-bottom: 3rem;
+            // margin-bottom: 3rem;
         }
         
         .field-busca{
@@ -43,9 +43,11 @@
                     cursor: pointer;
                 }
                 .item-menu.selected {
-                    // background: map-get($theme, dark);
+                    background: map-get($theme, light);
                     font-weight: 800;
-                    font-size: 18;
+                    margin: 8px;
+                    padding: 8px;
+                    border-radius: 5px;
                 }
             }
             .pesquisa-list{ 
@@ -103,6 +105,12 @@
                     }
                     
                 }                
+            }
+            .acoes{
+                .btn-publicar{
+                    padding-top: 16px;
+                    padding-bottom: 16px;
+                }
             }
             .p-dropdown{
                 width: 100%;

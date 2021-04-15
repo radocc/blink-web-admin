@@ -9,7 +9,7 @@
                         <small id="titulo-error" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
                     <div class="p-field p-d-flex p-flex-row">
-                        <p-fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
+                        <p-fileUpload #fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                         name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
                         accept="image/.png,.jpg,.jpeg"></p-fileUpload>
                         <div class="p-col arquivo">{{arquivo?.nome}}</div>

@@ -17,14 +17,14 @@
             <div class="">
                 <p>Dias da semana a ser exibido</p>
                 <div class="dia-semana rd-row rd-gap rd-txt-center">           
-                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="1" (onChange)="onClickDiaSemana($event,'1')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Dom"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="0" (onChange)="onClickTodos($event)" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Todos"></p-checkbox>                    
                     <p-checkbox class="rd-col rd-gap-8 check-dia" value="2" (onChange)="onClickDiaSemana($event,'2')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Seg"></p-checkbox>
                     <p-checkbox class="rd-col rd-gap-8 check-dia" value="3" (onChange)="onClickDiaSemana($event,'3')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Ter"></p-checkbox>
                     <p-checkbox class="rd-col rd-gap-8 check-dia" value="4" (onChange)="onClickDiaSemana($event,'4')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Qua"></p-checkbox>
                     <p-checkbox class="rd-col rd-gap-8 check-dia" value="5" (onChange)="onClickDiaSemana($event,'5')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Qui"></p-checkbox>
                     <p-checkbox class="rd-col rd-gap-8 check-dia" value="6" (onChange)="onClickDiaSemana($event,'6')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Sex"></p-checkbox>
                     <p-checkbox class="rd-col rd-gap-8 check-dia" value="7" (onChange)="onClickDiaSemana($event,'7')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Sab"></p-checkbox>
-                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="0" (onChange)="onClickTodos($event)" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Todos"></p-checkbox>
+                    <p-checkbox class="rd-col rd-gap-8 check-dia" value="1" (onChange)="onClickDiaSemana($event,'1')" [(ngModel)]="diaSemana" [ngModelOptions]="{standalone: true}" name="diasSemana" label="Dom"></p-checkbox>                    
                 </div>
             </div>    
             <div>

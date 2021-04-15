@@ -34,6 +34,7 @@ import {FocusTrapModule} from 'primeng/focustrap';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {InputMaskModule} from 'primeng/inputmask';
 import {PasswordModule} from 'primeng/password';
+import {GalleriaModule} from 'primeng/galleria';
 
 @NgModule({
   declarations: [],
@@ -72,7 +73,8 @@ import {PasswordModule} from 'primeng/password';
     FocusTrapModule,
     SplitButtonModule,
     InputMaskModule,
-    PasswordModule
+    PasswordModule,
+    GalleriaModule
   ],
   exports:[
     ButtonModule,
@@ -108,7 +110,8 @@ import {PasswordModule} from 'primeng/password';
     FocusTrapModule,
     SplitButtonModule,
     InputMaskModule,
-    PasswordModule
+    PasswordModule,
+    GalleriaModule
   ]
 })
 export class NgPrimeModule { }
