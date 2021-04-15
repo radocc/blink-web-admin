@@ -1,4 +1,5 @@
-#ambiente-novo {
+@mixin page-ambiente-novo-theme($theme) {
+    $primary: map-get($theme, primary);
     .conteudo {
         position: absolute;
         top: 0;
@@ -14,6 +15,10 @@
             left: 88%;
             bottom: 0;
             margin-bottom: 3%;
+        }
+        .p-p-4{ 
+            padding-bottom: 0rem !important;
+        
         }
     }
 }
