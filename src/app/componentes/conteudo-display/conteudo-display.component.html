@@ -1,7 +1,7 @@
 <div class="content-display rd-col">
 
     <img class="view" *ngIf="conteudoResult?.idTipoConteudo != 1" [src]="conteudoResult?.url">
-    <video class="view" autoplay *ngIf="conteudo?.idTipoConteudo == 1" width="600" height="500" controls>
+    <video class="view" autoplay *ngIf="conteudoResult?.idTipoConteudo == 1" width="600" height="500" controls>
         <source *ngIf="arquivo" [src]="arquivo?.url" type="video/mp4">
             Seu navegador não suporta este vídeoe.
     </video>

@@ -9,6 +9,8 @@ import { PanelPublicacaoComponent } from './panel-publicacao/panel-publicacao.co
 import { ShareTranslateModule } from '@radoccmodules/share-translate/share-translate.module';
 import { PlaylistDialogComponent } from './componente/dialog-playlist/playlist-dialog.component';
 import { PlaylistPesquisaDialogComponent } from './componente/dialog-playlist-pesquisa/playlist-pesquisa-dialog.component';
+import { ConteudoDisplayModule } from '@radocccomponentes/conteudo-display/conteudo-display.module';
+import { GaleriaConteudoComponent } from './componente/galeria-conteudo/galeria-conteudo.component';
 
 const routes: Routes = [
   {
@@ -26,11 +28,13 @@ const routes: Routes = [
   declarations: [
     PanelPublicacaoComponent,
     PlaylistDialogComponent,
-    PlaylistPesquisaDialogComponent
+    PlaylistPesquisaDialogComponent,
+    GaleriaConteudoComponent
   ],
   entryComponents:[
     PlaylistDialogComponent,
-    PlaylistPesquisaDialogComponent
+    PlaylistPesquisaDialogComponent,
+    GaleriaConteudoComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +42,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     ConteudoRowModule,
+    ConteudoDisplayModule,
     ShareTranslateModule,
     DevComponentModule,
     RouterModule.forChild(routes)

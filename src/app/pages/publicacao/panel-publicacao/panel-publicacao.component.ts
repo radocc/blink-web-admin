@@ -20,6 +20,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PlaylistPesquisaDialogComponent } from '../componente/dialog-playlist-pesquisa/playlist-pesquisa-dialog.component';
 import { PlaylistDialogComponent } from '../componente/dialog-playlist/playlist-dialog.component';
+import { GaleriaConteudoComponent } from '../componente/galeria-conteudo/galeria-conteudo.component';
 
 @Component({
   selector: 'app-panel-publicacao',
@@ -275,7 +276,9 @@ export class PanelPublicacaoComponent implements OnInit {
       }      
     }
     this.publicacao.idPlaylist = this.playlist.id;
+    this.playlist.status = 2;
     this.publicacao.playlist = this.playlist;
+    
 
     this.publicacaoService.save(this.publicacao).subscribe((publicacao)=>{
       this.publicacao = publicacao;
@@ -289,7 +292,17 @@ export class PanelPublicacaoComponent implements OnInit {
   }
 
   public preview(){
-    // this.mostrarPreview = true;
+    const dialog = this.dialogService.open(GaleriaConteudoComponent, {
+      data:this.listaConteudo,
+      modal:true,
+      showHeader:true,
+      closable:true,
+      header:'Playlist',
+      closeOnEscape:true
+    });
+    dialog.onClose.subscribe((playlist)=>{
+      
+    }); 
   }
 
   public importar(){

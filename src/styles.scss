@@ -19,6 +19,7 @@
 @import './app/pages/publicacao/panel-publicacao/panel-publicacao.component.scss';
 @import './app/pages/publicacao/componente/dialog-playlist/playlist-dialog.component.scss';
 @import './app/pages/publicacao/componente/dialog-playlist-pesquisa/playlist-pesquisa-dialog.component.scss';
+@import './app/pages/publicacao/componente/galeria-conteudo/galeria-conteudo.component.scss';
 
 @import './app/pages/player/panel-player/panel-player.component.scss';
 @import './app/pages/player/pages/player-cadastro/player-cadastro.component.scss';
@@ -55,6 +56,7 @@
 @import './app/componentes/pagecadastro/pagecadastro.component.scss';
 @import './app/componentes/conteudo-row/conteudo-row.component.scss';
 @import './app/componentes/conteudo-display/conteudo-display.component.scss';
+@import './app/componentes/conteudo-display-dialog/conteudo-display-dialog.component.scss';
 @import './sass/themes/mytheme/theme.scss';
 // @include mat-core();
 
@@ -133,21 +135,23 @@ PLAYER
 @include page-configuracao-grupousuario-pesquisa($theme);
 @include page-configuracao-noticia-cadastro($theme);
 @include page-configuracao-noticia-pesquisa($theme);
-@include  page-configuracao-previsaotempoimagem-pesquisa($theme);
-@include  page-configuracao-previsaotempoimagem-cadastro($theme);
-
+@include page-configuracao-previsaotempoimagem-pesquisa($theme);
+@include page-configuracao-previsaotempoimagem-cadastro($theme);
+@include app-galeria-conteudo-playlist($theme);
 
 @include page-cadastro($theme);
 @include conteudo-row($theme);
 @include conteudo-display($theme);
+@include conteudo-display-dialog($theme);
 @include page-template-pesquisa($theme);
 
 
 html, body { 
     height: 100%; 
+    width: 100%;
     @include absoluto();
     @include background-body();
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

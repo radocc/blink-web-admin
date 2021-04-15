@@ -10,6 +10,9 @@ import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
+import { Events } from '@radoccmodels/enum/events';
+import { EventBrokerService } from 'ng-event-broker';
+import { FileUpload } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-template-video-conteudo',
@@ -23,18 +26,16 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
 export class TemplateVideoComponent extends CadConteudoComponent implements OnInit {
 
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
-
+  @ViewChild("fileUpload") public fileUpload:FileUpload;
   public form:FormGroup = new FormGroup({
-    titulo:new FormControl(null, Validators.required),    
-    minutos:new FormControl(0),
-    segundos:new FormControl(10),
+    titulo:new FormControl(null, Validators.required)    
   }) 
   
   public arquivo:Arquivo;
   public conteudo:Conteudo;
 
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,private router:Router,
-    private route:ActivatedRoute, public translateService:TranslateService) {
+    private eventService:EventBrokerService, private route:ActivatedRoute, public translateService:TranslateService) {
       super(msgService, translateService);
   }
 
@@ -51,10 +52,7 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
       this.conteudo = conteudo;
       if (conteudo != null){
         this.form.controls['titulo'].setValue(conteudo.titulo);
-        let min = (conteudo.tempoExibicao / 60).toFixed(0);
-        let segundos = (conteudo.tempoExibicao % 60);
-        this.form.controls['minutos'].setValue(min);
-        this.form.controls['segundos'].setValue(segundos);
+        
         this.arquivo = conteudo.arquivo;
         let file = new File([], this.arquivo.nome);
         this.panelAgendamento.setAgendamento(conteudo.agendamento);
@@ -83,9 +81,7 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = ETipoConteudo.Video;
-    let segundos = this.form.controls['segundos'].value;
-    segundos += (this.form.controls['minutos'].value * 60);
-    this.conteudo.tempoExibicao = segundos;
+    this.conteudo.tempoExibicao = 0;
     this.conteudo.idTemplate = null;
     this.conteudo.idArquivo = this.arquivo.id;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
@@ -93,6 +89,7 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
       this.conteudo = conteudo;
       this.panelAgendamento.setAgendamento(conteudo.agendamento);
       this.showSuccessMsg('SALVO_COM_SUCESSO');
+      this.eventService.publishEvent(Events.atualizarLista);
       this.novo();
     }, error=>{
       this.showErrorMsg('FALHA_AO_SALVAR');
@@ -116,6 +113,7 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
     this.form.reset();
     this.arquivo = null;
     this.panelAgendamento.reset();
+    this.fileUpload.clear();
     // this.router.navigate(['admin/conteudo/panel/video']);
   }
 

@@ -5,16 +5,17 @@ import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { Template } from '@radoccmodels/template';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { MessageService } from 'primeng/api';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
-  selector: 'app-conteudo-display',
-  templateUrl: './conteudo-display.component.html',
-  styleUrls: ['./conteudo-display.component.scss'],
+  selector: 'app-conteudo-display-dialog',
+  templateUrl: './conteudo-display-dialog.component.html',
+  styleUrls: ['./conteudo-display-dialog.component.scss'],
   providers:[
     MessageService,ConteudoService
   ]
 })
-export class ConteudoDisplayComponent implements OnInit {
+export class ConteudoDisplayDialogComponent implements OnInit {
 
   @Input("conteudo") public conteudoResult:ConteudoResult;
   public urlVideo:string;
@@ -22,8 +23,8 @@ export class ConteudoDisplayComponent implements OnInit {
   public arquivo:Arquivo;
   public template:Template;
 
-  constructor( private msgService:MessageService,private conteudoService:ConteudoService) {
-    
+  constructor(public config: DynamicDialogConfig,public ref: DynamicDialogRef, private msgService:MessageService,private conteudoService:ConteudoService) {
+    this.conteudoResult = config.data;
   }
 
   ngOnInit(): void {
