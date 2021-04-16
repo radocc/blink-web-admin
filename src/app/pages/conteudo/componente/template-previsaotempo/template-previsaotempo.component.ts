@@ -56,7 +56,7 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
       if (param['id']){
           this.conteudoService.findConteudoPrevisao(param['id']).subscribe((conteudo)=>{
             this.conteudo = conteudo;
-            this.previsao = conteudo.previsaoTempo;
+            this.previsao = conteudo.conteudoPrevisaoTempo;
             this.form.controls['cidade'].setValue(this.previsao.cidade)
             this.form.controls['template'].setValue(this.conteudo.template);
             let min = (conteudo.tempoExibicao / 60).toFixed(0);
@@ -97,7 +97,7 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
     
     this.previsao.idCidade = this.form.controls['cidade'].value.id;
     this.conteudo.titulo = this.form.controls['cidade'].value.nome;
-    this.conteudo.previsaoTempo = this.previsao;
+    this.conteudo.conteudoPrevisaoTempo = this.previsao;
     this.conteudo.idTipoConteudo = ETipoConteudo.PrevisaoTempo;
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);

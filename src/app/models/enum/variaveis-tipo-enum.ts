@@ -7,6 +7,7 @@ export class VariaveisTipo {
             {nome: 'DATA_PUBLICACAO', campo: 'datapublicacao'}
         ],
         'previsao': [
+            {nome: 'CIDADE', campo: 'cidade'},
             {nome: 'DATA', campo: 'data'},
             {nome: 'TEMPO', campo: 'tempo'},
             {nome: 'MAXIMA', campo: 'maxima'},

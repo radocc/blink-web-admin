@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { Conteudo } from '@radoccmodels/conteudo';
+import { PrevisaoTempo } from '@radoccmodels/previsaotempo';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { Template } from '@radoccmodels/template';
 import { TemplateCampo } from '@radoccmodels/templatecampo';
@@ -28,6 +29,7 @@ export class ConteudoDisplayComponent implements OnInit {
   public campos:TemplateCampo[] = [];
   public imageHeight = 500;
   public proportion: number = 1;
+  public previsaoTempo:PrevisaoTempo;
 
   constructor( private msgService:MessageService,private conteudoService:ConteudoService, private templateCampoService:TemplateCampoService) {
     
@@ -39,6 +41,7 @@ export class ConteudoDisplayComponent implements OnInit {
       this.conteudo = conteudo;
       this.arquivo = conteudo.arquivo;
       this.template = conteudo.template;
+      this.previsaoTempo = conteudo.previsaoTempo;
       this.montar();
     })
   }
@@ -46,9 +49,23 @@ export class ConteudoDisplayComponent implements OnInit {
   public montar(){
     this.templateCampoService.getPreviewByConteudoTemplate(this.conteudo.id,this.template.id).subscribe((lista)=>{
       this.campos = lista;
+
       this.campos.forEach(campo => {
         campo.hash = uuidv4();
         campo.preenchimento = !campo.cadastro;
+        if (this.previsaoTempo != null){
+          switch (campo.variavel){
+            case 'cidade':
+              campo.valor = this.previsaoTempo.cidade.nome;
+              break;
+            case 'data':
+              campo.valor = this.previsaoTempo.dataPrevisao;
+              break;
+            case 'tempo':
+                campo.valor = this.previsaoTempo.jsonDatas;
+                break;
+          }
+        }
       });
       setTimeout(() => {
         this.setContainerImageHeight(this.imageContainer.nativeElement);        
