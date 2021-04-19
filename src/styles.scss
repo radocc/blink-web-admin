@@ -47,6 +47,7 @@
 @import './app/pages/configuracao/pages/usuario/usuario-cadastro/usuario-cadastro.component.scss';
 @import './app/pages/configuracao/pages/grupousuario/grupousuario-cadastro/grupousuario-cadastro.component.scss';
 @import './app/pages/configuracao/pages/grupousuario/grupousuario-pesquisa/grupousuario-pesquisa.component.scss';
+@import './app/pages/configuracao/pages/grupousuario/dialog-direitoacesso/direitoacesso-dialog.component.scss';
 @import './app/pages/configuracao/pages/noticia/noticia-cadastro/noticia-cadastro.component.scss';
 @import './app/pages/configuracao/pages/noticia/noticia-pesquisa/noticia-pesquisa.component.scss';
 @import './app/pages/configuracao/pages/noticia/noticia-cadastro/noticia-cadastro.component.scss';
@@ -139,6 +140,7 @@ PLAYER
 @include page-configuracao-previsaotempoimagem-pesquisa($theme);
 @include page-configuracao-previsaotempoimagem-cadastro($theme);
 @include app-galeria-conteudo-playlist($theme);
+@include app-dialog-direito-acesso-grupo($theme);
 
 @include page-cadastro($theme);
 @include conteudo-row($theme);

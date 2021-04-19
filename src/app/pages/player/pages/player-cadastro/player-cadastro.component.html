@@ -31,10 +31,10 @@
                                 <div class=" p-field rd-col ">
                                     <label class="label-field" translate>EQUIPAMENTO</label>
                                     <p-autoComplete formControlName="equipamento" 
-                                        [suggestions]="equipamentos" (completeMethod)="pesquisarEquipamento($event.query)" field="nome" [dropdown]="true">
+                                        [suggestions]="equipamentos" (completeMethod)="pesquisarEquipamento($event.query)" [dropdown]="true">
                                         <ng-template let-equipamento pTemplate="item">
                                             <div>{{equipamento.nome}} - {{equipamento.uuid}} </div>
-                                        </ng-template>
+                                        </ng-template> 
                                     </p-autoComplete>
                                     <small id="equipamento" *ngIf="form.controls['equipamento'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div>                           

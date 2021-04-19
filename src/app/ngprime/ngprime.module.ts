@@ -35,6 +35,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 import {InputMaskModule} from 'primeng/inputmask';
 import {PasswordModule} from 'primeng/password';
 import {GalleriaModule} from 'primeng/galleria';
+import {TreeModule} from 'primeng/tree';
 
 @NgModule({
   declarations: [],
@@ -74,7 +75,8 @@ import {GalleriaModule} from 'primeng/galleria';
     SplitButtonModule,
     InputMaskModule,
     PasswordModule,
-    GalleriaModule
+    GalleriaModule,
+    TreeModule
   ],
   exports:[
     ButtonModule,
@@ -111,7 +113,8 @@ import {GalleriaModule} from 'primeng/galleria';
     SplitButtonModule,
     InputMaskModule,
     PasswordModule,
-    GalleriaModule
+    GalleriaModule,
+    TreeModule
   ]
 })
 export class NgPrimeModule { }

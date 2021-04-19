@@ -1,0 +1,24 @@
+<div class="app-dialog-direito-acesso-grupo">
+    <ng-template pTemplate="header">
+        <h2>
+            {{'DEFINIR_ACESSOS'|translate}}&nbsp;{{grupoUsuario?.nome}}
+        </h2>
+    </ng-template>
+    <div class="rd-col">
+    
+        <div class="rd-row div-tree ">
+            <p-tree [value]="nodes" selectionMode="checkbox" [(selection)]="nodesSelected" 
+            [propagateSelectionUp]="true" [propagateSelectionDown]="true" (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
+                <ng-template let-node  pTemplate="default">
+                    <span>{{node.label |translate}}</span>
+                </ng-template>
+            </p-tree>            
+
+        </div>
+        <p-progressBar *ngIf="buscando" mode="indeterminate"></p-progressBar>
+        <p-messages></p-messages>   
+        <div class="div-footer">        
+            <button pButton class="p-mr-2" type="button" label="{{'SALVAR'|translate}}" translate (click)="salvar()"></button>
+        </div>
+    </div>    
+</div>

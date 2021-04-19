@@ -22,6 +22,8 @@
                             <label for="descricao" translate>DESCRICAO</label>
                             <textarea pInputTextarea  rows="6" formControlName="descricao"></textarea>
                         </div>
+                        <button *ngIf="grupoUsuario?.id != null" type="button" class="p-mr-2" label="{{'DEFINIR_ACESSOS'|translate}}"  pButton pRipple 
+                         (click)="abrirDireitosAcesso()"></button>
                     </div> 
                 </form>      
             </div>  
