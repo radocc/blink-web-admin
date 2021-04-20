@@ -29,6 +29,7 @@ import { PrevisaoTempoImagemCadastroComponent } from './pages/previsaotempoimage
 import { PrevisaoTempoImagemPesquisaComponent } from './pages/previsaotempoimagem/previsaotempoimagem-pesquisa/previsaotempoimagem-pesquisa.component';
 import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
 import { AmbienteNovoCadastroComponent } from './pages/ambientenovo/ambientenovo-cadastro/ambientenovo-cadastro.component';
+import { NgxMaskModule } from 'ngx-mask';
 import { DireitoAcessoDialogComponent } from './pages/grupousuario/dialog-direitoacesso/direitoacesso-dialog.component';
 
 const routes: Routes = [
@@ -183,7 +184,8 @@ const routes: Routes = [
       RouterModule.forChild(routes),
       DragDropModule,
       MatIconModule,
-      PagecadastroModule
+      PagecadastroModule,
+      NgxMaskModule.forRoot()
     ]
   })
   export class ConfiguracaoModule { }

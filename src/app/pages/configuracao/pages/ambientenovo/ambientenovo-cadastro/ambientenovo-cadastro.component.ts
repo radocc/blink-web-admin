@@ -1,3 +1,4 @@
+import { Loteria } from './../../../../../models/loteria';
 import { MD5Service } from '../../../../../services/base/md5.service';
 import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { Usuario } from '@radoccmodels/base/usuario';
@@ -54,7 +55,7 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
     public estadoChangeObserver: any;
     public usuario: Usuario = new Usuario();
     public listaIdioma: Idioma[];
-    public mascara: string = '000000000000000';
+    public mascara: string = '999.999.999-99?';
     public confirmaSenha: string;
     private md5Service: MD5Service = new MD5Service();
 
@@ -120,7 +121,7 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
             email: [null, Validators.compose([Validators.required, CustomValidators.email])],
             fantasiaUsuario: [null],
             login: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50)])],
-            cnpjUsuario: [null, Validators.compose([Validators.required, Validators.minLength(8)])],
+            cnpjUsuario: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
             celularUsuario: [null],
             telefoneUsuario: [null],
             senha: senha,
@@ -170,7 +171,10 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
             this.buscarCep(value);
         })
         this.form.controls['cnpjUsuario'].valueChanges.subscribe((value) => {
-            this.validarMascara(value);
+            //this.validarMascara(value);
+        });
+        this.form.controls['numeroUsuario'].valueChanges.subscribe((value) => {
+            this.calcularTotal();
         });
 
     }
@@ -264,16 +268,20 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         });
     }
 
-    public validarMascara(cnpj) {
+    public validarMascara(event, input) {
+        const cnpj = input.getUnmaskedValue();
         if (cnpj === undefined) {
             return;
         }
-        if (cnpj.length <= 11 && this.mascara != '990.000.000-09999') {
-            this.mascara = '990.000.000-09999';
-        } else if (cnpj.length > 11 && this.mascara != '99.000.000/0000-99') {
-            this.mascara = '99.000.000/0000-99';
+        if (cnpj.length <= 11) {
+            this.mascara = '999.999.999-99?9';
+        } else if (cnpj.length > 11) {
+            this.mascara = '99.999.999/9999-99';
+            
         }
+        input.value = cnpj;
     }
+
 
     public displayFn(value: any): string {
         return value && typeof value === 'object' ? value.nome : value;
@@ -341,9 +349,11 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
 
             });
 
-        }, erro => {
-            this.page.showErrorMsg("CEP_INVALIDO")
-        });
+        },
+            //  erro => {
+            //     this.page.showErrorMsg("CEP_INVALIDO")
+            // }
+        );
     }
 
     /**************** licença ********************* */
@@ -370,14 +380,14 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         this.periodo = value;
     }
 
-    // public marcarItem(index: number) {
-    //     let a = !this.listaAdicional[index].marcado;
-    //     setTimeout(() => {
-    //         this.listaAdicional[index].marcado = a;
-    //         this.calcularTotal()
-    //         this.resolveMarcados();
-    //     }, 50);
-    // }
+    public marcarItem(index: number) {
+        let a = !this.listaAdicional[index].marcado;
+        setTimeout(() => {
+            this.listaAdicional[index].marcado = a;
+            this.calcularTotal()
+            this.resolveMarcados();
+        }, 50);
+    }
 
     //ajustar adicionais para o envio
     public montarAdicionais() {
