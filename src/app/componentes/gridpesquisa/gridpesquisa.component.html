@@ -52,8 +52,11 @@
                     <ng-template pTemplate="body" let-item>
                         <tr [pSelectableRow]="item" (dblclick)="onRowSelect(item)">
                             <td *ngFor='let coluna of colunas' [ngStyle]="{'width': coluna.width + 'px'}" class="grid-cell">
-                                <div *ngIf="coluna.tipo.toUpperCase() != 'timestamp'.toUpperCase()" translate>{{item[coluna.prop]}}</div>
-                                <div *ngIf="coluna.tipo.toUpperCase() == 'timestamp'.toUpperCase()" translate>{{item[coluna.prop] | date: coluna.mascara}}</div>
+                                <div *ngIf="coluna.tipo.toUpperCase() == 'STRING'" translate>{{item[coluna.prop]}}</div>
+                                <div *ngIf="coluna.tipo.toUpperCase() == 'INTEGER' || coluna.tipo.toUpperCase() == 'LONG'" translate>{{item[coluna.prop]}}</div>
+                                <div *ngIf="coluna.tipo.toUpperCase() == 'DECIMAL' || coluna.tipo.toUpperCase() == 'DOUBLE'" translate>{{item[coluna.prop]|currency:coluna.mascara}}</div>
+                                <div *ngIf="coluna.tipo.toUpperCase() == 'BOOLEAN'" translate>{{item[coluna.prop] == true ? 'SIM':'NAO'}}</div>
+                                <div *ngIf="coluna.tipo.toUpperCase() == 'TIMESTAMP'" translate>{{item[coluna.prop] | date: coluna.mascara}}</div>
                             </td>
                         </tr>
                     </ng-template>
