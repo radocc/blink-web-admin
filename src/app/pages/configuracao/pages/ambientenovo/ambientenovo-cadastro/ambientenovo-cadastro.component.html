@@ -30,9 +30,9 @@
                             <div class="p-fluid p-formgrid p-grid">
                                 <div class="p-field p-col">
                                     <label for="cnpj">{{'CNPJ' | translate}}</label>
-                                    <input id="cnpj" type="text" mask="00.000.000/0000-00" name="cnpjEmpresa"
-                                        formControlName="cnpjEmpresa" required validaCpfCnpj
-                                        (blur)="blurFocusCNPJEmpresa()" pInputText />
+                                    <p-inputMask #inputCnpj id="cnpj" type="text" mask="99.999.999/9999-99" name="cnpjEmpresa"
+                                        formControlName="cnpjEmpresa"  required
+                                        validaCpfCnpj (blur)="blurFocusCNPJEmpresa()"></p-inputMask>
                                     <small id="cnpj"
                                         *ngIf="form.controls['cnpjEmpresa'].hasError('required') && form.controls['cnpjEmpresa'].touched"
                                         class="mat-text-warn" translate>FAVOR_INFORMAR_O_CNPJ_</small>
@@ -43,7 +43,7 @@
 
                                 <div class="p-field p-col">
                                     <label for="cep">{{'CEP' |translate}}</label>
-                                    <p-inputMask type="text" mask="99999-999" name="cep" formControlName="cep"
+                                    <p-inputMask type="decimal" mask="99999-999" name="cep" formControlName="cep"
                                         placeholder="99999-999"></p-inputMask>
                                     <small id="cep"
                                         *ngIf="form.controls['cep'].hasError('required') && form.controls['cep'].touched"
@@ -92,8 +92,8 @@
 
                             <div class="p-field p-col">
                                 <label for="rua">{{'NUMERO' |translate}}</label>
-                                <input matInput type="text" name="numero" formControlName="numero" required
-                                    pInputText />
+                                <p-inputNumber matInput nome="decimal" formControlName="numero" [useGrouping]="false"
+                                    required></p-inputNumber>
                             </div>
 
                             <div class="p-field p-col">
@@ -131,7 +131,7 @@
                             <div class="p-field p-col">
                                 <label for="telefone">{{'TELEFONE' |translate}}</label>
                                 <p-inputMask id="telefone" type="text" mask="(99) 999-9999" placeholder="(99) 999-9999"
-                                    formControlName="telefoneEmpresa" required></p-inputMask>
+                                    formControlName="telefoneEmpresa"></p-inputMask>
 
                                 <!-- <input id="telefone" type="text" mask="(00) 0000-0000"
                                     [specialCharacters]="['(' ,')','-',' ' ]" formControlName="telefoneEmpresa" required
@@ -184,7 +184,7 @@
 
                             <div class="p-field p-col">
                                 <label for="senha">{{'SENHA' |translate}}</label>
-                                <input id="senha" formControlName="senha" type="password" pPassword/>
+                                <input id="senha" formControlName="senha" type="password" pPassword />
                                 <small id="senha"
                                     *ngIf="form.controls['senha'].hasError('required') && form.controls['senha'].touched"
                                     class="mat-text-warn" translate>FAVOR_INFORMAR_A_SENHA_</small>
@@ -212,9 +212,9 @@
 
                             <div class="p-field p-col">
                                 <label for="cnpj-cpf">{{'CNPJ_CPF' |translate}}</label>
-                                <p-inputMask id="cnpj-cpf" type="text" mask="999.999.999-99"
-                                    formControlName="cnpjUsuario" placeholder="999.999.999-99" required validaCpfCnpj>
-                                </p-inputMask>
+                                <input id="cnpj-cpf" type="text" mask="000.000.000-00||00.000.000/0000-00" [validation]="true"
+                                    formControlName="cnpjUsuario" required validaCpfCnpj  pInputText/>
+                                
                                 <!-- <p-inputMask id="cnpj-cpf" type="text" mask="{{mascara}}" formControlName="cnpjUsuario"
                                     required validaCpfCnpj /> -->
                                 <small id="cnpj-cpf"
@@ -231,7 +231,7 @@
                             <div class="p-field p-col">
                                 <label for="telefone-u">{{'TELEFONE' |translate}}</label>
                                 <p-inputMask id="telefone-u" type="text" mask="(99) 999-9999"
-                                    placeholder="(99) 999-9999" formControlName="telefoneUsuario" required>
+                                    placeholder="(99) 999-9999" formControlName="telefoneUsuario">
                                 </p-inputMask>
                                 <!-- <input type="text" mask="(00) 0000-0000"
                                             [specialCharacters]="['(' ,')','-',' ' ]"
@@ -241,7 +241,7 @@
                             <div class="p-field p-col">
                                 <label for="celular">{{'CELULAR' |translate}}</label>
                                 <p-inputMask id="celular" type="text" mask="(99) 999-9999" placeholder="(99) 999-9999"
-                                    formControlName="celularUsuario" required>
+                                    formControlName="celularUsuario">
                                 </p-inputMask>
                                 <!-- <input type="text" [specialCharacters]="['(' ,')','-',' ' ]" mask="(00) 0 0000-0000"
                                     placeholder="{{'CELULAR' | translate }}" formControlName="celularUsuario" /> -->
@@ -250,11 +250,12 @@
                             <div class="p-field p-col">
                                 <label for="idioma">{{'IDIOMA' |translate}}</label>
                                 <p-autoComplete formControlName="idioma" [suggestions]="listaIdioma"
-                                        (completeMethod)="findIdioma($event.query)" field="nome" [dropdown]="true" appendTo="body">
-                                        <ng-template let-idioma pTemplate="item">
-                                            <div>{{ idioma.nome }}</div>
-                                        </ng-template>
-                                    </p-autoComplete>
+                                    (completeMethod)="findIdioma($event.query)" field="nome" [dropdown]="true"
+                                    appendTo="body">
+                                    <ng-template let-idioma pTemplate="item">
+                                        <div>{{ idioma.nome }}</div>
+                                    </ng-template>
+                                </p-autoComplete>
                             </div>
                         </div>
                     </div>
@@ -267,9 +268,10 @@
                             <div class="p-field p-col">
                                 <label for="plano">{{'PLANO' |translate}}</label>
                                 <p-autoComplete formControlName="plano" [suggestions]="listaPlano"
-                                    (completeMethod)="findPlanoPorNome($event.query)" field="nome" [dropdown]="true">
+                                    (completeMethod)="findPlanoPorNome($event.query)" field="nome" onselect="calcularTotal()"
+                                    [dropdown]="true">
                                     <ng-template let-plano pTemplate="item">
-                                        <div>{{plano.nome}} {{plano.valor | currency:'BRL':'1.2-2'}}</div>
+                                        <div>{{plano.nome}}; {{plano.valor | currency:'BRL':'1.2-2'}}</div>
                                     </ng-template>
                                 </p-autoComplete>
                                 <small id="plano"
@@ -280,9 +282,10 @@
                             </div>
                             <div class="p-field p-col">
                                 <label for="periodo">{{'PERIODO' |translate}}</label>
-                                
-                                <p-autoComplete formControlName="periodo" [suggestions]="listaPeriodo"
-                                    (completeMethod)="findPeriodoPorNome($event.query)" field="descricao" [dropdown]="true">
+
+                                <p-autoComplete (blur)="validarData()" formControlName="periodo"
+                                    [suggestions]="listaPeriodo" (completeMethod)="findPeriodoPorNome($event.query)"
+                                    field="descricao" [dropdown]="true">
                                     <ng-template let-periodo pTemplate="item">
                                         <div>{{periodo.descricao}}</div>
                                     </ng-template>
@@ -303,7 +306,7 @@
                             <div class="p-field p-col">
                                 <label for="numero">{{'NUMERO_USUARIOS' |translate}}</label>
                                 <p-inputNumber formControlName="numeroUsuario" mode="decimal" [showButtons]="true"
-                                    inputId="numero" (blur)="calcularTotal()" [min]="0" [max]="1000" required>
+                                    inputId="numero" [min]="0" [max]="1000" required>
                                 </p-inputNumber>
                                 <!-- <input autocomplete="off" type="number" formControlName="numeroUsuario"
                                     (blur)="calcularTotal()" placeholder="{{'NUMERO_USUARIOS' | translate}}" required> -->
@@ -327,24 +330,24 @@
 
                             <div class="p-field p-col">
                                 <label for="inicio">{{'DATA_INICIO' |translate}}</label>
-                                <p-calendar formControlName="dataInicio" [showIcon]="true" dateFormat="dd/mm/yy" appendTo="body"
-                                    inputId="inicio"></p-calendar>
+                                <p-calendar formControlName="dataInicio" [showIcon]="true" dateFormat="dd/mm/yy"
+                                    appendTo="body" inputId="inicio"></p-calendar>
                             </div>
 
                             <div class="p-field p-col">
                                 <label for="fim">{{'DATA_FIM' |translate}}</label>
-                                <input autocomplete="off" type="text" formControlName="dataFim" slotChar="dd/mm/yyyy" appendTo="body"
-                                    pInputText>
+                                <input autocomplete="off" type="text" formControlName="dataFim" slotChar="dd/mm/yyyy"
+                                    appendTo="body" pInputText>
                             </div>
                             <div class="p-field p-col">
                                 <label for="total">{{'VALOR_TOTAL' |translate}}</label>
-                                <p-inputNumber formControlName="valorTotal" inputId="total" mode="currency"
+                                <p-inputNumber autocomplete="off" formControlName="valorTotal" inputId="total" mode="currency"
                                     currency="BRL" locale="pt-BR" [disabled]="true">
                                 </p-inputNumber>
                                 <!-- <p-inputMask matInput autocomplete="off" type="tel" currencyMask
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                     formControlName="valorTotal" [disabled]="true"
-                                    placeholder="{{'VALOR_TOTAL' | translate}}"></p-inputMask> -->
+                                    ></p-inputMask> -->
                                 <small id="total" class="p-error">{{'CAMPO_OBRIGATORIO' | translate}}</small>
                             </div>
                         </div>
@@ -352,6 +355,15 @@
                     </div>
 
                 </p-tabPanel>
+                <!-- <div class="rd-flex-auto rd-h-100 p-d-flex p-flex-row p-mt-4 ">
+                    <div class="rd-flex-auto p-mb-2 p-col-6">
+                        <router-outlet name="pesquisa"></router-outlet>
+                    </div>
+                    <div class="rd-flex-auto p-mb-2 p-col-6">
+                        <router-outlet name="cadastro"></router-outlet>
+                    </div>
+                    
+                </div> -->
             </p-tabView>
             <!-- </mat-card-content>
             <mat-card-actions>
