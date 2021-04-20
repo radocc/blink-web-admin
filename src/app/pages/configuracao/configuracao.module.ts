@@ -30,6 +30,7 @@ import { PrevisaoTempoImagemPesquisaComponent } from './pages/previsaotempoimage
 import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
 import { AmbienteNovoCadastroComponent } from './pages/ambientenovo/ambientenovo-cadastro/ambientenovo-cadastro.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { DireitoAcessoDialogComponent } from './pages/grupousuario/dialog-direitoacesso/direitoacesso-dialog.component';
 
 const routes: Routes = [
     {
@@ -167,7 +168,11 @@ const routes: Routes = [
       NoticiaPesquisaComponent,
       PrevisaoTempoImagemCadastroComponent,
       PrevisaoTempoImagemPesquisaComponent,
-      AmbienteNovoCadastroComponent
+      AmbienteNovoCadastroComponent,
+      DireitoAcessoDialogComponent
+    ],
+    entryComponents:[
+      DireitoAcessoDialogComponent
     ],
     imports: [
       CommonModule,

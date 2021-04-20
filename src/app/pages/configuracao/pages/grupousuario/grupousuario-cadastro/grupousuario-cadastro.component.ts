@@ -7,13 +7,15 @@ import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadas
 import { GrupoUsuario } from '@radoccmodels/base/grupousuario';
 import { GrupoUsuarioService } from '@radoccservices/base/grupousuario-service';
 import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { DireitoAcessoDialogComponent } from '../dialog-direitoacesso/direitoacesso-dialog.component';
 
 @Component({
   selector: 'app-grupousuario-cadastro',
   templateUrl: './grupousuario-cadastro.component.html',
   styleUrls: ['./grupousuario-cadastro.component.scss'],
   providers:[ 
-    MessageService,GrupoUsuarioService
+    MessageService,GrupoUsuarioService, DialogService
   ]
 })
 export class GrupoUsuarioCadastroComponent extends CadForm implements OnInit {
@@ -37,7 +39,8 @@ export class GrupoUsuarioCadastroComponent extends CadForm implements OnInit {
   
   public grupoUsuario:GrupoUsuario = new GrupoUsuario();
 
-  constructor(private grupoUsuarioService:GrupoUsuarioService,public eventService:EventBrokerService) {
+  constructor(private grupoUsuarioService:GrupoUsuarioService,public eventService:EventBrokerService,
+    public dialogService:DialogService) {
     super(eventService);
 
   }
@@ -48,7 +51,7 @@ export class GrupoUsuarioCadastroComponent extends CadForm implements OnInit {
 
   public novo(){
     super.novo();
-    this.grupoUsuario = null;
+    this.grupoUsuario = new GrupoUsuario();
   }
    
   public buscar(id:number, editavel:boolean){
@@ -90,6 +93,19 @@ export class GrupoUsuarioCadastroComponent extends CadForm implements OnInit {
       console.log(error);
     })
   }
- 
+
+  public abrirDireitosAcesso(){
+    const dialog = this.dialogService.open(DireitoAcessoDialogComponent, {
+      data:this.grupoUsuario,
+      modal:true,
+      showHeader:true,
+      closable:true,
+      header:'Definir Acessos',
+      closeOnEscape:true
+    });
+    dialog.onClose.subscribe((playlist)=>{
+      
+    });
+  }
 
 }

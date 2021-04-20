@@ -31,4 +31,12 @@ export class DireitoGrupoService extends AbstractService<DireitoGrupo> {
         return this.http.get<Direito[]>(this.urlWebBase + `/find/tela/${idTela}/acao/${idAcao}`).pipe();
     }
 
+    public findByIdTelaIdGrupo(id: number, idGrupoUsuario:number): Observable<Direito[]> {
+        return this.http.get<Direito[]>(this.urlWebBase +`/findbyidtela/${id}/grupousuario/${idGrupoUsuario}`).pipe();
+    }
+
+    public montarDireitos(grupoUsuario): Observable<any> {
+        return this.http.post(this.urlWebBase +`/montar/direitos`, grupoUsuario).pipe();
+    }
+
 }

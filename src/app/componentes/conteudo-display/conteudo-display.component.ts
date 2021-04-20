@@ -48,12 +48,13 @@ export class ConteudoDisplayComponent implements OnInit {
 
   public montar(){
     this.templateCampoService.getPreviewByConteudoTemplate(this.conteudo.id,this.template.id).subscribe((lista)=>{
-      this.campos = lista;
-
+      this.campos = lista;      
+      
       this.campos.forEach(campo => {
         campo.hash = uuidv4();
         campo.preenchimento = !campo.cadastro;
         if (this.previsaoTempo != null){
+          let vetorPrevisao = JSON.parse(this.previsaoTempo.jsonDatas);
           switch (campo.variavel){
             case 'cidade':
               campo.valor = this.previsaoTempo.cidade.nome;
@@ -61,9 +62,24 @@ export class ConteudoDisplayComponent implements OnInit {
             case 'data':
               campo.valor = this.previsaoTempo.dataPrevisao;
               break;
-            case 'tempo':
-                campo.valor = this.previsaoTempo.jsonDatas;
+            case 'descricao':
+                campo.valor = vetorPrevisao[0].descricao;
                 break;
+            case 'tempo':
+              campo.valor = vetorPrevisao[0].tempo;
+                break;
+            case 'maxima':
+              campo.valor = vetorPrevisao[0].maxima;
+              break;
+            case 'minima':
+              campo.valor = vetorPrevisao[0].minima;
+              break;
+            case 'iuv':
+              campo.valor = vetorPrevisao[0].iuv;
+              break;
+            case 'url':
+              campo.valor = vetorPrevisao[0].url;
+              break;
           }
         }
       });

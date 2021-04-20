@@ -287,8 +287,8 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     let top = (Math.round(position.y) / this.imageHeight) * 100;
     // let left = Math.round(position.x);
     // let top = Math.round(position.y);
-    if (left < 0 || left == Infinity) left = 0;
-    if (top < 0 || top == Infinity) top = 0;
+    if (left < 0 || left == Infinity || isNaN(left)) left = 0;
+    if (top < 0 || top == Infinity || isNaN(top)) top = 0;
 
     // console.log('left: ', left);
     // console.log('top: ', top);
