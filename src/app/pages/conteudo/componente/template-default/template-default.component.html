@@ -17,6 +17,10 @@
                     </p-autoComplete>
                     <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                 </div> 
+                <div class="p-field rd-col" *ngFor="let camp of campos">
+                    <label for="titulo">{{camp.nome |translate}}</label>
+                    <input id="titulo" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
+                </div> 
                 <div class="tempo rd-row rd-gap">
                     <label class="label-field">{{'TEMPO_DE_EXIBICAO'|translate}}</label>
                     <span class=" rd-row">                

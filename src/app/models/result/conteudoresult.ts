@@ -9,5 +9,6 @@ export class ConteudoResult  {
     public tempoExibicao:number;
     public data:Date;
     public url:string;
+    public permiteEdicao:boolean
     
 }

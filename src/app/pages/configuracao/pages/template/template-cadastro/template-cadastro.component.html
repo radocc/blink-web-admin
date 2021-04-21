@@ -27,7 +27,7 @@
                 <!-- [ngStyle]="{top: campo.positionLeft+'%', left: campo.positionTop+'%'}" -->
                 <div class="drag-header p-d-flex p-ai-center" cdkDragHandle>
                     <div class="btnDrag"><mat-icon>open_with</mat-icon></div>
-                    <div class="grad-name p-m-1">{{campo.nome}}</div>
+                    <div class="grad-name p-m-1">{{campo.nome}}&nbsp;{{ campo.indice != null?campo.indice: ''}}</div>
                 </div>
                 <div class="drag-content" name="drag-content">
                     <p-inplace *ngIf="campo.tipo != 4" closable="closable">
@@ -65,7 +65,7 @@
                 <ng-template class="p-d-flex" pTemplate="header">
                     <div class="rd-w-100 rd-row">
                         <div class="rd-flex p-m-auto">
-                            {{campo.nome ? campo.nome : 'Campo'}}
+                            {{campo.nome ? campo.nome : 'Campo'}}&nbsp;{{ campo.indice != null?campo.indice: ''}}
                         </div>
                         <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="excluirCampo(campo)"></button>
                     </div>                    
@@ -82,6 +82,10 @@
                             <div class="p-field p-col-4" *ngIf="campo.preenchimento">
                                 <label for="txtCampoTipo">{{'VARIAVEL' | translate}}</label>
                                 <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            </div>
+                            <div class="p-field p-col-2" >
+                                <label for="txtCampoIndice">{{'INDICE' | translate}}</label>
+                                <input type="number" id="txtCampoIndice" pInputText [(ngModel)]="campo.indice" [ngModelOptions]="{standalone: true}">
                             </div>
                             <div class="p-field p-col-4" *ngIf="campo.variavel == 'variavelCustomizado'">
                                 <label for="txtCampoCustomizado">{{'CUSTOMIZE' | translate}}</label>

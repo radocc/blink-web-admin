@@ -1,5 +1,4 @@
 import { ActivatedRoute } from '@angular/router';
-import { ConteudoLoteria } from './../../../../models/conteudoloteria';
 import { EventBrokerService } from 'ng-event-broker'; 
 import { Events } from './../../../../models/enum/events';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +17,7 @@ import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
+import { ConteudoLoteria } from '@radoccmodels/conteudoloteria';
 
 @Component({
   selector: 'app-template-loteria-conteudo',

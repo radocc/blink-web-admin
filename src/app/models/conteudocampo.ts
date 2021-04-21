@@ -1,4 +1,3 @@
-import { jsonIgnore } from "json-ignore";
 import { BaseEntityImpl } from "./baseentityimpl";
 
 export class ConteudoCampo extends BaseEntityImpl {

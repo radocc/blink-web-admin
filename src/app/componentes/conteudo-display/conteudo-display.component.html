@@ -8,21 +8,41 @@
         </video>
         <div id="campos-container" class="campos-container">
             <div [id]="campo.hash" class="div-campo" *ngFor="let campo of campos">
-                <div *ngIf="campo.tipo == 7" class="drag-content " >
-                    <span [ngStyle]="{
+                <div [ngSwitch]="campo.tipo" class="drag-content " >
+                    <span *ngSwitchCase="7" [ngStyle]="{
                             'font-family': campo.fonte,
                             'font-size': campo.fonteTamanho + 'px',
                             'font-weight': campo.fonteEspessura,
                             'color': campo.fonteCor
-                        }">{{campo.nome}}</span>
+                    }">{{campo.nome}}</span>
+                    <span *ngSwitchCase="5" [ngStyle]="{
+                        'font-family': campo.fonte,
+                        'font-size': campo.fonteTamanho + 'px',
+                        'font-weight': campo.fonteEspessura,
+                        'color': campo.fonteCor
+                    }">{{campo.valor | currency}}</span>
+                    <img *ngSwitchCase="4" [ngStyle]="{
+                        'font-family': campo.fonte,
+                        'font-size': campo.fonteTamanho + 'px',
+                        'font-weight': campo.fonteEspessura,
+                        'color': campo.fonteCor
+                    }" [src]="campo.valor">
+                    <span *ngSwitchCase="5" [ngStyle]="{
+                        'font-family': campo.fonte,
+                        'font-size': campo.fonteTamanho + 'px',
+                        'font-weight': campo.fonteEspessura,
+                        'color': campo.fonteCor
+                    }">{{campo.valor | date:'dd/MM/yyyy'}}</span>
+                    <span *ngSwitchDefault [ngStyle]="{
+                        'font-family': campo.fonte,
+                        'font-size': campo.fonteTamanho + 'px',
+                        'font-weight': campo.fonteEspessura,
+                        'color': campo.fonteCor
+                    }">{{campo.valor}}</span>
                 </div>
+                
                 <div *ngIf="campo.tipo != 7" class="drag-content " >
-                    <span [ngStyle]="{
-                            'font-family': campo.fonte,
-                            'font-size': campo.fonteTamanho + 'px',
-                            'font-weight': campo.fonteEspessura,
-                            'color': campo.fonteCor
-                        }">{{campo.valor}}</span>
+                    
                 </div>
             </div>        
         </div>

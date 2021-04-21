@@ -1,5 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
-import { ConteudoLoteria } from '../../../../models/conteudoloteria';
+import { ActivatedRoute } from '@angular/router'; 
 import { EventBrokerService } from 'ng-event-broker'; 
 import { Events } from '../../../../models/enum/events';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +17,9 @@ import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
+import { ConteudoCampo } from '@radoccmodels/conteudocampo';
+import { ConteudoCampoService } from '@radoccservices/conteudocampo-services';
+import { TemplateCampoService } from '@radoccservices/templatecampo-services';
 
 @Component({
   selector: 'app-template-default-conteudo',
@@ -25,7 +27,7 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
   styleUrls: ['./template-default.component.scss'],
   providers:[
     ArquivoService,
-    MessageService,ConteudoService,LoteriaService, TemplateService
+    MessageService,ConteudoService,LoteriaService, TemplateService, TemplateCampoService, ConteudoCampoService
   ]
 })
 export class TemplateDefaultComponent extends CadConteudoComponent implements OnInit {
@@ -41,10 +43,12 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   public conteudo:Conteudo;
   public templates:Template[] = [];
   public tipoConteudo:ETipoConteudo = ETipoConteudo.Receitas;
+  public campos:ConteudoCampo[] = [];
   public titulo:string= 'CADASTRO';
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,
     private templateService:TemplateService, public translateService:TranslateService,
-    private eventService:EventBrokerService, private route:ActivatedRoute) {
+    private eventService:EventBrokerService, private route:ActivatedRoute,
+    private conteudoCampoService:ConteudoCampoService, private templateCampoService:TemplateCampoService) {
       super(msgService, translateService);
   }
 
@@ -89,6 +93,9 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
         this.form.controls['minutos'].setValue(min);
         this.form.controls['segundos'].setValue(segundos);
         this.form.controls['template'].setValue(conteudo.template);
+        this.conteudoCampoService.getPreenchimentoManualByConteudoETemplate(conteudo.id,conteudo.idTemplate).subscribe((lista)=>{
+          this.campos = lista;
+        })
         this.panelAgendamento.setAgendamento(conteudo.agendamento);
       }
     });
@@ -109,7 +116,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = this.form.controls['template'].value.id;
     this.conteudo.template = this.form.controls['template'].value;
-
+    this.conteudo.campos = this.campos;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{
       this.conteudo = conteudo;

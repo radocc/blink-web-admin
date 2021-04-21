@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { Conteudo } from '@radoccmodels/conteudo';
+import { ConteudoLoteria } from '@radoccmodels/conteudoloteria';
 import { PrevisaoTempo } from '@radoccmodels/previsaotempo';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { Template } from '@radoccmodels/template';
@@ -30,6 +31,7 @@ export class ConteudoDisplayComponent implements OnInit {
   public imageHeight = 500;
   public proportion: number = 1;
   public previsaoTempo:PrevisaoTempo;
+  public conteudoLoteria:ConteudoLoteria;
 
   constructor( private msgService:MessageService,private conteudoService:ConteudoService, private templateCampoService:TemplateCampoService) {
     
@@ -42,6 +44,7 @@ export class ConteudoDisplayComponent implements OnInit {
       this.arquivo = conteudo.arquivo;
       this.template = conteudo.template;
       this.previsaoTempo = conteudo.previsaoTempo;
+      this.conteudoLoteria = conteudo.conteudoLoteria;
       this.montar();
     })
   }
@@ -63,22 +66,40 @@ export class ConteudoDisplayComponent implements OnInit {
               campo.valor = this.previsaoTempo.dataPrevisao;
               break;
             case 'descricao':
-                campo.valor = vetorPrevisao[0].descricao;
+                campo.valor = vetorPrevisao[campo.indice].descricao;
                 break;
             case 'tempo':
-              campo.valor = vetorPrevisao[0].tempo;
+              campo.valor = vetorPrevisao[campo.indice].tempo;
                 break;
             case 'maxima':
-              campo.valor = vetorPrevisao[0].maxima;
+              campo.valor = vetorPrevisao[campo.indice].maxima;
               break;
             case 'minima':
-              campo.valor = vetorPrevisao[0].minima;
+              campo.valor = vetorPrevisao[campo.indice].minima;
               break;
             case 'iuv':
-              campo.valor = vetorPrevisao[0].iuv;
+              campo.valor = vetorPrevisao[campo.indice].iuv;
               break;
             case 'url':
-              campo.valor = vetorPrevisao[0].url;
+              campo.valor = vetorPrevisao[campo.indice].url;
+              break;
+          }
+        }else if (this.conteudoLoteria != null){
+          switch (campo.variavel){
+            case 'dataSorteio':
+              campo.valor = this.conteudoLoteria.resultado.dataSorteio;
+              break;
+            case 'codigoSorteio':
+              campo.valor = this.conteudoLoteria.resultado.codigoSorteio;
+              break;
+            case 'numeros':
+              campo.valor = this.conteudoLoteria.resultado.numeros;
+              break;
+            case 'dataProximoSorteio':
+              campo.valor = this.conteudoLoteria.resultado.dataProximoSorteio;
+              break;
+            case 'valorProximoSorteio':
+              campo.valor = this.conteudoLoteria.resultado.valorProximoSorteio;
               break;
           }
         }

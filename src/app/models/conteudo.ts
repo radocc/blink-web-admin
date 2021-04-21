@@ -1,4 +1,3 @@
-import { ConteudoLoteria } from './conteudoloteria';
 import { Arquivo } from "./base/arquivo";
 import { BaseEntityImpl } from "./baseentityimpl";
 import { ConteudoAgendamento } from "./conteudoagendamento";
@@ -8,6 +7,7 @@ import { ConteudoPrevisao } from "./conteudoprevisao";
 import { Template } from "./template";
 import { ConteudoCampo } from './conteudocampo';
 import { PrevisaoTempo } from './previsaotempo';
+import { ConteudoLoteria } from "./conteudoloteria";
 
 export class Conteudo extends BaseEntityImpl {
     
