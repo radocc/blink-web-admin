@@ -17,6 +17,7 @@ import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy, registerLocaleDa
 import { DevionnTranslateLoader } from './modules/share-translate/devionn-translate-loader';
 import { EventBrokerModule } from 'ng-event-broker';
 import { MAT_DATE_FORMATS } from '@angular/material/core'; 
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 registerLocaleData(localePt);
 export const MY_FORMATS = {
@@ -48,7 +49,8 @@ export const MY_FORMATS = {
     NgPrimeModule, 
     HttpClientModule,
     ShareTranslateModule,
-    EventBrokerModule
+    EventBrokerModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
