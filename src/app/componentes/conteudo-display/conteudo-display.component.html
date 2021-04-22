@@ -20,7 +20,7 @@
                         'font-size': campo.fonteTamanho + 'px',
                         'font-weight': campo.fonteEspessura,
                         'color': campo.fonteCor
-                    }">{{campo.valor | currency}}</span>
+                    }">{{campo.valor | currency:'':'1.2-2'}}</span>
                     <img *ngSwitchCase="4" [ngStyle]="{
                         'font-family': campo.fonte,
                         'font-size': campo.fonteTamanho + 'px',

@@ -141,6 +141,8 @@ PLAYER
 @include page-configuracao-previsaotempoimagem-cadastro($theme);
 @include app-galeria-conteudo-playlist($theme);
 @include app-dialog-direito-acesso-grupo($theme);
+@include page-ambiente-novo-theme($theme);
+
 
 @include page-cadastro($theme);
 @include conteudo-row($theme);

@@ -50,6 +50,9 @@ export class ConteudoDisplayComponent implements OnInit {
   }
 
   public montar(){
+    if (this.template == null){
+      return;
+    }
     this.templateCampoService.getPreviewByConteudoTemplate(this.conteudo.id,this.template.id).subscribe((lista)=>{
       this.campos = lista;      
       

@@ -26,6 +26,7 @@ import { AdicionalService } from '@radoccservices/base/adicional-service';
 import { LicencaService } from '@radoccservices/base/licenca-service';
 import { NovoAmbiente } from '@radoccmodels/request/novo-ambiente';
 import { EventBrokerService } from 'ng-event-broker';
+import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-ambientenovo-cadastro',
@@ -70,6 +71,8 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
     public periodoObserver: any;
     public marcarTodos: boolean = false;
     public dataFimString: string;
+    public items: MenuItem[];
+    public activeIndex:number=0;
 
     constructor(private empresaService: EmpresaService,
         public estadoService: EstadoService,
@@ -113,6 +116,26 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
 
 
     ngOnInit() {
+        this.items = [
+            {
+                label: 'Empresa',
+                command: (event: any) => {
+                    this.activeIndex = 0;
+                }
+            },
+            {
+                label: 'Usuário',
+                command: (event: any) => {
+                    this.activeIndex = 1;
+                }
+            },
+            {
+                label: 'Licença',
+                command: (event: any) => {
+                    this.activeIndex = 2;
+                }
+            }
+        ];
         const senha = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)]));
         const confirmeSenha = new FormControl('', CustomValidators.equalTo(senha));
         // const me = this;
@@ -141,16 +164,16 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
             rua: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
             complemento: [null],
             numero: [null],
-            site: [null, Validators.required],
+            site: [null],
             // loginEmpresa: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 
             //licencas
             plano: [null, Validators.required],
             periodo: [null, Validators.required],
             valorTotal: [{ value: null, disabled: true }],
-            numeroUsuario: [null, Validators.required],
-            diaVencimento: [null, Validators.required],
-            dataInicio: [null, Validators.required],
+            numeroUsuario: [1, Validators.required],
+            diaVencimento: [4, Validators.required],
+            dataInicio: [new Date(), Validators.required],
             dataFim: [{ value: null, disabled: true }, Validators.required],
         });
 
@@ -159,6 +182,9 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         });
         this.buscarDados();
         this.form.controls['dataInicio'].valueChanges.subscribe((value) => {
+            this.onChangeData();
+        })
+        this.form.controls['periodo'].valueChanges.subscribe((value) => {
             this.onChangeData();
         })
         this.form.controls['estado'].valueChanges.subscribe((value) => {
@@ -174,6 +200,9 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
             //this.validarMascara(value);
         });
         this.form.controls['numeroUsuario'].valueChanges.subscribe((value) => {
+            this.calcularTotal();
+        });
+        this.form.controls['plano'].valueChanges.subscribe((value) => {
             this.calcularTotal();
         });
 
@@ -261,8 +290,8 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
 
         this.empresaService.novoAmbiente(novoAmbiente).subscribe((data: Empresa) => {
             this.empresa = data;
-            this.page.showErrorMsg('SALVO_COM_SUCESSO');
-            this.router.navigate(['admin/empresa-pesquisa']);
+            this.page.showSuccessMsg('SALVO_COM_SUCESSO');
+            this.form.reset();
         }, error => {
             this.page.showErrorMsg(error);
         });
@@ -508,5 +537,9 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
                     inputs.item(i).dispatchEvent(new Event('input'));
             }
         }, 1000);
+    }
+
+    public onIndexStepChange(event){
+        console.log(event);
     }
 }

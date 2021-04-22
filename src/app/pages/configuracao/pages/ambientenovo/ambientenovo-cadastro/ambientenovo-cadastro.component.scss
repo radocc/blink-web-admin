@@ -1,5 +1,17 @@
 @mixin page-ambiente-novo-theme($theme) {
     $primary: map-get($theme, primary);
+
+    app-ambientenovo-cadastro {
+        margin: 50px !important;
+        position: absolute;
+        left: 50px;
+        right: 50px;
+        bottom: 50px;
+        top: 50px;
+        .conteiner-step{
+            margin-top: 50px;
+        }
+    }
     .conteudo {
         position: absolute;
         top: 0;

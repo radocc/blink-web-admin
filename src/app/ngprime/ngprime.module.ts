@@ -36,7 +36,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {PasswordModule} from 'primeng/password';
 import {GalleriaModule} from 'primeng/galleria';
 import {TreeModule} from 'primeng/tree';
-
+import {StepsModule} from 'primeng/steps';
 @NgModule({
   declarations: [],
   imports: [
@@ -76,7 +76,8 @@ import {TreeModule} from 'primeng/tree';
     InputMaskModule,
     PasswordModule,
     GalleriaModule,
-    TreeModule
+    TreeModule,
+    StepsModule
   ],
   exports:[
     ButtonModule,
@@ -114,7 +115,8 @@ import {TreeModule} from 'primeng/tree';
     InputMaskModule,
     PasswordModule,
     GalleriaModule,
-    TreeModule
+    TreeModule,
+    StepsModule
   ]
 })
 export class NgPrimeModule { }

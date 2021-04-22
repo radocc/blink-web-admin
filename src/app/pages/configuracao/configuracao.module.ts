@@ -136,13 +136,12 @@ const routes: Routes = [
           path:'previsaotempoimagem-cadastro',
           outlet: 'cadastro',
           component: PrevisaoTempoImagemCadastroComponent
-        },
-        {
-          path:'ambientenovo-cadastro',
-          component: AmbienteNovoCadastroComponent,
-          outlet: 'all'
-        }
+        },        
       ]
+    },
+    {
+      path:'ambientenovo-cadastro',
+      component: AmbienteNovoCadastroComponent,      
     }
   ]
   
