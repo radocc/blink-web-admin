@@ -12,7 +12,25 @@
         .input-tempo{
             width: 70px;
         }
-            
+        
+        .p-fileupload .p-fileupload-content{
+            padding: 0px !important;
+        }
+        .p-fileupload{
+            margin-bottom: 8px;
+        }
+        .arquivo {
+            line-height: 40px;
+            margin-left: 16px;
+        }
+        
+        .image-container{
+            width: 900px;
+            height: 600px;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+        }
+
         p-autocomplete {
             display: flex;
             span {

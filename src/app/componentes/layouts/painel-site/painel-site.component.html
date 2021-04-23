@@ -10,19 +10,19 @@
                 <p-dropdown [options]="empresas" [(ngModel)]="empresaSelecionada" optionLabel="razaoSocial" (onChange)="alterarEmpresa()"></p-dropdown>
             </div>
             <div class="item-menu " [ngClass]="{'selected':rotaSelecionada=='conteudo'}">
-                <span routerLink="conteudo" (click)="navegar('conteudo')" translate>CONTEUDOS</span>
+                <span class="uppercase" routerLink="conteudo" (click)="navegar('conteudo')" translate>CONTEUDOS</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='publicacao'}">
-                <span routerLink="publicacao"  (click)="navegar('publicacao')" translate>PUBLICACOES</span>
+                <span class="uppercase" routerLink="publicacao"  (click)="navegar('publicacao')" translate>PUBLICACOES</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='playlist'}">
-                <span (click)="navegar('playlist','admin/player/panel/(pesquisa:playlist-pesquisa//cadastro:playlist-cadastro)')" translate>PLAYLIST</span>
+                <span class="uppercase" (click)="navegar('playlist','admin/player/panel/(pesquisa:playlist-pesquisa//cadastro:playlist-cadastro)')" translate>PLAYLIST</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='player'}">
-                <span (click)="navegar('player','admin/player/panel/(pesquisa:player-pesquisa//cadastro:player-cadastro)')" translate>PLAYERS</span>
+                <span class="uppercase" (click)="navegar('player','admin/player/panel/(pesquisa:player-pesquisa//cadastro:player-cadastro)')" translate>PLAYERS</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='grupo'}">
-                <span (click)="navegar('grupo','admin/player/panel/(pesquisa:grupoplayer-pesquisa//cadastro:grupoplayer-cadastro)')" translate>GRUPO</span>
+                <span class="uppercase" (click)="navegar('grupo','admin/player/panel/(pesquisa:grupoplayer-pesquisa//cadastro:grupoplayer-cadastro)')" translate>GRUPO</span>
             </div>
             <!-- <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='relatorio'}">
                 <span routerLink="relatorio"  (click)="navegar('relatorio')" translate>RELATORIOS</span>
@@ -31,14 +31,14 @@
                 <span routerLink="usuario" (click)="navegar('usuario')"  translate>USUARIOS</span>
             </div> -->
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='configuracao'}" >
-                <span (click)="navegar('configuracao');menu.toggle($event)"  translate>CONFIGURACAO</span>
+                <span class="uppercase" (click)="navegar('configuracao');menu.toggle($event)"  translate>CONFIGURACAO</span>
                 <p-menu #menu [popup]="true" [model]="itensConfiguracao"></p-menu>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='ajuda'}">
                 <span routerLink="ajuda" (click)="navegar('ajuda')" translate>AJUDA</span>
             </div>
             <div>
-                <p-avatar image="{{usuario?.foto}}"  size="large" (click)="menuUsuario.toggle($event)"></p-avatar>
+                <p-avatar image="{{usuario?.foto == null ? '/assets/images/perfil.jpg': usuario?.foto}}" shape="circle"  (click)="menuUsuario.toggle($event)"></p-avatar>
                 <p-menu #menuUsuario [popup]="true" [model]="itemsMenuUsuario"></p-menu>
             </div>
         </div>

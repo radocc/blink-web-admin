@@ -73,13 +73,13 @@
                 <ng-template pTemplate="content">
                     <!-- <div class="p-field p-mt-2 p-col-12 campo-container"> -->
                         <div class="p-d-flex">
-                            <div class="p-field-checkbox p-col-4 p-mt-4">
+                            <div class="p-field-checkbox p-col-6 p-mt-4">
                                 <!-- <p-checkbox [binary]="true" inputId="chkCadastro" [(ngModel)]="campo.preenchimento" [ngModelOptions]="{standalone: true}" (onChange)="changeCadastro($event, campo)"></p-checkbox>
                                 <label for="chkCadastro">{{'PREENCHIMENTO_AUTOMATICO' | translate}}</label> -->
-                                <input class="p-checkbox" type="checkbox" name="chkCadastro" id="chkCadastro" value="false" [(ngModel)]="campo.preenchimento" [ngModelOptions]="{standalone: true}" (onChange)="changeCadastro($event, campo)">
-                                <label class="label-nowrap" for="chkCadastro">{{'PREENCHIMENTO_AUTOMATICO' | translate}}</label>
+                                <input class="p-checkbox" type="checkbox"  [(ngModel)]="campo.cadastro" [ngModelOptions]="{standalone: true}" (onChange)="changeCadastro($event, campo)">
+                                <label class="label-nowrap" >{{'PREENCHIMENTO_AUTOMATICO' | translate}}</label>
                             </div>
-                            <div class="p-field p-col-4" *ngIf="campo.preenchimento">
+                            <div class="p-field p-col-4" *ngIf="campo.cadastro">
                                 <label for="txtCampoTipo">{{'VARIAVEL' | translate}}</label>
                                 <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>

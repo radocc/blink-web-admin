@@ -92,20 +92,7 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
               }
             }
           } 
-    })
-    // this.templateCampoService.getPreenchimentoManualByTemplate(template.id).subscribe((lista)=>{
-    //   this.campos = [];
-    //   if (lista.length > 0){
-    //     for (let w = 0; w < lista.length;w++){
-    //       let camp = new ConteudoCampo();
-    //       camp.nome = lista[w].nome;
-    //       camp.tipo = lista[w].tipo;
-    //       camp.idTemplateCampo = lista[w].id;
-    //       camp.valor = '';
-    //       this.campos.push(camp);
-    //     }
-    //   }      
-    // })
+    }) 
   }
 
    
