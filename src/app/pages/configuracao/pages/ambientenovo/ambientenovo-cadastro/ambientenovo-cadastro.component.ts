@@ -170,9 +170,10 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
             //licencas
             plano: [null, Validators.required],
             periodo: [null, Validators.required],
+            valor: [{ value: null, disabled: false }],
             valorTotal: [{ value: null, disabled: true }],
             numeroUsuario: [1, Validators.required],
-            diaVencimento: [4, Validators.required],
+            diaVencimento: [10, Validators.required],
             dataInicio: [new Date(), Validators.required],
             dataFim: [{ value: null, disabled: true }, Validators.required],
         });
@@ -203,6 +204,9 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
             this.calcularTotal();
         });
         this.form.controls['plano'].valueChanges.subscribe((value) => {
+            this.calcularTotal();
+        });
+        this.form.controls['valor'].valueChanges.subscribe((value) => {
             this.calcularTotal();
         });
 
@@ -259,6 +263,7 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
 
     public montarLicenca() {
         this.licenca.plano = this.form.controls['plano'].value;
+        this.licenca.valor = this.form.controls['valor'].value;
         this.licenca.periodo = this.form.controls['periodo'].value;
         this.licenca.numeroVendedores = this.form.controls['numeroUsuario'].value;
         this.licenca.diaVencimento = this.form.controls['diaVencimento'].value;
@@ -512,11 +517,12 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
 
     public calcularTotal() {
         this.licenca.valorTotal = 0;
+        this.licenca.valor;
         this.plano = this.form.controls['plano'].value;
         if (typeof this.plano === 'object' && this.plano != null) {
 
             this.licenca.valor = this.plano.valor;
-            this.licenca.valorTotal = this.plano.valor;
+            this.licenca.valorTotal = this.licenca.valor;
         }
         this.licenca.numeroVendedores = this.form.controls['numeroUsuario'].value;
         this.licenca.valorAdicional = 0;
@@ -525,6 +531,7 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         })
         this.licenca.valorTotal = (this.licenca.valor + this.licenca.valorAdicional) * this.licenca.numeroVendedores;
         this.form.controls['valorTotal'].setValue(this.licenca.valorTotal);
+        this.form.controls['valor'].setValue(this.licenca.valor);
     }
 
     //teste do verificar
