@@ -1,7 +1,4 @@
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'; 
-import { Playlist } from '@radoccmodels/playlist';
 import { PlaylistConteudo } from '@radoccmodels/playlistconteudo';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { MessageService } from 'primeng/api';

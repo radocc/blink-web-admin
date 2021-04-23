@@ -12,4 +12,5 @@ export class Arquivo extends AbstractEntity {
     public idArquivo: number;
     public width: number;
     public height: number;
+    public tempoDuracao:number;
 }

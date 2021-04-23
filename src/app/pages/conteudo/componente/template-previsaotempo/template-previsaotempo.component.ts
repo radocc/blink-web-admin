@@ -101,6 +101,7 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
     this.conteudo.idTipoConteudo = ETipoConteudo.PrevisaoTempo;
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
+    this.conteudo.tipo = 1;
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = this.form.controls['template'].value.id;
     this.conteudo.template = this.form.controls['template'].value;

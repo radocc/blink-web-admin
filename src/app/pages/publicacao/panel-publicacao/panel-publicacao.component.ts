@@ -350,5 +350,19 @@ export class PanelPublicacaoComponent implements OnInit {
     }, 3000);
   }
 
+  public previewPlayer(){
+    // this.playerService.
+    const dialog = this.dialogService.open(GaleriaConteudoComponent, {
+      data:this.listaConteudo,
+      modal:true,
+      showHeader:true,
+      closable:true,
+      header:'Playlist',
+      closeOnEscape:true
+    });
+    dialog.onClose.subscribe((playlist)=>{
+      
+    }); 
+  }
 
 }

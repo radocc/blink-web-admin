@@ -53,7 +53,7 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
       this.conteudo = conteudo;
       if (conteudo != null){
         this.form.controls['titulo'].setValue(conteudo.titulo);
-        
+        this.form.controls['audio'].setValue(conteudo.audio);
         this.arquivo = conteudo.arquivo;
         let file = new File([], this.arquivo.nome);
         this.panelAgendamento.setAgendamento(conteudo.agendamento);
@@ -82,8 +82,10 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = ETipoConteudo.Video;
-    this.conteudo.tempoExibicao = 0;
+    this.conteudo.tempoExibicao = this.arquivo.tempoDuracao;
     this.conteudo.idTemplate = null;
+    this.conteudo.tipo = 2;
+    this.conteudo.audio = this.form.controls['audio'].value;
     this.conteudo.idArquivo = this.arquivo.id;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{

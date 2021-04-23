@@ -157,6 +157,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
         this.form.controls['minutos'].setValue(min);
         this.form.controls['segundos'].setValue(segundos);
         this.form.controls['template'].setValue(conteudo.template);
+        this.form.controls['tipo'].setValue(conteudo.tipo);
         this.arquivo = conteudo.arquivo;
         if (conteudo.idTemplate != null){
           this.conteudoCampoService.getPreenchimentoManualByConteudoETemplate(conteudo.id,conteudo.idTemplate).subscribe((lista)=>{
@@ -179,6 +180,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = this.tipoConteudo;
+    this.conteudo.tipo = this.form.controls['tipo'].value;
     if (this.tipo != 2){
       let segundos = this.form.controls['segundos'].value;
       segundos += (this.form.controls['minutos'].value * 60);
@@ -197,6 +199,9 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     if (this.arquivo != null){
       this.conteudo.idArquivo = this.arquivo.id;
     }    
+    if (this.tipo == 2){
+      this.conteudo.tempoExibicao = this.arquivo.tempoDuracao;
+    }
     this.conteudo.campos = this.campos;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{

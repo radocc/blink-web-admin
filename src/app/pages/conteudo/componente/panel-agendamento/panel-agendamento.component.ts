@@ -83,8 +83,11 @@ export class PanelAgendamentoComponent implements OnInit {
 
   public setAgendamento(agendamento:ConteudoAgendamento){
     this.conteudoAgendamento = agendamento;
-    let dtInicio = new Date(agendamento.dataInicio)
-    this.form.controls['dataInicio'].setValue(dtInicio);    
+    if (agendamento.dataInicio != null){
+      let dtInicio = new Date(agendamento.dataInicio)
+      this.form.controls['dataInicio'].setValue(dtInicio);    
+    }
+    
     if (agendamento.dataFim){
       let dtFim = new Date(agendamento.dataFim);
       this.form.controls['dataFim'].setValue(dtFim);

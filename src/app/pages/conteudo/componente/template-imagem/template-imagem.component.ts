@@ -93,6 +93,7 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
     segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = null;
+    this.conteudo.tipo = 3;
     this.conteudo.idArquivo = this.arquivo.id;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{

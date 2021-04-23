@@ -19,6 +19,8 @@ export class Conteudo extends BaseEntityImpl {
     public tempoExibicao:number;
     public agendamento:ConteudoAgendamento;
     public arquivo:Arquivo;
+    public audio:number;
+    public tipo:number;
     public fontes:ConteudoFonteNoticia[] = [];
     public filtro:ConteudoFiltro;
     public conteudoPrevisaoTempo:ConteudoPrevisao;

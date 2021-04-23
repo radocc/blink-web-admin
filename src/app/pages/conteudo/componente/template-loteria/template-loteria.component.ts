@@ -93,6 +93,7 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;
+    this.conteudo.tipo = 1;
     this.conteudo.idTemplate = this.form.controls['template'].value.id;
     this.conteudo.template = this.form.controls['template'].value;
     this.conteudoLoteria.idLoteria = this.form.controls['loteria'].value.id;

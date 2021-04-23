@@ -106,6 +106,7 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
     this.conteudo.idTipoConteudo = ETipoConteudo.Noticias;
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
+    this.conteudo.tipo = 1;
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = null;
     this.conteudo.idArquivo = null;
