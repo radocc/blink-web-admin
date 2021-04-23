@@ -23,6 +23,11 @@
                 flex: 0 1 auto;
                 display: flex;
                 flex-direction: row;
+                .p-avatar{
+                    img{
+                        border-radius: 50px;
+                    }
+                }
             }
             .painel-site-content {
                 // flex: 1 1 auto;
@@ -74,14 +79,15 @@
                 text-align: center;
                 font-weight: normal;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-                color: map-get($theme, black);
-                text-transform: uppercase;
+                color: map-get($theme, black);                
                 cursor: pointer;
+            }
+            .uppercase{
+                text-transform: uppercase;
             }
             .item-menu.selected {
                 background: map-get($theme , light);
                 color: map-get($theme, white);
-
             }
         }
         

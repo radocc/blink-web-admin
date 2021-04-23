@@ -330,7 +330,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   }
 
   public changeCadastro(event, campo: TemplateCampo) {
-    campo.cadastro = !event.checked;
+    // campo.cadastro = !event.checked;
   }
 
   public changeVariavel(event, campo: TemplateCampo) {

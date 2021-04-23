@@ -9,11 +9,18 @@
                             <input id="nome" required formControlName="nome" type="text" pInputText>
                             <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
-                        <div class="p-field rd-col">
-                            <label for="sequencia" translate>SEQUENCIA</label>
-                            <input id="sequencia" required formControlName="sequencia" type="number" pInputText>
-                            <small id="sequencia" *ngIf="form.controls['sequencia'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                        </div> 
+                        <div class="rd-flex rd-row rd-gap-8">
+                            <div class="p-field rd-flex rd-col">
+                                <label for="sequencia" translate>SEQUENCIA</label>
+                                <input id="sequencia" required formControlName="sequencia" type="number" pInputText>
+                                <small id="sequencia" *ngIf="form.controls['sequencia'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                            </div> 
+                            <div class="p-field rd-flex rd-col">
+                                <label for="txtTipo">{{'TIPO' | translate}}</label>
+                                <p-dropdown id="txtTipo" formControlName="tipo" optionValue="id" optionLabel="nome" [options]="tipos" placeholder="{{'SELECIONE_UM_TIPO' | translate}}"></p-dropdown>
+                                <small id="tipo-error" *ngIf="form.controls['tipo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                            </div>
+                        </div>
                     </div> 
                 </form>      
             </div>  

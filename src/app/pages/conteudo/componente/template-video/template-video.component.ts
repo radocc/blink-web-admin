@@ -28,7 +28,8 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
   @ViewChild("fileUpload") public fileUpload:FileUpload;
   public form:FormGroup = new FormGroup({
-    titulo:new FormControl(null, Validators.required)    
+    titulo:new FormControl(null, Validators.required),
+    audio:new FormControl('1', Validators.required)
   }) 
   
   public arquivo:Arquivo;

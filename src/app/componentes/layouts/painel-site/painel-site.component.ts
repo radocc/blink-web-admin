@@ -35,16 +35,14 @@ export class PainelSiteComponent implements OnInit {
 
     this.telaService.findTelasPorAcessoIdMenu(10001).subscribe((lista)=>{
       for (let i = 0; i < lista.length; i++) {
-        this.translateService.get(lista[i].nome).subscribe((nome)=>{
-          this.itensConfiguracao.push({
-            label: nome,
-            command: () => {
-              this.router.navigateByUrl(lista[i].url);
-            }
-          });
-        })
-        
+        this.itensConfiguracao.push({
+          label: lista[i].nome,
+          command: () => {
+            this.router.navigateByUrl(lista[i].url);
+          }
+        });
       }
+      this.aplicarTranslateMenu(this.itensConfiguracao);
     });
     this.itemsMenuUsuario = [
       {
@@ -52,26 +50,24 @@ export class PainelSiteComponent implements OnInit {
         routerLink: ['/perfil-usuario']
       },
       {
-        label: 'EMPRESA',
-        items:[
-          {
-            label:'Empresa 1'
-          },
-          {
-            label:'Empresa 2'
-          }
-        ]
-      },
-      {
         label: 'SAIR',
         routerLink:['/login']        
       }
     ]
+    this.aplicarTranslateMenu(this.itemsMenuUsuario);
     this.pesquisarEmpresa();
     
   }
 
-   public pesquisarEmpresa(){ 
+  public aplicarTranslateMenu(menus:MenuItem[]){
+    menus.map((menu)=>{
+      this.translateService.get(menu.label).subscribe((label)=>{
+        menu.label = label;
+      });
+    })
+  }
+
+  public pesquisarEmpresa(){ 
      this.empresaService.buscarPorUsuario().subscribe((lista)=>{
         this.empresas = lista;
         this.empresaPadrao();

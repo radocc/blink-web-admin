@@ -14,6 +14,11 @@
                     <!-- <div class="rd-flex">{{arquivo.url}}</div> -->
                     <button pButton *ngIf="arquivo" type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                 </div>  
+                <div class="p-field rd-row rd-gap">
+                    <!-- <label class="label-field" translate>AUDIO</label>                                 -->                    
+                    <p-radioButton name="audio" value="1" formControlName="audio"  label="{{'SEM_AUDIO'|translate}}"></p-radioButton>
+                    <p-radioButton name="audio" value="2" formControlName="audio" label="{{'COM_AUDIO'|translate}}"></p-radioButton>
+                </div>
                 <app-panel-agendamento-conteudo #panelAgendamento>
         
                 </app-panel-agendamento-conteudo> 

@@ -12,4 +12,14 @@
         background: map-get($theme, primary);
         border: 1px solid map-get($theme, primary);
     }
+
+    .p-selectbutton .p-button.p-highlight{
+        background: map-get($theme, light );
+        border-color: map-get($theme, light );
+        color: #ffffff;
+    }
+    .p-selectbutton .p-button {
+        background: map-get($theme, primary );
+        border: 1px solid map-get($theme, primary );
+    }
 }

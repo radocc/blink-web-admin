@@ -29,10 +29,37 @@ export class TipoConteudoCadastroComponent extends CadForm implements OnInit {
   
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),
-    sequencia:new FormControl('', Validators.required)
+    sequencia:new FormControl(1, Validators.required),
+    tipo:new FormControl(1, Validators.required)
   }) 
   
-  public tipo:TipoConteudo;
+  public tipoConteudo:TipoConteudo;
+  public tipos:{id:number,nome:string}[] = [
+    {
+      id:1,
+      nome:'Vídeo'
+    },
+    {
+      id:2,
+      nome:'Imagem'
+    },
+    {
+      id:3,
+      nome:'Previsão do Tempo'
+    },
+    {
+      id:4,
+      nome:'Notícias'
+    },
+    {
+      id:5,
+      nome:'Loteria'
+    },
+    {
+      id:6,
+      nome:'Padrão'
+    }
+  ];
 
   constructor(public eventService:EventBrokerService, private tipoConteudoService:TipoConteudoService) {
     super(eventService)
@@ -43,7 +70,7 @@ export class TipoConteudoCadastroComponent extends CadForm implements OnInit {
   } 
 
   public novo() {
-    this.tipo = new TipoConteudo();
+    this.tipoConteudo = new TipoConteudo();
     super.novo();
   }
 
@@ -54,9 +81,10 @@ export class TipoConteudoCadastroComponent extends CadForm implements OnInit {
   }
 
   public montarForm(tipo:TipoConteudo, editavel:boolean){
-    this.tipo = tipo;
+    this.tipoConteudo = tipo;
     this.form.controls['nome'].setValue(tipo.nome, {emitEvent:false});
     this.form.controls['sequencia'].setValue(tipo.sequencia, {emitEvent:false});
+    this.form.controls['tipo'].setValue(tipo.tipo, {emitEvent:false});
     if (editavel == false){
       this.form.disable();
     }    
@@ -67,14 +95,15 @@ export class TipoConteudoCadastroComponent extends CadForm implements OnInit {
       this.page.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
-    if (this.tipo == null){
-      this.tipo = new TipoConteudo();
+    if (this.tipoConteudo == null){
+      this.tipoConteudo = new TipoConteudo();
     }
-    this.tipo.nome = this.form.controls['nome'].value;
-    this.tipo.sequencia = this.form.controls['sequencia'].value;
+    this.tipoConteudo.nome = this.form.controls['nome'].value;
+    this.tipoConteudo.sequencia = this.form.controls['sequencia'].value;
+    this.tipoConteudo.tipo = this.form.controls['tipo'].value;
     
-    this.tipoConteudoService.save(this.tipo).subscribe((equipamento)=>{
-      this.tipo = equipamento;
+    this.tipoConteudoService.save(this.tipoConteudo).subscribe((equipamento)=>{
+      this.tipoConteudo = equipamento;
       this.page.showSuccessMsg('SALVO_COM_SUCESSO');
       this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{

@@ -36,8 +36,10 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
 
   public form:FormGroup = new FormGroup({
     titulo:new FormControl('', Validators.required),    
-    template:new FormControl(null, [Validators.required]),
+    template:new FormControl(null),
     minutos:new FormControl(1),
+    audio:new FormControl(1),
+    tipo:new FormControl(1),
     segundos:new FormControl(30),
   }) 
   public conteudo:Conteudo;
@@ -45,6 +47,25 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   public tipoConteudo:ETipoConteudo = ETipoConteudo.Receitas;
   public campos:ConteudoCampo[] = [];
   public titulo:string= 'CADASTRO';
+  public mostrarPreview:boolean = false;
+  public arquivo:Arquivo;
+  public files:File[] = [];
+  public tipo:number=3;
+  public tipos:{id:number,nome:string}[] = [
+    {
+      id:1,
+      nome:'Template'
+    },
+    {
+      id:2,
+      nome:'Vídeo'
+    },
+    {
+      id:3,
+      nome:'Imagem'
+    },
+    
+  ];
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,
     private templateService:TemplateService, public translateService:TranslateService,
     private eventService:EventBrokerService, private route:ActivatedRoute,
@@ -53,6 +74,20 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   }
 
   ngOnInit(): void { 
+    this.form.controls['template'].valueChanges.subscribe((template)=>{
+      if (template != null){
+        this.buscarCampos(template)
+      }      
+    })
+    this.form.controls['tipo'].valueChanges.subscribe((tipo)=>{
+      if (tipo != 1){
+        this.campos = []
+        this.form.controls['template'].setValue(null);
+      }else if (tipo == 1){
+        this.arquivo = null;
+        this.form.controls['template'].setValidators(Validators.required);
+      }     
+    })
     this.route.params.subscribe((param)=>{
       if (param['id']){
           this.buscar(param['id']);
@@ -83,6 +118,35 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     })
   }
 
+  public buscarCampos(template){
+    let idConteudo = 0;
+    if (this.conteudo != null){
+      idConteudo = this.conteudo.id;
+    }
+    this.conteudoCampoService.getPreenchimentoManualByConteudoETemplate(idConteudo, template.id).subscribe((lista)=>{
+      this.campos = lista;
+      if (lista.length > 0){
+            for (let w = 0; w < lista.length;w++){
+              let camp = lista[w];
+              if (camp.valor == null){
+                camp.valor = '';
+              }
+            }
+          } 
+    }) 
+  }
+
+  public uploadFile(event){
+    if (event.files.length > 0){
+      event.progress = 10;
+      this.arquivoService.postFile(event.files[0]).then((res)=>{
+        event.progress = 100;
+        this.arquivo = res;
+        console.log(res);
+      })
+    }    
+  }
+
   public buscar(id:number){
     this.conteudoService.findById(id).subscribe((conteudo)=>{
       this.conteudo = conteudo;
@@ -93,9 +157,13 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
         this.form.controls['minutos'].setValue(min);
         this.form.controls['segundos'].setValue(segundos);
         this.form.controls['template'].setValue(conteudo.template);
-        this.conteudoCampoService.getPreenchimentoManualByConteudoETemplate(conteudo.id,conteudo.idTemplate).subscribe((lista)=>{
-          this.campos = lista;
-        })
+        this.arquivo = conteudo.arquivo;
+        if (conteudo.idTemplate != null){
+          this.conteudoCampoService.getPreenchimentoManualByConteudoETemplate(conteudo.id,conteudo.idTemplate).subscribe((lista)=>{
+            this.campos = lista;
+          })
+        }
+        
         this.panelAgendamento.setAgendamento(conteudo.agendamento);
       }
     });
@@ -111,11 +179,24 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = this.tipoConteudo;
-    let segundos = this.form.controls['segundos'].value;
-    segundos += (this.form.controls['minutos'].value * 60);
-    this.conteudo.tempoExibicao = segundos;
-    this.conteudo.idTemplate = this.form.controls['template'].value.id;
-    this.conteudo.template = this.form.controls['template'].value;
+    if (this.tipo != 2){
+      let segundos = this.form.controls['segundos'].value;
+      segundos += (this.form.controls['minutos'].value * 60);
+      this.conteudo.tempoExibicao = segundos;
+    }else {
+      this.conteudo.tempoExibicao = 0;
+    }
+    
+    if (this.form.controls['template'].value != null){
+      this.conteudo.idTemplate = this.form.controls['template'].value.id;
+      this.conteudo.template = this.form.controls['template'].value;
+    }else {
+      this.conteudo.idTemplate = null;
+      this.conteudo.template = null;
+    }
+    if (this.arquivo != null){
+      this.conteudo.idArquivo = this.arquivo.id;
+    }    
     this.conteudo.campos = this.campos;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{
@@ -151,6 +232,10 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     this.templateService.findNomeETipo(nome,this.tipoConteudo).subscribe((lista)=>{
       this.templates = lista;
     })
+  }
+
+  public baixarArquivo(){
+    window.open(this.arquivo.url, 'Download');
   }
 
 }
