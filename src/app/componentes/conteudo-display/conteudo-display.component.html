@@ -1,52 +1,57 @@
 <div class="content-display rd-col">
 
     <div #imageContainer class="conteiner">
-        <img class="view" *ngIf="conteudoResult?.idTipoConteudo != 1" [src]="conteudoResult?.url">
-        <video class="view" autoplay [muted]="conteudoResult.audio == 1" *ngIf="conteudoResult?.idTipoConteudo == 1" height="400" controls>
-            <source *ngIf="arquivo" [src]="arquivo?.url" type="video/mp4">
-                Seu navegador não suporta este vídeoe.
-        </video>
-        <div id="campos-container" class="campos-container">
-            <div [id]="campo.hash" class="div-campo" *ngFor="let campo of campos">
-                <div [ngSwitch]="campo.tipo" class="drag-content " >
-                    <span *ngSwitchCase="7" [ngStyle]="{
-                            'font-family': campo.fonte,
-                            'font-size': campo.fonteTamanho + 'px',
-                            'font-weight': campo.fonteEspessura,
-                            'color': campo.fonteCor
-                    }">{{campo.nome}}</span>
-                    <span *ngSwitchCase="5" [ngStyle]="{
-                        'font-family': campo.fonte,
-                        'font-size': campo.fonteTamanho + 'px',
-                        'font-weight': campo.fonteEspessura,
-                        'color': campo.fonteCor
-                    }">{{campo.valor | currency:'':'1.2-2'}}</span>
-                    <img *ngSwitchCase="4" [ngStyle]="{
-                        'font-family': campo.fonte,
-                        'font-size': campo.fonteTamanho + 'px',
-                        'font-weight': campo.fonteEspessura,
-                        'color': campo.fonteCor
-                    }" [src]="campo.valor">
-                    <span *ngSwitchCase="5" [ngStyle]="{
-                        'font-family': campo.fonte,
-                        'font-size': campo.fonteTamanho + 'px',
-                        'font-weight': campo.fonteEspessura,
-                        'color': campo.fonteCor
-                    }">{{campo.valor | date:'dd/MM/yyyy'}}</span>
-                    <span *ngSwitchDefault [ngStyle]="{
-                        'font-family': campo.fonte,
-                        'font-size': campo.fonteTamanho + 'px',
-                        'font-weight': campo.fonteEspessura,
-                        'color': campo.fonteCor
-                    }">{{campo.valor}}</span>
+        <div class="panel">
+            <div class="content">
+                <img class="view" *ngIf="conteudoResult?.idTipoConteudo != 1" [src]="conteudoResult?.url">
+                <video class="view" autoplay [muted]="conteudoResult.audio == 1" *ngIf="conteudoResult?.idTipoConteudo == 1" height="400" controls>
+                    <source *ngIf="arquivo" [src]="arquivo?.url" type="video/mp4">
+                        Seu navegador não suporta este vídeoe.
+                </video>
+                <div id="campos-container" class="campos-container">
+                    <div [id]="campo.hash" class="div-campo" *ngFor="let campo of campos">
+                        <div [ngSwitch]="campo.tipo" class="drag-content " >
+                            <span *ngSwitchCase="7" [ngStyle]="{
+                                    'font-family': campo.fonte,
+                                    'font-size': campo.fonteTamanho + 'px',
+                                    'font-weight': campo.fonteEspessura,
+                                    'color': campo.fonteCor
+                            }">{{campo.nome}}</span>
+                            <span *ngSwitchCase="5" [ngStyle]="{
+                                'font-family': campo.fonte,
+                                'font-size': campo.fonteTamanho + 'px',
+                                'font-weight': campo.fonteEspessura,
+                                'color': campo.fonteCor
+                            }">{{campo.valor | currency:'':'1.2-2'}}</span>
+                            <img *ngSwitchCase="4" [ngStyle]="{
+                                'font-family': campo.fonte,
+                                'font-size': campo.fonteTamanho + 'px',
+                                'font-weight': campo.fonteEspessura,
+                                'color': campo.fonteCor
+                            }" [src]="campo.valor">
+                            <span *ngSwitchCase="5" [ngStyle]="{
+                                'font-family': campo.fonte,
+                                'font-size': campo.fonteTamanho + 'px',
+                                'font-weight': campo.fonteEspessura,
+                                'color': campo.fonteCor
+                            }">{{campo.valor | date:'dd/MM/yyyy'}}</span>
+                            <span *ngSwitchDefault [ngStyle]="{
+                                'font-family': campo.fonte,
+                                'font-size': campo.fonteTamanho + 'px',
+                                'font-weight': campo.fonteEspessura,
+                                'color': campo.fonteCor
+                            }">{{campo.valor}}</span>
+                        </div>
+                        
+                        <div *ngIf="campo.tipo != 7" class="drag-content " >
+                            
+                        </div>
+                    </div>        
                 </div>
-                
-                <div *ngIf="campo.tipo != 7" class="drag-content " >
-                    
-                </div>
-            </div>        
+            </div>
+            </div>
         </div>
-    </div>
+        
     <!-- <div class="view ">
     
     </div> -->

@@ -89,11 +89,28 @@ export class PanelPublicacaoComponent implements OnInit {
   ngOnInit(): void {
     this.buscarTipos();
     this.form.controls['grupoPlayer'].valueChanges.subscribe((grupo)=> {
-      this.buscarPublicacaoPorGrupo();
+      if (grupo != null){
+        this.buscarPublicacaoPorGrupo();
+      }else{
+        this.listaConteudo = [];
+      }
+      
     })
     this.form.controls['player'].valueChanges.subscribe((grupo)=> {
-      this.buscarPublicacaoPorPlayer();
+      if (grupo != null){
+        this.buscarPublicacaoPorPlayer();
+      }else {
+        this.listaConteudo = [];
+      }
     })
+    this.form.controls['tipoPublicacao'].valueChanges.subscribe((tipo)=>{
+      this.onChangeTipo(null);
+     
+    })
+  }
+  public onChangeTipo(event){
+    this.form.controls['grupoPlayer'].setValue(null);
+    this.form.controls['player'].setValue(null);
   }
 
   public atualizarTempo(){
@@ -351,18 +368,20 @@ export class PanelPublicacaoComponent implements OnInit {
   }
 
   public previewPlayer(){
-    // this.playerService.
-    const dialog = this.dialogService.open(GaleriaConteudoComponent, {
-      data:this.listaConteudo,
-      modal:true,
-      showHeader:true,
-      closable:true,
-      header:'Playlist',
-      closeOnEscape:true
-    });
-    dialog.onClose.subscribe((playlist)=>{
-      
-    }); 
+    this.playlistConteudoService.gerarPreviewPlayer(this.form.controls['player'].value.id).subscribe((lista)=>{
+      const dialog = this.dialogService.open(GaleriaConteudoComponent, {
+        data:lista,
+        modal:true,
+        showHeader:true,
+        closable:true,
+        header:'Playlist',
+        closeOnEscape:true
+      });
+      dialog.onClose.subscribe((playlist)=>{
+        
+      }); 
+    })
+    
   }
 
 }

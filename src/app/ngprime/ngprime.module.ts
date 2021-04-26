@@ -37,6 +37,8 @@ import {PasswordModule} from 'primeng/password';
 import {GalleriaModule} from 'primeng/galleria';
 import {TreeModule} from 'primeng/tree';
 import {StepsModule} from 'primeng/steps';
+import {DataViewModule} from 'primeng/dataview';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 @NgModule({
   declarations: [],
   imports: [
@@ -77,7 +79,9 @@ import {StepsModule} from 'primeng/steps';
     PasswordModule,
     GalleriaModule,
     TreeModule,
-    StepsModule
+    StepsModule,
+    DataViewModule,
+    ToggleButtonModule
   ],
   exports:[
     ButtonModule,
@@ -116,7 +120,9 @@ import {StepsModule} from 'primeng/steps';
     PasswordModule,
     GalleriaModule,
     TreeModule,
-    StepsModule
+    StepsModule,
+    DataViewModule,
+    ToggleButtonModule
   ]
 })
 export class NgPrimeModule { }
