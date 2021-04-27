@@ -128,11 +128,11 @@
                         <div class="p-d-flex">
                             <div class="p-field p-col-2">
                                 <label class="label-nowrap" for="txtCampoWidth">{{'LARGURA' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.width" mode="decimal" inputId="txtCampoWidth" (onBlur)="setFieldWidth($event, campo)" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <p-inputNumber [(ngModel)]="campo.width" mode="decimal" inputId="txtCampoWidth" (onBlur)="setFieldWidth($event, campo)" [useGrouping]="false" [minFractionDigits]="2" suffix="%"  [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                             <div class="p-field p-col-2">
                                 <label class="label-nowrap" for="txtCampoHeight">{{'ALTURA' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.height" mode="decimal" inputId="txtCampoHeight" (onBlur)="setFieldHeight($event, campo)" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <p-inputNumber [(ngModel)]="campo.height" mode="decimal" inputId="txtCampoHeight" (onBlur)="setFieldHeight($event, campo)" [useGrouping]="false" [minFractionDigits]="2" suffix="%"  [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                             <div class="p-field p-col-3">
                                 <label class="label-nowrap" for="txtCampoLeft">{{'DISTANCIA_ESQUERDA' | translate}}</label>

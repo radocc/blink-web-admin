@@ -173,9 +173,13 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
         setTimeout(() => {
           const drag = document.getElementById(campo.hash);
           const dragContent: any = drag.getElementsByClassName('drag-content').item(0);
+          campo.width = (Math.round(this.imageContainer.nativeElement.clientWidth) * campo.width) / 100;
+          campo.height = (Math.round(this.imageContainer.nativeElement.clientHeight) * campo.height) / 100;
+
           dragContent.style.width = campo.width + 'px';
           dragContent.style.height = campo.height + 'px';
-        }, 100);
+          this.setTamanhoCampo(campo);
+        }, 300);
       });
     }, 100);
   }
@@ -259,7 +263,16 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     new ResizeObserver(() => {
       campo.height = drag.offsetHeight;
       campo.width = drag.offsetWidth;
-      
+      console.log(this.imageContainer.nativeElement.clientHeight);
+      console.log(this.imageContainer.nativeElement.clientWidth);
+      if (this.imageContainer.nativeElement){
+        let height = this.imageContainer.nativeElement.clientHeight;
+        let proporHeigth = campo.height * 100 / height;
+        campo.height = proporHeigth;
+        let width =  this.imageContainer.nativeElement.clientWidth;
+        let proporWidth = campo.width * 100 / width;
+        campo.width = proporWidth;
+      }      
       let campoImagem = document.getElementById(campo.hash+'-imagem');
       if (campoImagem != null) {
         campoImagem.style.height = (drag.offsetHeight - 2) + 'px';

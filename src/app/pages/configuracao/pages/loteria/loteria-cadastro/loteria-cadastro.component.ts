@@ -7,6 +7,7 @@ import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadas
 import { Loteria } from '@radoccmodels/loteria';
 import { LoteriaService } from '@radoccservices/loteria-services';
 import { MessageService } from 'primeng/api';
+import { LoteriaResultado } from '@radoccmodels/loteriaresultado';
 
 @Component({
   selector: 'app-loteria-cadastro',
@@ -30,10 +31,13 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
   
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),
-    url:new FormControl('', Validators.required)    
+    url:new FormControl('', Validators.required),
+    dataAtualizacao:new FormControl({disabled:true}),
+    resultado:new FormControl({disabled:true})
   }) 
   
   public loteria:Loteria;
+  public resultado:LoteriaResultado;
 
   constructor(private msgService:MessageService, private loteriaService:LoteriaService,
     public eventService: EventBrokerService) {
@@ -42,17 +46,19 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
   }
 
   ngOnInit(): void { 
-    super.ngOnInit();
+    super.ngOnInit();        
   } 
   
   public novo(){
     super.novo();
     this.loteria = null;
+    this.resultado = null;
   }
 
   public buscar(id:number, editavel:boolean){
     this.loteriaService.findById(id).subscribe((loteria)=>{
       this.montarForm(loteria,editavel);
+      this.ultimoResultado();
     })
   }
 
@@ -88,8 +94,18 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
 
   public atualizarResultado(){
     this.loteriaService.atualizarResultado(this.loteria.id).subscribe((result)=>{
-      
+      this.ultimoResultado();
     })
   }
 
+  public ultimoResultado(){
+    this.loteriaService.ultimoResultado(this.loteria.id).subscribe((result)=>{
+      this.resultado = result;
+      if (this.resultado != null){
+        let dtAtualizacao = new Date(this.resultado.dataAtualizacao);
+        this.form.controls['dataAtualizacao'].setValue(dtAtualizacao);
+        this.form.controls['resultado'].setValue(JSON.stringify(this.resultado,null,2));
+      }
+    })
+  }
 }

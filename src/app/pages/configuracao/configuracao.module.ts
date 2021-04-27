@@ -31,9 +31,7 @@ import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro
 import { AmbienteNovoCadastroComponent } from './pages/ambientenovo/ambientenovo-cadastro/ambientenovo-cadastro.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { DireitoAcessoDialogComponent } from './pages/grupousuario/dialog-direitoacesso/direitoacesso-dialog.component';
-import { GaleriaConteudoModule } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.module';
 import { GaleriaConteudoComponent } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.component';
-
 const routes: Routes = [
     {
       path:'',

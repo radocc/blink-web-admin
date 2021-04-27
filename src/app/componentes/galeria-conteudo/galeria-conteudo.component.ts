@@ -63,6 +63,9 @@ export class GaleriaConteudoComponent implements OnInit {
     }
     this.activeIndex++;
     this.conteudo = this.conteudos[this.activeIndex].conteudo;
+    if (this.conteudo.tempoExibicao == null){
+      this.conteudo.tempoExibicao = 3;
+    }
     let tempo = this.conteudo.tempoExibicao * 1000;
     // let tempo = 4000;
     let me = this;

@@ -14,9 +14,22 @@
                             <input id="url" required formControlName="url" type="text" pInputText>                     
                             <small id="url" *ngIf="form.controls['url'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
-                        <button *ngIf="loteria?.id != null" type="button" class="p-mr-2" label="{{'ATUALIZAR_RESULTADO'|translate}}"  pButton pRipple 
-                        (click)="atualizarResultado()"></button>
+                        <div class="rd-row rd-gap">
+                            <div class="p-field rd-col" *ngIf="resultado?.dataAtualizacao">
+                                <label for="ultimaAtualizacao" translate>ULTIMA_ATUALIZACAO</label>
+                                <p-calendar [showTime]="true" hourFormat="24" autocomplete="off" type="date" formControlName="dataAtualizacao"
+                                    dateFormat="dd/mm/yy" appendTo="body" disabled>
+                                </p-calendar>
+                            </div>
+                            <button *ngIf="loteria?.id != null" type="button" class="p-mr-2" label="{{'ATUALIZAR_RESULTADO'|translate}}"  pButton pRipple 
+                            (click)="atualizarResultado()"></button>
+                        </div>
                     </div> 
+                    <p-fieldset *ngIf="resultado?.dataAtualizacao" legend="{{'RESULTADO'|translate}}">
+                        <div class="rd-flex rd-col ">
+                            <textarea disabled pInputTextarea [rows]="15" formControlName="resultado"></textarea>
+                        </div>
+                    </p-fieldset>
                 </form>      
             </div>
             <div class="acoes rd-col rd-gap">

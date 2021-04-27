@@ -18,6 +18,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
 import { PageCadastroConteudoModule } from '@radocccomponentes/pagecadastro-conteudo/pagecadastro-conteudo.module';
 import { TemplateDefaultComponent } from './componente/template-default/template-default.component';
+import { ConteudoDisplayDialogComponent } from '@radocccomponentes/conteudo-display-dialog/conteudo-display-dialog.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,9 @@ export const MY_FORMATS = {
     TemplateLoteriaComponent,
     TemplatePrevisaoTempoComponent,
     TemplateDefaultComponent
+  ],
+  entryComponents:[
+    ConteudoDisplayDialogComponent
   ],
   imports: [
     CommonModule,
