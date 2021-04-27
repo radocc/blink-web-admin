@@ -19,7 +19,6 @@ import { ConteudoDisplayDialogModule } from '@radocccomponentes/conteudo-display
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    ConteudoDisplayDialogModule,
     ShareTranslateModule,
   ],
   exports:[

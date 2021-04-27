@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; 
 import { TVBlinkService } from './tvblink-services'; 
 import { Noticia } from '@radoccmodels/noticia';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class NoticiaService extends TVBlinkService<Noticia> {
@@ -15,5 +16,9 @@ export class NoticiaService extends TVBlinkService<Noticia> {
     public getWebService(): string {
         return 'noticia';
     }
+
+    public buscarUltimas(idEditoria:number,quantidade:number): Observable<Array<Noticia>> {
+        return this.http.get<Array<Noticia>>(this.urlWebBase + `/ultimas/editoria/${idEditoria}/${quantidade}`).pipe();
+    } 
     
 }

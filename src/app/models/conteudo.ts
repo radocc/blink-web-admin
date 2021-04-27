@@ -8,6 +8,7 @@ import { Template } from "./template";
 import { ConteudoCampo } from './conteudocampo';
 import { PrevisaoTempo } from './previsaotempo';
 import { ConteudoLoteria } from "./conteudoloteria";
+import { Noticia } from "./noticia";
 
 export class Conteudo extends BaseEntityImpl {
     
@@ -27,6 +28,7 @@ export class Conteudo extends BaseEntityImpl {
     public conteudoLoteria:ConteudoLoteria;
     public campos:ConteudoCampo[] = [];
     public previsaoTempo:PrevisaoTempo;
+    public noticia:Noticia;
     
     
 }

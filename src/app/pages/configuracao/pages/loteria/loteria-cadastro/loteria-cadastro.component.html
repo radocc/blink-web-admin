@@ -14,6 +14,8 @@
                             <input id="url" required formControlName="url" type="text" pInputText>                     
                             <small id="url" *ngIf="form.controls['url'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
+                        <button *ngIf="loteria?.id != null" type="button" class="p-mr-2" label="{{'ATUALIZAR_RESULTADO'|translate}}"  pButton pRipple 
+                        (click)="atualizarResultado()"></button>
                     </div> 
                 </form>      
             </div>

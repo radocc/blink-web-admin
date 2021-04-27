@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { Conteudo } from '@radoccmodels/conteudo';
 import { ConteudoLoteria } from '@radoccmodels/conteudoloteria';
+import { Noticia } from '@radoccmodels/noticia';
 import { PrevisaoTempo } from '@radoccmodels/previsaotempo';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { Template } from '@radoccmodels/template';
@@ -32,21 +33,31 @@ export class ConteudoDisplayComponent implements OnInit {
   public proportion: number = 1;
   public previsaoTempo:PrevisaoTempo;
   public conteudoLoteria:ConteudoLoteria;
-
+  public noticia:Noticia;
   constructor( private msgService:MessageService,private conteudoService:ConteudoService, private templateCampoService:TemplateCampoService) {
     
   }
 
   ngOnInit(): void {
+    if (this.conteudo.tipo == 4){
+      if (this.conteudoResult.noticia != null){
+        this.noticia = this.conteudoResult.noticia;
+      }  
+    }else {
+      this.conteudoService.findPreview(this.conteudoResult.id).subscribe((conteudo)=>{
+        this.conteudo = conteudo;
+        this.arquivo = conteudo.arquivo;
+        this.template = conteudo.template;
+        this.previsaoTempo = conteudo.previsaoTempo;
+        this.conteudoLoteria = conteudo.conteudoLoteria;
+        if (this.noticia == null){
+          this.noticia = conteudo.noticia;
+        }
+        this.montar();
+      })
+    }
     
-    this.conteudoService.findPreview(this.conteudoResult.id).subscribe((conteudo)=>{
-      this.conteudo = conteudo;
-      this.arquivo = conteudo.arquivo;
-      this.template = conteudo.template;
-      this.previsaoTempo = conteudo.previsaoTempo;
-      this.conteudoLoteria = conteudo.conteudoLoteria;
-      this.montar();
-    })
+    
   }
 
   public montar(){
@@ -105,6 +116,22 @@ export class ConteudoDisplayComponent implements OnInit {
               campo.valor = this.conteudoLoteria.resultado.valorProximoSorteio;
               break;
           }
+        }else if (this.noticia != null){
+            switch (campo.variavel){
+              case 'titulo':
+                campo.valor = this.noticia.titulo;
+                break;  
+              case 'descricao':
+                campo.valor = this.noticia.descricao;
+                break;
+              case 'url':
+                campo.valor = this.noticia.link;
+                break;
+              case 'datapublicacao':
+                campo.valor = this.noticia.dataPublicado;
+                break;
+          }
+          
         }
       });
       setTimeout(() => {

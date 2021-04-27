@@ -34,6 +34,7 @@ export class GaleriaConteudoComponent implements OnInit {
 
   constructor(public config: DynamicDialogConfig,public ref: DynamicDialogRef, private msgService:MessageService) {
     this.conteudos = config.data;
+    
   }
 
   ngOnInit(): void { 

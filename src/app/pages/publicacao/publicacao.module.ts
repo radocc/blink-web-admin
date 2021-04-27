@@ -10,7 +10,8 @@ import { ShareTranslateModule } from '@radoccmodules/share-translate/share-trans
 import { PlaylistDialogComponent } from './componente/dialog-playlist/playlist-dialog.component';
 import { PlaylistPesquisaDialogComponent } from './componente/dialog-playlist-pesquisa/playlist-pesquisa-dialog.component';
 import { ConteudoDisplayModule } from '@radocccomponentes/conteudo-display/conteudo-display.module';
-import { GaleriaConteudoComponent } from './componente/galeria-conteudo/galeria-conteudo.component';
+import { GaleriaConteudoComponent } from '../../componentes/galeria-conteudo/galeria-conteudo.component';
+import { GaleriaConteudoModule } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.module';
 
 const routes: Routes = [
   {
@@ -28,13 +29,11 @@ const routes: Routes = [
   declarations: [
     PanelPublicacaoComponent,
     PlaylistDialogComponent,
-    PlaylistPesquisaDialogComponent,
-    GaleriaConteudoComponent
+    PlaylistPesquisaDialogComponent
   ],
   entryComponents:[
     PlaylistDialogComponent,
-    PlaylistPesquisaDialogComponent,
-    GaleriaConteudoComponent
+    PlaylistPesquisaDialogComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +44,7 @@ const routes: Routes = [
     ConteudoDisplayModule,
     ShareTranslateModule,
     DevComponentModule,
+    GaleriaConteudoModule,
     RouterModule.forChild(routes)
   ],exports:[
     

@@ -20,4 +20,8 @@ export class LoteriaService extends TVBlinkService<Loteria> {
     public findNome(nome: string): Observable<Array<Loteria>> {
         return this.http.post<Array<Loteria>>(this.urlWebBase + `/find/nome`, nome).pipe();
     }
+
+    public atualizarResultado(idLoteria: number): Observable<any> {
+        return this.http.get(this.urlWebBase + `/atualizar/resultado/${idLoteria}`).pipe();
+    }
 }

@@ -3,8 +3,8 @@
         <div class="rd-flex rd-col">
             <form class="rd-flex" [formGroup]="form">
                 <p-tabView class="rd-h-100">
-                    <p-tabPanel header="{{'DADOS' | translate}}">
-                        <div class="rd-flex rd-col ">
+                    <p-tabPanel class="rd-h-100 rd-col" header="{{'DADOS' | translate}}">
+                        <div class="rd-flex rd-col rd-over-hidden">
                             <div class="p-field rd-col">
                                 <label for="nome" translate>NOME</label>
                                 <input id="nome" required formControlName="nome" type="text" pInputText>                     

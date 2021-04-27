@@ -28,6 +28,18 @@
                 flex: 1;
             };
         } 
+        .p-tabview{
+            height: 100%;
+            .p-tabview-panels{
+                height: 100%;
+                .p-tabview-panel {
+                    height: 100%;
+                }
+            }
+        }
+        .p-listbox{
+            height: 100%;
+        }
         .dv-player{
             line-height: 30px;
         }

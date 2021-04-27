@@ -203,7 +203,11 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         this.form.controls['numeroUsuario'].valueChanges.subscribe((value) => {
             this.calcularTotal();
         });
-        this.form.controls['plano'].valueChanges.subscribe((value) => {
+        this.form.controls['plano'].valueChanges.subscribe((plano) => {
+            if (typeof plano === 'object' && plano != null) {
+                this.licenca.valor = plano.valor;                
+                this.form.controls['valor'].setValue(plano.valor, {emitEvent:false});
+            }
             this.calcularTotal();
         });
         this.form.controls['valor'].valueChanges.subscribe((value) => {
@@ -519,11 +523,8 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         this.licenca.valorTotal = 0;
         this.licenca.valor;
         this.plano = this.form.controls['plano'].value;
-        if (typeof this.plano === 'object' && this.plano != null) {
-
-            this.licenca.valor = this.plano.valor;
-            this.licenca.valorTotal = this.licenca.valor;
-        }
+        
+        this.licenca.valor = this.form.controls['valor'].value;
         this.licenca.numeroVendedores = this.form.controls['numeroUsuario'].value;
         this.licenca.valorAdicional = 0;
         this.listaAdicional.forEach(data => {
@@ -531,7 +532,7 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         })
         this.licenca.valorTotal = (this.licenca.valor + this.licenca.valorAdicional) * this.licenca.numeroVendedores;
         this.form.controls['valorTotal'].setValue(this.licenca.valorTotal);
-        this.form.controls['valor'].setValue(this.licenca.valor);
+        this.form.controls['valor'].setValue(this.licenca.valor, {emitEvent:false});
     }
 
     //teste do verificar

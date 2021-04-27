@@ -20,7 +20,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PlaylistPesquisaDialogComponent } from '../componente/dialog-playlist-pesquisa/playlist-pesquisa-dialog.component';
 import { PlaylistDialogComponent } from '../componente/dialog-playlist/playlist-dialog.component';
-import { GaleriaConteudoComponent } from '../componente/galeria-conteudo/galeria-conteudo.component';
+import { GaleriaConteudoComponent } from '../../../componentes/galeria-conteudo/galeria-conteudo.component';
 
 @Component({
   selector: 'app-panel-publicacao',
