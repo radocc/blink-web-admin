@@ -1,0 +1,29 @@
+<form [formGroup]="form">
+    <div class="div-acoes">
+        <p-selectButton [options]="tipoVisualizacao" formControlName="modoVisualizacao" optionLabel="nome" optionValue="id"></p-selectButton>        
+    </div>    
+</form>
+    <div class="rd-col" *ngIf="modoVisualizacao == 1">
+        <p-dataView [value]="conteudos" layout="grid">
+            <ng-template let-playContent pTemplate="gridItem">
+                <app-conteudo-display [conteudo]="playContent.conteudo"></app-conteudo-display>
+            </ng-template>
+        </p-dataView>
+    </div>
+    <div class="rd-col" *ngIf="modoVisualizacao == 2">   
+        <div class="rd-row ">
+            <app-conteudo-display [conteudo]="conteudo"></app-conteudo-display>
+        </div>
+        <div class="rd-col div-footer">
+            <div class="rd-row">
+                <div class="rd-flex titulo">
+                    {{conteudo.titulo}}
+                </div>
+                <div>{{conteudo.tempoExibicao|tempoExibicao}}</div>
+            </div>
+            <div class="rd-row">
+                <div class="rd-flex"></div>
+                <div>{{activeIndex+1 }}/{{conteudos.length}}</div>
+            </div>
+        </div>
+    </div>        

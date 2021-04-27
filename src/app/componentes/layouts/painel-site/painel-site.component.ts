@@ -56,7 +56,8 @@ export class PainelSiteComponent implements OnInit {
     ]
     this.aplicarTranslateMenu(this.itemsMenuUsuario);
     this.pesquisarEmpresa();
-    
+    this.rotaSelecionada = this.router.url.split('/')[2];
+    console.log(this.router.url.split('/')[2])
   }
 
   public aplicarTranslateMenu(menus:MenuItem[]){

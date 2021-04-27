@@ -33,11 +33,11 @@
                 </div>
             </div>
         </div>        
-        <div class="rd-flex-auto p-col-6 cadastro">
-            <div class="publicacao-cadastro rd-flex rd-col rd-gap-8">    
-                <form [formGroup]="form" class="rd-flex rd-col p-flex-column"> 
+        <div class="rd-flex-auto p-col-6 cadastro rd-over-hidden">
+            <div class="publicacao-cadastro rd-flex rd-col rd-gap-8 rd-over-hidden">    
+                <form [formGroup]="form" class="rd-flex rd-col p-flex-column rd-over-hidden"> 
                     <div class="p-grid div-tipo-grupo">
-                        <p-selectButton [options]="tiposPublicacao" [ngModelOptions]="{standalone: true}" [(ngModel)]="idTipoPublicacao" optionValue="id" optionLabel="name">
+                        <p-selectButton [options]="tiposPublicacao" (onChange)="onChangeTipo($event)" [ngModelOptions]="{standalone: true}" [(ngModel)]="idTipoPublicacao" optionValue="id" optionLabel="name">
                             <ng-template let-item>
                                 {{item.name|translate}}
                             </ng-template>
@@ -61,8 +61,8 @@
                             <small id="grupoplayer-erro" *ngIf="form.controls['grupoPlayer'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>
                     </div> 
-                    <div class="rd-row p-flex rd-flex rd-gap">
-                        <div class="div-edicao rd-flex rd-col">
+                    <div class="rd-row p-flex rd-flex rd-gap rd-over-hidden">
+                        <div class="div-edicao rd-flex rd-col rd-over-hidden">
                             <p-messages></p-messages>       
                             <div class="div-resumo rd-row rd-gap">
                                 <div class="rd-flex"></div>

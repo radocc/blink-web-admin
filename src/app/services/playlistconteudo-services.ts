@@ -29,4 +29,8 @@ export class PlaylistConteudoService extends TVBlinkService<PlaylistConteudo> {
         return this.http.get<Array<PlaylistConteudo>>(this.urlWebBase + `/playlist/grupoplayer/${idGrupoPlayer}`).pipe();
     }
 
+    public gerarPreviewPlayer(id: number): Observable<Array<PlaylistConteudo>> {
+        return this.http.get<Array<PlaylistConteudo>>(this.urlWebBase + `/gerar/preview/player/${id}`).pipe();
+    }
+
 }

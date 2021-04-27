@@ -1,3 +1,5 @@
+import { Noticia } from "@radoccmodels/noticia";
+import { jsonIgnore } from "json-ignore";
 
 export class ConteudoResult  {
     
@@ -11,6 +13,8 @@ export class ConteudoResult  {
     public tempoExibicao:number;
     public data:Date;
     public url:string;
-    public permiteEdicao:boolean
+    public permiteEdicao:boolean;
+
+    @jsonIgnore() public noticia:Noticia;
     
 }

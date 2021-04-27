@@ -9,19 +9,21 @@ import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import { FonteNoticia } from '@radoccmodels/fontenoticia';
 import { NoticiaEditoria } from '@radoccmodels/noticiaeditoria';
 import { Template } from '@radoccmodels/template';
-import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { FonteNoticiaService } from '@radoccservices/fontenoticia-services';
 import { TemplateService } from '@radoccservices/template-services';
-import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
-import { MessageService } from 'primeng/api';
-import { VirtualTimeScheduler } from 'rxjs';
+import { MessageService } from 'primeng/api'
+import { NoticiaService } from '@radoccservices/noticia-services';
+import { ConteudoService } from '@radoccservices/conteudo-services';
+import { DialogService } from 'primeng/dynamicdialog';
+import { GaleriaConteudoComponent } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.component';
+import { PlaylistConteudo } from '@radoccmodels/playlistconteudo';
 
 @Component({
   selector: 'app-fontenoticia-cadastro',
   templateUrl: './fontenoticia-cadastro.component.html',
   styleUrls: ['./fontenoticia-cadastro.component.scss'],
   providers:[ 
-    MessageService,FonteNoticiaService, TemplateService,NoticiaEditoriaService
+    MessageService,FonteNoticiaService, TemplateService,NoticiaEditoriaService,NoticiaService, ConteudoService,DialogService
   ]
 })
 export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
@@ -52,8 +54,8 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
   public editoria:NoticiaEditoria;
 
   constructor(private fonteNoticiaService:FonteNoticiaService, private templateService:TemplateService,
-    public eventService:EventBrokerService,
-    private editoriaService:NoticiaEditoriaService) {
+    public eventService:EventBrokerService,private noticiaService:NoticiaService,private conteudoService:ConteudoService,
+    private editoriaService:NoticiaEditoriaService,public dialogService:DialogService) {
       super(eventService);
 
   }
@@ -151,4 +153,40 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
     this.editorias.splice(index,1);
   }
 
+  public atualizarEditoria(editoria){
+    this.editoriaService.atualizar(editoria.id).subscribe((res)=>{
+      
+    })
+  }
+
+  public visualizarUltimas(editoria){
+    this.conteudoService.buscarDefaultNoticiaPorFonte(this.fonteNoticia.id).subscribe((conteudo)=>{
+      if (conteudo != null){
+        this.noticiaService.buscarUltimas(editoria.id,10).subscribe((lista)=>{      
+          let playList = [];
+          for (let w = 0; w < lista.length;w++){
+            let item = new PlaylistConteudo();
+            let ct = conteudo;
+            ct.noticia = lista[w];
+            item.conteudo = ct;   
+            playList.push(item);
+          }
+          
+          const dialog = this.dialogService.open(GaleriaConteudoComponent, {
+            data:playList,
+            modal:true,
+            showHeader:true,
+            closable:true,
+            header:'Playlist',
+            closeOnEscape:true
+          });
+          dialog.onClose.subscribe((playlist)=>{
+            
+          }); 
+        })
+      }else {
+        this.pageCadastro.showInfoMsg('Não possui conteudo criado para esta fonte de noticia!');
+      }      
+    });
+  }
 }

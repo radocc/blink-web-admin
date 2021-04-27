@@ -20,6 +20,7 @@ import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendament
 import { ConteudoCampo } from '@radoccmodels/conteudocampo';
 import { ConteudoCampoService } from '@radoccservices/conteudocampo-services';
 import { TemplateCampoService } from '@radoccservices/templatecampo-services';
+import { FileUpload } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-template-default-conteudo',
@@ -33,7 +34,8 @@ import { TemplateCampoService } from '@radoccservices/templatecampo-services';
 export class TemplateDefaultComponent extends CadConteudoComponent implements OnInit {
 
   @ViewChild("panelAgendamento") public panelAgendamento:PanelAgendamentoComponent;
-
+  @ViewChild("fileUploadVideo") public fileUploadVideo:FileUpload;
+  @ViewChild("fileUploadImagem") public fileUploadImagem:FileUpload;
   public form:FormGroup = new FormGroup({
     titulo:new FormControl('', Validators.required),    
     template:new FormControl(null),
@@ -219,6 +221,12 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     this.form.reset({minutos:0,segundos:15});
     this.conteudo = null;
     this.panelAgendamento.reset();
+    if (this.fileUploadVideo != null){
+      this.fileUploadVideo.clear();
+    }
+    if (this.fileUploadImagem != null){
+      this.fileUploadImagem.clear();
+    }
   }
 
   public publicar(){

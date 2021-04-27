@@ -85,6 +85,11 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
       this.pageCadastro.showErrorMsg("FALHA_AO_SALVAR");
     })
   }
- 
+
+  public atualizarResultado(){
+    this.loteriaService.atualizarResultado(this.loteria.id).subscribe((result)=>{
+      
+    })
+  }
 
 }

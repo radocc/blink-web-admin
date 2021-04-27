@@ -280,9 +280,9 @@
                             </div>
 
                             <div class="p-field p-col">
-                                <label for="valor">{{'VALOR_PLANO' |translate}}</label>
+                                <label for="valor">{{'VALOR_DO_PLANO' |translate}}</label>
                                 <p-inputNumber formControlName="valor" inputId="valor" mode="currency"
-                                currency="BRL" locale="pt-BR" (blur)="calcularTotal()" [showButtons]="true">
+                                currency="BRL" locale="pt-BR" (blur)="calcularTotal()">
                                 </p-inputNumber>
                             </div>
 
@@ -303,7 +303,7 @@
                             </div>
 
                             <div class="p-field p-col">
-                                <label for="numeroUsuario">{{'NUMERO_USUARIOS' |translate}}</label>
+                                <label for="numeroUsuario">{{'NUMERO_DE_USUARIOS' |translate}}</label>
                                 <p-inputNumber formControlName="numeroUsuario" mode="decimal" [showButtons]="true"
                                     inputId="numeroUsuario" [min]="1" [max]="100" required>
                                 </p-inputNumber>

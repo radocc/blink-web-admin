@@ -8,7 +8,10 @@
         </div>
         <div class="p-d-flex p-flex-row div-footer">
             <!-- {{conteudo.data |date:'dd/MM/yyyy'}}&nbsp;&nbsp; -->
-            <div class="div-sound" *ngIf="conteudo.audio == 2"><img class="sound" src="/assets/images/sound.png"></div>
+            <div class="div-sound" *ngIf="conteudo.audio == 2">
+                <i class="sound pi pi-volume-up" style="font-size: 1rem"></i>                
+                <!-- <img class="sound" src="/assets/images/sound.png">-->
+            </div> 
             <div class="tempo">{{conteudo.tempoExibicao | tempoExibicao}}</div>
             <div class="p-d-flex p-col"></div>
             <button pButton pRipple type="button" *ngIf="exibiBtnAlterar && conteudo.permiteEdicao" (click)="alterarConteudo(conteudo)" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>

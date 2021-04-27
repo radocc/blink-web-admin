@@ -4,15 +4,16 @@ import { NgPrimeModule } from 'app/ngprime/ngprime.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ShareTranslateModule } from '@radoccmodules/share-translate/share-translate.module';
-import { ConteudoDisplayComponent } from './conteudo-display.component'; 
+import { GaleriaConteudoComponent } from './galeria-conteudo.component';
+import { ConteudoDisplayModule } from '@radocccomponentes/conteudo-display/conteudo-display.module';
 import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
 
 @NgModule({
   declarations: [
-    ConteudoDisplayComponent
+    GaleriaConteudoComponent    
   ],
   entryComponents:[
-    ConteudoDisplayComponent
+    GaleriaConteudoComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +22,11 @@ import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.
     FormsModule,
     RouterModule,
     ConteudoRowModule,
+    ConteudoDisplayModule,
     ShareTranslateModule,
   ],
   exports:[
-    ConteudoDisplayComponent
+    GaleriaConteudoComponent
   ]
 })
-export class ConteudoDisplayModule { }
+export class GaleriaConteudoModule { }

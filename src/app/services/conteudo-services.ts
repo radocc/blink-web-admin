@@ -57,4 +57,8 @@ export class ConteudoService extends TVBlinkService<Conteudo> {
     public findPreview(id: number): Observable<Conteudo> {
         return this.http.get<Conteudo>(this.urlWebBase + `/preview/${id}`).pipe();
     }
+
+    public buscarDefaultNoticiaPorFonte(idFonte: number): Observable<ConteudoResult> {
+        return this.http.get<ConteudoResult>(this.urlWebBase + `/buscar/default/noticia/fontenoticia/${idFonte}`).pipe();
+    }
 }

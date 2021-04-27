@@ -10,10 +10,10 @@
                 <p-dropdown [options]="empresas" [(ngModel)]="empresaSelecionada" optionLabel="razaoSocial" (onChange)="alterarEmpresa()"></p-dropdown>
             </div>
             <div class="item-menu " [ngClass]="{'selected':rotaSelecionada=='conteudo'}">
-                <span class="uppercase" routerLink="conteudo" (click)="navegar('conteudo')" translate>CONTEUDOS</span>
+                <span class="uppercase" (click)="navegar('conteudo','admin/conteudo')" translate>CONTEUDOS</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='publicacao'}">
-                <span class="uppercase" routerLink="publicacao"  (click)="navegar('publicacao')" translate>PUBLICACOES</span>
+                <span class="uppercase"   (click)="navegar('publicacao','admin/publicacao')" translate>PUBLICACOES</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='playlist'}">
                 <span class="uppercase" (click)="navegar('playlist','admin/player/panel/(pesquisa:playlist-pesquisa//cadastro:playlist-cadastro)')" translate>PLAYLIST</span>
@@ -31,11 +31,11 @@
                 <span routerLink="usuario" (click)="navegar('usuario')"  translate>USUARIOS</span>
             </div> -->
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='configuracao'}" >
-                <span class="uppercase" (click)="navegar('configuracao');menu.toggle($event)"  translate>CONFIGURACAO</span>
+                <span class="uppercase" (click)="menu.toggle($event)"  translate>CONFIGURACAO</span>
                 <p-menu #menu [popup]="true" [model]="itensConfiguracao"></p-menu>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='ajuda'}">
-                <span routerLink="ajuda" (click)="navegar('ajuda')" translate>AJUDA</span>
+                <span class="uppercase"  (click)="navegar('ajuda','admin/ajuda')" translate>AJUDA</span>
             </div>
             <div>
                 <p-avatar image="{{usuario?.foto == null ? '/assets/images/perfil.jpg': usuario?.foto}}" shape="circle"  (click)="menuUsuario.toggle($event)"></p-avatar>

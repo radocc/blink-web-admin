@@ -50,7 +50,7 @@
                                         <input id="url" required formControlName="url" type="url" pInputText>
                                         <small id="url" *ngIf="formEditoria.controls['url'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                     </div>                                  
-                                    <div class="btn-adicionar">
+                                    <div class="btn-adicionar">                                        
                                         <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="ADICIONAR" translate (click)="adicionar($event)"></button>
                                     </div>
                                 </div>
@@ -69,8 +69,12 @@
                                     <td>{{edit.nome}}</td>
                                     <td>{{edit.url}}</td>
                                     <td style="text-align: end;">
-                                        <button type="button" class="p-mr-2" title="EDITAR"  pButton pRipple icon="pi pi-pencil" (click)="alterarEditoria(edit)"></button>
-                                        <button type="button" class="p-mr-2" title="EXCLUIR"  pButton pRipple icon="pi pi-trash" (click)="excluirEditoria(edit)"></button>
+                                        <button type="button" class="p-mr-2" title="{{'EDITAR'|translate}}"  pButton pRipple icon="pi pi-pencil" (click)="alterarEditoria(edit)"></button>
+                                        <button type="button" class="p-mr-2" title="{{'EXCLUIR'|translate}}"  pButton pRipple icon="pi pi-trash" (click)="excluirEditoria(edit)"></button>
+                                        <button *ngIf="edit?.id != null" type="button" class="p-mr-2" title="{{'ATUALIZAR_NOTICIAS'|translate}}"  pButton pRipple icon="pi pi-refresh" 
+                                            (click)="atualizarEditoria(edit)"></button>
+                                        <button *ngIf="edit?.id != null" type="button" class="p-mr-2" title="{{'PREVIEW'|translate}}"  pButton pRipple icon="pi pi-eye" 
+                                        (click)="visualizarUltimas(edit)"></button>
                                     </td>
                                 </tr>
                             </ng-template>

@@ -33,6 +33,8 @@ import { NgxMaskModule } from 'ngx-mask';
 import { DireitoAcessoDialogComponent } from './pages/grupousuario/dialog-direitoacesso/direitoacesso-dialog.component';
 import { EmpresaPesquisaComponent } from './pages/empresa/empresa-pesquisa/empresa-pesquisa.component';
 import { EmpresaCadastroComponent } from './pages/empresa/empresa-cadastro/empresa-cadastro.component';
+import { GaleriaConteudoModule } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.module';
+import { GaleriaConteudoComponent } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.component';
 
 const routes: Routes = [
     {
@@ -185,7 +187,8 @@ const routes: Routes = [
       EmpresaPesquisaComponent,
     ],
     entryComponents:[
-      DireitoAcessoDialogComponent
+      DireitoAcessoDialogComponent,
+      GaleriaConteudoComponent
     ],
     imports: [
       CommonModule,

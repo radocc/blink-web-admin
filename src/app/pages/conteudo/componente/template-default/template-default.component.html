@@ -22,21 +22,9 @@
                     </p-autoComplete>
                     <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                 </div> 
-                <div class="p-field p-d-flex p-flex-row" *ngIf="tipo == 3">
-                    <p-fileUpload #fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
-                    name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
-                    accept="image/.png,.jpg,.jpeg"></p-fileUpload>
-                    <div class="p-col arquivo">{{arquivo?.nome}}</div>
-                    <p-dialog [(visible)]="mostrarPreview" >
-                        <div class="image-container" [ngStyle]="{'background':'url(' + arquivo?.url+')'}" ></div>
-                        <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-check" (click)="mostrarPreview=false" label="OK" styleClass="p-button-text"></p-button>
-                        </ng-template>
-                    </p-dialog>
-                </div> 
                 <div *ngIf="tipo == 2">
                     <div class="p-field rd-row">
-                        <p-fileUpload #fileUpload mode="basic" maxFileSize="99999999" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
+                        <p-fileUpload #fileUploadVideo mode="basic" maxFileSize="99999999" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                         name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" accept=".mov,.mp3,.mkv,.mp4" ></p-fileUpload>
                         <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
                         <!-- <div class="rd-flex">{{arquivo.url}}</div> -->
@@ -48,6 +36,19 @@
                         <p-radioButton name="audio" value="2" formControlName="audio" label="{{'COM_AUDIO'|translate}}"></p-radioButton>
                     </div>
                 </div>
+                <div class="p-field p-d-flex p-flex-row" *ngIf="tipo == 3">
+                    <p-fileUpload #fileUploadImagem mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
+                    name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
+                    accept="image/.png,.jpg,.jpeg"></p-fileUpload>
+                    <div class="p-col arquivo">{{arquivo?.nome}}</div>
+                    <p-dialog [(visible)]="mostrarPreview" >
+                        <div class="image-container" [ngStyle]="{'background':'url(' + arquivo?.url+')'}" ></div>
+                        <ng-template pTemplate="footer">
+                            <p-button icon="pi pi-check" (click)="mostrarPreview=false" label="OK" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                    </p-dialog>
+                </div> 
+                
                 <div class="p-field rd-col" *ngFor="let camp of campos">
                     <label for="{{'camp'+camp.id}}">{{camp.nome |translate}}</label>
                     <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
