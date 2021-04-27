@@ -43,6 +43,7 @@ export class ConteudoDisplayComponent implements OnInit {
       if (this.conteudoResult.noticia != null){
         this.noticia = this.conteudoResult.noticia;
       }  
+      // this.conteudoService.findPreview
     }else {
       this.conteudoService.findPreview(this.conteudoResult.id).subscribe((conteudo)=>{
         this.conteudo = conteudo;
