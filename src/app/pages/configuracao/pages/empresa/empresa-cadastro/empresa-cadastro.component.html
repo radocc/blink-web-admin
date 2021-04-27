@@ -1,0 +1,118 @@
+<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)">
+    <div class="page-empresa-cadastro rd-flex rd-col rd-gap-8">
+        <div class="rd-col rd-flex rd-gap">
+            <div class="div-edicao rd-flex rd-col">
+                <form [formGroup]="form">
+                    <div class="rd-flex rd-col ">
+                        <div class="rd-row rd-flex">
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="razao" translate>RAZAO_SOCIAL</label>
+                                <input id="razao" type="text" formControlName="razaoSocial" required pInputText />
+                                <small id="razao" *ngIf="form.controls['razaoSocial'].errors?.required"
+                                    class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                            </div>
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="fantasia" translate>FANTASIA</label>
+                                <input id="fantasia" type="text" formControlName="fantasiaEmpresa" equired pInputText />
+                                <small id="fantasia" *ngIf="form.controls['fantasiaEmpresa'].errors?.required"
+                                    class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="p-fluid p-formgrid p-grid">
+                                <div class="p-field p-col">
+                                    <label for="cnpj" translate>CNPJ</label>
+                                    <input id="cnpj" required formControlName="cnpjEmpresa" type="text" pInputText>
+                                    <small id="cnpj" *ngIf="form.controls['cnpjEmpresa'].errors?.required"
+                                        class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                                </div>
+                                <div class="p-field rd-col p-mr-2 rd-flex">
+                                    <label for="cpf" translate>CPF</label>
+                                    <p-inputMask type="decimal" unmask="true" mask="99999-999" name="cep"
+                                        formControlName="cep" placeholder="99999-999"></p-inputMask>
+                                    <small id="login" *ngIf="form.controls['cep'].errors?.required"
+                                        class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rd-row rd-flex">
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="estado" translate>ESTADO</label>
+                                <p-autoComplete formControlName="estado" [suggestions]="listaEstado"
+                                    (completeMethod)="findEstadoPorNome($event.query)" field="nome" [dropdown]="true">
+                                    <ng-template let-estado pTemplate="item">
+                                        <div>{{ estado.nome }}</div>
+                                    </ng-template>
+                                </p-autoComplete>
+                                <small id="p-estado" *ngIf="form.controls['estado'].hasError('required') &&
+                                form.controls['estado'].touched">{{'INFORME'| translate}}</small>
+                            </div>
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="cidade" translate>CIDADE</label>
+                                <p-autoComplete formControlName="cidade" [suggestions]="listaCidade"
+                                    (completeMethod)="findCidadePorNomeEIdEstado($event.query)" field="nome"
+                                    [dropdown]="true">
+                                    <ng-template let-cidade pTemplate="item">
+                                        <div>{{ cidade.nome }}</div>
+                                    </ng-template>
+                                </p-autoComplete>
+                                <small id="cidade"
+                                    *ngIf="form.controls['cidade'].hasError('required') && form.controls['cidade'].touched">
+                                    {{'INFORME'| translate}}</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="p-fluid p-formgrid p-grid">
+                                <div class="p-field p-col">
+                                    <label for="rua" translate>RUA</label>
+                                    <input id="rua" type="text" name="rua" formControlName="rua" required pInputText />
+                                    <small id="rua" *ngIf="form.controls['rua'].errors?.required"
+                                        class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                                </div>
+                                <div class="p-field rd-col p-mr-2 rd-flex">
+                                    <label for="numero" translate>NUMERO</label>
+                                    <p-inputNumber id="numero" matInput formControlName="numero" [useGrouping]="false">
+                                    </p-inputNumber>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rd-row rd-flex">
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="bairro" translate>BAIRRO</label>
+                                <input id="bairro" type="text" name="bairro" formControlName="bairro" required
+                                    pInputText />
+                                <small id="bairro"
+                                    *ngIf="form.controls['bairro'].hasError('required') && form.controls['bairro'].touched"
+                                    class="mat-text-warn" translate>FAVOR_INFORMAR_O_BAIRRO_</small>
+                            </div>
+                            <div class="p-field rd-col p-mr-2 rd-flex">
+                                <label for="complemento" translate>COMPLEMENTO</label>
+                                <input id="complemento" type="text" name="complemento" formControlName="complemento"
+                                    pInputText />
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="p-fluid p-formgrid p-grid">
+                                <div class="p-field p-col">
+                                    <label for="email" translate>EMAIL</label>
+                                    <input id="email" required formControlName="emailEmpresa" type="text" pInputText>
+                                    <small id="email" *ngIf="form.controls['emailEmpresa'].errors?.required"
+                                        class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                                </div>
+                                <div class="p-field rd-col p-mr-2 rd-flex">
+                                    <label for="telefone" translate>TELEFONE</label>
+                                    <p-inputMask id="telefone" type="text" unmask="true" mask="(99) 9999-9999"
+                                        placeholder="(99) 9999-9999" formControlName="telefoneEmpresa"></p-inputMask>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-field rd-col">
+                            <label for="site" translate>SITE</label>
+                            <input id="site" type="text" name="site" formControlName="site" pInputText />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</app-pagecadastro>
