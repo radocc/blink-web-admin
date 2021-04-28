@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
-import { Loteria } from '@radoccmodels/loteria'; 
 import { FiltroService } from '@radoccservices/base/filtro-service';
 import { UsuarioService } from '@radoccservices/base/usuario-service'; 
 import { MessageService } from 'primeng/api';
@@ -19,7 +18,6 @@ export class UsuarioPesquisaComponent implements OnInit {
     nome:new FormControl('', Validators.required)    
   }) 
   
-  public loteria:Loteria;
   public gridpesquisa;
 
   

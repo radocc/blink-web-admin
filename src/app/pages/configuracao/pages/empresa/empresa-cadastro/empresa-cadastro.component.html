@@ -22,14 +22,16 @@
                             <div class="p-fluid p-formgrid p-grid">
                                 <div class="p-field p-col">
                                     <label for="cnpj" translate>CNPJ</label>
-                                    <input id="cnpj" required formControlName="cnpjEmpresa" type="text" pInputText>
+                                    <p-inputMask #inputCnpj id="cnpj" unmask="true" type="text"
+                                        mask="99.999.999/9999-99" name="cnpjEmpresa" formControlName="cnpjEmpresa"
+                                        required validaCpfCnpj></p-inputMask>
                                     <small id="cnpj" *ngIf="form.controls['cnpjEmpresa'].errors?.required"
                                         class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div>
                                 <div class="p-field rd-col p-mr-2 rd-flex">
-                                    <label for="cpf" translate>CPF</label>
+                                    <label for="cep" translate>CEP</label>
                                     <p-inputMask type="decimal" unmask="true" mask="99999-999" name="cep"
-                                        formControlName="cep" placeholder="99999-999"></p-inputMask>
+                                        formControlName="cep"></p-inputMask>
                                     <small id="login" *ngIf="form.controls['cep'].errors?.required"
                                         class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                 </div>
@@ -45,7 +47,7 @@
                                     </ng-template>
                                 </p-autoComplete>
                                 <small id="p-estado" *ngIf="form.controls['estado'].hasError('required') &&
-                                form.controls['estado'].touched">{{'INFORME'| translate}}</small>
+                                form.controls['estado'].touched">{{'INFORME O ESTADO'| translate}}</small>
                             </div>
                             <div class="p-field rd-col p-mr-2 rd-flex">
                                 <label for="cidade" translate>CIDADE</label>
@@ -58,7 +60,7 @@
                                 </p-autoComplete>
                                 <small id="cidade"
                                     *ngIf="form.controls['cidade'].hasError('required') && form.controls['cidade'].touched">
-                                    {{'INFORME'| translate}}</small>
+                                    {{'INFORME A CIDADE'| translate}}</small>
                             </div>
                         </div>
                         <div class="card">

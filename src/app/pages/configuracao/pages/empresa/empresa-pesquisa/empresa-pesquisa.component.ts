@@ -19,7 +19,6 @@ export class EmpresaPesquisaComponent implements OnInit {
     nome:new FormControl('', Validators.required)    
   }) 
   
-  public loteria:Loteria;
   public gridpesquisa;
 
   

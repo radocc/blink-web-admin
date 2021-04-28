@@ -3,14 +3,6 @@ import { Events } from '../../../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadastro.component';
-import { GrupoUsuario } from '@radoccmodels/base/grupousuario';
-import { Usuario } from '@radoccmodels/base/usuario';
-import { TipoConteudo } from '@radoccmodels/tipoconteudo';
-import { GrupoUsuarioService } from '@radoccservices/base/grupousuario-service';
-import { UsuarioService } from '@radoccservices/base/usuario-service';
-import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
-import { MessageService } from 'primeng/api';
 import { EmpresaService } from '@radoccservices/base/empresa-service';
 import { EstadoService } from '@radoccservices/base/estado-service';
 import { CidadeService } from '@radoccservices/base/cidade-service';
@@ -69,11 +61,16 @@ export class EmpresaCadastroComponent extends CadForm implements OnInit {
     complemento: new FormControl(null),
     numero: new FormControl(null),
     site: new FormControl(null),
-  })
+  });
+
 
 
   ngOnInit(): void {
     super.ngOnInit();
+
+    this.form.controls['cep'].valueChanges.subscribe((value) => {
+      this.buscarCep(value);
+    });
   }
 
   public novo() {
@@ -89,15 +86,15 @@ export class EmpresaCadastroComponent extends CadForm implements OnInit {
 
   public findCidadePorNomeEIdEstado(nome: string) {
     this.cidadeService.findNomeIdEstado(nome, this.form.controls['estado'].value.id).subscribe((lista: Cidade[]) => {
-        this.listaCidade = lista;
+      this.listaCidade = lista;
     });
-}
+  }
 
-public findEstadoPorNome(nome: string) {
+  public findEstadoPorNome(nome: string) {
     this.estadoService.findNome(nome).subscribe((lista: Estado[]) => {
-        this.listaEstado = lista;
+      this.listaEstado = lista;
     });
-}
+  }
 
   public montarForm(empresa: Empresa, editavel: boolean) {
     this.empresa = empresa;
@@ -106,7 +103,7 @@ public findEstadoPorNome(nome: string) {
     this.form.controls['cnpjEmpresa'].setValue(empresa.cnpj);
     this.form.controls['cep'].setValue(empresa.cep);
     this.form.controls['telefoneEmpresa'].setValue(empresa.telefone);
-    this.form.controls['email'].setValue(empresa.email);
+    this.form.controls['emailEmpresa'].setValue(empresa.email);
     this.form.controls['estado'].setValue(empresa.estado);
     this.form.controls['cidade'].setValue(empresa.cidade);
     this.form.controls['bairro'].setValue(empresa.bairro);
@@ -132,17 +129,17 @@ public findEstadoPorNome(nome: string) {
     }
     this.empresa.razaoSocial = this.form.controls['razaoSocial'].value;
     this.empresa.fantasia = this.form.controls['fantasiaEmpresa'].value;
-        this.empresa.cnpj = this.form.controls['cnpjEmpresa'].value;
-        this.empresa.cep = this.form.controls['cep'].value;
-        this.empresa.email = this.form.controls['emailEmpresa'].value;
-        this.empresa.estado = this.form.controls['estado'].value;
-        this.empresa.cidade = this.form.controls['cidade'].value;
-        this.empresa.bairro = this.form.controls['bairro'].value;
-        this.empresa.rua = this.form.controls['rua'].value;
-        this.empresa.numero = this.form.controls['numero'].value;
-        this.empresa.complemento = this.form.controls['complemento'].value;
-        this.empresa.telefone = this.form.controls['telefoneEmpresa'].value;
-        this.empresa.site = this.form.controls['site'].value;
+    this.empresa.cnpj = this.form.controls['cnpjEmpresa'].value;
+    this.empresa.cep = this.form.controls['cep'].value;
+    this.empresa.email = this.form.controls['emailEmpresa'].value;
+    this.empresa.estado = this.form.controls['estado'].value;
+    this.empresa.cidade = this.form.controls['cidade'].value;
+    this.empresa.bairro = this.form.controls['bairro'].value;
+    this.empresa.rua = this.form.controls['rua'].value;
+    this.empresa.numero = this.form.controls['numero'].value;
+    this.empresa.complemento = this.form.controls['complemento'].value;
+    this.empresa.telefone = this.form.controls['telefoneEmpresa'].value;
+    this.empresa.site = this.form.controls['site'].value;
 
     this.empresaService.save(this.empresa).subscribe((empresa) => {
       this.empresa = empresa;
@@ -155,29 +152,38 @@ public findEstadoPorNome(nome: string) {
   }
 
   buscarCep(event) {
-
     if (event == undefined || event.length < 8) {
-        return
+      return
     }
     this.empresaService.buscarCep(event).then((cep: any) => {
-        this.cep = cep;
-        this.empresa.bairro = cep.bairro
-        this.empresa.complemento = cep.complemento
-        this.empresa.rua = cep.logradouro
-        let req = {
-            cidade: cep.localidade,
-            uf: cep.uf
-        }
-        this.cidadeService.buscarCidadePeloCep(req).subscribe((cidades: Cidade[]) => {
-            if (cidades.length > 0) {
-                this.empresa.cidade = cidades[0];
-                this.empresa.estado = cidades[0].estado;
-            }
+      // this.form.controls['cep'].setValue = cep;
+      this.form.controls['bairro'].setValue(cep.bairro);
+      this.form.controls['rua'].setValue(cep.logradouro);
+      this.form.controls['complemento'].setValue(cep.complemento);
+      this.empresa.bairro = cep.bairro
+      this.empresa.complemento = cep.complemento
+      this.empresa.rua = cep.logradouro;
 
-        })
-    }), (erro) => {
-      this.page.showErrorMsg("CEP_INVALIDO");
-    }
-}
+      let req = {
+        cidade: cep.localidade,
+        uf: cep.uf
+      }
+
+      this.cidadeService.buscarCidadePeloCep(req).subscribe((cidades: Cidade[]) => {
+        if (cidades.length > 0) {
+          this.form.controls['cidade'].setValue(cidades[0]);
+          this.form.controls['estado'].setValue(cidades[0].estado);
+          this.empresa.cidade = cidades[0];
+          this.empresa.estado = cidades[0].estado;
+        }
+
+      });
+
+    },
+      //  erro => {
+      //     this.page.showErrorMsg("CEP_INVALIDO")
+      // }
+    );
+  }
 
 }
