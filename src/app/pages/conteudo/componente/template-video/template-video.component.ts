@@ -34,6 +34,8 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
   
   public arquivo:Arquivo;
   public conteudo:Conteudo;
+  public idTipoConteudo:number;
+  public clonar:boolean = false;
 
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,private router:Router,
     private eventService:EventBrokerService, private route:ActivatedRoute, public translateService:TranslateService) {
@@ -42,6 +44,8 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
 
   ngOnInit(): void { 
     this.route.params.subscribe((param)=>{
+      this.idTipoConteudo = param['idTipoConteudo'];
+      this.clonar = param['clonar'];
       if (param['id']){
           this.buscar(param['id']);
       }
@@ -77,14 +81,14 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
       this.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
-    if (this.conteudo == null){
+    if (this.conteudo == null || this.clonar){
       this.conteudo = new Conteudo();
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
-    this.conteudo.idTipoConteudo = ETipoConteudo.Video;
+    this.conteudo.idTipoConteudo = this.idTipoConteudo;
     this.conteudo.tempoExibicao = this.arquivo.tempoDuracao;
     this.conteudo.idTemplate = null;
-    this.conteudo.tipo = 2;
+    this.conteudo.tipo = ETipoConteudo.Video;
     this.conteudo.audio = this.form.controls['audio'].value;
     this.conteudo.idArquivo = this.arquivo.id;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();

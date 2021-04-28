@@ -166,7 +166,7 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
           let playList = [];
           for (let w = 0; w < lista.length;w++){
             let item = new PlaylistConteudo();
-            let ct = conteudo;
+            let ct = { ...conteudo};
             ct.noticia = lista[w];
             item.conteudo = ct;   
             playList.push(item);

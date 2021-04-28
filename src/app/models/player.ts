@@ -7,7 +7,7 @@ export class Player extends BaseEntityImpl {
     public observacao:string;
     public horaInicio:Date;
     public horaFim:Date;    
-    public orientacao:number;    
+    public orientacao:number = 1;    
     public idItem:number;
     public playerEquipamento:PlayerEquipamento;
 

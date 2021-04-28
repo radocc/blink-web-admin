@@ -42,6 +42,8 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
   public editorias:ConteudoFonteNoticia[] = [];
   public filtro:ConteudoFiltro;
   public conteudo:Conteudo;
+  public idTipoConteudo:number;
+  public clonar:boolean = false;
 
   constructor(public msgService:MessageService, private conteudoService:ConteudoService, private fonteService:FonteNoticiaService,
     private editoriaService:NoticiaEditoriaService, private conteudoFonteService:ConteudoFonteNoticiaService, public translateService:TranslateService,
@@ -51,6 +53,8 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
 
   ngOnInit(): void { 
     this.route.params.subscribe((param)=>{
+      this.idTipoConteudo = param['idTipoConteudo'];
+      this.clonar = param['clonar'];
       if (param['id']){
           this.conteudoService.findConteudoNoticia(param['id']).subscribe((conteudo)=>{
             this.conteudo = conteudo;
@@ -78,6 +82,9 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
   public novo(){
     this.form.reset({minutos:0,segundos:15});
     this.conteudo = null;
+    for (let w = 0;w < this.conteudoNoticias.length;w++){
+      this.conteudoNoticias[w].editoriasSelecionado = [];
+    }
   }
   
   public salvar(){    
@@ -103,10 +110,10 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
       }      
     }
     this.conteudo.titulo = titulos.join(',');
-    this.conteudo.idTipoConteudo = ETipoConteudo.Noticias;
+    this.conteudo.idTipoConteudo = this.idTipoConteudo;
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
-    this.conteudo.tipo = 1;
+    this.conteudo.tipo = ETipoConteudo.Noticias;    
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = null;
     this.conteudo.idArquivo = null;

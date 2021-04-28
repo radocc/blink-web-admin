@@ -35,7 +35,8 @@ import { EmpresaPesquisaComponent } from './pages/empresa/empresa-pesquisa/empre
 import { EmpresaCadastroComponent } from './pages/empresa/empresa-cadastro/empresa-cadastro.component';
 import { GaleriaConteudoModule } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.module';
 import { GaleriaConteudoComponent } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.component';
-
+import { PrevisaoTempoCadastroComponent } from './pages/previsaotempo/previsaotempo-cadastro/previsaotempo-cadastro.component';
+import { PrevisaoTempoPesquisaComponent } from './pages/previsaotempo/previsaotempo-pesquisa/previsaotempo-pesquisa.component';
 const routes: Routes = [
     {
       path:'',
@@ -150,7 +151,17 @@ const routes: Routes = [
           path:'empresa-cadastro',
           outlet: 'cadastro',
           component: EmpresaCadastroComponent
-        },        
+        },
+        {        
+          path:'previsaotempo-pesquisa',
+          component: PrevisaoTempoPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'previsaotempo-cadastro',
+          outlet: 'cadastro',
+          component: PrevisaoTempoCadastroComponent
+        }        
       ]
     },
     {
@@ -185,6 +196,8 @@ const routes: Routes = [
       DireitoAcessoDialogComponent,
       EmpresaCadastroComponent,
       EmpresaPesquisaComponent,
+      PrevisaoTempoCadastroComponent,
+      PrevisaoTempoPesquisaComponent
     ],
     entryComponents:[
       DireitoAcessoDialogComponent,

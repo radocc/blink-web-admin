@@ -25,7 +25,7 @@
                     </div>
                     <div class="list-conteudo">
                         <div class="item-conteudo " *ngFor="let conteudo of conteudos">
-                            <app-conteudo-row [conteudo]="conteudo" (onAbrirArquivo)="arquivoConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
+                            <app-conteudo-row [conteudo]="conteudo" (onClonar)="clonarConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
                                 (onAlterar)="alterarConteudo(conteudo)" (onExcluir)="excluirConteudo(conteudo)" > 
                             </app-conteudo-row>
                         </div>

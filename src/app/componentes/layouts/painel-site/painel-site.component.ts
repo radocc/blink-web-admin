@@ -45,10 +45,10 @@ export class PainelSiteComponent implements OnInit {
       this.aplicarTranslateMenu(this.itensConfiguracao);
     });
     this.itemsMenuUsuario = [
-      {
-        label: 'PERFIL',
-        routerLink: ['/perfil-usuario']
-      },
+      // {
+      //   label: 'PERFIL',
+      //   routerLink: ['/perfil-usuario']
+      // },
       {
         label: 'SAIR',
         routerLink:['/login']        

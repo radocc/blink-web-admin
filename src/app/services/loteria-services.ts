@@ -24,4 +24,8 @@ export class LoteriaService extends TVBlinkService<Loteria> {
     public atualizarResultado(idLoteria: number): Observable<any> {
         return this.http.get(this.urlWebBase + `/atualizar/resultado/${idLoteria}`).pipe();
     }
+
+    public ultimoResultado(idLoteria: number): Observable<any> {
+        return this.http.get(this.urlWebBase + `/ultimo/resultado/${idLoteria}`).pipe();
+    }
 }

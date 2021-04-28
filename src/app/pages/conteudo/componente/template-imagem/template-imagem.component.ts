@@ -37,6 +37,8 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
   public files:File[] = [];
   public conteudo:Conteudo;
   public mostrarPreview:boolean = false;
+  public idTipoConteudo:number;
+  public clonar:boolean = false;
 
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,private router:Router,
     private route:ActivatedRoute, public translateService:TranslateService, private eventService:EventBrokerService) {
@@ -45,6 +47,8 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
 
   ngOnInit(): void { 
     this.route.params.subscribe((param)=>{
+      this.idTipoConteudo = param['idTipoConteudo'];
+      this.clonar = param['clonar'];
       if (param['id']){
           this.buscar(param['id']);
       }
@@ -84,16 +88,16 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
       this.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
-    if (this.conteudo == null){
+    if (this.conteudo == null || this.clonar){
       this.conteudo = new Conteudo();
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
-    this.conteudo.idTipoConteudo = ETipoConteudo.Imagens; 
+    this.conteudo.idTipoConteudo = this.idTipoConteudo; 
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = null;
-    this.conteudo.tipo = 3;
+    this.conteudo.tipo = ETipoConteudo.Imagens;
     this.conteudo.idArquivo = this.arquivo.id;
     this.conteudo.agendamento = this.panelAgendamento.getAgendamento();
     this.conteudoService.save(this.conteudo).subscribe((conteudo)=>{

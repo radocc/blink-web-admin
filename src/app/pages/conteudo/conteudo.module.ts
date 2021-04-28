@@ -18,6 +18,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
 import { PageCadastroConteudoModule } from '@radocccomponentes/pagecadastro-conteudo/pagecadastro-conteudo.module';
 import { TemplateDefaultComponent } from './componente/template-default/template-default.component';
+import { ConteudoDisplayDialogComponent } from '@radocccomponentes/conteudo-display-dialog/conteudo-display-dialog.component';
 
 const routes: Routes = [
   {
@@ -35,59 +36,59 @@ const routes: Routes = [
         pathMatch:'full'
       },
       {
-        path:'imagem',
+        path:'imagem/:idTipoConteudo',
         component:TemplateImagemComponent
       },
       {
-        path:'imagem/:id',
+        path:'imagem/:idTipoConteudo/:id/:clonar',
         component:TemplateImagemComponent
       },
       {
-        path:'video',
+        path:'video/:idTipoConteudo',
         component:TemplateVideoComponent
       },
       {
-        path:'video/:id',
+        path:'video/:idTipoConteudo/:id/:clonar',
         component:TemplateVideoComponent
       },
       {
-        path:'noticia',
+        path:'noticia/:idTipoConteudo',
         component:TemplateNoticiaComponent
       },
       {
-        path:'noticia/:id',
+        path:'noticia/:idTipoConteudo/:id/:clonar',
         component:TemplateNoticiaComponent
       },
       {
-        path:'cotacao',
+        path:'cotacao/:idTipoConteudo',
         component:TemplateCotacaoComponent
       },
       {
-        path:'cotacao/:id',
+        path:'cotacao/:idTipoConteudo/:id/:clonar',
         component:TemplateCotacaoComponent
       },
       {
-        path:'loteria',
+        path:'loteria/:idTipoConteudo',
         component:TemplateLoteriaComponent
       },
       {
-        path:'loteria/:id',
+        path:'loteria/:idTipoConteudo/:id/:clonar',
         component:TemplateLoteriaComponent
       },
       {
-        path:'previsaotempo',
+        path:'previsaotempo/:idTipoConteudo',
         component:TemplatePrevisaoTempoComponent
       },
       {
-        path:'previsaotempo/:id',
+        path:'previsaotempo/:idTipoConteudo/:id/:clonar',
         component:TemplatePrevisaoTempoComponent
       },
       {
-        path:'default/:tipo',
+        path:'default/:idTipoConteudo/:tipo',
         component:TemplateDefaultComponent
       },
       {
-        path:'default/:tipo/:id',
+        path:'default/:idTipoConteudo/:tipo/:id/:clonar',
         component:TemplateDefaultComponent
       },
     ]
@@ -117,6 +118,9 @@ export const MY_FORMATS = {
     TemplateLoteriaComponent,
     TemplatePrevisaoTempoComponent,
     TemplateDefaultComponent
+  ],
+  entryComponents:[
+    ConteudoDisplayDialogComponent
   ],
   imports: [
     CommonModule,

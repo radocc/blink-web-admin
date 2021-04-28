@@ -17,7 +17,7 @@
                 </div>
                 <div class="rd-col rd-gap-8" *ngFor="let conteudo of conteudos">
                     <app-conteudo-row pDraggable="conteudo" (onDragStart)="dragStart(conteudo)" (onDragEnd)="dragEnd($event)" [conteudo]="conteudo"
-                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false"> 
+                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="false" [exibiBtnClonar]="false"> 
                     </app-conteudo-row>
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <p-orderList  pDroppable="conteudo" (onDrop)="drop($event)"  class="rd-flex rd-col" [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
                 <ng-template let-itemList pTemplate="item">
                     <app-conteudo-row [conteudo]="itemList.conteudo" 
-                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false">
+                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="false" [exibiBtnClonar]="false">
                      </app-conteudo-row>
                 </ng-template>
             </p-orderList>

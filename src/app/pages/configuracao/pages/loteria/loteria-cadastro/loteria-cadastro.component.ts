@@ -7,6 +7,7 @@ import { PageCadastroComponent } from '@radocccomponentes/pagecadastro/pagecadas
 import { Loteria } from '@radoccmodels/loteria';
 import { LoteriaService } from '@radoccservices/loteria-services';
 import { MessageService } from 'primeng/api';
+import { LoteriaResultado } from '@radoccmodels/loteriaresultado';
 
 @Component({
   selector: 'app-loteria-cadastro',
@@ -30,10 +31,14 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
   
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),
-    url:new FormControl('', Validators.required)    
+    url:new FormControl('', Validators.required),
+    horariosAtualizacao:new FormControl(null, Validators.required),
+    ultimaAtualizacao:new FormControl({disabled:true}),
+    resultado:new FormControl({disabled:true})
   }) 
   
   public loteria:Loteria;
+  public resultado:LoteriaResultado;
 
   constructor(private msgService:MessageService, private loteriaService:LoteriaService,
     public eventService: EventBrokerService) {
@@ -42,17 +47,19 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
   }
 
   ngOnInit(): void { 
-    super.ngOnInit();
+    super.ngOnInit();        
   } 
   
   public novo(){
     super.novo();
     this.loteria = null;
+    this.resultado = null;
   }
 
   public buscar(id:number, editavel:boolean){
     this.loteriaService.findById(id).subscribe((loteria)=>{
       this.montarForm(loteria,editavel);
+      this.ultimoResultado();
     })
   }
 
@@ -60,7 +67,8 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
     this.loteria = loteria;
     this.form.controls['nome'].setValue(loteria.nome, {emitEvent:false});
     this.form.controls['url'].setValue(loteria.url, {emitEvent:false});
-    
+    this.form.controls['horariosAtualizacao'].setValue(loteria.horariosAtualizacao, {emitEvent:false});
+    this.form.controls['ultimaAtualizacao'].setValue(loteria.ultimaAtualizacao, {emitEvent:false});
     if (editavel == false){
       this.form.disable();
     }    
@@ -76,6 +84,8 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
     }
     this.loteria.nome = this.form.controls['nome'].value;
     this.loteria.url = this.form.controls['url'].value;
+    this.loteria.horariosAtualizacao = this.form.controls['horariosAtualizacao'].value;
+
     this.loteriaService.save(this.loteria).subscribe((loteria)=>{
       this.loteria = loteria;
       this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
@@ -88,8 +98,18 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
 
   public atualizarResultado(){
     this.loteriaService.atualizarResultado(this.loteria.id).subscribe((result)=>{
-      
+      this.ultimoResultado();
     })
   }
 
+  public ultimoResultado(){
+    this.loteriaService.ultimoResultado(this.loteria.id).subscribe((result)=>{
+      this.resultado = result;
+      if (this.resultado != null){
+        let dtAtualizacao = new Date(this.resultado.dataAtualizacao);
+        this.form.controls['ultimaAtualizacao'].setValue(dtAtualizacao);
+        this.form.controls['resultado'].setValue(JSON.stringify(this.resultado,null,2));
+      }
+    })
+  }
 }
