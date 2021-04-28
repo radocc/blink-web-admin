@@ -262,6 +262,23 @@ export class PanelPublicacaoComponent implements OnInit {
           })
         }
       }); 
+    }else {
+      for (let w =0; w < this.listaConteudo.length;w++){
+        this.listaConteudo[w].sequencia = w+1;
+      }
+      this.playlist.playlistConteudos = this.listaConteudo;
+      
+      this.playlistService.save(this.playlist).subscribe((playlist)=>{
+        this.playlist = playlist;
+        this.msgService.add({
+          severity:'success', summary:'Salvo', detail:'Salvo com sucesso'
+        })
+      }, error=>{
+        this.msgService.add({
+          severity:'error', summary:'Atenção', detail:'Erro no processo de salvar playlist!'
+        })
+        console.log(error);
+      })
     }
     
   }
@@ -294,6 +311,11 @@ export class PanelPublicacaoComponent implements OnInit {
     }
     this.publicacao.idPlaylist = this.playlist.id;
     this.playlist.status = 2;
+
+    for (let w =0; w < this.listaConteudo.length;w++){
+      this.listaConteudo[w].sequencia = w+1;
+    }
+    this.playlist.playlistConteudos = this.listaConteudo;
     this.publicacao.playlist = this.playlist;
     
 

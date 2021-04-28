@@ -36,7 +36,6 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
   public arquivo:Arquivo;
   public files:File[] = [];
   public conteudo:Conteudo;
-  public mostrarPreview:boolean = false;
   public idTipoConteudo:number;
   public clonar:boolean = false;
 
@@ -116,7 +115,7 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
   }
 
   public preview(){
-    this.mostrarPreview = true;
+    
   }
 
   public importar(){
@@ -132,4 +131,7 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
     this.router.navigate(['admin/conteudo/panel/imagem']);
   }
 
+  public baixarArquivo(){
+    window.open(this.arquivo.url, 'Download');
+  }
 }

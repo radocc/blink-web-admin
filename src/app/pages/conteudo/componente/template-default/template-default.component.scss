@@ -20,8 +20,9 @@
             margin-bottom: 8px;
         }
         .arquivo {
-            line-height: 40px;
-            margin-left: 16px;
+            overflow-wrap: anywhere;
+            margin: auto;
+            margin-left: 16px !important;
         }
         
         .image-container{

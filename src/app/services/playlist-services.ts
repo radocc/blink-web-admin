@@ -17,8 +17,8 @@ export class PlaylistService extends TVBlinkService<Playlist> {
         return 'playlist';
     }
 
-    public findNome(nome: string): Observable<Array<Playlist>> {
-        return this.http.post<Array<Playlist>>(this.urlWebBase + `/find/nome`, nome).pipe();
+    public findNome(nome: string,campanha:boolean): Observable<Array<Playlist>> {
+        return this.http.post<Array<Playlist>>(this.urlWebBase + `/find/nome/campanha/${campanha}`, nome).pipe();
     }
     
 }

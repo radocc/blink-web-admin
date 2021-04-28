@@ -81,7 +81,7 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
       this.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
-    if (this.conteudo == null || this.clonar){
+    if (this.conteudo == null || this.clonar == true){
       this.conteudo = new Conteudo();
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;

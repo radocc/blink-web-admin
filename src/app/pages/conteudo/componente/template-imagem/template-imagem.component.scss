@@ -13,8 +13,9 @@
             padding: 0px !important;
         }
         .arquivo {
-            line-height: 40px;
-            margin-left: 16px;
+            overflow-wrap: anywhere;
+            margin: auto;
+            margin-left: 16px !important;
         }
         .p-fileupload{
             margin-bottom: 8px;

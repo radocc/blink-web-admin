@@ -40,7 +40,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   @ViewChild("fileUploadImagem") public fileUploadImagem:FileUpload;
   public form:FormGroup = new FormGroup({
     titulo:new FormControl('', Validators.required),    
-    template:new FormControl(null),
+    template:new FormControl(),
     minutos:new FormControl(1),
     audio:new FormControl(1),
     tipo:new FormControl(1),

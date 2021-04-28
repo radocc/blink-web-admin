@@ -2,23 +2,18 @@
     <ng-template #content>
     
             <form [formGroup]="form">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12">
+                <div class="p-formgrid p-grid">
+                    <div class="p-field rd-col p-col-12">
                         <label for="titulo">Título</label>
                         <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
                         <small id="titulo-error" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
-                    <div class="p-field p-d-flex p-flex-row">
+                    <div class="p-field rd-row p-col-12">
                         <p-fileUpload #fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                         name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
                         accept="image/.png,.jpg,.jpeg"></p-fileUpload>
-                        <div class="p-col arquivo">{{arquivo?.nome}}</div>
-                        <p-dialog [(visible)]="mostrarPreview" >
-                            <div class="image-container" [ngStyle]="{'background':'url(' + arquivo?.url+')'}" ></div>
-                            <ng-template pTemplate="footer">
-                                <p-button icon="pi pi-check" (click)="mostrarPreview=false" label="OK" styleClass="p-button-text"></p-button>
-                            </ng-template>
-                        </p-dialog>
+                        <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
+                        <button pButton *ngIf="arquivo" class="p-button-secondary"  type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                     </div> 
                     
                         <!-- [url]="arquivoService.getUrlUpload()" -->
@@ -29,7 +24,7 @@
                             <label class="label-field p-col" for="minutos">&nbsp; Minutos</label>
                         </div>
                         <div class="p-d-flex p-flex-row">                
-                            <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
+                            <input id="segundos"  class="p-col" type="number" min="0" max="60" formControlName="segundos"  pInputText>                         
                             <label class="label-field" for="segundos">&nbsp;Segundos</label>
                         </div>
                     </div>

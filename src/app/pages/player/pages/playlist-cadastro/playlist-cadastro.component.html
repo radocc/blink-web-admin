@@ -35,30 +35,55 @@
                             </p-dropdown>
                             <small id="status" *ngIf="form.controls['status'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
+                        <div class="rd-col rd-flex">
+                            <label for="intercalacao" translate>{{'INTERCALACAO'|translate}}</label>
+                            <p-dropdown id="intercalacao" [options]="tiposIntercalacao" optionLabel="name" optionValue="id" formControlName="intercalacao"></p-dropdown>
+                        </div> 
                     </div>
                     <div class="rd-col rd-flex ">
-                        <div class="div-container-orderlist rd-col">
-                            <div class="rd-row header">
-                                <div class="rd-flex">
-                                    {{'CONTEUDOS'|translate}}
-                                </div>
-                                <div>
-                                    <button pButton type="button" icon="pi pi-plus" class="p-button-raised p-button-rounded btn-add" translate (click)="abrirLista()"></button>
-                                </div>
-                            </div>
-                            <p-orderList class="rd-flex rd-col" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
-                                <ng-template let-itemList pTemplate="item">
-                                    <app-conteudo-row [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
-                                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="false" [exibiBtnClonar]="false">
-                                    </app-conteudo-row>
+                        <p-tabView>
+                            <p-tabPanel>
+                                <ng-template pTemplate="header">
+                                    {{'CONTEUDOS'|translate}}                                    
                                 </ng-template>
-                            </p-orderList>
-                        </div>
+                                <div class="div-container-orderlist rd-col">                                    
+                                    <div class="rd-row header">
+                                        <div class="rd-flex">
+                                          Lista dos conteúdos adicionados  
+                                        </div>
+                                        <div>
+                                            <button pButton type="button" icon="pi pi-plus" class="p-button-raised p-button-rounded btn-add" translate (click)="abrirLista()"></button>
+                                        </div>
+                                    </div>
+                                    <p-orderList class="rd-flex rd-col" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
+                                        <ng-template let-itemList let-index="index" pTemplate="item">
+                                            <div class="rd-row">
+                                                <div class="order-index">{{index + 1}}</div>
+                                                <app-conteudo-row [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
+                                                    [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false">
+                                                </app-conteudo-row>
+                                            </div>
+                                        </ng-template>
+                                    </p-orderList>
+                                </div>
+                            </p-tabPanel>
+                            <p-tabPanel header="{{'PLAYERS'|translate}}" >
+                                <p-listbox class="rd-h-100" [options]="players" [(ngModel)]="playersSelecionados" [filter]="true" [checkbox]="true" [multiple]="true" optionLabel="nome" [ngModelOptions]="{standalone: true}">
+                                    <ng-template pTemplate="header">
+                                        {{'SELECIONE_OS_PLAYERS'|translate}}
+                                    </ng-template>
+                                    <ng-template let-player pTemplate="item">
+                                        <div class="dv-player">
+                                            <div class="nome-player">{{player.identificacao}}&nbsp;&nbsp;{{player.nome}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-listbox>
+                            </p-tabPanel>
+                        </p-tabView>
+                        
                     </div>
                 </div> 
             </form>
         </div>
     </div>            
 </app-pagecadastro>
-<!-- <app-conteudo-dialog-playlist #dialogConteudo></app-conteudo-dialog-playlist> -->
-

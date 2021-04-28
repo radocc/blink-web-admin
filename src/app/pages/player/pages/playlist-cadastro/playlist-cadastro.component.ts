@@ -10,13 +10,16 @@ import { PlaylistConteudoService } from '@radoccservices/playlistconteudo-servic
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { ConteudoDialogComponent } from './dialog-conteudo/conteudo-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
+import { Player } from '@radoccmodels/player';
+import { PlayerService } from '@radoccservices/player-services';
 
 @Component({
   selector: 'app-playlist-cadastro',
   templateUrl: './playlist-cadastro.component.html',
   styleUrls: ['./playlist-cadastro.component.scss'],
   providers:[
-    PlaylistService, PlaylistConteudoService, ConteudoService,DialogService
+    PlaylistService, PlaylistConteudoService, ConteudoService,DialogService,
+    PlayerService
   ]
 })
 export class PlaylistCadastroComponent extends CadForm implements OnInit {
@@ -26,21 +29,24 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     subTitle:string,
     btnSalvar:string;
   }={
-    titulo:'PLAYLIST',
+    titulo:'CAMPANHA',
     subTitle:'',
     btnSalvar:'SALVAR'
   }
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),
-    campanha:new FormControl(false),
+    campanha:new FormControl(true),
     dataInicio:new FormControl(),
     dataFim:new FormControl(),
     regraExibicao:new FormControl(),
-    status:new FormControl(2)
+    status:new FormControl(2),
+    intercalacao:new FormControl(3)
   }) 
   
   public playlist:Playlist;
   public status:any;
+  public players:Player[] = [];
+  public playersSelecionados:Player[] = [];
   public listaConteudo:PlaylistConteudo[] = [];
   public listaStatus:{ id:number, nome:string }[] = [{
     id:1,
@@ -59,14 +65,36 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     id:5,
     nome:'REPROVADO'
   }];
+  public tiposIntercalacao:any[] = [
+    {
+      name: '1|1', 
+      id:1
+    },
+    { 
+      name: '2|2', 
+      id:2
+    },
+    { 
+      name: '3|3', 
+      id:3
+    },
+    { 
+      name: '4|4', 
+      id:4
+    },
+  ];
 
   constructor(private playlistService:PlaylistService, private playlistConteudoService:PlaylistConteudoService,
-     public eventService:EventBrokerService, public dialogService:DialogService) {
+     public eventService:EventBrokerService, public dialogService:DialogService,
+     private playerService:PlayerService) {
       super(eventService);
   }
 
   ngOnInit(): void { 
     super.ngOnInit();
+    this.playerService.findAll().subscribe((lista)=>{
+      this.players = lista;
+    })
   } 
 
   public novo(){
@@ -86,6 +114,19 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     this.form.controls['status'].setValue(playlist.status,{emitEvent:false});
     this.form.controls['dataInicio'].setValue(new Date(playlist.dataInicio),{emitEvent:false});    
     this.form.controls['dataFim'].setValue(new Date(playlist.dataFim),{emitEvent:false});    
+    this.form.controls['intercalacao'].setValue(playlist.intercalacao, {emitEvent:false});
+    this.playersSelecionados = [];
+    if (this.playlist.players != null){
+      let ids = this.playlist.players.split(',');
+      for (let w = 0;w < this.players.length;w++){
+        for (let i = 0; i < ids.length;i++){
+          if (this.players[w].id === parseInt(ids[i])){
+            this.playersSelecionados.push(this.players[w]);
+            break;
+          }
+        }      
+      }
+    }    
     this.playlistConteudoService.buscarPorPlayList(playlist.id).subscribe((lista)=>{
       this.listaConteudo = lista;
     })
@@ -110,10 +151,16 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     }
     
     this.playlist.nome = this.form.controls['nome'].value;
-    // this.playlist.campanha = this.form.controls['campanha'].value;
+    this.playlist.campanha = this.form.controls['campanha'].value;
     this.playlist.dataInicio = this.form.controls['dataInicio'].value;
     this.playlist.dataFim = this.form.controls['dataFim'].value;    
     this.playlist.status = this.form.controls['status'].value;
+    this.playlist.intercalacao = this.form.controls['intercalacao'].value;
+    let idsPlayes = []
+    for (let w =0; w < this.playersSelecionados.length;w++){
+      idsPlayes.push(this.playersSelecionados[w].id);
+    }
+    this.playlist.players = idsPlayes.join(',');
     for (let w =0; w < this.listaConteudo.length;w++){
       this.listaConteudo[w].sequencia = w+1;
     }

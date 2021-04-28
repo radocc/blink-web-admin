@@ -40,7 +40,7 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         subTitle: string,
         btnSalvar: string;
     } = {
-            titulo: 'CONFIGURACAO_PARA_NOVO_AMBIENTE',
+            titulo: 'CONFIGURACAO_PARA_NOVO_CLIENTE',
             subTitle: '',
             btnSalvar: 'SALVAR'
         }

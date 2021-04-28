@@ -26,7 +26,7 @@ export class PlaylistPesquisaDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {  
-    this.playlistService.findNome("").subscribe((lista)=>{
+    this.playlistService.findNome("",false).subscribe((lista)=>{
       this.lista = lista;
     })
   }  

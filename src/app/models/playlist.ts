@@ -9,6 +9,8 @@ export class Playlist extends BaseEntityImpl {
     public dataFim:Date;
     public status:number;
     public idOrigem:number;
+    public intercalacao:number = 3;
+    public players:string;
     public playlistConteudos:PlaylistConteudo[] = [];
 
     

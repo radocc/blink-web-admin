@@ -15,6 +15,7 @@ import { PlaylistPesquisaComponent } from './pages/playlist-pesquisa/playlist-pe
 import { ConteudoDialogComponent } from './pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component';
 import { ConteudoRowModule } from '@radocccomponentes/conteudo-row/conteudo-row.module';
 import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro.module';
+import { ConteudoDisplayDialogComponent } from '@radocccomponentes/conteudo-display-dialog/conteudo-display-dialog.component';
 
 const routes: Routes = [
   {
@@ -73,7 +74,8 @@ const routes: Routes = [
     ConteudoDialogComponent
   ],
   entryComponents:[
-    ConteudoDialogComponent
+    ConteudoDialogComponent,
+    ConteudoDisplayDialogComponent
   ],
   imports: [
     CommonModule,

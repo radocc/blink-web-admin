@@ -28,8 +28,7 @@
                         <p-fileUpload #fileUploadVideo mode="basic" maxFileSize="99999999" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                         name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" accept=".mov,.mp3,.mkv,.mp4" ></p-fileUpload>
                         <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
-                        <!-- <div class="rd-flex">{{arquivo.url}}</div> -->
-                        <button pButton *ngIf="arquivo" type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
+                        <button pButton *ngIf="arquivo" class="p-button-secondary" type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                     </div>  
                     <div class="p-field rd-row rd-gap">
                         <!-- <label class="label-field" translate>AUDIO</label>                                 -->                    
@@ -41,13 +40,8 @@
                     <p-fileUpload #fileUploadImagem mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                     name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
                     accept="image/.png,.jpg,.jpeg"></p-fileUpload>
-                    <div class="p-col arquivo">{{arquivo?.nome}}</div>
-                    <p-dialog [(visible)]="mostrarPreview" >
-                        <div class="image-container" [ngStyle]="{'background':'url(' + arquivo?.url+')'}" ></div>
-                        <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-check" (click)="mostrarPreview=false" label="OK" styleClass="p-button-text"></p-button>
-                        </ng-template>
-                    </p-dialog>
+                    <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
+                    <button pButton *ngIf="arquivo" class="p-button-secondary" type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                 </div> 
                 
                 <div class="p-field rd-col" *ngFor="let camp of campos">
