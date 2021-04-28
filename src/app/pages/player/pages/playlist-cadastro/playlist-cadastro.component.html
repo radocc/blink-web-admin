@@ -49,7 +49,7 @@
                             <p-orderList class="rd-flex rd-col" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
                                 <ng-template let-itemList pTemplate="item">
                                     <app-conteudo-row [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
-                                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="false" [exibiBtnArquivo]="false">
+                                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="false" [exibiBtnClonar]="false">
                                     </app-conteudo-row>
                                 </ng-template>
                             </p-orderList>

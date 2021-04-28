@@ -68,49 +68,49 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
 
   public getUrl(tipo:TipoConteudo){
     let url = 'admin/conteudo/panel/';
-    switch (tipo.id){
+    switch (tipo.tipo){
       case ETipoConteudo.Video:
-        url += 'video';
+        url += 'video/'+tipo.id;
         break;
       case ETipoConteudo.Imagens:
-        url += 'imagem';
+        url += 'imagem/'+tipo.id;
         break;
       case ETipoConteudo.Noticias:
-        url += 'noticia';
+        url += 'noticia/'+tipo.id;
         break;
       case ETipoConteudo.Cotacao:
-        url += 'cotacao';
+        url += 'default/'+tipo.id+"/"+ETipoConteudo.Cotacao;
         break;
       case ETipoConteudo.PrevisaoTempo:
-        url += 'previsaotempo';
+        url += 'previsaotempo/'+tipo.id;
         break;
       case ETipoConteudo.Loteria:
-        url += 'loteria';
+        url += 'loteria/'+tipo.id;
         break;
       case ETipoConteudo.TemplatesCorporativos:
-        url += 'default/'+ETipoConteudo.TemplatesCorporativos;
+        url += 'default/'+tipo.id+"/"+ETipoConteudo.TemplatesCorporativos;
         break;
       case ETipoConteudo.Curiosidades:
-        url += 'default/'+ETipoConteudo.Curiosidades;
+        url += 'default/'+tipo.id+"/"+ETipoConteudo.Curiosidades;
         break;
       case ETipoConteudo.Saude:
-        url += 'default/'+ETipoConteudo.Saude;
+        url += 'default/'+tipo.id+"/"+ETipoConteudo.Saude;
         break;
       case ETipoConteudo.Receitas:
-        url += 'default/'+ETipoConteudo.Receitas;
+        url += 'default/'+tipo.id+"/"+ETipoConteudo.Receitas;
         break;
       case ETipoConteudo.Agenda:
-        url += 'default/'+ETipoConteudo.Agenda;
+        url += 'default/'+tipo.id+"/"+ETipoConteudo.Agenda;
         break;
       case ETipoConteudo.Turismo:
-        url += 'default/'+ETipoConteudo.Turismo;
+        url += 'default/'+tipo.id+"/"+ETipoConteudo.Turismo;
         break;
     }
     return url;
   }
 
   public alterarConteudo(conteudo){
-    let url = this.getUrl(this.tipoConteudo)+"/"+conteudo.id;
+    let url = this.getUrl(this.tipoConteudo)+"/"+conteudo.id+'/'+false;
     this.router.navigate([url]);
   }
 
@@ -127,8 +127,9 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
     
   }
 
-  public arquivoConteudo(conteudo){
-    
+  public clonarConteudo(conteudo){
+    let url = this.getUrl(this.tipoConteudo)+"/"+conteudo.id+"/"+true;
+    this.router.navigate([url]);
   }
 
 }

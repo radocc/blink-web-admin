@@ -54,6 +54,8 @@
 @import './app/pages/configuracao/pages/previsaotempoimagem/previsaotempoimagem-cadastro/previsaotempoimagem-cadastro.component.scss';
 @import './app/pages/configuracao/pages/previsaotempoimagem/previsaotempoimagem-pesquisa/previsaotempoimagem-pesquisa.component.scss';
 @import './app/pages/configuracao/pages/ambientenovo/ambientenovo-cadastro/ambientenovo-cadastro.component.scss';
+@import './app/pages/configuracao/pages/previsaotempo/previsaotempo-cadastro/previsaotempo-cadastro.component.scss';
+@import './app/pages/configuracao/pages/previsaotempo/previsaotempo-pesquisa/previsaotempo-pesquisa.component.scss';
 
 @import './app/componentes/pagecadastro/pagecadastro.component.scss';
 @import './app/componentes/conteudo-row/conteudo-row.component.scss';
@@ -139,6 +141,8 @@ PLAYER
 @include page-configuracao-noticia-pesquisa($theme);
 @include page-configuracao-previsaotempoimagem-pesquisa($theme);
 @include page-configuracao-previsaotempoimagem-cadastro($theme);
+@include page-configuracao-previsaotempo-pesquisa($theme);
+@include page-configuracao-previsaotempo-cadastro($theme);
 @include app-galeria-conteudo-playlist($theme);
 @include app-dialog-direito-acesso-grupo($theme);
 @include page-ambiente-novo-theme($theme);

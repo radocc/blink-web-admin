@@ -25,7 +25,7 @@ export class GaleriaConteudoComponent implements OnInit {
   public tipoVisualizacao:{id:number,nome:string}[] = [
     {
       id:1,
-      nome:'Grade'
+      nome:'Lista'
     },{
       id:2,
       nome:'Individual'

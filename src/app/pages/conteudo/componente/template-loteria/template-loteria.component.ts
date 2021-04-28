@@ -17,7 +17,7 @@ import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { MessageService } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
-import { ConteudoLoteria } from '@radoccmodels/conteudoloteria';
+import { ConteudoLoteria } from '@radoccmodels/conteudoloteria'; 
 
 @Component({
   selector: 'app-template-loteria-conteudo',
@@ -45,6 +45,8 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
   public conteudoLoteria:ConteudoLoteria;
   public loterias:Loteria[] = [];  
   public templates:Template[] = [];
+  public idTipoConteudo:number;
+  public clonar:boolean = false;
 
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,
     private loteriaService:LoteriaService, private templateService:TemplateService, public translateService:TranslateService,
@@ -54,6 +56,8 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
 
   ngOnInit(): void { 
     this.route.params.subscribe((param)=>{
+      this.idTipoConteudo = param['idTipoConteudo'];
+      this.clonar = param['clonar'];
       if (param['id']){
           this.buscar(param['id']);
       }
@@ -84,16 +88,16 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
       this.showWarnMsg('EXISTEM_CAMPOS_OBRIGATORIOS');
       return ;
     }
-    if (this.conteudo == null){
+    if (this.conteudo == null || this.clonar){
       this.conteudo = new Conteudo();
       this.conteudoLoteria = new ConteudoLoteria();
     }
     this.conteudo.titulo = this.form.controls['titulo'].value;
-    this.conteudo.idTipoConteudo = ETipoConteudo.Loteria
+    this.conteudo.idTipoConteudo = this.idTipoConteudo;
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;
-    this.conteudo.tipo = 1;
+    this.conteudo.tipo = ETipoConteudo.Loteria;
     this.conteudo.idTemplate = this.form.controls['template'].value.id;
     this.conteudo.template = this.form.controls['template'].value;
     this.conteudoLoteria.idLoteria = this.form.controls['loteria'].value.id;

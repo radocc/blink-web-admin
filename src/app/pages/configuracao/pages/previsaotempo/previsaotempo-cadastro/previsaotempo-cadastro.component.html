@@ -1,0 +1,28 @@
+<app-pagecadastro #pageCadastro [config]="config" (save)="salvar($event)" [form]="form">
+    <div class="page-tipoconteudo-cadastro rd-flex rd-col rd-gap-8">
+        <div class="rd-col rd-flex rd-gap">
+            <div class="div-edicao rd-flex rd-col">
+                <form [formGroup]="form">
+                    <div class="p-fluid p-grid p-formgrid ">
+                        
+                        <div class="p-field  p-col ">
+                            <label for="cidade" translate>CIDADE</label>
+                            <p-autoComplete formControlName="cidade" class="rd-flex p-field"
+                                  field="nome" [dropdown]="true" [disabled]="true">
+                                    <ng-template let-cidade pTemplate="item">
+                                        <div>{{cidade.nome}} </div>
+                                    </ng-template>
+                            </p-autoComplete>
+                            <small id="cidade-error" *ngIf="form.controls['cidade'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div>  
+                        <div class="p-field p-d-flex p-flex-column p-col-12 p-lg-12">
+                            <label for="jsonDatas" translate>JSON</label>
+                            <textarea id="jsonDatas" required formControlName="jsonDatas" [rows]="25" pInputTextarea class="p-inputtextarea"></textarea>                            
+                        </div> 
+                         
+                    </div> 
+                </form>      
+            </div>  
+        </div>    
+    </div>            
+</app-pagecadastro>

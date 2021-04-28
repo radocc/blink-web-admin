@@ -26,7 +26,7 @@
                         <div class="item-conteudo " pDraggable="conteudo" (onDragStart)="dragStart(conteudo)" (onDragEnd)="dragEnd($event)" *ngFor="let conteudo of conteudos">
                             <app-conteudo-row 
                                 [conteudo]="conteudo" (onAbrirArquivo)="arquivoConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
-                                [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnArquivo]="false"> 
+                                [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnClonar]="false"> 
                             </app-conteudo-row>
                         </div>
                     </div>
@@ -79,12 +79,12 @@
                                 <div>{{listaConteudo.length}}&nbsp; {{'ITENS'|translate}}</div>
                                 <div>{{tempoLista | tempoExibicao}}</div>
                             </div>
-                            <p-orderList class="rd-h-100" pDroppable="conteudo" (onDrop)="drop($event)" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
+                            <p-orderList class="rd-h-100" [listStyle]="{'height':'auto'}"  pDroppable="conteudo" (onDrop)="drop($event)" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
                                 <ng-template  let-itemList let-index="index" pTemplate="item">
                                     <div class="rd-row">
                                         <div class="order-index">{{index + 1}}</div>
                                         <app-conteudo-row class="rd-flex" [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
-                                            [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnArquivo]="false">
+                                            [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false">
                                         </app-conteudo-row>
                                     </div>
                                 </ng-template>

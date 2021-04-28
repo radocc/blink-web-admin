@@ -17,11 +17,11 @@ export class ConteudoRowComponent implements OnInit {
   @Input("exibiBtnAlterar") public exibiBtnAlterar:boolean = true;
   @Input("exibiBtnExcluir") public exibiBtnExcluir:boolean = true;
   @Input("exibiBtnVisualizar") public exibiBtnVisualizar:boolean = true;
-  @Input("exibiBtnArquivo") public exibiBtnArquivo:boolean = true;
+  @Input("exibiBtnClonar") public exibiBtnClonar:boolean = true;
   @Output("onAlterar") public btnAlterar: EventEmitter<any> = new EventEmitter();
   @Output("onExcluir") public btnExcluir: EventEmitter<any> = new EventEmitter();
   @Output("onVisualizar") public btnVisualizar: EventEmitter<any> = new EventEmitter();
-  @Output("onAbrirArquivo") public btnAbrirArquivo: EventEmitter<any> = new EventEmitter();
+  @Output("onClonar") public btnClonar: EventEmitter<any> = new EventEmitter();
 
   constructor(public dialogService:DialogService) { }
 
@@ -59,9 +59,9 @@ export class ConteudoRowComponent implements OnInit {
     }); 
   }
 
-  public arquivoConteudo(conteudo){
-    if (this.btnAbrirArquivo){
-      this.btnAbrirArquivo.emit(conteudo);
+  public clonarConteudo(conteudo){
+    if (this.btnClonar){
+      this.btnClonar.emit(conteudo);
     }
   }
 

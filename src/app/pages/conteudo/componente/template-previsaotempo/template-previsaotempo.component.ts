@@ -43,7 +43,8 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
   public templates:Template[] = [];
   public previsao:ConteudoPrevisao;
   public conteudo:Conteudo;
-
+  public idTipoConteudo:number;
+  public clonar:boolean = false;
   constructor(public msgService:MessageService, private conteudoService:ConteudoService,private conteudoPrevisaoService:ConteudoPrevisaoService,
     private route:ActivatedRoute, private router:Router, private cidadeService:CidadeService, private templateService:TemplateService,
     private eventService:EventBrokerService, public translateService:TranslateService) {
@@ -53,6 +54,8 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
   ngOnInit(): void { 
     
     this.route.params.subscribe((param)=>{
+      this.idTipoConteudo = param['idTipoConteudo'];
+      this.clonar = param['clonar'];
       if (param['id']){
           this.conteudoService.findConteudoPrevisao(param['id']).subscribe((conteudo)=>{
             this.conteudo = conteudo;
@@ -90,7 +93,7 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
       this.showWarnMsg('EXISTEM_CAMPOS_INVALIDOS');
       return ;
     }
-    if (this.conteudo == null){
+    if (this.conteudo == null || this.clonar){
       this.conteudo = new Conteudo();
       this.previsao = new ConteudoPrevisao();
     }  
@@ -98,10 +101,10 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
     this.previsao.idCidade = this.form.controls['cidade'].value.id;
     this.conteudo.titulo = this.form.controls['cidade'].value.nome;
     this.conteudo.conteudoPrevisaoTempo = this.previsao;
-    this.conteudo.idTipoConteudo = ETipoConteudo.PrevisaoTempo;
+    this.conteudo.idTipoConteudo = this.idTipoConteudo;
     let segundos = this.form.controls['segundos'].value;
     segundos += (this.form.controls['minutos'].value * 60);
-    this.conteudo.tipo = 1;
+    this.conteudo.tipo = ETipoConteudo.PrevisaoTempo;
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = this.form.controls['template'].value.id;
     this.conteudo.template = this.form.controls['template'].value;

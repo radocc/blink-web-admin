@@ -36,59 +36,59 @@ const routes: Routes = [
         pathMatch:'full'
       },
       {
-        path:'imagem',
+        path:'imagem/:idTipoConteudo',
         component:TemplateImagemComponent
       },
       {
-        path:'imagem/:id',
+        path:'imagem/:idTipoConteudo/:id/:clonar',
         component:TemplateImagemComponent
       },
       {
-        path:'video',
+        path:'video/:idTipoConteudo',
         component:TemplateVideoComponent
       },
       {
-        path:'video/:id',
+        path:'video/:idTipoConteudo/:id/:clonar',
         component:TemplateVideoComponent
       },
       {
-        path:'noticia',
+        path:'noticia/:idTipoConteudo',
         component:TemplateNoticiaComponent
       },
       {
-        path:'noticia/:id',
+        path:'noticia/:idTipoConteudo/:id/:clonar',
         component:TemplateNoticiaComponent
       },
       {
-        path:'cotacao',
+        path:'cotacao/:idTipoConteudo',
         component:TemplateCotacaoComponent
       },
       {
-        path:'cotacao/:id',
+        path:'cotacao/:idTipoConteudo/:id/:clonar',
         component:TemplateCotacaoComponent
       },
       {
-        path:'loteria',
+        path:'loteria/:idTipoConteudo',
         component:TemplateLoteriaComponent
       },
       {
-        path:'loteria/:id',
+        path:'loteria/:idTipoConteudo/:id/:clonar',
         component:TemplateLoteriaComponent
       },
       {
-        path:'previsaotempo',
+        path:'previsaotempo/:idTipoConteudo',
         component:TemplatePrevisaoTempoComponent
       },
       {
-        path:'previsaotempo/:id',
+        path:'previsaotempo/:idTipoConteudo/:id/:clonar',
         component:TemplatePrevisaoTempoComponent
       },
       {
-        path:'default/:tipo',
+        path:'default/:idTipoConteudo/:tipo',
         component:TemplateDefaultComponent
       },
       {
-        path:'default/:tipo/:id',
+        path:'default/:idTipoConteudo/:tipo/:id/:clonar',
         component:TemplateDefaultComponent
       },
     ]

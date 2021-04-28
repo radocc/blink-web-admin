@@ -4,8 +4,8 @@
     </div>    
 </form>
     <div class="rd-col" *ngIf="modoVisualizacao == 1">
-        <p-dataView [value]="conteudos" layout="grid">
-            <ng-template let-playContent pTemplate="gridItem">
+        <p-dataView [value]="conteudos" layout="list">
+            <ng-template let-playContent pTemplate="listItem">
                 <app-conteudo-display [conteudo]="playContent.conteudo"></app-conteudo-display>
             </ng-template>
         </p-dataView>

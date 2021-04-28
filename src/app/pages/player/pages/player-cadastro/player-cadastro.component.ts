@@ -71,7 +71,6 @@ export class PlayerCadastroComponent extends CadForm implements OnInit {
   public montarForm(player:Player, editavel:boolean){
     this.player = player;
     this.form.controls['nome'].setValue(player.nome,{emitEvent:false});
-    this.form.controls['orientacao'].setValue(player.orientacao,{emitEvent:false});
     this.form.controls['observacao'].setValue(player.observacao,{emitEvent:false});    
     let horaInicio = new Date();
     let hr = (player.horaInicio+"").split(":")[0];
@@ -116,7 +115,6 @@ export class PlayerCadastroComponent extends CadForm implements OnInit {
     
     this.player.nome = this.form.controls['nome'].value;
     this.player.observacao = this.form.controls['observacao'].value;
-    this.player.orientacao = this.form.controls['orientacao'].value;
     this.player.horaInicio = this.form.controls['horaInicio'].value;    
     this.player.horaFim = this.form.controls['horaFim'].value;
 

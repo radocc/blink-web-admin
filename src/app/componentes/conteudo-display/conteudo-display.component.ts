@@ -24,12 +24,13 @@ export class ConteudoDisplayComponent implements OnInit {
 
   @Input("conteudo") public conteudoResult:ConteudoResult;
   @ViewChild('imageContainer', {static: false}) imageContainer: ElementRef;
+  @ViewChild('videoContainer', {static: false}) videoContainer: ElementRef;
   public urlVideo:string;
   public conteudo:Conteudo;
   public arquivo:Arquivo;
   public template:Template;
   public campos:TemplateCampo[] = [];
-  public imageHeight = 500;
+  public imageHeight = 337;
   public proportion: number = 1;
   public previsaoTempo:PrevisaoTempo;
   public conteudoLoteria:ConteudoLoteria;
@@ -150,6 +151,9 @@ export class ConteudoDisplayComponent implements OnInit {
     });
     setTimeout(() => {
       this.setContainerImageHeight(this.imageContainer.nativeElement);        
+      if (this.videoContainer){
+        this.videoContainer.nativeElement.clientHeight = this.imageContainer.nativeElement.clientHeight;
+      }
       this.campos.forEach((campo) => {          
         console.log('Positicionar', campo.nome, campo.positionTop, campo.positionLeft);
           const drag = document.getElementById(campo.hash);
@@ -171,7 +175,7 @@ export class ConteudoDisplayComponent implements OnInit {
 
   //** Seta a altura para manter a proporção 16:9 */
   private setContainerImageHeight(div: HTMLDivElement) {
-    // this.imageHeight = div.offsetWidth * 0.5625;
+    this.imageHeight = div.offsetWidth * 0.5625;
     // div.style.setProperty('height', this.imageHeight + 'px');
     if (this.arquivo != null) {
       this.proportion = this.arquivo.height / this.imageHeight;  

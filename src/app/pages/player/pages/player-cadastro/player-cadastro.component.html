@@ -1,4 +1,4 @@
-<app-pagecadastro [config]="config" (save)="salvar($event)">
+<app-pagecadastro [config]="config" [form]="form" (save)="salvar($event)">
     <div class="player-cadastro rd-flex rd-col rd-gap-8">        
         <div class="rd-flex rd-col">
             <form [formGroup]="form"> 
@@ -30,7 +30,7 @@
                             <p-fieldset legend="{{'EQUIPAMENTO'|translate}}">
                                 <div class=" p-field rd-col ">
                                     <label class="label-field" translate>EQUIPAMENTO</label>
-                                    <p-autoComplete formControlName="equipamento" 
+                                    <p-autoComplete formControlName="equipamento" field="nome"
                                         [suggestions]="equipamentos" (completeMethod)="pesquisarEquipamento($event.query)" [dropdown]="true">
                                         <ng-template let-equipamento pTemplate="item">
                                             <div>{{equipamento.nome}} - {{equipamento.uuid}} </div>

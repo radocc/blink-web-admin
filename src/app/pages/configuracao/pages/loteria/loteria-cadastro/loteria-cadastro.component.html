@@ -13,11 +13,16 @@
                             <label for="url" translate>URL</label>
                             <input id="url" required formControlName="url" type="text" pInputText>                     
                             <small id="url" *ngIf="form.controls['url'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                        </div>
+                        <div class="p-field rd-col">
+                            <label for="horariosAtualizacao" translate>HORARIOS_DE_ATUALIZACAO</label>
+                            <input id="horariosAtualizacao" required formControlName="horariosAtualizacao" type="text" pInputText>
+                            <small id="horariosAtualizacao-error" *ngIf="form.controls['horariosAtualizacao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div> 
                         <div class="rd-row rd-gap">
                             <div class="p-field rd-col" *ngIf="resultado?.dataAtualizacao">
                                 <label for="ultimaAtualizacao" translate>ULTIMA_ATUALIZACAO</label>
-                                <p-calendar [showTime]="true" hourFormat="24" autocomplete="off" type="date" formControlName="dataAtualizacao"
+                                <p-calendar [showTime]="true" hourFormat="24" autocomplete="off" type="date" formControlName="ultimaAtualizacao"
                                     dateFormat="dd/mm/yy" appendTo="body" disabled>
                                 </p-calendar>
                             </div>

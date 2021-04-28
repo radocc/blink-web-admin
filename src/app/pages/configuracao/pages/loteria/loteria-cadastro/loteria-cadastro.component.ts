@@ -32,7 +32,8 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
   public form:FormGroup = new FormGroup({
     nome:new FormControl('', Validators.required),
     url:new FormControl('', Validators.required),
-    dataAtualizacao:new FormControl({disabled:true}),
+    horariosAtualizacao:new FormControl(null, Validators.required),
+    ultimaAtualizacao:new FormControl({disabled:true}),
     resultado:new FormControl({disabled:true})
   }) 
   
@@ -66,7 +67,8 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
     this.loteria = loteria;
     this.form.controls['nome'].setValue(loteria.nome, {emitEvent:false});
     this.form.controls['url'].setValue(loteria.url, {emitEvent:false});
-    
+    this.form.controls['horariosAtualizacao'].setValue(loteria.horariosAtualizacao, {emitEvent:false});
+    this.form.controls['ultimaAtualizacao'].setValue(loteria.ultimaAtualizacao, {emitEvent:false});
     if (editavel == false){
       this.form.disable();
     }    
@@ -82,6 +84,8 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
     }
     this.loteria.nome = this.form.controls['nome'].value;
     this.loteria.url = this.form.controls['url'].value;
+    this.loteria.horariosAtualizacao = this.form.controls['horariosAtualizacao'].value;
+
     this.loteriaService.save(this.loteria).subscribe((loteria)=>{
       this.loteria = loteria;
       this.pageCadastro.showSuccessMsg('SALVO_COM_SUCESSO');
@@ -103,7 +107,7 @@ export class LoteriaCadastroComponent extends CadForm implements OnInit {
       this.resultado = result;
       if (this.resultado != null){
         let dtAtualizacao = new Date(this.resultado.dataAtualizacao);
-        this.form.controls['dataAtualizacao'].setValue(dtAtualizacao);
+        this.form.controls['ultimaAtualizacao'].setValue(dtAtualizacao);
         this.form.controls['resultado'].setValue(JSON.stringify(this.resultado,null,2));
       }
     })
