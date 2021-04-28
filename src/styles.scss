@@ -54,6 +54,8 @@
 @import './app/pages/configuracao/pages/previsaotempoimagem/previsaotempoimagem-cadastro/previsaotempoimagem-cadastro.component.scss';
 @import './app/pages/configuracao/pages/previsaotempoimagem/previsaotempoimagem-pesquisa/previsaotempoimagem-pesquisa.component.scss';
 @import './app/pages/configuracao/pages/ambientenovo/ambientenovo-cadastro/ambientenovo-cadastro.component.scss';
+@import './app/pages/configuracao/pages/empresa/empresa-pesquisa/empresa-pesquisa.component.scss';
+@import './app/pages/configuracao/pages/empresa/empresa-cadastro/empresa-cadastro.component.scss';
 @import './app/pages/configuracao/pages/previsaotempo/previsaotempo-cadastro/previsaotempo-cadastro.component.scss';
 @import './app/pages/configuracao/pages/previsaotempo/previsaotempo-pesquisa/previsaotempo-pesquisa.component.scss';
 
@@ -135,6 +137,8 @@ PLAYER
 @include page-configuracao-equipamento-cadastro($theme);
 @include page-configuracao-usuario-cadastro($theme);
 @include page-configuracao-usuario-pesquisa($theme);
+@include page-configuracao-empresa-cadastro($theme);
+@include page-configuracao-empresa-pesquisa($theme);
 @include page-configuracao-grupousuario-cadastro($theme);
 @include page-configuracao-grupousuario-pesquisa($theme);
 @include page-configuracao-noticia-cadastro($theme);

@@ -31,6 +31,9 @@ import { PagecadastroModule } from '@radocccomponentes/pagecadastro/pagecadastro
 import { AmbienteNovoCadastroComponent } from './pages/ambientenovo/ambientenovo-cadastro/ambientenovo-cadastro.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { DireitoAcessoDialogComponent } from './pages/grupousuario/dialog-direitoacesso/direitoacesso-dialog.component';
+import { EmpresaPesquisaComponent } from './pages/empresa/empresa-pesquisa/empresa-pesquisa.component';
+import { EmpresaCadastroComponent } from './pages/empresa/empresa-cadastro/empresa-cadastro.component';
+import { GaleriaConteudoModule } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.module';
 import { GaleriaConteudoComponent } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.component';
 import { PrevisaoTempoCadastroComponent } from './pages/previsaotempo/previsaotempo-cadastro/previsaotempo-cadastro.component';
 import { PrevisaoTempoPesquisaComponent } from './pages/previsaotempo/previsaotempo-pesquisa/previsaotempo-pesquisa.component';
@@ -140,6 +143,16 @@ const routes: Routes = [
           component: PrevisaoTempoImagemCadastroComponent
         },
         {
+          path:'empresa-pesquisa',
+          component: EmpresaPesquisaComponent,
+          outlet: 'pesquisa'
+        },
+        {
+          path:'empresa-cadastro',
+          outlet: 'cadastro',
+          component: EmpresaCadastroComponent
+        },
+        {        
           path:'previsaotempo-pesquisa',
           component: PrevisaoTempoPesquisaComponent,
           outlet: 'pesquisa'
@@ -181,6 +194,8 @@ const routes: Routes = [
       PrevisaoTempoImagemPesquisaComponent,
       AmbienteNovoCadastroComponent,
       DireitoAcessoDialogComponent,
+      EmpresaCadastroComponent,
+      EmpresaPesquisaComponent,
       PrevisaoTempoCadastroComponent,
       PrevisaoTempoPesquisaComponent
     ],

@@ -1,0 +1,13 @@
+
+@mixin page-configuracao-empresa-cadastro($videotheme) {
+ 
+    app-empresa-cadastro {
+        height: 100%;
+        p-autocomplete {
+            display: flex;
+            span {
+                flex: 1;
+            };
+        }
+    }
+}
