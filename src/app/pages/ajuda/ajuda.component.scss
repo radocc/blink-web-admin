@@ -1,0 +1,46 @@
+@mixin page-ajuda-theme($theme) {
+    $primary: map-get($theme, primary);
+
+    .ajuda-tela{
+        background-color: white;
+        margin: 50px !important;
+        position: absolute;
+        left: 50px;
+        right: 50px;
+        bottom: 40px;
+        top: 40px;
+        
+
+        .p-p-4{
+            padding-top: 0rem !important;
+         }
+        
+         .p-field {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .content{
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            top: 0px;
+            bottom: 0px;
+        }
+
+        .box {
+            min-height: 100px;
+            min-width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin: 2rem;
+            border-radius: 4px;
+        }
+
+        .duvida{
+            background-color: gray;
+        }
+    }
+}

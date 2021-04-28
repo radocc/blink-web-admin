@@ -64,6 +64,8 @@
 @import './app/componentes/conteudo-display/conteudo-display.component.scss';
 @import './app/componentes/conteudo-display-dialog/conteudo-display-dialog.component.scss';
 @import './sass/themes/mytheme/theme.scss';
+
+@import './app/pages/ajuda/ajuda.component.scss';
 // @include mat-core();
 
 
@@ -157,6 +159,7 @@ PLAYER
 @include conteudo-display($theme);
 @include conteudo-display-dialog($theme);
 @include page-template-pesquisa($theme);
+@include page-ajuda-theme($theme);
 
 
 html, body { 

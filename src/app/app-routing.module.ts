@@ -40,6 +40,10 @@ const routes: Routes = [
       {
         path:'configuracao',
         loadChildren: () => import('@radoccpages/configuracao/configuracao.module').then(m => m.ConfiguracaoModule)
+      },
+      {
+        path:'ajuda',
+        loadChildren: () => import('@radoccpages/ajuda/ajuda.module').then(m => m.AjudaModule)
       }
     ] 
   },
