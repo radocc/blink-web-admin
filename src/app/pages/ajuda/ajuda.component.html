@@ -1,45 +1,43 @@
-<form class="ajuda-tela">
-    <div>
-        <div class="p-p-4">
-            <label for="ajuda" translate>AJUDA</label>
-        </div>
+<div>
+    <div class="ajuda-tela">
+        <div>
+            <p-scrollPanel [style]="{width: '100%', height: '450px'}" styleClass="custom">
+                <div class="p-p-4">
+                    <label for="ajuda" translate>AJUDA</label>
+                </div>
 
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col">
+                        <input id="ajuda" type="text" [(ngModel)]="pesquisa" pInputText
+                            [placeholder]="'QUAL_A_SUA_DUVIDA' | translate" />
+                    </div>
+                </div>
 
-        <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <input id="ajuda" type="text" formControlName="ajuda" pInputText
-                    [placeholder]="'QUAL_A_SUA_DUVIDA' | translate" />
-            </div>
-        </div>
+                <div class="grupos">
+                    <p-accordion>
+                        <p-accordionTab *ngFor="let item of ajudas | filterpipe:pesquisa" header="{{item.titulo}}">
+                            <p> {{item.conteudo}}</p>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+                <div class="p-p-4">
+                    <label for="canais" translate>Nossos Canais</label>
+                </div>
 
-        <div class="p-fluid">
-            <div class="p-field p-inputtext-sm">
-                <input id="duvida" type="text" formControlName="ajuda" pInputText
-                    [placeholder]="'DUVIDA 1' | translate" />
-            </div>
-            <div class="p-field">
-                <input id="duvida" type="text" formControlName="ajuda" pInputText
-                    [placeholder]="'DUVIDA 1' | translate" />
-            </div>
-            <div class="p-field">
-                <input id="duvida" type="text" formControlName="ajuda" pInputText
-                    [placeholder]="'DUVIDA 1' | translate" />
-            </div>
-            <div class="p-field">
-                <input id="duvida" type="text" formControlName="ajuda" pInputText
-                    [placeholder]="'DUVIDA 1' | translate" />
-            </div>
-        </div>
-
-        <h5>Nossos Canais</h5>
-
-        <div class="p-grid">
-            <div class="box p-shadow-1">
-                E-mail
-            </div>
-            <div class="box p-shadow-1">
-                Telefone
-            </div>
+                <div class="p-grid">
+                    <div class="box p-shadow-2">
+                        <i class="pi pi-envelope" style="font-size: 2rem">| E-mail
+                            <p>envie um e-mail para
+                                atendimento.b2b@empresas.americanas.com</p>
+                        </i>
+                    </div>
+                    <div class="box p-shadow-2 p-colunm">
+                        <i class="pi pi-mobile" style="font-size: 2rem">| Telefone
+                            <p>para realizar uma ligação tenha em mãos:</p>
+                        </i>
+                    </div>
+                </div>
+            </p-scrollPanel>
         </div>
     </div>
-</form>
+</div>
