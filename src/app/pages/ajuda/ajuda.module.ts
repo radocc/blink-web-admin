@@ -1,3 +1,4 @@
+import { FilterPipe } from './pipeFilter';
 import { NgPrimeModule } from '../../ngprime/ngprime.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,8 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-      AjudaComponent
+      AjudaComponent,
+      FilterPipe
     ],
     imports: [
       CommonModule,
