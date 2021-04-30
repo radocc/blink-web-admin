@@ -89,4 +89,8 @@ export class ConteudoDialogComponent implements OnInit {
       this.conteudo = null;
   } 
 
+  public cancelar(){
+    this.ref.close();    
+  }
+
 }

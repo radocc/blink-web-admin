@@ -7,6 +7,7 @@
         overflow: hidden;
         .playlist-cadastro{
             overflow: hidden;
+            height: 100%;
         }
         
         .label-field{
@@ -36,7 +37,8 @@
         }
         .div-container-orderlist{
             border: 1px solid #dee2e6;
-            // height: 100%;
+            overflow: hidden;
+            height: 100%;
             .header{
                 background: #f8f9fa;
                 color: #495057;
@@ -52,26 +54,44 @@
                 }
             }
         }
-        .p-tabview-panels{
-            padding: 0px!important;
+        // .p-tabview{
+        //     flex: 1;
+        //     // display: flex;
+        //     // flex-direction: column;
+        //     .p-tabview-panels{
+        //         display: flex;
+        //         flex-direction: column;
+        //         flex: 1;
+        //         .p-tabview-panel{
+        //             display: flex;
+        //             flex-direction: column;
+        //             flex: 1;
+        //         }
+        //     }
+        // }
+        .p-listbox{
+            height: 100%;
+            overflow: hidden;
         }
-        .p-orderlist{
-            display: flex;
-            flex: auto;
-
-            .p-orderlist-list{
-                // height: 100%;
-                .order-index{
-                    margin-right: 8px !important;
-                    top: 0px;
-                    bottom: 0px;
-                    margin: auto;
+        p-orderlist{
+            overflow: hidden;
+            .p-orderlist{
+                display: flex;
+                flex: auto;
+                overflow: hidden;
+                .p-orderlist-list-container{
+                    overflow: auto;
                 }
+                .p-orderlist-list{ 
+                    height: calc(100% - 70px);
+                    .order-index{
+                        margin-right: 8px !important;
+                        top: 0px;
+                        bottom: 0px;
+                        margin: auto;
+                    }
+                } 
             }
-            // .p-orderlist-list-container{
-            //     display: flex;
-            //     flex-direction: column;
-            // }
         }
     }
 }

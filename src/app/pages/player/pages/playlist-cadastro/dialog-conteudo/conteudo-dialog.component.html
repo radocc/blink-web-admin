@@ -1,6 +1,11 @@
-<div class="rd-col">
-    <div class="rd-row ">
-        <div class="rd-row rd-flex">
+<div class="rd-col rd-over-hidden">
+    <div class="div-header">
+        <div class="rd-flex"><h2>Lista de Conteúdos da Campanha</h2></div>
+        <button pButton styleClass="p-button-secondary" class="p-mr-2" type="button" label="CANCELAR" translate (click)="cancelar()"></button>
+        <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="SALVAR" translate (click)="salvar()"></button>
+    </div>
+    <div class="rd-row rd-over-hidden">        
+        <div class="rd-row rd-flex rd-over-hidden">
             <div class="div-menu">
                 <span class="p-float-label">
                     <input id="float-input" type="text" pInputText> 
@@ -12,27 +17,23 @@
             </div>
             <div class="rd-flex pesquisa-list">
                 <div class="div-filtro"> </div>
-                <div class="title-conteudo" >
-                    {{tipoConteudo?.nome}}
-                </div>
-                <div class="rd-col rd-gap-8" *ngFor="let conteudo of conteudos">
-                    <app-conteudo-row pDraggable="conteudo" (onDragStart)="dragStart(conteudo)" (onDragEnd)="dragEnd($event)" [conteudo]="conteudo"
-                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="false" [exibiBtnClonar]="false"> 
+                <div pDraggable="conteudo" (onDragStart)="dragStart(conteudo)" (onDragEnd)="dragEnd($event)" *ngFor="let conteudo of conteudos">
+                    <app-conteudo-row [conteudo]="conteudo" [exibiBtnAlterar]="false" [exibiBtnExcluir]="false" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false"> 
                     </app-conteudo-row>
                 </div>
             </div>
         </div>
-        <div class="rd-col rd-flex">
-            <p-orderList  pDroppable="conteudo" (onDrop)="drop($event)"  class="rd-flex rd-col" [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
-                <ng-template let-itemList pTemplate="item">
-                    <app-conteudo-row [conteudo]="itemList.conteudo" 
-                        [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="false" [exibiBtnClonar]="false">
-                     </app-conteudo-row>
+        <div class="rd-col rd-flex rd-over-hidden">
+            <p-orderList  pDroppable="conteudo" (onDrop)="drop($event)"  class="rd-h-100" [value]="listaConteudo" header="{{'CONTEUDOS'|translate}}" [dragdrop]="true" controlsPosition="right">
+                <ng-template let-itemList let-index="index" pTemplate="item">
+                    <div class="rd-row">
+                        <div class="order-index">{{index + 1}}</div>
+                        <app-conteudo-row [conteudo]="itemList.conteudo" 
+                            [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false">
+                        </app-conteudo-row>
+                    </div>
                 </ng-template>
             </p-orderList>
         </div>
-    </div>
-    <div class="div-footer">
-        <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="SALVAR" translate (click)="salvar()"></button>
-    </div>
+    </div>    
 </div>    

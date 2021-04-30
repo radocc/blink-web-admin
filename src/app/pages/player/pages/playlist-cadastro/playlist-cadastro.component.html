@@ -1,89 +1,81 @@
 <app-pagecadastro [config]="config" (save)="salvar($event)">
-    <div class="playlist-cadastro rd-flex rd-col rd-gap-8">        
-        <div class="rd-flex rd-col">
-            <form [formGroup]="form" class="rd-flex rd-col">
-                <div class="rd-flex rd-col ">
-                    <div class="p-field rd-col">
-                        <label for="nome" translate>NOME</label>
-                        <input id="nome" required formControlName="nome" type="text" pInputText>                     
-                        <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+    <div class="playlist-cadastro rd-col rd-gap-8">        
+        <form [formGroup]="form" class="rd-flex rd-col rd-over-hidden">
+            <p-steps [model]="items" [readonly]="false" [(activeIndex)]="activeIndex">
+            </p-steps>
+            <div class="rd-flex rd-col " *ngIf="activeIndex == 0">
+                <div class="p-field rd-col">
+                    <label for="nome" translate>NOME</label>
+                    <input id="nome" required formControlName="nome" type="text" pInputText>                     
+                    <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                </div>
+                <div class="rd-row rd-gap">
+                    <div class="p-field rd-col rd-flex">
+                        <label for="dataInicio" translate>Início as</label>
+                        <p-calendar [showTime]="true"  hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataInicio"  appendTo="body" inputId="dataInicio"></p-calendar>
+                        <small id="dataInicio" *ngIf="form.controls['dataInicio'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
-                    <div class="rd-row rd-gap">
-                        <div class="rd-col rd-flex">
-                            <label for="dataInicio" translate>Início as</label>
-                            <p-calendar [showTime]="true"  hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataInicio"  appendTo="body" inputId="dataInicio"></p-calendar>
-                            <small id="dataInicio" *ngIf="form.controls['dataInicio'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                        </div>
-                        <div class="rd-col rd-flex">
-                            <label for="dataFim" translate>Término as</label>
-                            <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataFim"  appendTo="body"  inputId="dataFim"></p-calendar>
-                            <small id="dataFim-error" *ngIf="form.controls['dataFim'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                        </div>
-                        <div class="rd-col rd-flex">
-                            <label for="status" translate>STATUS</label>
-                            <p-dropdown [options]="listaStatus" formControlName="status" optionLabel="nome" optionValue="id" >
-                                <ng-template let-item pTemplate="selectedItem">
-                                    <div class="" >
-                                        <div>{{item?.nome |translate}}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-item pTemplate="item">
-                                    <div class="country-item">
-                                        <div>{{item.nome|translate}}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                            <small id="status" *ngIf="form.controls['status'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                        </div> 
-                        <div class="rd-col rd-flex">
-                            <label for="intercalacao" translate>{{'INTERCALACAO'|translate}}</label>
-                            <p-dropdown id="intercalacao" [options]="tiposIntercalacao" optionLabel="name" optionValue="id" formControlName="intercalacao"></p-dropdown>
-                        </div> 
+                    <div class="p-field rd-col rd-flex">
+                        <label for="dataFim" translate>Término as</label>
+                        <p-calendar [showTime]="true" hourFormat="24" dateFormat="dd/mm/yy" formControlName="dataFim"  appendTo="body"  inputId="dataFim"></p-calendar>
+                        <small id="dataFim-error" *ngIf="form.controls['dataFim'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                     </div>
-                    <div class="rd-col rd-flex ">
-                        <p-tabView>
-                            <p-tabPanel>
-                                <ng-template pTemplate="header">
-                                    {{'CONTEUDOS'|translate}}                                    
-                                </ng-template>
-                                <div class="div-container-orderlist rd-col">                                    
-                                    <div class="rd-row header">
-                                        <div class="rd-flex">
-                                          Lista dos conteúdos adicionados  
-                                        </div>
-                                        <div>
-                                            <button pButton type="button" icon="pi pi-plus" class="p-button-raised p-button-rounded btn-add" translate (click)="abrirLista()"></button>
-                                        </div>
-                                    </div>
-                                    <p-orderList class="rd-flex rd-col" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
-                                        <ng-template let-itemList let-index="index" pTemplate="item">
-                                            <div class="rd-row">
-                                                <div class="order-index">{{index + 1}}</div>
-                                                <app-conteudo-row [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
-                                                    [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false">
-                                                </app-conteudo-row>
-                                            </div>
-                                        </ng-template>
-                                    </p-orderList>
+                </div>
+                <div class="rd-row rd-gap">
+                    <div class="p-field rd-col rd-flex">
+                        <label for="status" translate>STATUS</label>
+                        <p-dropdown [options]="listaStatus" formControlName="status" optionLabel="nome" optionValue="id" >
+                            <ng-template let-item pTemplate="selectedItem">
+                                <div class="" >
+                                    <div>{{item?.nome |translate}}</div>
                                 </div>
-                            </p-tabPanel>
-                            <p-tabPanel header="{{'PLAYERS'|translate}}" >
-                                <p-listbox class="rd-h-100" [options]="players" [(ngModel)]="playersSelecionados" [filter]="true" [checkbox]="true" [multiple]="true" optionLabel="nome" [ngModelOptions]="{standalone: true}">
-                                    <ng-template pTemplate="header">
-                                        {{'SELECIONE_OS_PLAYERS'|translate}}
-                                    </ng-template>
-                                    <ng-template let-player pTemplate="item">
-                                        <div class="dv-player">
-                                            <div class="nome-player">{{player.identificacao}}&nbsp;&nbsp;{{player.nome}}</div>
-                                        </div>
-                                    </ng-template>
-                                </p-listbox>
-                            </p-tabPanel>
-                        </p-tabView>
-                        
+                            </ng-template>
+                            <ng-template let-item pTemplate="item">
+                                <div class="country-item">
+                                    <div>{{item.nome|translate}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <small id="status" *ngIf="form.controls['status'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                    </div> 
+                    <div class="p-field rd-col rd-flex">
+                        <label for="intercalacao" translate>{{'INTERCALACAO'|translate}}</label>
+                        <p-dropdown id="intercalacao" [options]="tiposIntercalacao" optionLabel="name" optionValue="id" formControlName="intercalacao"></p-dropdown>
+                    </div> 
+                </div>
+            </div>
+            <div class="div-container-orderlist rd-col" *ngIf="activeIndex == 1">                                    
+                <div class="rd-row header">
+                    <div class="rd-flex">
+                        Lista dos conteúdos adicionados  
                     </div>
-                </div> 
-            </form>
-        </div>
+                    <div>
+                        <button pButton type="button" icon="pi pi-plus" class="p-button-raised p-button-rounded btn-add" translate (click)="abrirLista()"></button>
+                    </div>
+                </div>
+                <p-orderList #orderList filterBy="conteudo.titulo" class="rd-flex rd-col" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
+                    <ng-template let-itemList let-index="index" pTemplate="item">
+                        <div class="rd-row">
+                            <div class="order-index">{{index + 1}}</div>
+                            <app-conteudo-row [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
+                                [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false">
+                            </app-conteudo-row>
+                        </div>
+                    </ng-template>
+                </p-orderList>
+            </div>
+            <div class="div-container-orderlist rd-col" *ngIf="activeIndex == 2">
+                <p-listbox class="rd-flex" [options]="players" [(ngModel)]="playersSelecionados" [filter]="true" [checkbox]="true" [multiple]="true" optionLabel="nome" [ngModelOptions]="{standalone: true}">
+                    <ng-template pTemplate="header">
+                        {{'SELECIONE_OS_PLAYERS'|translate}}
+                    </ng-template>
+                    <ng-template let-player pTemplate="item">
+                        <div class="dv-player">
+                            <div class="nome-player">{{player.identificacao}}&nbsp;&nbsp;{{player.nome}}</div>
+                        </div>
+                    </ng-template>
+                </p-listbox>
+            </div>
+        </form>
     </div>            
 </app-pagecadastro>

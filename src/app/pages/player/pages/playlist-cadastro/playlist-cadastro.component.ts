@@ -12,6 +12,8 @@ import { ConteudoDialogComponent } from './dialog-conteudo/conteudo-dialog.compo
 import { DialogService } from 'primeng/dynamicdialog';
 import { Player } from '@radoccmodels/player';
 import { PlayerService } from '@radoccservices/player-services';
+import { MenuItem } from 'primeng/api';
+import { OrderList } from 'primeng/orderlist';
 
 @Component({
   selector: 'app-playlist-cadastro',
@@ -23,7 +25,7 @@ import { PlayerService } from '@radoccservices/player-services';
   ]
 })
 export class PlaylistCadastroComponent extends CadForm implements OnInit {
-
+  @ViewChild("orderList")public orderList:OrderList;
   public config:{
     titulo:string,
     subTitle:string,
@@ -47,6 +49,8 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
   public status:any;
   public players:Player[] = [];
   public playersSelecionados:Player[] = [];
+  public items: MenuItem[];
+  public activeIndex:number=0;
   public listaConteudo:PlaylistConteudo[] = [];
   public listaStatus:{ id:number, nome:string }[] = [{
     id:1,
@@ -95,6 +99,26 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     this.playerService.findAll().subscribe((lista)=>{
       this.players = lista;
     })
+    this.items = [
+      {
+          label: 'Dados',
+          command: (event: any) => {
+              this.activeIndex = 0;
+          }
+      },
+      {
+          label: 'Conteúdos',
+          command: (event: any) => {
+              this.activeIndex = 1;
+          }
+      },
+      {
+          label: 'Players',
+          command: (event: any) => {
+              this.activeIndex = 2;
+          }
+      }
+  ];
   } 
 
   public novo(){
@@ -180,7 +204,6 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     const dialog = this.dialogService.open(ConteudoDialogComponent, {
       data:this.listaConteudo,
       width: '80%',
-      // height:'80%',
       modal:true,
       showHeader:false,
       closable:false,
@@ -188,6 +211,11 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     });
     dialog.onClose.subscribe((lista)=>{
       this.listaConteudo = lista;
+      if (this.orderList != null){
+        setTimeout(()=>{
+          this.orderList.filter();
+        },500);        
+      }
     }); 
   }
   

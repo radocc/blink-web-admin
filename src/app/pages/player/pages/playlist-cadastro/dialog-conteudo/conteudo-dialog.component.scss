@@ -1,20 +1,28 @@
 @mixin app-dialog-conteudo-playlist($videotheme) {
  
     app-conteudo-dialog-playlist {
+        overflow: hidden;
+        min-height: 400px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;            
+        max-height: 800px;
+
         .p-dialog{
             display: flex;
-            flex-direction: column;
+            flex-direction: column;            
 
-            .p-dialog-content{
-                flex: 1;
-                padding: 0px !important;
-            }
+        }
+        .p-dialog-content{
+            flex: 1;
+            padding: 0px !important;
+            overflow: hidden;
         }
         .div-menu{
-            width: 250px;
+            min-width: 200px;
             background: black;
             border-radius: 5px;
-            // height: 100%;
+            height: 100%;
             padding: 12px;
             
             .item-menu{
@@ -25,58 +33,54 @@
                 cursor: pointer;
             }
             .item-menu.selected {
-                // background: map-get($theme, dark);
+                background: map-get($theme, light);
                 font-weight: 800;
-                font-size: 18;
+                margin: 8px;
+                padding: 8px;
+                border-radius: 5px;
             }
         }
         .pesquisa-list{
-            margin: 8px;
+            margin-left: 8px;
+            margin-right: 8px;
+            overflow: auto;
+            // .div-filtro{
+            //     text-align: end;
+            // }
 
-            .div-filtro{
-                text-align: end;
-            }
-
-            .item-conteudo{
-                margin-top: 16px;
-                margin-bottom: 16px;
-                padding: 8px;
-                padding-left: 16px;
-                padding-right: 16px;
-                border-radius: 5px;
-                background: map-get($theme, secondary);                    
-                .view{
-                    width: 120px;
-                    height: 70px;
-                    background: green;
-                    border-radius: 5px;
-                    margin-left: 8px;
-                    margin-right: 8px;
-                    border-width: 1px;
-                    border-style: solid;
-                    background-repeat: no-repeat !important;
-                    background-size: contain !important;
-                    background-position: center !important;                    
-                }
-            }
         }
         
         .p-orderlist{
-            display: flex;
-            flex: auto;
-
-            .p-orderlist-list{
-                flex: auto;
-                max-height: max-content !important; 
-            }
+            height: 100%;            
             .p-orderlist-list-container{
-                display: flex;
-                flex-direction: column;
+                height: 100%;
+
+                .p-orderlist-list{
+                    height: calc(100% - 50px);
+                    max-height: max-content !important; 
+                }
+                .order-index{
+                    margin-right: 8px !important;
+                    top: 0px;
+                    bottom: 0px;
+                    margin: auto;
+                }
+
             }
         }
-        .div-footer{
-            text-align: right;
-            padding: 1rem;
+        .div-header{            
+            display: flex;
+            h2{
+                margin: auto;
+            }
+            margin-bottom: 4px;            
         }
+    }
+    :host {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 0px !important;
+        overflow: hidden !important;
     }
 }
