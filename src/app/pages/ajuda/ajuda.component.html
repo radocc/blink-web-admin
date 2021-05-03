@@ -1,7 +1,7 @@
 <div>
     <div class="ajuda-tela">
         <div>
-            <p-scrollPanel [style]="{width: '100%', height: '450px'}" styleClass="custom">
+            <p-scrollPanel [style]="{width: '100%', height: '600px'}" styleClass="custom">
                 <div class="p-p-4">
                     <label for="ajuda" translate>AJUDA</label>
                 </div>
@@ -21,20 +21,44 @@
                     </p-accordion>
                 </div>
                 <div class="p-p-4">
-                    <label for="canais" translate>Nossos Canais</label>
+                    <label for="canais" translate>Nossos Canais de Contato</label>
                 </div>
+                <br />
 
-                <div class="p-grid">
-                    <div class="box p-shadow-2">
-                        <i class="pi pi-envelope" style="font-size: 2rem">| E-mail
+                <div class="p-d-flex p-jc-center">
+                    <div class="p-grid">
+                        <div [style]="{'width': '100%', 'margin-bottom': '2em'}">
+                            <i class="pi pi-envelope" style="font-size: 2rem">|</i>
+                            <font size=5> você pode entrar em contato via <font class="texto-colorido">e-mail</font>
+                            </font>
                             <p>envie um e-mail para
                                 atendimento.b2b@empresas.americanas.com</p>
-                        </i>
+                            <p>Exemplo de assunto: Motivo do Contato: Troca<br />
+                                Descrição da mensagem:<br />
+                                .CNPJ - 0900000000/0009 <br />
+                                .Nome da empresa - Cliente S/A<br />
+                                .Número do pedido - 09-00000000<br />
+                                .Motivo do contato: troca<br />
+                                .Descrição do motivo: (forneça todos os detalhes do assunto que você quer tratar)<br />
+                            </p>
+                        </div>
                     </div>
-                    <div class="box p-shadow-2 p-colunm">
-                        <i class="pi pi-mobile" style="font-size: 2rem">| Telefone
+
+                    <div class="p-grid">
+                        <div [style]="{'width': '100%', 'margin-bottom': '2em'}">
+                            <i class="pi pi-mobile" style="font-size: 2rem">|</i>
+                            <font size=5> você pode entrar em contato via <font class="texto-colorido">telefone</font>
+                            </font>
                             <p>para realizar uma ligação tenha em mãos:</p>
-                        </i>
+                            <p>.CNPJ cadastrado <br />
+                                .nome da empresa<br />
+                                .número do pedido<br />
+                                .motivo da ligação<br />
+                            </p>
+                            <p>capitais e regioes metropolitanas: 4003 2399* <br />
+                                Outras regiões: 041 11 4003 2399
+                            </p>
+                        </div>
                     </div>
                 </div>
             </p-scrollPanel>
