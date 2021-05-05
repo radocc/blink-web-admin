@@ -9,6 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class AjudaComponent implements OnInit {
 
   public pesquisa: String;
+  text: "www.google.com";
   public ajudas = [
     {
       titulo: "Para alterar a senha de acesso", conteudo: `
@@ -16,8 +17,8 @@ export class AjudaComponent implements OnInit {
                         senha.
                         Coloque o e-mail que você cadastrou no site para receber as instruções de alteração. Caso não
                         receba
-                        o e-mail, entre em contato com nosso time de Atendimento. Confira nossos canail para contato
-                        aqui:
+                        o e-mail, entre em contato com nosso time de Atendimento. Confira nossos canais para contato
+                        aqui 
     `},
     {
       titulo: "Como se logar utilizando uma conta b2w marketplace", conteudo: `

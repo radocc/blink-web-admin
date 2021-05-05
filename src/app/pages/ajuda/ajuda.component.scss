@@ -5,6 +5,7 @@
         background-color: white;
         margin: 50px !important;
         position: absolute;
+        height: 450px;
         left: 40px;
         right: 40px;
         bottom: 40px;
@@ -48,12 +49,7 @@
             margin: 1rem;
             border-radius: 5px;
         }
-        .custom{
-            .p-scrollpanel-bar {
-                background-color: mat-color($primary);
-                opacity: 2;
-            }
-        }
+        
         .p-grid{
             margin-right: 2rem;
             .pi{
@@ -63,6 +59,8 @@
 
         .texto-colorido{
             color: map-get($theme,light);
-            }
+       }
+       
+    
     }
 }
