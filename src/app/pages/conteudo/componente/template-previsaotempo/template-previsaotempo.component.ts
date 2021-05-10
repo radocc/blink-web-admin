@@ -55,7 +55,7 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
     
     this.route.params.subscribe((param)=>{
       this.idTipoConteudo = param['idTipoConteudo'];
-      this.clonar = param['clonar'];
+      this.clonar = param['clonar'] == 'true';
       if (param['id']){
           this.conteudoService.findConteudoPrevisao(param['id']).subscribe((conteudo)=>{
             this.conteudo = conteudo;

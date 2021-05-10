@@ -45,7 +45,7 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
   ngOnInit(): void { 
     this.route.params.subscribe((param)=>{
       this.idTipoConteudo = param['idTipoConteudo'];
-      this.clonar = param['clonar'];
+      this.clonar = param['clonar'] == 'true';
       if (param['id']){
           this.buscar(param['id']);
       }

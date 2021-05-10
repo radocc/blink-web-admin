@@ -97,7 +97,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     this.route.params.subscribe((param)=>{
 
       this.idTipoConteudo = param['idTipoConteudo'];
-      this.clonar = param['clonar'];
+      this.clonar = param['clonar'] == 'true';
       if (param['id']){
           this.buscar(param['id']);
       }

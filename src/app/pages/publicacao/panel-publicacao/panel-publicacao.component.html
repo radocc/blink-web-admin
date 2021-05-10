@@ -79,7 +79,7 @@
                                 <div>{{listaConteudo.length}}&nbsp; {{'ITENS'|translate}}</div>
                                 <div>{{tempoLista | tempoExibicao}}</div>
                             </div>
-                            <p-orderList class="rd-h-100" [listStyle]="{'height':'auto'}"  pDroppable="conteudo" (onDrop)="drop($event)" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
+                            <p-orderList class="rd-h-100" (onReorder)="onReorder($event)" [listStyle]="{'height':'auto'}"  pDroppable="conteudo" (onDrop)="drop($event)" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
                                 <ng-template  let-itemList let-index="index" pTemplate="item">
                                     <div class="rd-row">
                                         <div class="order-index">{{index + 1}}</div>

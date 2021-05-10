@@ -22,7 +22,7 @@ export class ConteudoRowComponent implements OnInit {
   @Output("onExcluir") public btnExcluir: EventEmitter<any> = new EventEmitter();
   @Output("onVisualizar") public btnVisualizar: EventEmitter<any> = new EventEmitter();
   @Output("onClonar") public btnClonar: EventEmitter<any> = new EventEmitter();
-
+  
   constructor(public dialogService:DialogService) { }
 
   ngOnInit(): void {
@@ -63,6 +63,10 @@ export class ConteudoRowComponent implements OnInit {
     if (this.btnClonar){
       this.btnClonar.emit(conteudo);
     }
+  }
+
+  public vincularConteudo(){
+
   }
 
 }

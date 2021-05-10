@@ -54,7 +54,7 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
   ngOnInit(): void { 
     this.route.params.subscribe((param)=>{
       this.idTipoConteudo = param['idTipoConteudo'];
-      this.clonar = param['clonar'];
+      this.clonar = param['clonar'] == 'true';
       if (param['id']){
           this.conteudoService.findConteudoNoticia(param['id']).subscribe((conteudo)=>{
             this.conteudo = conteudo;

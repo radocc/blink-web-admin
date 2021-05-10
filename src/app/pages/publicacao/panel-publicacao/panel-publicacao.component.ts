@@ -377,10 +377,12 @@ export class PanelPublicacaoComponent implements OnInit {
         this.conteudo = null;
         this.atualizarTempo();
       }
+      console.log('Drop', event);
   }
 
   dragEnd(event) {
       this.conteudo = null;
+      console.log('Event', event);
   } 
 
   public timerClose() {
@@ -404,6 +406,10 @@ export class PanelPublicacaoComponent implements OnInit {
       }); 
     })
     
+  }
+
+  public onReorder(event){
+    console.log('Reordenando', event);
   }
 
 }

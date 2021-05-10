@@ -8,7 +8,6 @@ export class PlaylistConteudo extends BaseEntityImpl {
     public conteudo:ConteudoResult;
     public idPlaylist:number;
     public idVinculado:number;
-    public sequencia:number;
-
+    public sequencia:number;    
     
 }
