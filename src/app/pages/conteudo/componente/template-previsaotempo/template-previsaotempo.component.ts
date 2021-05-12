@@ -68,6 +68,8 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
             this.form.controls['segundos'].setValue(segundos);
             if (this.conteudo.agendamento != null){
               this.panelAgendamento.setAgendamento(this.conteudo.agendamento);
+            }else{
+              this.panelAgendamento.reset();
             }
             
           })

@@ -84,16 +84,22 @@ export class PanelAgendamentoComponent implements OnInit {
   public setAgendamento(agendamento:ConteudoAgendamento){
     this.conteudoAgendamento = agendamento;
     if (agendamento == null){
+      this.form.controls['dataInicio'].setValue(null);
+      this.form.controls['dataFim'].setValue(null);
       return;
     }
     if (agendamento.dataInicio != null){
       let dtInicio = new Date(agendamento.dataInicio)
       this.form.controls['dataInicio'].setValue(dtInicio);    
+    }else{
+      this.form.controls['dataInicio'].setValue(null);    
     }
     
     if (agendamento.dataFim){
       let dtFim = new Date(agendamento.dataFim);
       this.form.controls['dataFim'].setValue(dtFim);
+    }else {
+      this.form.controls['dataFim'].setValue(null);
     }
     if (agendamento.modoHorario == 2){
       let horaInicio = new Date();
