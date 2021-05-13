@@ -8,22 +8,12 @@
                     <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
                     <small id="titulo-error" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                 </div> 
-                <p-selectButton class="p-field" [options]="tipos" [ngModelOptions]="{standalone: true}" [(ngModel)]="tipo" optionValue="id" optionLabel="nome">
+                <p-selectButton class="p-field" [options]="tipos" formControlName="tipo" [(ngModel)]="tipo" optionValue="id" optionLabel="nome">
                     <ng-template let-item>
                         {{item.nome|translate}}
                     </ng-template>
-                </p-selectButton>
-                <div class="p-field rd-col" *ngIf="tipo == 1">
-                    <label for="template" translate>{{'TEMPLATE'|translate}}</label>
-                    <p-autoComplete id="template" formControlName="template" 
-                        [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
-                        <ng-template let-template pTemplate="item">
-                            <div>{{template.nome}} </div>
-                        </ng-template>
-                    </p-autoComplete>
-                    <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                </div> 
-                <div *ngIf="tipo == 2">
+                </p-selectButton>                
+                <div *ngIf="tipo == 1">
                     <div class="p-field rd-row">
                         <p-fileUpload #fileUploadVideo mode="basic" maxFileSize="99999999" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                         name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" accept=".mov,.mp3,.mkv,.mp4" ></p-fileUpload>
@@ -36,14 +26,23 @@
                         <p-radioButton name="audio" value="2" formControlName="audio" label="{{'COM_AUDIO'|translate}}"></p-radioButton>
                     </div>
                 </div>
-                <div class="p-field p-d-flex p-flex-row" *ngIf="tipo == 3">
+                <div class="p-field p-d-flex p-flex-row" *ngIf="tipo == 2">
                     <p-fileUpload #fileUploadImagem mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                     name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
                     accept="image/.png,.jpg,.jpeg"></p-fileUpload>
                     <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
                     <button pButton *ngIf="arquivo" class="p-button-secondary" type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                 </div> 
-                
+                <div class="p-field rd-col" *ngIf="tipo == 6">
+                    <label for="template" translate>{{'TEMPLATE'|translate}}</label>
+                    <p-autoComplete id="template" formControlName="template" 
+                        [suggestions]="templates" (completeMethod)="pesquisarTemplate($event.query)" field="nome" [dropdown]="true">
+                        <ng-template let-template pTemplate="item">
+                            <div>{{template.nome}} </div>
+                        </ng-template>
+                    </p-autoComplete>
+                    <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                </div> 
                 <div class="p-field rd-col" *ngFor="let camp of campos">
                     <label for="{{'camp'+camp.id}}">{{camp.nome |translate}}</label>
                     <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     

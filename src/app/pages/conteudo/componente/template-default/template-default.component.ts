@@ -59,15 +59,15 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   public tipo:number=3;
   public tipos:{id:number,nome:string}[] = [
     {
-      id:1,
+      id:6,
       nome:'Template'
     },
     {
-      id:2,
+      id:1,
       nome:'Vídeo'
     },
     {
-      id:3,
+      id:2,
       nome:'Imagem'
     },
     
@@ -86,10 +86,10 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
       }      
     })
     this.form.controls['tipo'].valueChanges.subscribe((tipo)=>{
-      if (tipo != 1){
+      if (tipo != 6){
         this.campos = []
         this.form.controls['template'].setValue(null);
-      }else if (tipo == 1){
+      }else if (tipo == 6){
         this.arquivo = null;
         this.form.controls['template'].setValidators(Validators.required);
       }     
@@ -180,7 +180,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = this.idTipoConteudo;
     this.conteudo.tipo = this.form.controls['tipo'].value;
-    if (this.tipo != 2){
+    if (this.tipo != 1){
       let segundos = this.form.controls['segundos'].value;
       segundos += (this.form.controls['minutos'].value * 60);
       this.conteudo.tempoExibicao = segundos;
@@ -198,7 +198,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     if (this.arquivo != null){
       this.conteudo.idArquivo = this.arquivo.id;
     }    
-    if (this.tipo == 2){
+    if (this.tipo == 1){
       this.conteudo.tempoExibicao = this.arquivo.tempoDuracao;
     }
     this.conteudo.campos = this.campos;
