@@ -34,6 +34,14 @@ const routes: Routes = [
         loadChildren: () => import('@radoccpages/player/player.module').then(m => m.PlayerModule)
       }, 
       {
+        path:'playlist',
+        loadChildren: () => import('@radoccpages/playlist/playlist.module').then(m => m.PlaylistModule)
+      }, 
+      {
+        path:'grupoplayer',
+        loadChildren: () => import('@radoccpages/grupoplayer/grupoplayer.module').then(m => m.GrupoPlayerModule)
+      }, 
+      {
         path:'relatorio',
         loadChildren: () => import('@radoccpages/relatorio/relatorio.module').then(m => m.RelatorioModule)
       },

@@ -79,7 +79,7 @@
                                 <input class="p-checkbox" type="checkbox"  [(ngModel)]="campo.cadastro" [ngModelOptions]="{standalone: true}" (onChange)="changeCadastro($event, campo)">
                                 <label class="label-nowrap" >{{'PREENCHIMENTO_AUTOMATICO' | translate}}</label>
                             </div>
-                            <div class="p-field p-col-4" *ngIf="campo.cadastro">
+                            <div class="p-field p-col-4">
                                 <label for="txtCampoTipo">{{'VARIAVEL' | translate}}</label>
                                 <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>

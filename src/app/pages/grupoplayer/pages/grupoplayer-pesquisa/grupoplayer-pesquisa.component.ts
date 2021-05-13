@@ -1,7 +1,5 @@
-import { PlayerService } from '../../../../services/player-services';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; 
-import { Loteria } from '@radoccmodels/loteria'; 
 import { FiltroService } from '@radoccservices/base/filtro-service';
 import { MessageService } from 'primeng/api';
 import { GrupoPlayerService } from '@radoccservices/grupoplayer-services';

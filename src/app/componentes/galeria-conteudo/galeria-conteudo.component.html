@@ -2,15 +2,8 @@
     <div class="div-acoes">
         <p-selectButton [options]="tipoVisualizacao" formControlName="modoVisualizacao" optionLabel="nome" optionValue="id"></p-selectButton>        
     </div>    
-</form>
-    <div class="rd-col" *ngIf="modoVisualizacao == 1">
-        <p-dataView [value]="conteudos" layout="list">
-            <ng-template let-playContent pTemplate="listItem">
-                <app-conteudo-display [conteudo]="playContent.conteudo"></app-conteudo-display>
-            </ng-template>
-        </p-dataView>
-    </div>
-    <div class="rd-col" *ngIf="modoVisualizacao == 2">   
+</form>    
+    <div class="rd-col" *ngIf="modoVisualizacao == 1">   
         <div class="rd-row ">
             <app-conteudo-display [conteudo]="conteudo"></app-conteudo-display>
         </div>
@@ -27,3 +20,10 @@
             </div>
         </div>
     </div>        
+    <div class="rd-col" *ngIf="modoVisualizacao == 2">
+        <p-dataView [value]="conteudos" layout="list">
+            <ng-template let-playContent pTemplate="listItem">
+                <app-conteudo-display [conteudo]="playContent.conteudo"></app-conteudo-display>
+            </ng-template>
+        </p-dataView>
+    </div>

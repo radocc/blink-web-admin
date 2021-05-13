@@ -25,10 +25,11 @@ export class GaleriaConteudoComponent implements OnInit {
   public tipoVisualizacao:{id:number,nome:string}[] = [
     {
       id:1,
-      nome:'Lista'
-    },{
-      id:2,
       nome:'Individual'
+    },
+    {
+      id:2,
+      nome:'Lista'
     }
   ]
 
@@ -41,15 +42,16 @@ export class GaleriaConteudoComponent implements OnInit {
       this.form.controls['modoVisualizacao'].valueChanges.subscribe((tipo)=>{
         if (tipo == 1){
           this.modoVisualizacao = 1;
-        }else {
-          this.modoVisualizacao = 2;
           this.play();
+        }else {
+          this.modoVisualizacao = 2;          
         }        
       })
+      this.play();
   } 
 
   public play(){
-    this.modoVisualizacao = 2;
+    this.modoVisualizacao = 1;
     if (this.conteudos.length > 0){
       this.criarTemporizador();      
     }

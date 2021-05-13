@@ -1,0 +1,20 @@
+@mixin app-panel-playlist($theme) {
+    
+    app-panel-playlist{
+        height: 100%;
+        display: flex;
+
+        .pagina {
+            flex: auto;
+            display: flex;
+            .lado {
+                // height: 100%;
+                flex: auto;
+
+                // p-card .p-card {
+                //     height: 100%;
+                // }
+            }
+        }
+    }
+}

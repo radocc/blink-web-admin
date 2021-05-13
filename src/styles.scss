@@ -22,13 +22,16 @@
 @import './app/componentes/galeria-conteudo/galeria-conteudo.component.scss';
 
 @import './app/pages/player/panel-player/panel-player.component.scss';
+
 @import './app/pages/player/pages/player-cadastro/player-cadastro.component.scss';
 @import './app/pages/player/pages/player-pesquisa/player-pesquisa.component.scss';
-@import './app/pages/player/pages/grupoplayer-cadastro/grupoplayer-cadastro.component.scss';
-@import './app/pages/player/pages/grupoplayer-pesquisa/grupoplayer-pesquisa.component.scss';
-@import './app/pages/player/pages/playlist-cadastro/playlist-cadastro.component.scss';
-@import './app/pages/player/pages/playlist-pesquisa/playlist-pesquisa.component.scss';
-@import './app/pages/player/pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component.scss';
+@import './app/pages/grupoplayer/panel-grupoplayer/panel-grupoplayer.component.scss';
+@import './app/pages/grupoplayer/pages/grupoplayer-cadastro/grupoplayer-cadastro.component.scss';
+@import './app/pages/grupoplayer/pages/grupoplayer-pesquisa/grupoplayer-pesquisa.component.scss';
+@import './app/pages/playlist/panel-playlist/panel-playlist.component.scss';
+@import './app/pages/playlist/pages/playlist-cadastro/playlist-cadastro.component.scss';
+@import './app/pages/playlist/pages/playlist-pesquisa/playlist-pesquisa.component.scss';
+@import './app/pages/playlist/pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component.scss';
 
 
 @import './app/pages/configuracao/panel-configuracao/panel-configuracao.component.scss';
@@ -114,8 +117,11 @@ PLAYER
 @include app-panel-player($theme);
 @include app-player-cadastro($theme);
 @include app-player-pesquisa($theme);
+@include app-panel-grupoplayer($theme);
 @include app-grupoplayer-pesquisa($theme);
 @include app-grupoplayer-cadastro($theme);
+
+@include app-panel-playlist($theme);
 @include app-playlist-cadastro($theme);
 @include app-playlist-pesquisa($theme);
 @include app-dialog-conteudo-playlist($theme);

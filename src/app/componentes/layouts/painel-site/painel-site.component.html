@@ -16,13 +16,13 @@
                 <span class="uppercase"   (click)="navegar('publicacao','admin/publicacao')" translate>PUBLICACOES</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='playlist'}">
-                <span class="uppercase" (click)="navegar('playlist','admin/player/panel/(pesquisa:playlist-pesquisa//cadastro:playlist-cadastro)')" translate>CAMPANHAS</span>
+                <span class="uppercase" (click)="navegar('playlist','admin/playlist/panel/(pesquisa:playlist-pesquisa//cadastro:playlist-cadastro)')" translate>CAMPANHAS</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='player'}">
                 <span class="uppercase" (click)="navegar('player','admin/player/panel/(pesquisa:player-pesquisa//cadastro:player-cadastro)')" translate>PLAYERS</span>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='grupo'}">
-                <span class="uppercase" (click)="navegar('grupo','admin/player/panel/(pesquisa:grupoplayer-pesquisa//cadastro:grupoplayer-cadastro)')" translate>GRUPO</span>
+                <span class="uppercase" (click)="navegar('grupo','admin/grupoplayer/panel/(pesquisa:grupoplayer-pesquisa//cadastro:grupoplayer-cadastro)')" translate>GRUPO</span>
             </div>
             <!-- <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='relatorio'}">
                 <span routerLink="relatorio"  (click)="navegar('relatorio')" translate>RELATORIOS</span>
@@ -31,7 +31,7 @@
                 <span routerLink="usuario" (click)="navegar('usuario')"  translate>USUARIOS</span>
             </div> -->
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='configuracao'}" >
-                <span class="uppercase" (click)="menu.toggle($event)"  translate>CONFIGURACAO</span>
+                <span class="uppercase" (click)="menu.toggle($event);this.rotaSelecionada = 'configuracao'"  translate>CONFIGURACAO</span>
                 <p-menu #menu [popup]="true" [model]="itensConfiguracao"></p-menu>
             </div>
             <div class="item-menu" [ngClass]="{'selected':rotaSelecionada=='ajuda'}">

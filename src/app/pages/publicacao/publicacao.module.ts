@@ -12,7 +12,7 @@ import { PlaylistPesquisaDialogComponent } from './componente/dialog-playlist-pe
 import { ConteudoDisplayModule } from '@radocccomponentes/conteudo-display/conteudo-display.module';
 import { GaleriaConteudoComponent } from '../../componentes/galeria-conteudo/galeria-conteudo.component';
 import { GaleriaConteudoModule } from '@radocccomponentes/galeria-conteudo/galeria-conteudo.module';
-import { ConteudoDialogComponent } from '@radoccpages/player/pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component';
+import { ConteudoDialogComponent } from '@radoccpages/playlist/pages/playlist-cadastro/dialog-conteudo/conteudo-dialog.component';
 import { ConteudoDisplayComponent } from '@radocccomponentes/conteudo-display/conteudo-display.component';
 import { ConteudoDisplayDialogComponent } from '@radocccomponentes/conteudo-display-dialog/conteudo-display-dialog.component';
 
