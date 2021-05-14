@@ -143,7 +143,7 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
   }
 
   public pesquisarTemplate(nome:string){
-    this.templateService.findNomeETipo(nome,ETipoConteudo.PrevisaoTempo).subscribe((lista)=>{
+    this.templateService.findNomeETipo(nome,this.idTipoConteudo).subscribe((lista)=>{
       this.templates = lista;
     })
   }
