@@ -11,36 +11,40 @@
                 <div id="campos-container" class="campos-container" *ngIf="campos.length > 0">
                     <div [id]="campo.hash" class="div-campo" *ngFor="let campo of campos">
                         <div [ngSwitch]="campo.tipo" class="drag-content " >
-                            <span *ngSwitchCase="7" [ngStyle]="{
+                            <div *ngSwitchCase="7" [ngStyle]="{
                                     'font-family': campo.fonte,
                                     'font-size': campo.fonteTamanho + 'px',
+                                    'text-align':campo.alinhamento,
                                     'font-weight': campo.fonteEspessura,
                                     'color': campo.fonteCor
-                            }">{{campo.nome}}</span>
-                            <span *ngSwitchCase="5" [ngStyle]="{
+                            }">{{campo.nome}}</div>
+                            <div *ngSwitchCase="5" [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
+                                'text-align':campo.alinhamento,
                                 'font-weight': campo.fonteEspessura,
                                 'color': campo.fonteCor
-                            }">{{campo.valor | currency:'':'1.2-2'}}</span>
+                            }">{{campo.valor | currency:'':'1.2-2'}}</div>
                             <img *ngSwitchCase="4" [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
                                 'font-weight': campo.fonteEspessura,
                                 'color': campo.fonteCor
                             }" [src]="campo.valor">
-                            <span *ngSwitchCase="5" [ngStyle]="{
+                            <div *ngSwitchCase="5" [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
+                                'text-align':campo.alinhamento,
                                 'font-weight': campo.fonteEspessura,
                                 'color': campo.fonteCor
-                            }">{{campo.valor | date:'dd/MM/yyyy'}}</span>
-                            <span *ngSwitchDefault [ngStyle]="{
+                            }">{{campo.valor | date:'dd/MM/yyyy'}}</div>
+                            <div *ngSwitchDefault [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
+                                'text-align':campo.alinhamento,
                                 'font-weight': campo.fonteEspessura,
                                 'color': campo.fonteCor
-                            }">{{campo.valor}}</span>
+                            }">{{campo.valor}}</div>
                         </div>
                         
                         <div *ngIf="campo.tipo != 7" class="drag-content " >

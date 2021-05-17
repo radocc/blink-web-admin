@@ -146,7 +146,13 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
         });
 
         this.direitoGrupoService.findByIdTela(this._idTela).subscribe((direitos: Direito[]) => {
-            this.direitos = direitos;
+            let acessos = direitos;
+            this.direitos = [];
+            acessos.map((dir)=>{
+              if (dir.idAcao != 1){
+                this.direitos.push(dir);
+              } 
+            })
             var me = this;
             this.direitos.forEach(direito => {
                 let button = {

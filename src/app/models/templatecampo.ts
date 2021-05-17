@@ -24,6 +24,7 @@ export class TemplateCampo extends BaseEntityImpl {
     public height: number = 0;
     public width: number = 0;
     public indice: number = 0;
+    public alinhamento: string;
     public variavel: string;
     public variavelCustomizado: string;    
 

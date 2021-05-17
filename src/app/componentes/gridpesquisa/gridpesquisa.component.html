@@ -25,8 +25,8 @@
                                 [ngClass]="{'p-button-outlined' : direito.posicao != 1, 'primary-button-header' : direito.posicao == 1}"
                                 label="{{'' | translate}}" 
                                 tabindex="{{direito.posicao}}" 
-                                title="{{direito.nome | translate}}" 
-                                *ngFor="let direito of direitos" 
+                                title="{{direito.nome | translate}}"
+                                *ngFor="let direito of direitos " 
                                 (click)="onClickButton(direito)">
                             </button>
                         </div>

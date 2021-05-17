@@ -7,6 +7,7 @@ export class LoteriaResultado extends BaseEntityImpl {
     public codigoSorteio:number;
     public dataSorteio:Date;
     public numeros:string;
+    public numeros2:string;
     public jsonPremios:string;
     public dataProximoSorteio:Date;
     public valorProximoSorteio:number;

@@ -25,6 +25,7 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
+import ETextAlinhamento from '@radoccmodels/enum/text-alinhamento-enum';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -47,6 +48,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   public camposAdicionais: TemplateCampo[] = [];
   public tipos = ECampoTipo.values;
   public fontes = EFontFamily.values;
+  public alinhamentos = ETextAlinhamento.values;
   public formatos = EImagemFormato.values;
   public espessuras = EFonteEspessura.values;
   public proportion: number = 1;
@@ -165,7 +167,6 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
         })
       )
       .toPromise();
-    
     setTimeout(() => {
       this.setContainerImageHeight(this.imageContainer.nativeElement);
       this.camposAdicionais.forEach((campo) => {

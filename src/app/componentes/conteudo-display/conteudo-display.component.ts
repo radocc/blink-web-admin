@@ -1,3 +1,4 @@
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { Conteudo } from '@radoccmodels/conteudo';
@@ -17,7 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './conteudo-display.component.html',
   styleUrls: ['./conteudo-display.component.scss'],
   providers:[
-    MessageService,ConteudoService,TemplateCampoService
+    MessageService,ConteudoService,TemplateCampoService, DatePipe,CurrencyPipe
   ]
 })
 export class ConteudoDisplayComponent implements OnInit {
@@ -35,7 +36,8 @@ export class ConteudoDisplayComponent implements OnInit {
   public previsaoTempo:PrevisaoTempo;
   public conteudoLoteria:ConteudoLoteria;
   public noticia:Noticia;
-  constructor( private msgService:MessageService,private conteudoService:ConteudoService, private templateCampoService:TemplateCampoService) {
+  constructor( private msgService:MessageService,private conteudoService:ConteudoService, private templateCampoService:TemplateCampoService,
+    private currencyPipe:CurrencyPipe, private datePipe:DatePipe) {
     
   }
 
@@ -116,7 +118,7 @@ export class ConteudoDisplayComponent implements OnInit {
       }else if (this.conteudoLoteria != null){
         switch (campo.variavel){
           case 'dataSorteio':
-            campo.valor = this.conteudoLoteria.resultado.dataSorteio;
+            campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataSorteio,'dd/MM/yyyy');
             break;
           case 'codigoSorteio':
             campo.valor = this.conteudoLoteria.resultado.codigoSorteio;
@@ -124,11 +126,14 @@ export class ConteudoDisplayComponent implements OnInit {
           case 'numeros':
             campo.valor = this.conteudoLoteria.resultado.numeros;
             break;
+          case 'numeros2':
+              campo.valor = this.conteudoLoteria.resultado.numeros2;
+              break;
           case 'dataProximoSorteio':
-            campo.valor = this.conteudoLoteria.resultado.dataProximoSorteio;
+            campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataProximoSorteio,'dd/MM/yyyy');
             break;
           case 'valorProximoSorteio':
-            campo.valor = this.conteudoLoteria.resultado.valorProximoSorteio;
+            campo.valor = this.currencyPipe.transform(this.conteudoLoteria.resultado.valorProximoSorteio,'BRL');
             break;
         }
       }else if (this.noticia != null){
@@ -143,10 +148,9 @@ export class ConteudoDisplayComponent implements OnInit {
               campo.valor = this.noticia.link;
               break;
             case 'datapublicacao':
-              campo.valor = this.noticia.dataPublicado;
+              campo.valor = this.datePipe.transform(this.noticia.dataPublicado,'dd/MM/yyyy');
               break;
         }
-        
       }
     });
     setTimeout(() => {

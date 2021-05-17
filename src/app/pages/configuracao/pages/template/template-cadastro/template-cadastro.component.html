@@ -65,7 +65,7 @@
                 <ng-template class="p-d-flex" pTemplate="header">
                     <div class="rd-w-100 rd-row">
                         <div class="rd-flex p-m-auto">
-                            {{campo.nome ? campo.nome : 'Campo'}}&nbsp;{{ campo.indice != null?campo.indice: ''}}
+                            {{campo.nome ? campo.nome : 'Campo'}}&nbsp;{{ campo.indice != null ? campo.indice: ''}}
                         </div>
                         <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="excluirCampo(campo)"></button>
                     </div>                    
@@ -79,11 +79,11 @@
                                 <input class="p-checkbox" type="checkbox"  [(ngModel)]="campo.cadastro" [ngModelOptions]="{standalone: true}" (onChange)="changeCadastro($event, campo)">
                                 <label class="label-nowrap" >{{'PREENCHIMENTO_AUTOMATICO' | translate}}</label>
                             </div>
-                            <div class="p-field p-col-4">
+                            <div class="p-field p-col-4" *ngIf="campo.cadastro">
                                 <label for="txtCampoTipo">{{'VARIAVEL' | translate}}</label>
                                 <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
-                            <div class="p-field p-col-2" >
+                            <div class="p-field p-col-2" *ngIf="campo.cadastro">
                                 <label for="txtCampoIndice">{{'INDICE' | translate}}</label>
                                 <input type="number" id="txtCampoIndice" pInputText [(ngModel)]="campo.indice" [ngModelOptions]="{standalone: true}">
                             </div>
@@ -115,7 +115,13 @@
                                 <label for="txtCampoFonteTamanho">{{'TAMANHO' | translate}}</label>
                                 <p-inputNumber [(ngModel)]="campo.fonteTamanho" mode="decimal" [showButtons]="true" inputId="txtCampoFonteTamanho" [min]="0" [max]="100" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
-                            <div class="p-field p-col-3 p-d-flex">
+                            <div class="p-field p-col-3">
+                                <label for="txtCampoAlinhamento">{{'ALINHAMENTO' | translate}}</label>
+                                <p-dropdown id="txtCampoAlinhamento" [(ngModel)]="campo.alinhamento" optionValue="name" [options]="alinhamentos" placeholder="{{'Selecione uma alinhamento' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            </div>                            
+                        </div>
+                        <div class="p-d-flex">
+                            <div class="p-field p-col-4 p-d-flex">
                                 <div class="p-d-flex p-flex-column p-field">
                                     <label>{{'COR' | translate}}</label>
                                     <p-colorPicker [(ngModel)]="campo.fonteCor" [ngModelOptions]="{standalone: true}" format="hex"></p-colorPicker>
@@ -124,25 +130,25 @@
                                     <input type="text" id="txtCampoFonteCor" pInputText [(ngModel)]="campo.fonteCor" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
-                        </div>
-                        <div class="p-d-flex">
-                            <div class="p-field p-col-2">
+                            <div class="p-field p-col-4">
                                 <label class="label-nowrap" for="txtCampoWidth">{{'LARGURA' | translate}}</label>
                                 <p-inputNumber [(ngModel)]="campo.width" mode="decimal" inputId="txtCampoWidth" (onBlur)="setFieldWidth($event, campo)" [useGrouping]="false" [minFractionDigits]="2" suffix="%"  [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
-                            <div class="p-field p-col-2">
+                            <div class="p-field p-col-4">
                                 <label class="label-nowrap" for="txtCampoHeight">{{'ALTURA' | translate}}</label>
                                 <p-inputNumber [(ngModel)]="campo.height" mode="decimal" inputId="txtCampoHeight" (onBlur)="setFieldHeight($event, campo)" [useGrouping]="false" [minFractionDigits]="2" suffix="%"  [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
-                            <div class="p-field p-col-3">
+                        </div>
+                        <div class="p-d-flex">                            
+                            <div class="p-field p-col-4">
                                 <label class="label-nowrap" for="txtCampoLeft">{{'DISTANCIA_ESQUERDA' | translate}}</label>
                                 <p-inputNumber [(ngModel)]="campo.positionLeft" (keypress)="onKeyPress($event, campo)" (onBlur)="setDistancia(campo)" mode="decimal" inputId="txtCampoLeft" [minFractionDigits]="2" suffix="%" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
-                            <div class="p-field p-col-3">
+                            <div class="p-field p-col-4">
                                 <label class="label-nowrap" for="txtCampoTop">{{'DISTANCIA_TOPO' | translate}}</label>
                                 <p-inputNumber [(ngModel)]="campo.positionTop" (keypress)="onKeyPress($event, campo)" (onBlur)="setDistancia(campo)"  mode="decimal" inputId="txtCampoTop" [minFractionDigits]="2" suffix="%" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
-                            <div class="p-field p-col-2">
+                            <div class="p-field p-col-4">
                                 <label class="label-nowrap" for="txtCampoAngulo">{{'ANGULO' | translate}}</label>
                                 <p-inputNumber [(ngModel)]="campo.angulo" mode="decimal" inputId="txtCampoAngulo" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>

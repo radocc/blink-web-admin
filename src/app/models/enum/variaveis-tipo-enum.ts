@@ -20,6 +20,7 @@ export class VariaveisTipo {
         'loteria': [
             {nome: 'DATA_SORTEIO', campo: 'dataSorteio'},
             {nome: 'NUMEROS', campo: 'numeros'},
+            {nome: 'NUMEROS2', campo: 'numeros2'},
             {nome: 'CODIGO_SORTEIO', campo: 'codigoSorteio'},
             {nome: 'DATA_PROXIMO_SORTEIO', campo: 'dataProximoSorteio'},            
             {nome: 'VALOR_PROXIMO_SORTEIO', campo: 'valorProximoSorteio'},
