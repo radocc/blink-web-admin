@@ -10,8 +10,8 @@ import { ConteudoAgendamento } from '@radoccmodels/conteudoagendamento';
 export class PanelAgendamentoComponent implements OnInit {
 
   public form:FormGroup = new FormGroup({
-    dataInicio:new FormControl(new Date(), [Validators.required]),
-    dataFim:new FormControl(null, [Validators.required]),
+    dataInicio:new FormControl(new Date()),
+    dataFim:new FormControl(null),
     horaInicio:new FormControl(),
     horaFim:new FormControl()
   })

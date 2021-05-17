@@ -72,6 +72,19 @@
             .p-autocomplete{
                 width: 100%;
             }
+            .autocomplete-invertido{
+
+                .p-autocomplete{
+                    display: inline-flex;
+                    flex-direction: row-reverse;
+                    .p-autocomplete-dropdown {
+                        border-bottom-right-radius: 0;
+                        border-top-right-radius: 0;
+                        border-bottom-left-radius: 4px;
+                        border-top-left-radius: 4px;
+                    }
+                }
+            }
             .div-tipo-grupo{
                 .p-selectbutton{
                     margin-top: 0.5rem;

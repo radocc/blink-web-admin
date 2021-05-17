@@ -1,4 +1,18 @@
 <div class="gridpesquisa slide rd-h-100" #page>
+    <div class="p-d-flex p-flex-row">
+        <div class="p-col">
+            <div class="p-inputgroup">
+                <input pInputText class="rd-w-100" type="text" placeholder="Pesquisar" [(ngModel)]="valor1" (keypress)="onKeyPress($event)"/>
+                <button type="button" pButton pRipple icon="pi pi-times" class="p-button-secondary" (click)="valor1 = ''"></button> 
+            </div>
+            
+        </div>
+        <div class="p-col-fixed">
+            <p-button  (click)="onClickPesquisar()">
+                <i *ngIf="mostrapesquisa" class="pi pi-search"></i>
+            </p-button> 
+        </div>
+    </div>
     <p-card class="box box-stretched rd-h-100">
         <ng-template pTemplate="header">
             <div class="p-d-flex p-flex-column p-pl-4 p-pt-4 p-pr-4">
@@ -24,20 +38,7 @@
     
         <div class="p-d-flex p-flex-column rd-h-100">
 
-            <div class="p-d-flex p-flex-row">
-                <div class="p-col">
-                    <div class="p-inputgroup">
-                        <input pInputText class="rd-w-100" type="text" placeholder="Pesquisar" [(ngModel)]="valor1" (keypress)="onKeyPress($event)"/>
-                        <button type="button" pButton pRipple icon="pi pi-times" class="p-button-secondary" (click)="valor1 = ''"></button> 
-                    </div>
-                    
-                </div>
-                <div class="p-col-fixed">
-                    <p-button  (click)="onClickPesquisar()">
-                        <i *ngIf="mostrapesquisa" class="pi pi-search"></i>
-                    </p-button> 
-                </div>
-            </div>
+            
 
             <div class="p-d-flex p-flex-column rd-h-100 p-mt-2" id="print-section"  #divTable> 
                 <p-table #pTable  selectionMode="single" [(selection)]="selection" [value]="dataSource" 

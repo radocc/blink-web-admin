@@ -43,7 +43,7 @@
                             </ng-template>
                         </p-selectButton>
                         <div class="p-col p-flex-column" *ngIf="idTipoPublicacao ==1">
-                            <p-autoComplete class="p-field" id="player" formControlName="player" 
+                            <p-autoComplete class="p-field autocomplete-invertido" id="player" formControlName="player" 
                                 [suggestions]="players" (completeMethod)="pesquisarPlayer($event.query)" field="nome" [dropdown]="true">
                                 <ng-template let-player pTemplate="item">
                                     <div>{{player.nome}} </div>
@@ -52,7 +52,7 @@
                             <small id="player-erro" *ngIf="form.controls['player'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>
                         <div class="p-col p-flex-column" *ngIf="idTipoPublicacao ==2">
-                            <p-autoComplete class="p-field" formControlName="grupoPlayer" 
+                            <p-autoComplete class="p-field autocomplete-invertido" formControlName="grupoPlayer" 
                                 [suggestions]="grupoPlayers" (completeMethod)="pesquisarGrupoPlayer($event.query)" field="nome" [dropdown]="true">
                                 <ng-template let-grupo pTemplate="item">
                                     <div>{{grupo.nome}} </div>

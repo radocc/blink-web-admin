@@ -57,11 +57,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   public idTipoConteudo:number;
   public clonar:boolean = false;
   public tipo:number=3;
-  public tipos:{id:number,nome:string}[] = [
-    {
-      id:6,
-      nome:'Template'
-    },
+  public tipos:{id:number,nome:string}[] = [    
     {
       id:1,
       nome:'Vídeo'
@@ -70,7 +66,10 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
       id:2,
       nome:'Imagem'
     },
-    
+    {
+      id:6,
+      nome:'Template'
+    }
   ];
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,
     private templateService:TemplateService, public translateService:TranslateService,
@@ -89,6 +88,8 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
       if (tipo != 6){
         this.campos = []
         this.form.controls['template'].setValue(null);
+        this.form.controls['template'].setErrors(null);
+        this.form.controls['template'].clearAsyncValidators();
       }else if (tipo == 6){
         this.arquivo = null;
         this.form.controls['template'].setValidators(Validators.required);

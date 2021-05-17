@@ -47,7 +47,7 @@
                     <label for="{{'camp'+camp.id}}">{{camp.nome |translate}}</label>
                     <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
                 </div> 
-                <div class="tempo rd-row rd-gap" *ngIf="tipo != 2">
+                <div class="tempo rd-row rd-gap" *ngIf="tipo != 1">
                     <label class="label-field">{{'TEMPO_DE_EXIBICAO'|translate}}</label>
                     <span class=" rd-row">                
                         <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
