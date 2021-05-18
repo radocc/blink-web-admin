@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';  
-import { CadForm } from '@radocccomponentes/pagecadastro/cadform';
 import { GrupoPlayer } from '@radoccmodels/grupoplayer';
 import { Player } from '@radoccmodels/player';
 import { Playlist } from '@radoccmodels/playlist';
@@ -21,6 +20,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { PlaylistPesquisaDialogComponent } from '../componente/dialog-playlist-pesquisa/playlist-pesquisa-dialog.component';
 import { PlaylistDialogComponent } from '../componente/dialog-playlist/playlist-dialog.component';
 import { GaleriaConteudoComponent } from '../../../componentes/galeria-conteudo/galeria-conteudo.component';
+import { OrderList } from 'primeng/orderlist';
 
 @Component({
   selector: 'app-panel-publicacao',
@@ -32,11 +32,12 @@ import { GaleriaConteudoComponent } from '../../../componentes/galeria-conteudo/
   ]
 })
 export class PanelPublicacaoComponent implements OnInit {
-
+  @ViewChild("orderList")public orderList:OrderList;
   public nomeBusca:string = "";
   public tiposConteudos: TipoConteudo[] = [ ]
   public conteudos:ConteudoResult[] = [];
   public tipoConteudo:TipoConteudo= null;
+  public textBtnVinculo:string="VINCULAR";
   public eventLista = null;
   public pesquisaTipo:string;
   public tempoLista:number = 0;
@@ -58,6 +59,7 @@ export class PanelPublicacaoComponent implements OnInit {
   // {name: 'CAMPANHA', id: 3}
   public listaConteudo:PlaylistConteudo[] = [];
   public conteudo:ConteudoResult;
+  public conteudosSelecionados:PlaylistConteudo[] = [];
   public playlist:Playlist;
   public publicacao:Publicacao; 
   public tiposIntercalacao:any[] = [
@@ -177,6 +179,7 @@ export class PanelPublicacaoComponent implements OnInit {
   public buscarPlayListConteudo(idPlaylist:number){
     this.playlistConteudoService.buscarPorPlayList(idPlaylist).subscribe((lista)=>{
       this.listaConteudo = lista;
+      this.organizarVinculos();
       this.atualizarTempo();
     })
   }
@@ -189,6 +192,7 @@ export class PanelPublicacaoComponent implements OnInit {
         this.form.controls['tipoIntercalacao'].setValue(publicacao.intercalacao);
         this.playlist = publicacao.playlist;
         this.listaConteudo = this.playlist.playlistConteudos;
+        this.organizarVinculos();
       }else {
         this.playlist = null;
         this.listaConteudo = [];
@@ -204,6 +208,7 @@ export class PanelPublicacaoComponent implements OnInit {
         this.form.controls['tipoIntercalacao'].setValue(publicacao.intercalacao);
         this.playlist = publicacao.playlist;
         this.listaConteudo = this.playlist.playlistConteudos;
+        this.organizarVinculos();
       }else {
         this.playlist = null;
         this.listaConteudo = [];
@@ -255,6 +260,7 @@ export class PanelPublicacaoComponent implements OnInit {
           this.playlistService.save(playlist).subscribe((playlist)=>{
             this.playlist = playlist;
             this.listaConteudo = playlist.playlistConteudos;
+            this.organizarVinculos();
             this.msgService.add({
               severity:'success', summary:'Salvo', detail:'Salvo com sucesso'
             })
@@ -263,10 +269,17 @@ export class PanelPublicacaoComponent implements OnInit {
         }
       }); 
     }else {
+      let lista = [];
       for (let w =0; w < this.listaConteudo.length;w++){
         this.listaConteudo[w].sequencia = w+1;
+        lista.push(this.listaConteudo[w]);
+        if (this.listaConteudo[w].vinculados != null){
+          for (let x = 0; x < this.listaConteudo[w].vinculados.length;x++){
+            lista.push(this.listaConteudo[w].vinculados[x]);
+          }
+        }
       }
-      this.playlist.playlistConteudos = this.listaConteudo;
+      this.playlist.playlistConteudos = lista;
       
       this.playlistService.save(this.playlist).subscribe((playlist)=>{
         this.playlist = playlist;
@@ -311,18 +324,24 @@ export class PanelPublicacaoComponent implements OnInit {
     }
     this.publicacao.idPlaylist = this.playlist.id;
     this.playlist.status = 2;
-
+    let lista = [];
     for (let w =0; w < this.listaConteudo.length;w++){
       this.listaConteudo[w].sequencia = w+1;
+      lista.push(this.listaConteudo[w]);
+      if (this.listaConteudo[w].vinculados != null){
+        for (let x = 0; x < this.listaConteudo[w].vinculados.length;x++){
+          lista.push(this.listaConteudo[w].vinculados[x]);
+        }
+      }
     }
-    this.playlist.playlistConteudos = this.listaConteudo;
+    this.playlist.playlistConteudos = lista;
     this.publicacao.playlist = this.playlist;
-    
 
     this.publicacaoService.save(this.publicacao).subscribe((publicacao)=>{
       this.publicacao = publicacao;
       this.playlist = publicacao.playlist;
       this.listaConteudo = this.playlist.playlistConteudos;
+      this.organizarVinculos();
       this.msgService.add({
         severity:'success', summary:'Publicado', detail:'Publicado com sucesso'
       })
@@ -330,9 +349,38 @@ export class PanelPublicacaoComponent implements OnInit {
     });
   }
 
+  public organizarVinculos(){
+    let lista = [];
+    for (let w = 0; w < this.listaConteudo.length;w++){
+      if (this.listaConteudo[w].idVinculado != null){
+        if (lista[lista.length-1].vinculados == null){
+          lista[lista.length-1].vinculados = [];
+        }
+        lista[lista.length-1].vinculados.push(this.listaConteudo[w]);
+      }else{
+        lista.push(this.listaConteudo[w]);
+      }
+    }
+    this.listaConteudo = lista;
+    let me = this;
+    setTimeout(()=>{          
+      me.conteudosSelecionados = [];
+      me.orderList.value = this.listaConteudo;
+    },300);
+  }
+
   public preview(){
+    let lista = [];
+    for (let w = 0; w < this.listaConteudo.length;w++){
+      lista.push(this.listaConteudo[w]);
+      if (this.listaConteudo[w].vinculados != null){
+        for (let x = 0; x <this.listaConteudo[w].vinculados.length;x++){
+          lista.push(this.listaConteudo[w].vinculados[x]);
+        }
+      }
+    }
     const dialog = this.dialogService.open(GaleriaConteudoComponent, {
-      data:this.listaConteudo,
+      data:lista,
       modal:true,
       showHeader:true,
       closable:true,
@@ -412,4 +460,51 @@ export class PanelPublicacaoComponent implements OnInit {
     console.log('Reordenando', event);
   }
 
+  public vincular(){
+    if (this.textBtnVinculo == 'VINCULAR'){
+      if (this.conteudosSelecionados.length > 0){      
+        if (this.conteudosSelecionados[0].vinculados == null){
+          this.conteudosSelecionados[0].vinculados = [];
+        }
+        for (let w = 1; w < this.conteudosSelecionados.length;w++){
+          this.conteudosSelecionados[w].idVinculado = this.conteudosSelecionados[w-1].id;
+          this.conteudosSelecionados[w].sequencia = this.conteudosSelecionados[w-1].sequencia+w;
+          this.conteudosSelecionados[0].vinculados.push(this.conteudosSelecionados[w]);
+          let index = this.listaConteudo.indexOf(this.conteudosSelecionados[w]);        
+          this.listaConteudo.splice(index,1);
+          let me = this;
+          setTimeout(()=>{          
+            me.conteudosSelecionados = [];
+            me.orderList.value = this.listaConteudo;
+          },300);
+          
+        }
+      }
+    }else{
+      if (this.conteudosSelecionados.length > 0){
+
+        for (let w= 0; w < this.conteudosSelecionados[0].vinculados.length;w++){
+          let itemConteudo = this.conteudosSelecionados[0].vinculados[w];
+          itemConteudo.idVinculado = null;
+          this.listaConteudo.push(itemConteudo);
+        }
+        this.conteudosSelecionados[0].vinculados = null;
+        let me = this;
+          setTimeout(()=>{          
+            me.conteudosSelecionados = [];
+            me.orderList.value = this.listaConteudo;
+          },300);
+      }
+    }
+    
+  }
+
+  public onSelectionChange(event){
+    console.log(event);
+    if (event.value != null && event.value.length > 1){
+      this.textBtnVinculo = 'VINCULAR';
+    }else {
+      this.textBtnVinculo = 'DESVINCULAR';
+    }
+  }
 }

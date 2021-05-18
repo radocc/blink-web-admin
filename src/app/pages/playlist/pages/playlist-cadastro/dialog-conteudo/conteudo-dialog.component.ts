@@ -36,6 +36,9 @@ export class ConteudoDialogComponent implements OnInit {
      public conteudoService:ConteudoService, private tipoConteudoService:TipoConteudoService,
      public config: DynamicDialogConfig,public ref: DynamicDialogRef) {
     this.listaConteudo = config.data;
+    if (this.listaConteudo == null){
+      this.listaConteudo = [];
+    }
   }
 
   ngOnInit(): void { 

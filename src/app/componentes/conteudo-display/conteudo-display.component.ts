@@ -45,10 +45,15 @@ export class ConteudoDisplayComponent implements OnInit {
     if (this.conteudoResult.tipo == 4){
       if (this.conteudoResult.noticia != null){
         this.noticia = this.conteudoResult.noticia;
-      }  
-      this.conteudoService.findPreviewNoticia(this.conteudoResult.id,this.noticia.id).subscribe((conteudo)=>{
+      } 
+      let idNoticia = 0;
+      if (this.noticia != null){
+        idNoticia = this.noticia.id;
+      } 
+      this.conteudoService.findPreviewNoticia(this.conteudoResult.id,idNoticia).subscribe((conteudo)=>{
         this.conteudo = conteudo;
         this.arquivo = conteudo.arquivo;
+        this.noticia = conteudo.noticia;
         this.conteudoResult.url = this.arquivo.url;
         this.template = conteudo.template;
         this.templateCampoService.getPreenchimentoManualByTemplate(this.template.id).subscribe((lista)=>{

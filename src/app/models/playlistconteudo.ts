@@ -9,5 +9,6 @@ export class PlaylistConteudo extends BaseEntityImpl {
     public idPlaylist:number;
     public idVinculado:number;
     public sequencia:number;    
+    public vinculados:PlaylistConteudo[];
     
 }

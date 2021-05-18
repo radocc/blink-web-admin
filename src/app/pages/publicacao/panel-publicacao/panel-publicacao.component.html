@@ -79,13 +79,22 @@
                                 <div>{{listaConteudo.length}}&nbsp; {{'ITENS'|translate}}</div>
                                 <div>{{tempoLista | tempoExibicao}}</div>
                             </div>
-                            <p-orderList class="rd-h-100" (onReorder)="onReorder($event)" [listStyle]="{'height':'auto'}"  pDroppable="conteudo" (onDrop)="drop($event)" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right">
-                                <ng-template  let-itemList let-index="index" pTemplate="item">
-                                    <div class="rd-row">
-                                        <div class="order-index">{{index + 1}}</div>
-                                        <app-conteudo-row class="rd-flex" [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
-                                            [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false">
-                                        </app-conteudo-row>
+                            <p-orderList #orderList class="rd-h-100" (onReorder)="onReorder($event)" [listStyle]="{'height':'auto'}"  pDroppable="conteudo" (onDrop)="drop($event)" [value]="listaConteudo"  [dragdrop]="true" controlsPosition="right"
+                                [(selection)]="conteudosSelecionados" (onSelectionChange)="onSelectionChange($event)">
+                                <ng-template  let-itemList let-index="index"  pTemplate="item">
+                                    <div [ngClass]="{'vinculado' :itemList.vinculados != null}">
+                                        <div class="rd-row" >
+                                            <!-- <div class="order-index" >{{index + 1}}</div> -->
+                                            <app-conteudo-row class="rd-flex" [conteudo]="itemList.conteudo"  (onExcluir)="excluirConteudo(itemList)"
+                                                [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false">
+                                            </app-conteudo-row>
+                                        </div>
+                                        <div class="rd-row" *ngFor="let itemVinc of itemList.vinculados">
+                                            <!-- <div class="order-index" >{{index + 1}}</div> -->
+                                            <app-conteudo-row class="rd-flex" [conteudo]="itemVinc.conteudo"  (onExcluir)="excluirConteudo(itemVinc)"
+                                                [exibiBtnAlterar]="false" [exibiBtnExcluir]="true" [exibiBtnVisualizar]="true" [exibiBtnClonar]="false">
+                                            </app-conteudo-row>
+                                        </div>
                                     </div>
                                 </ng-template>
                             </p-orderList>
@@ -97,6 +106,7 @@
                             <button pButton *ngIf="idTipoPublicacao == 1" (click)="previewPlayer()" type="button" label="{{'VISUALIZAR_PLAYER'|translate}}"></button>
                             <button pButton (click)="salvar()" type="button" label="{{'SALVAR'|translate}}"></button>
                             <button pButton (click)="importar()" type="button" label="{{'IMPORTAR'|translate}}"></button>
+                            <button pButton (click)="vincular()" type="button" label="{{textBtnVinculo|translate}}"></button>
                             <div class="p-field rd-col">
                                 <label for="intercalacao" translate>{{'INTERCALACAO'|translate}}</label>
                                 <p-dropdown id="intercalacao" [options]="tiposIntercalacao" optionLabel="name" optionValue="id" formControlName="tipoIntercalacao"></p-dropdown>

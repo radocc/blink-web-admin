@@ -210,11 +210,13 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
       closeOnEscape:false
     });
     dialog.onClose.subscribe((lista)=>{
-      this.listaConteudo = lista;
+      this.listaConteudo = [];
       if (this.orderList != null){
+        let me = this;
         setTimeout(()=>{
-          this.orderList.filter();
-        },500);        
+          this.listaConteudo = lista;
+          me.orderList.value = lista;
+        },700);        
       }
     }); 
   }

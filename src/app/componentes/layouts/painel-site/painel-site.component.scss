@@ -90,6 +90,9 @@
                 color: map-get($theme, white);
             }
         }
+        .p-menuitem-text{
+            text-align: start;
+        }
         
     }
 }

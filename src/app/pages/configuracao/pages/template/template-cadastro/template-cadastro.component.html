@@ -32,15 +32,16 @@
                 <div class="drag-content" name="drag-content">
                     <p-inplace *ngIf="campo.tipo != 4" closable="closable">
                         <ng-template pTemplate="display">
-                            <span 
+                            <div 
                                 [ngStyle]="{
                                     'font-family': campo.fonte,
                                     'font-size': campo.fonteTamanho + 'px',
                                     'font-weight': campo.fonteEspessura,
+                                    'text-align':campo.alinhamento,
                                     'color': campo.fonteCor
                                 }">
                                 {{campo.valor}}
-                            </span>
+                            </div>
                         </ng-template>
                         <ng-template pTemplate="content">
                             <input type="text" [(ngModel)]="campo.valor" pInputText [ngModelOptions]="{standalone: true}">

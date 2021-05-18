@@ -124,7 +124,11 @@
                     .p-orderlist-droppoint-highlight{
                         height: 50px;
                         background: red;
-                    }                    
+                    }      
+                    .vinculado{
+                        background: map-get($theme, light) !important;
+                        padding: 4px;
+                    }              
                 }                
             }
             .acoes{

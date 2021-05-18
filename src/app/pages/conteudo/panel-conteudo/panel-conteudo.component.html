@@ -20,9 +20,9 @@
                     </div>
                 </div>
                 <div class="p-col-9 p-d-flex p-flex-column pesquisa-list">
-                    <div class="title-conteudo" >
+                    <!-- <div class="title-conteudo" >
                         {{tipoConteudo?.nome}}
-                    </div>
+                    </div> -->
                     <div class="list-conteudo">
                         <div class="item-conteudo " *ngFor="let conteudo of conteudos">
                             <app-conteudo-row [conteudo]="conteudo" (onClonar)="clonarConteudo(conteudo)" (onVisualizar)="visualizarConteudo(conteudo)"
