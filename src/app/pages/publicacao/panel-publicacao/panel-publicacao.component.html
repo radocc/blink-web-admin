@@ -102,8 +102,8 @@
                         </div>
                         <div class="acoes rd-col rd-gap">
                             <button pButton class="btn-publicar" (click)="publicar()"  type="button" label="{{'PUBLICAR'|translate}}"></button>
-                            <button pButton (click)="preview()" type="button" label="{{'VISUALIZAR'|translate}}"></button>
-                            <button pButton *ngIf="idTipoPublicacao == 1" (click)="previewPlayer()" type="button" label="{{'VISUALIZAR_PLAYER'|translate}}"></button>
+                            <button pButton (click)="preview()" type="button" label="{{'PREVIEW_LISTA'|translate}}"></button>
+                            <button pButton *ngIf="idTipoPublicacao == 1" (click)="previewPlayer()" type="button" label="{{'PREVIEW_PLAYER'|translate}}"></button>
                             <button pButton (click)="salvar()" type="button" label="{{'SALVAR'|translate}}"></button>
                             <button pButton (click)="importar()" type="button" label="{{'IMPORTAR'|translate}}"></button>
                             <button pButton (click)="vincular()" type="button" label="{{textBtnVinculo|translate}}"></button>

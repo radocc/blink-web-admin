@@ -11,11 +11,12 @@
                     <p-fileUpload #fileUpload mode="basic" maxFileSize="9999999999" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                     name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" accept=".mov,.mp3,.mkv,.mp4"
                     invalidFileSizeMessageSummary="{0}:Invalido o tamanho do arquivo!" 
-                    invalidFileSizeMessageDetail="O tamanho máximo do arquivo é {0}"></p-fileUpload>
+                    invalidFileSizeMessageDetail="O tamanho máximo do arquivo é {0}"></p-fileUpload>                    
                     <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
                     <!-- <div class="rd-flex">{{arquivo.url}}</div> -->
                     <button pButton *ngIf="arquivo" class="p-button-secondary"  type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                 </div>  
+                <p-progressBar *ngIf="carregandoArquivo" class="p-field" [value]="progressValue" mode="determinate"></p-progressBar>
                 <div class="p-field rd-row rd-gap">
                     <!-- <label class="label-field" translate>AUDIO</label>                                 -->                    
                     <p-radioButton name="audio" value="1" formControlName="audio"  label="{{'SEM_AUDIO'|translate}}"></p-radioButton>

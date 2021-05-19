@@ -36,7 +36,8 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
   public conteudo:Conteudo;
   public idTipoConteudo:number;
   public clonar:boolean = false;
-
+  public carregandoArquivo:boolean = false;
+  public progressValue = 0;
   constructor(public arquivoService:ArquivoService, public msgService:MessageService, private conteudoService:ConteudoService,private router:Router,
     private eventService:EventBrokerService, private route:ActivatedRoute, public translateService:TranslateService) {
       super(msgService, translateService);
@@ -68,10 +69,15 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
   public uploadFile(event){
     if (event.files.length > 0){
       event.progress = 10;
-      this.arquivoService.postFile(event.files[0]).then((res)=>{
+      this.carregandoArquivo = true;
+      let me = this;
+      let fnProgress = (value)=>{
+        me.progressValue = value;
+      };
+      this.arquivoService.postFile(event.files[0], fnProgress).then((res)=>{
         event.progress = 100;
         this.arquivo = res;
-        console.log(res);
+        this.carregandoArquivo = false;
       })
     }    
   }  

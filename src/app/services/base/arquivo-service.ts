@@ -22,7 +22,7 @@ export class ArquivoService extends AbstractService<Arquivo> {
         return this.urlWebBase + '/upload';
     }
   
-    public postFile(fileToUpload: File): Promise<any> {
+    public postFile(fileToUpload: File, fnProgress?:Function): Promise<any> {
         return new Promise((resolve, reject) => {
             const endpoint = this.getUrlUpload();
             const formData: FormData = new FormData();
@@ -42,6 +42,9 @@ export class ArquivoService extends AbstractService<Arquivo> {
                     if (evnt.lengthComputable) {
                         let progres = Math.round((evnt.loaded / evnt.total) * 100);
                         console.log('Progress', evnt.lengthComputable, progres);
+                        if (fnProgress != null){
+                            fnProgress(progres);
+                        }
                     }
                 };
                 xhr.onload = function (evnt) {

@@ -325,11 +325,13 @@ export class PanelPublicacaoComponent implements OnInit {
     this.publicacao.idPlaylist = this.playlist.id;
     this.playlist.status = 2;
     let lista = [];
+    let sequencia = 1;
     for (let w =0; w < this.listaConteudo.length;w++){
-      this.listaConteudo[w].sequencia = w+1;
+      this.listaConteudo[w].sequencia = sequencia++;
       lista.push(this.listaConteudo[w]);
       if (this.listaConteudo[w].vinculados != null){
         for (let x = 0; x < this.listaConteudo[w].vinculados.length;x++){
+          this.listaConteudo[w].vinculados[x].sequencia = sequencia++
           lista.push(this.listaConteudo[w].vinculados[x]);
         }
       }
@@ -466,9 +468,11 @@ export class PanelPublicacaoComponent implements OnInit {
         if (this.conteudosSelecionados[0].vinculados == null){
           this.conteudosSelecionados[0].vinculados = [];
         }
+        let sequencia = this.conteudosSelecionados[0].sequencia;
         for (let w = 1; w < this.conteudosSelecionados.length;w++){
-          this.conteudosSelecionados[w].idVinculado = this.conteudosSelecionados[w-1].id;
-          this.conteudosSelecionados[w].sequencia = this.conteudosSelecionados[w-1].sequencia+w;
+          this.conteudosSelecionados[w].idVinculado = this.conteudosSelecionados[0].id;
+          sequencia = sequencia + w;
+          this.conteudosSelecionados[w].sequencia = sequencia;
           this.conteudosSelecionados[0].vinculados.push(this.conteudosSelecionados[w]);
           let index = this.listaConteudo.indexOf(this.conteudosSelecionados[w]);        
           this.listaConteudo.splice(index,1);
