@@ -21,22 +21,11 @@
                     width: 70px;
                 } 
             }
-            .grid-fonte{
-                display: grid;
-                grid-template-columns: repeat(2fr);
-                gap: 8px;
-            }
-            .fonte{
+            p-tree{
                 width: 100%;
-                border:1px solid #ced4da;
-                border-radius: 4px;
-                .header {
-                    padding: 16px;
-                    background-color: white;
-                }    
-                .p-listbox{
-                    flex: 1;
-                }       
+            }
+            .p-tree{
+                height: 100%;
             }
         }
         

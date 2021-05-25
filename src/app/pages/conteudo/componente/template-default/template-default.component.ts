@@ -240,7 +240,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   } 
 
   public pesquisarTemplate(nome:string){
-    this.templateService.findNomeETipo(nome,this.idTipoConteudo).subscribe((lista)=>{
+    this.templateService.findNomeETipoConteudo(nome,this.idTipoConteudo).subscribe((lista)=>{
       this.templates = lista;
     })
   }

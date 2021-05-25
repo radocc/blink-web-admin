@@ -17,8 +17,10 @@ import { ConteudoService } from '@radoccservices/conteudo-services';
 import { ConteudoFonteNoticiaService } from '@radoccservices/conteudofontenoticia-services';
 import { FonteNoticiaService } from '@radoccservices/fontenoticia-services';
 import { NoticiaEditoriaService } from '@radoccservices/noticiaeditoria-services';
-import { MessageService } from 'primeng/api';
+import { MessageService, TreeNode } from 'primeng/api';
 import { PanelAgendamentoComponent } from '../panel-agendamento/panel-agendamento.component';
+import { eventNames } from 'process';
+import { Tree } from 'primeng/tree';
 
 @Component({
   selector: 'app-template-noticia-conteudo',
@@ -37,7 +39,8 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
     minutos:new FormControl(0),
     segundos:new FormControl(30)
   }) 
-  
+  public fontes: TreeNode[];
+  public selectedFontes:TreeNode[];
   public conteudoNoticias:ConteudoFonteNoticia[] = [];
   public editorias:ConteudoFonteNoticia[] = [];
   public filtro:ConteudoFiltro;
@@ -68,15 +71,75 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
             this.form.controls['segundos'].setValue(segundos);
             if (conteudo.fontes != null){
               this.conteudoNoticias = conteudo.fontes;
+              this.montarTree();
             }
           }) 
       }else {
         this.conteudoFonteService.prepare(0).subscribe((lista)=>{
           this.conteudoNoticias = lista;
+          this.montarTree(); 
         });
       }
     })
     
+  }
+
+  public montarTree(){
+    this.fontes = [];
+    for (let w = 0; w < this.conteudoNoticias.length;w++){
+      let fonte = this.conteudoNoticias[w].fonte;
+      let treFonte:TreeNode = {
+        label:fonte.nome,
+        data:fonte.id,
+        leaf:true,
+        children:[]
+      };
+      for (let x = 0; x < fonte.editorias.length;x++){
+        let editoria = fonte.editorias[x];
+        treFonte.children.push({
+          label:editoria.nome,
+          data:editoria.id,
+          leaf:true
+        })
+        // for (let x = 0; x < this.conteudoNoticias[w].editoriasSelecionado.length;x++){
+        //   let editoria = this.conteudoNoticias[w].editoriasSelecionado[x];
+        //   for (let y = 0; y < treFonte.children.length;y++){
+        //     if (treFonte.children[y].data == editoria.id){
+
+        //     }
+        //   }
+            
+        // }
+      }
+      this.fontes.push(treFonte);
+    }
+    this.selectedFontes = [];
+    for (let w = 0; w < this.conteudoNoticias.length;w++){
+      let fonte = this.conteudoNoticias[w].fonte;
+      for ( let i = 0;i < this.fontes.length;i++){
+        if (fonte.id == this.fontes[i].data){
+          let treFonte:TreeNode = this.fontes[i];
+
+          for (let x = 0; x < this.conteudoNoticias[w].editoriasSelecionado.length;x++){
+            let achou = false;
+            
+            for (let n = 0; n < treFonte.children.length;n++){
+              if (treFonte.children[n].data == this.conteudoNoticias[w].editoriasSelecionado[x].id){
+                treFonte.partialSelected = true;
+                treFonte.selectable = true;
+                treFonte.parent = treFonte;
+                treFonte.expanded = true;
+                // treFonte.children.push(treFonte.children[n]);
+                this.selectedFontes.push(treFonte.children[n]);
+              }
+            }
+          }
+        }
+        
+
+      }      
+    }
+    // this.selectedFontes = this.fontes;
   }
 
   public novo(){
@@ -97,18 +160,24 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
     }
     let titulos = [];
     let fontes = [];
-    for (let w = 0; w < this.conteudoNoticias.length;w++){
-      if (this.conteudoNoticias[w].editoriasSelecionado != null && this.conteudoNoticias[w].editoriasSelecionado.length > 0){
-        titulos.push(this.conteudoNoticias[w].fonte.nome);
-        let ids = [];
-        for (let x = 0; x < this.conteudoNoticias[w].editoriasSelecionado.length;x++){
-            ids.push(this.conteudoNoticias[w].editoriasSelecionado[x].id);
+    for (let i = 0; i < this.selectedFontes.length;i++){
+      let fonte:TreeNode = this.selectedFontes[i];
+      for (let w = 0; w < this.conteudoNoticias.length;w++){
+        if (fonte.data == this.conteudoNoticias[w].fonte.id){
+          
+          let ids = [];
+          for (let x = 0; x < fonte.children.length;x++){
+              ids.push(fonte.children[x].data);
+          }
+          if (ids.length > 0){
+            titulos.push(fonte.label);
+            this.conteudoNoticias[w].idsEditorias =  ids.join(',');
+            fontes.push(this.conteudoNoticias[w]);
+          }
         }
-        this.conteudoNoticias[w].idsEditorias = ids.join(',');
-        this.conteudoNoticias[w].idFonteNoticia = this.conteudoNoticias[w].fonte.id;
-        fontes.push(this.conteudoNoticias[w]);
-      }      
+      }  
     }
+     
     this.conteudo.titulo = titulos.join(',');
     this.conteudo.idTipoConteudo = this.idTipoConteudo;
     let segundos = this.form.controls['segundos'].value;
@@ -148,6 +217,16 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
 
   public importar(){
 
+  }
+
+  nodeSelect(event) {
+    //event.node = selected node
+    console.log(event);
+  }
+
+  nodeUnselect(event) {
+    //event.node = selected node
+    console.log(event);
   }
 
 }

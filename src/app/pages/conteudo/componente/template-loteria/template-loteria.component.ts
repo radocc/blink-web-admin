@@ -141,7 +141,7 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
   }
 
   public pesquisarTemplate(nome:string){
-    this.templateService.findNomeETipo(nome,ETipoConteudo.Loteria).subscribe((lista)=>{
+    this.templateService.findNomeETipoConteudoTipo(nome,ETipoConteudo.Loteria).subscribe((lista)=>{
       this.templates = lista;
     })
   }

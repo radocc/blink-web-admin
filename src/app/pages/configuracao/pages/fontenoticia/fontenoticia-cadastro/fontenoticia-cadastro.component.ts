@@ -66,6 +66,7 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
 
   public novo(){
     super.novo();
+    
     this.fonteNoticia = null; 
     this.editorias = [];
   }
@@ -91,7 +92,7 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
   }
 
   public pesquisarTemplate(nome){
-    this.templateService.findNomeETipo(nome,ETipoConteudo.Noticias).subscribe((lista)=>{
+    this.templateService.findNomeETipoConteudoTipo(nome,ETipoConteudo.Noticias).subscribe((lista)=>{
       this.templates = lista;
     })
   }

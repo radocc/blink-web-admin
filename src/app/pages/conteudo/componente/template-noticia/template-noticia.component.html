@@ -3,13 +3,8 @@
         <form [formGroup]="form" class="rd-flex rd-col">
             <div class="rd-flex rd-col ">
                 <div class="rd-flex p-field rd-row rd-gap-8">
-                    <div class="p-field rd-col fonte" *ngFor="let content of conteudoNoticias">
-                        <div class=" header">
-                            <label for="titulo" translate>&nbsp;{{content.fonte.nome}}</label>
-                        </div>
-                        <p-listbox class="rd-flex rd-col" [options]="content.editorias" [filter]="true" [checkbox]="true" [multiple]="true" [ngModelOptions]="{standalone: true}" 
-                            [(ngModel)]="content.editoriasSelecionado" optionLabel="nome"></p-listbox>
-                    </div>
+                    <p-tree [value]="fontes" selectionMode="checkbox" [(selection)]="selectedFontes"
+                            (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
                 </div>
                 <div class="p-field rd-col">
                     <label for="titulo" translate>FILTROS</label>

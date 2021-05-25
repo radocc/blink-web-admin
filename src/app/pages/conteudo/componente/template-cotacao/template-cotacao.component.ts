@@ -157,7 +157,7 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
   }
 
   public pesquisarTemplate(nome:string){
-    this.templateService.findNomeETipo(nome,ETipoConteudo.Cotacao).subscribe((lista)=>{
+    this.templateService.findNomeETipoConteudoTipo(nome,ETipoConteudo.Cotacao).subscribe((lista)=>{
       this.templates = lista;
     })
   }
