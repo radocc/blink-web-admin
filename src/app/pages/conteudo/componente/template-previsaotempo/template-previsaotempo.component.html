@@ -1,7 +1,8 @@
 <app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_PREVISAO_DO_TEMPO', btnNovo: 'NOVO_CONTEUDO'}" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
     <ng-template #content>
+        <p-messages></p-messages>
         <form [formGroup]="form" class="rd-flex rd-col">
-            <div class="rd-flex rd-col ">
+            <div class="rd-flex rd-col div-form">
                 <div class="p-field rd-col">
                     <label for="cidade" translate>CIDADE</label>
                     <p-autoComplete formControlName="cidade" 
@@ -22,15 +23,10 @@
                     </p-autoComplete>
                     <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                 </div>
-                <div class="tempo rd-row rd-gap">
-                    <label class="label-field">Tempo de exibição</label>
+                <div class="tempo rd-row rd-gap" >                    
                     <span class=" rd-row">                
-                        <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
-                        <label class="label-field" for="minutos" translate>&nbsp; MINUTOS</label>
-                    </span>
-                    <span class=" rd-row">                
-                        <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
-                        <label class="label-field" for="segundos" translate>&nbsp;SEGUNDOS</label>
+                        <label class="label-field" for="segundos">{{'EXIBICAO_EM_SEGUNDOS'|translate}}</label>
+                        <input id="segundos" type="number" min="0"  formControlName="segundos" class="input-tempo" pInputText>                         
                     </span>
                 </div>
                 <app-panel-agendamento-conteudo #panelAgendamento>

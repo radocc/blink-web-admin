@@ -1,5 +1,6 @@
 <app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_COTACAO'}" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
     <ng-template #content> 
+            <p-messages></p-messages>
             <form [formGroup]="form">
                 <div class="rd-flex rd-col ">
                     <div class="p-field rd-col">
@@ -20,15 +21,10 @@
                         <label for="titulo">{{camp.nome |translate}}</label>
                         <input id="titulo" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
                     </div>  
-                    <div class="tempo rd-row rd-gap">
-                        <label class="label-field">{{'TEMPO_DE_EXIBICAO'|translate}}</label>
+                    <div class="tempo rd-row rd-gap" >                    
                         <span class=" rd-row">                
-                            <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
-                            <label class="label-field" for="minutos">&nbsp; {{'MINUTOS'|translate}}</label>
-                        </span>
-                        <span class=" rd-row">                
-                            <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
-                            <label class="label-field" for="segundos">&nbsp;{{'SEGUNDOS'|translate}}</label>
+                            <label class="label-field" for="segundos">{{'EXIBICAO_EM_SEGUNDOS'|translate}}</label>
+                            <input id="segundos" type="number" min="0"  formControlName="segundos" class="input-tempo" pInputText>                         
                         </span>
                     </div>
                     <app-panel-agendamento-conteudo #panelAgendamento>

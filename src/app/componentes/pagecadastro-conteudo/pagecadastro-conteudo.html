@@ -2,16 +2,12 @@
     <!-- <div class="">
         <button pButton  type="button" label="{{config?.btnNovo|translate}}" (click)="novo()"></button>
     </div> -->
-    <div>
-        <p-messages></p-messages>
-    </div>
+    
     <div class="p-d-flex p-flex-row rd-flex rd-gap rd-h-100 rd-over-hidden">
-        <app-pagecadastro class="p-col-10" [config]="config" class="p-d-flex p-flex-column" [actions]="false">
-              <ng-container *ngTemplateOutlet="content">
+        <app-pagecadastro class="p-col-10" (novo)="novo()" [config]="config" class="p-d-flex p-flex-column" [actions]="false">            
+            <ng-container *ngTemplateOutlet="content">
 
-              </ng-container>
-              
-              
+            </ng-container>
         </app-pagecadastro>
         <div class="acoes rd-col rd-gap rd-h-100">
             <app-register-action (onPreview)="preview()" (onPublicar)="publicar()" (onSalvar)="salvar()" [permiteImportar]="false" [permitePublicar]="false"

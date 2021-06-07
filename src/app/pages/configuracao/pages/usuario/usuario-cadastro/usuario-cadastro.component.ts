@@ -11,6 +11,7 @@ import { GrupoUsuarioService } from '@radoccservices/base/grupousuario-service';
 import { UsuarioService } from '@radoccservices/base/usuario-service';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
 import { MessageService } from 'primeng/api';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -31,15 +32,7 @@ export class UsuarioCadastroComponent extends CadForm implements OnInit {
     btnSalvar:'SALVAR'
   }
   
-  public form:FormGroup = new FormGroup({
-    nome:new FormControl('', Validators.required),
-    cnpj:new FormControl('', Validators.required),
-    login:new FormControl('', Validators.required),
-    email:new FormControl('', Validators.required),
-    senha:new FormControl('', Validators.required),
-    confirmeSenha:new FormControl('', Validators.required),
-    grupoUsuario:new FormControl(null, Validators.required)
-  }) 
+  public form:FormGroup = null;
   
   public usuario:Usuario;
   public grupos:GrupoUsuario[] = [];
@@ -51,6 +44,16 @@ export class UsuarioCadastroComponent extends CadForm implements OnInit {
 
   ngOnInit(): void { 
     super.ngOnInit();
+    const senha = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(50)]));
+    const confirmeSenha = new FormControl('', Validators.compose([CustomValidators.equalTo(senha), Validators.required]));
+    this.form = new FormGroup({
+      nome:new FormControl('', Validators.required),
+      email:new FormControl('', Validators.required),
+      senha:senha,
+      confirmeSenha:confirmeSenha,
+      grupoUsuario:new FormControl(null, Validators.required)
+    }) 
+
   } 
 
   public novo(){
@@ -67,9 +70,7 @@ export class UsuarioCadastroComponent extends CadForm implements OnInit {
   public montarForm(usuario:Usuario, editavel:boolean){
     this.usuario = usuario;
     this.form.controls['nome'].setValue(usuario.razaoSocial, {emitEvent:false});
-    this.form.controls['login'].setValue(usuario.login, {emitEvent:false});
     this.form.controls['email'].setValue(usuario.email, {emitEvent:false});
-    this.form.controls['cnpj'].setValue(usuario.cnpj, {emitEvent:false});
     this.form.controls['grupoUsuario'].setValue(usuario.grupoUsuario, {emitEvent:false});
     this.form.controls['senha'].setValue(usuario.senha, {emitEvent:false});
     this.form.controls['confirmeSenha'].setValue(usuario.senha, {emitEvent:false});
@@ -93,9 +94,9 @@ export class UsuarioCadastroComponent extends CadForm implements OnInit {
       this.usuario = new Usuario();
     }
     this.usuario.razaoSocial = this.form.controls['nome'].value;
-    this.usuario.login = this.form.controls['login'].value;
+    this.usuario.login = this.form.controls['email'].value;
     this.usuario.email = this.form.controls['email'].value;
-    this.usuario.cnpj = this.form.controls['cnpj'].value;
+    this.usuario.cnpj = '0';
     this.usuario.senha = this.form.controls['senha'].value;
     this.usuario.grupoUsuario = this.form.controls['grupoUsuario'].value;
     
@@ -103,11 +104,25 @@ export class UsuarioCadastroComponent extends CadForm implements OnInit {
       this.usuario = usuario;
       this.page.showSuccessMsg('SALVO_COM_SUCESSO');
       this.eventService.publishEvent(Events.atualizarLista);
-    }, error=>{
-      this.page.showErrorMsg('FALHA_AO_SALVAR');
-      console.log(error);
+    }, resp=>{      
+      this.page.showErrorMsg(resp.error.message);
+      console.log(resp);
     })
   }
- 
+
+  public validarEmail(){
+    let idUsuario = -1
+    if ( this.usuario != null){
+      idUsuario = this.usuario.id;
+    }
+    let email = this.form.controls['email'].value;
+    this.usuarioService.existeEmail(email, idUsuario).subscribe((res)=>{
+      if (res){
+        this.form.controls['email'].setErrors({ 'jaExiste':true});
+      }else{
+        this.form.controls['email'].setErrors(null);
+      }
+    })
+  }
 
 }

@@ -36,8 +36,7 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
     titulo:new FormControl('', Validators.required),    
     loteria:new FormControl(null, [Validators.required]),
     template:new FormControl(null, [Validators.required]),
-    minutos:new FormControl(0),
-    segundos:new FormControl(30),
+    segundos:new FormControl(10),
   }) 
   
   public arquivo:Arquivo;
@@ -69,10 +68,7 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
       this.conteudo = conteudo;
       if (conteudo != null){
         this.form.controls['titulo'].setValue(conteudo.titulo);
-        let min = (conteudo.tempoExibicao / 60).toFixed(0);
-        let segundos = (conteudo.tempoExibicao % 60);
-        this.form.controls['minutos'].setValue(min);
-        this.form.controls['segundos'].setValue(segundos);
+        this.form.controls['segundos'].setValue(conteudo.tempoExibicao);
         this.conteudoLoteria = conteudo.conteudoLoteria;
         this.form.controls['template'].setValue(conteudo.template);
         this.form.controls['loteria'].setValue(this.conteudoLoteria.loteria);
@@ -95,7 +91,6 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
     this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = this.idTipoConteudo;
     let segundos = this.form.controls['segundos'].value;
-    segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.tipo = ETipoConteudo.Loteria;
     this.conteudo.idTemplate = this.form.controls['template'].value.id;
@@ -117,7 +112,7 @@ export class TemplateLoteriaComponent extends CadConteudoComponent implements On
   }
 
   public novo(){
-    this.form.reset({minutos:0,segundos:15});
+    this.form.reset({segundos:10});
     this.conteudo = null;
     this.panelAgendamento.reset();
   }

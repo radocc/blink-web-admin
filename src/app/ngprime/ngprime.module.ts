@@ -39,11 +39,13 @@ import {TreeModule} from 'primeng/tree';
 import {StepsModule} from 'primeng/steps';
 import {DataViewModule} from 'primeng/dataview';
 import {ToggleButtonModule} from 'primeng/togglebutton';
+import { TagModule } from 'primeng/tag';
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     MenuModule,
+    TagModule,
     ButtonModule,
     InputTextModule,
     CheckboxModule,
@@ -87,6 +89,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
     ButtonModule,
     MenuModule,
     InputTextModule,
+    TagModule,
     CheckboxModule,
     CalendarModule,
     RadioButtonModule,

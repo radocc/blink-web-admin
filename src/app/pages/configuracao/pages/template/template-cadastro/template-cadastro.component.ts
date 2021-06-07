@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagemService } from '@radoccservices/base/imagem-service';
 import { ArquivoService } from '@radoccservices/base/arquivo-service';
 import { Arquivo } from '@radoccmodels/base/arquivo';
@@ -26,6 +26,7 @@ import { map } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import ETextAlinhamento from '@radoccmodels/enum/text-alinhamento-enum';
+import { Accordion } from 'primeng/accordion';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -38,6 +39,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   @ViewChild('fileupload', {static: true}) inputFile: FileUpload;
   @ViewChild('imageContainer', {static: false}) imageContainer: ElementRef;
   @ViewChildren(CdkDrag) cdkDrags: QueryList<CdkDrag>;
+  @ViewChild("accordion", {static:true}) accordion:Accordion;
 
   public template: Template;
   public imageHeight = 400;
@@ -72,6 +74,9 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit()
+    this.form = this.fb.group({
+      nome:new FormControl(null,[Validators.required])
+    })
     this.route.params.subscribe((param)=>{
       if (param['id']){
         this.buscar(param['id']);
@@ -154,8 +159,10 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   public async buscar(id) {
     this.template = await this.service.findById(id).toPromise();
-    if (this.template != null) 
+    if (this.template != null) {
       this.arquivo = await this.arquivoService.findById(this.template.idArquivo).toPromise();
+      this.form.controls['nome'].setValue(this.template.nome);
+    }      
     this.camposAdicionais = await this.campoService.getByTemplate(this.template.id)
       .pipe(
         map((campos) => {
@@ -180,8 +187,11 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
           dragContent.style.width = campo.width + 'px';
           dragContent.style.height = campo.height + 'px';
           this.setTamanhoCampo(campo);
-        }, 300);
+        }, 300);        
       });
+      for (let w =0;w < this.camposAdicionais.length;w++){
+        this.accordion.activeIndex = w;
+      }
     }, 100);
   }
 

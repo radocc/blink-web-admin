@@ -21,6 +21,7 @@ import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
 })
 export class PanelConteudoComponent implements OnInit, OnDestroy {
 
+  public textoPesquisa:string;
   public nomeBusca:string = "";
   public tiposConteudos: TipoConteudo[] = [ ]
   public conteudos:ConteudoResult[] = [];
@@ -39,6 +40,12 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(){
     this.eventLista.unsubscribe();
+  }
+
+  public pesquisar(){
+    this.conteudoService.pesquisar(this.textoPesquisa).subscribe((lista)=>{
+      this.conteudos = lista;
+    })
   }
 
   public buscarTipos(){

@@ -70,8 +70,9 @@ export class LoginPage implements OnInit {
         this.logarAuth.versaoAplicacao = 1;
         this.loginService.logar(this.logarAuth).subscribe((res: any) => {
             this.tratarLogin(res);
-        }, (error) => {
-            this.tratarErro(error);
+        }, (resp) => {
+            // this.form.controls['senha'].setErrors({login:resp.error.message});
+            this.tratarErro(resp);
         })
     }
 

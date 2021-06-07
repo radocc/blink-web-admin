@@ -27,6 +27,7 @@ export class TemplateCampo extends BaseEntityImpl {
     public alinhamento: string;
     public variavel: string;
     public variavelCustomizado: string;    
+    public valorFormato: string;    
 
     @jsonIgnore() public valor: any = 'Texto aqui';
     @jsonIgnore() public drag = {x: 0, y: 0};

@@ -1,8 +1,9 @@
 <app-pagecadastro-conteudo [content]="content" [config]="{titulo: titulo, btnNovo: 'NOVO_CONTEUDO'}" (novo)="novo()" 
     (salvar)="salvar()" (publicar)="publicar()">
     <ng-template #content>
+        <p-messages></p-messages>
         <form [formGroup]="form">
-            <div class="rd-flex rd-col ">
+            <div class="rd-flex rd-col div-form">
                 <div class="p-field rd-col">
                     <label for="titulo">{{'TITULO'|translate}}</label>
                     <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
@@ -20,11 +21,13 @@
                         <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
                         <button pButton *ngIf="arquivo" class="p-button-secondary" type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                     </div>  
+                    <p-progressBar *ngIf="carregandoArquivo" class="p-field" [value]="progressValue" mode="determinate"></p-progressBar>
                     <div class="p-field rd-row rd-gap">
                         <!-- <label class="label-field" translate>AUDIO</label>                                 -->                    
                         <p-radioButton name="audio" value="1" formControlName="audio"  label="{{'SEM_AUDIO'|translate}}"></p-radioButton>
                         <p-radioButton name="audio" value="2" formControlName="audio" label="{{'COM_AUDIO'|translate}}"></p-radioButton>
                     </div>
+                    
                 </div>
                 <div class="p-field p-d-flex p-flex-row" *ngIf="tipo == 2">
                     <p-fileUpload #fileUploadImagem mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
@@ -47,15 +50,10 @@
                     <label for="{{'camp'+camp.id}}">{{camp.nome |translate}}</label>
                     <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
                 </div> 
-                <div class="tempo rd-row rd-gap" *ngIf="tipo != 1">
-                    <label class="label-field">{{'TEMPO_DE_EXIBICAO'|translate}}</label>
+                <div class="tempo rd-row rd-gap" *ngIf="tipo != 1">                    
                     <span class=" rd-row">                
-                        <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
-                        <label class="label-field" for="minutos">&nbsp; {{'MINUTOS'|translate }}</label>
-                    </span>
-                    <span class=" rd-row">                
-                        <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
-                        <label class="label-field" for="segundos">&nbsp;{{'SEGUNDOS'|translate}}</label>
+                        <label class="label-field" for="segundos">{{'EXIBICAO_EM_SEGUNDOS'|translate}}</label>
+                        <input id="segundos" type="number" min="0"  formControlName="segundos" class="input-tempo" pInputText>                         
                     </span>
                 </div>
                 <app-panel-agendamento-conteudo #panelAgendamento>

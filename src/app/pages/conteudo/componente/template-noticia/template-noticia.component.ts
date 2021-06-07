@@ -36,8 +36,8 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
 
   public form:FormGroup = new FormGroup({
     filtroAssuntos:new FormControl(''),
-    minutos:new FormControl(0),
-    segundos:new FormControl(30)
+    assunto:new FormControl(),
+    segundos:new FormControl(10)
   }) 
   public fontes: TreeNode[];
   public selectedFontes:TreeNode[];
@@ -47,6 +47,7 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
   public conteudo:Conteudo;
   public idTipoConteudo:number;
   public clonar:boolean = false;
+  public assuntos:string[] = [];
 
   constructor(public msgService:MessageService, private conteudoService:ConteudoService, private fonteService:FonteNoticiaService,
     private editoriaService:NoticiaEditoriaService, private conteudoFonteService:ConteudoFonteNoticiaService, public translateService:TranslateService,
@@ -64,11 +65,9 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
             if (conteudo.filtro != null){
               this.filtro = conteudo.filtro;
               this.form.controls['filtroAssuntos'].setValue(conteudo.filtro.assuntos);
+              this.assuntos = conteudo.filtro.assuntos.split(',');
             }
-            let min = (conteudo.tempoExibicao / 60).toFixed(0);
-            let segundos = (conteudo.tempoExibicao % 60);
-            this.form.controls['minutos'].setValue(min);
-            this.form.controls['segundos'].setValue(segundos);
+            this.form.controls['segundos'].setValue(conteudo.tempoExibicao);
             if (conteudo.fontes != null){
               this.conteudoNoticias = conteudo.fontes;
               this.montarTree();
@@ -143,11 +142,13 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
   }
 
   public novo(){
-    this.form.reset({minutos:0,segundos:15});
+    this.form.reset({segundos:1});
     this.conteudo = null;
     for (let w = 0;w < this.conteudoNoticias.length;w++){
       this.conteudoNoticias[w].editoriasSelecionado = [];
     }
+    this.assuntos = [];
+    this.selectedFontes = [];
   }
   
   public salvar(){    
@@ -181,17 +182,16 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
     this.conteudo.titulo = titulos.join(',');
     this.conteudo.idTipoConteudo = this.idTipoConteudo;
     let segundos = this.form.controls['segundos'].value;
-    segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tipo = ETipoConteudo.Noticias;    
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = null;
     this.conteudo.idArquivo = null;
     this.conteudo.fontes = fontes;
-    if (this.form.controls['filtroAssuntos'].value != null){
+    if (this.assuntos.length > 0){
       if (this.filtro == null){
         this.filtro = new ConteudoFiltro();
       }
-      this.filtro.assuntos = this.form.controls['filtroAssuntos'].value;
+      this.filtro.assuntos = this.assuntos.join(',');
       this.conteudo.filtro = this.filtro;
     }else {
       this.conteudo.filtro = null;
@@ -207,6 +207,15 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
     })
   }
 
+  public adicionarAssunto(){
+    this.assuntos.push(this.form.controls['assunto'].value);
+    this.form.controls['assunto'].reset();
+  }
+
+  public removerAssunto(assunto:string){
+    let index = this.assuntos.indexOf(assunto);
+    this.assuntos.splice(index,1);
+  }
   public publicar(){
 
   }

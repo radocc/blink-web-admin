@@ -26,6 +26,7 @@ export class PageCadastroComponent implements OnInit {
   @Input() translateParams: any[];
   @Input() mostraVoltar: boolean = true;
   @Output("save") onSave:EventEmitter<any> = new EventEmitter();
+  @Output("novo") onNovo:EventEmitter<any> = new EventEmitter();
   @Input("actions") actions: boolean = true;
   public _disabledSalvar:boolean = false;
 
@@ -71,8 +72,12 @@ export class PageCadastroComponent implements OnInit {
   }
 
   public novo() {
-    if (this.form != null)
+    if (this.form != null){
       this.form.reset();
+    }
+    if (this.onNovo != null){
+      this.onNovo.emit();
+    }    
   }
 
   public showSuccessMsg(msg: string) {

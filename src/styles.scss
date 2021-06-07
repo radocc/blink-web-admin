@@ -193,6 +193,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: flex;
     flex-direction: column;
 }
+.rd-block{
+    display: block;
+}
 .rd-flex{
     flex: 1;
 }

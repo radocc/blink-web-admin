@@ -2,16 +2,14 @@
     <!-- <div class="rd-row rd-flex rd-gap"> -->
         <div class="rd-flex-auto p-mb-2 p-col-6 pesquisa">
             <div class="p-d-flex p-jc-end ">
-                <span class="p-float-label field-busca">
-                    <input id="float-input" type="text" pInputText> 
-                    <label for="float-input" >{{'BUSCAR'|translate}}</label>
+                <span class="field-busca">
+                    <input id="float-input" [(ngModel)]="textoPesquisa" placeholder="{{'BUSCAR'|translate}}" type="text" pInputText (keyup.enter)="pesquisar()"> 
                 </span>
             </div>
             <div class="p-d-flex p-flex-row pesquisa-content ">
                 <div class="div-menu p-col-3 p-d-flex p-flex-column">
-                    <span class="p-float-label">
-                        <input id="pesquisaTipo" class="rd-w-100" [(ngModel)]="pesquisaTipo" (ngModelChange)="pesquisarTipo($event)" type="text" pInputText> 
-                        <label for="pesquisaTipo" translate>OPCOES</label>
+                    <span class="">
+                        <input id="pesquisaTipo" placeholder="{{'OPCOES'|translate}}" class="rd-w-100" [(ngModel)]="pesquisaTipo" (ngModelChange)="pesquisarTipo($event)" type="text" pInputText> 
                     </span>
                     <div class="lista-opcoes">
                         <div *ngFor="let item of tiposConteudos">

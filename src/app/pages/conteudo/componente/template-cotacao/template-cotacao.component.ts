@@ -33,8 +33,7 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
 
   public form:FormGroup = new FormGroup({
     titulo:new FormControl('', Validators.required),    
-    minutos:new FormControl(),
-    segundos:new FormControl(),
+    segundos:new FormControl(10),
     template:new FormControl()
   }) 
   
@@ -66,10 +65,7 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
       this.conteudo = conteudo;
       if (conteudo != null){
         this.form.controls['titulo'].setValue(conteudo.titulo);
-        let min = (conteudo.tempoExibicao / 60).toFixed(0);
-        let segundos = (conteudo.tempoExibicao % 60);
-        this.form.controls['minutos'].setValue(min);
-        this.form.controls['segundos'].setValue(segundos);
+        this.form.controls['segundos'].setValue(conteudo.tempoExibicao);
         this.form.controls['template'].setValue(conteudo.template);
         this.campos = conteudo.campos;
         this.panelAgendamento.setAgendamento(conteudo.agendamento);
@@ -109,7 +105,7 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
   }  
   
   public novo(){
-    this.form.reset({minutos:0,segundos:15});
+    this.form.reset({segundos:10});
     this.conteudo = null;
     this.campos = [];
   }
@@ -125,7 +121,6 @@ export class TemplateCotacaoComponent extends CadConteudoComponent implements On
     this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = ETipoConteudo.Cotacao;//Cotações
     let segundos = this.form.controls['segundos'].value;
-    segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.tipo = 1;
     this.conteudo.idTemplate = this.form.controls['template'].value.id;

@@ -1,9 +1,10 @@
 <!-- <p-card header="Cadastro de template"> -->
 <app-pagecadastro [config]="{titulo: 'Cadastro de template'}" class="p-d-flex p-flex-column" (save)="salvar()">
-    <form class="p-fluid p-formgrid p-grid">
+    <form [formGroup]="form" class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-9">
             <label for="txtNome">{{'Nome' | translate}}</label>
-            <input type="text" id="txtNome" pInputText [(ngModel)]="template.nome" [ngModelOptions]="{standalone: true}">
+            <input type="text" id="txtNome" pInputText formControlName="nome">
+            <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
         </div>
         <div class="p-field-checkbox p-col-3 p-mt-4">
             <p-checkbox [binary]="true" inputId="chkTodos" [(ngModel)]="template.todasEmpresas" [ngModelOptions]="{standalone: true}"></p-checkbox>
@@ -61,9 +62,9 @@
                 <span>{{'ADICIONAR_CAMPO' | translate}}</span>
             </button>
         </div>
-        <p-accordion class="p-col-12">
+        <p-accordion #accordion class="p-col-12">
             <p-accordionTab *ngFor="let campo of camposAdicionais" [selected]="this.campoSelecionado?.hash == campo?.hash" (selectedChange)="selecionarCampo($event, campo)">
-                <ng-template class="p-d-flex" pTemplate="header">
+                <ng-template class="p-d-flex"  pTemplate="header">
                     <div class="rd-w-100 rd-row">
                         <div class="rd-flex p-m-auto">
                             {{campo.nome ? campo.nome : 'Campo'}}&nbsp;{{ campo.indice != null ? campo.indice: ''}}
@@ -82,7 +83,15 @@
                             </div>
                             <div class="p-field p-col-4" *ngIf="campo.cadastro">
                                 <label for="txtCampoTipo">{{'VARIAVEL' | translate}}</label>
-                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}">
+                                    <ng-template let-tipo pTemplate="selectedItem">
+                                        <div>{{tipo.nome|translate}}</div>
+                                    </ng-template>
+                                    <ng-template let-tipo pTemplate="item">
+                                        <div>{{tipo.nome|translate}}</div>
+                                    </ng-template>
+
+                                </p-dropdown>
                             </div>
                             <div class="p-field p-col-2" *ngIf="campo.cadastro">
                                 <label for="txtCampoIndice">{{'INDICE' | translate}}</label>
@@ -94,13 +103,17 @@
                             </div>
                         </div>
                         <div class="p-d-flex">
-                            <div class="p-field p-col-8" *ngIf="!campo.preenchimento || (campo.preenchimento && campo.variavel == 'variavelCustomizado')">
+                            <div class="p-field p-col-4" *ngIf="!campo.preenchimento || (campo.preenchimento && campo.variavel == 'variavelCustomizado')">
                                 <label for="txtCampoNome">{{'NOME' | translate}}</label>
                                 <input type="text" id="txtCampoNome" pInputText [(ngModel)]="campo.nome" [ngModelOptions]="{standalone: true}">
                             </div>
                             <div class="p-field" [ngClass]="{'p-col-12' : (campo.preenchimento && campo.variavel != 'variavelCustomizado'), 'p-col-4' : !campo.preenchimento || (campo.preenchimento && campo.variavel == 'variavelCustomizado')}">
                                 <label for="txtCampoTipo">{{'TIPO' | translate}}</label>
                                 <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            </div>
+                            <div class="p-field p-col-4" >
+                                <label for="txtCampoFormato">{{'FORMATO' | translate}}</label>
+                                <input type="text" id="txtCampoFormato" pInputText [(ngModel)]="campo.valorFormato" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                         <div class="p-d-flex">

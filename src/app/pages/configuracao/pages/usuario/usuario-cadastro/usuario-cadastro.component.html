@@ -9,33 +9,25 @@
                             <input id="nome" required formControlName="nome" type="text" pInputText>
                             <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                         </div>
-                        <div class="rd-row rd-flex">
-                            <div class="p-field rd-col p-mr-2 rd-flex">
-                                <label for="cnpj" translate>CPF/CNPJ</label>
-                                <input id="cnpj" required formControlName="cnpj" type="text" pInputText>
-                                <small id="cnpj" *ngIf="form.controls['cnpj'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                            </div> 
-                            <div class="p-field rd-col p-mr-2 rd-flex">
-                                <label for="login" translate>LOGIN</label>
-                                <input id="login" required formControlName="login" type="text" pInputText>
-                                <small id="login" *ngIf="form.controls['login'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
-                            </div>
-                        </div>
                         <div class="p-field rd-col">
                             <label for="email" translate>EMAIL</label>
-                            <input id="email" required formControlName="email" type="email" pInputText>
+                            <input id="email" required formControlName="email" (blur)="validarEmail()" type="email" pInputText>
                             <small id="email" *ngIf="form.controls['email'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                            <small id="email" *ngIf="form.controls['email'].errors?.jaExiste" class="p-error">{{'JA_EXISTE_UM_USUARIO_COM_ESTE_EMAIL'|translate}}</small>
                         </div>
                         <div class="rd-row rd-flex">
                             <div class="p-field rd-col p-mr-2 rd-flex">
                                 <label for="senha" translate>SENHA</label>
-                                <input id="senha" required formControlName="senha" type="password" pInputText>
+                                 <p-password required formControlName="senha" weakLabel="Muito Fácil" mediumLabel="Boa" strongLabel="Excelente"
+                                 promptLabel="Informe a senha"></p-password>
                                 <small id="senha" *ngIf="form.controls['senha'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                             </div> 
                             <div class="p-field rd-col p-mr-2 rd-flex">
                                 <label for="confirmeSenha" translate>CONFIRME_A_SENHA</label>
                                 <input id="confirmeSenha" required formControlName="confirmeSenha" type="password" pInputText>
                                 <small id="confirmeSenha" *ngIf="form.controls['confirmeSenha'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                                <small id="confirmeSenha" *ngIf="form.controls['confirmeSenha'].errors?.equalTo" class="p-error">{{'SENHA_NAO_CONFERE'|translate}}</small>
+                                
                             </div>
                         </div>
                         <div class="p-field rd-col rd-flex">

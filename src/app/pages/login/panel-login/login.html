@@ -10,6 +10,9 @@
             <div class="p-field rd-col">
                 <label for="f-user">{{'SENHA'|translate}}</label>
                 <input id="f-user" formControlName="senha" (keydown)="keyDownFunction($event)" type="password" pInputText> 
+                <small id="senha-invalid" *ngIf="form.controls['senha'].errors?.erro" class="p-error">
+                    {{form.controls['senha'].errors?.erro}}
+                </small>
             </div>
             <div class="rd-txt-center ">
                 <button pButton  type="button"  (click)="entrar()" label="{{'ENTRAR'|translate}}" ></button>

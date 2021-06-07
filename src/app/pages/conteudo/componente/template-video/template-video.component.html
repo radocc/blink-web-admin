@@ -1,7 +1,8 @@
 <app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_VIDEO', btnNovo: 'NOVO_CONTEUDO'}" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
     <ng-template #content>
+        <p-messages></p-messages>
         <form [formGroup]="form">
-            <div class="rd-flex rd-col ">
+            <div class="rd-flex rd-col div-form">
                 <div class="p-field rd-col">
                     <label for="titulo" translate>TITULO</label>
                     <input id="titulo" required formControlName="titulo" [ngClass]="{'ng-invalid':form.controls['titulo'].invalid}" type="text" pInputText>                     
@@ -9,7 +10,7 @@
                 </div> 
                 <div class="p-field rd-row">
                     <p-fileUpload #fileUpload mode="basic" maxFileSize="9999999999" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
-                    name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" accept=".mov,.mp3,.mkv,.mp4"
+                    name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" accept=".mov,.mp3,.mkv,.mp4,.avi"
                     invalidFileSizeMessageSummary="{0}:Invalido o tamanho do arquivo!" 
                     invalidFileSizeMessageDetail="O tamanho máximo do arquivo é {0}"></p-fileUpload>                    
                     <div class="rd-flex arquivo">{{arquivo?.nome}}</div>

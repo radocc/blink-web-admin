@@ -4,7 +4,8 @@ export class VariaveisTipo {
             {nome: 'TITULO', campo: 'titulo'},
             {nome: 'DESCRICAO', campo: 'descricao'},
             {nome: 'LINK', campo: 'link'},
-            {nome: 'DATA_PUBLICACAO', campo: 'datapublicacao'}
+            {nome: 'DATA_PUBLICACAO', campo: 'datapublicacao'},
+            {nome: 'URL_DA_IMAGEM', campo: 'url'}
         ],
         'previsao': [
             {nome: 'CIDADE', campo: 'cidade'},

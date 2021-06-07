@@ -29,8 +29,7 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
   @ViewChild("fileUpload") public fileUpload:FileUpload;
   public form:FormGroup = new FormGroup({
     titulo:new FormControl('', Validators.required),    
-    minutos:new FormControl(0),
-    segundos:new FormControl(20),
+    segundos:new FormControl(10),
   }) 
   
   public arquivo:Arquivo;
@@ -59,10 +58,7 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
       this.conteudo = conteudo;
       if (conteudo != null){
         this.form.controls['titulo'].setValue(conteudo.titulo);
-        let min = (conteudo.tempoExibicao / 60).toFixed(0);
-        let segundos = (conteudo.tempoExibicao % 60);
-        this.form.controls['minutos'].setValue(min);
-        this.form.controls['segundos'].setValue(segundos);
+        this.form.controls['segundos'].setValue(conteudo.tempoExibicao);
         this.arquivo = conteudo.arquivo;
         let file = new File([], this.arquivo.nome);
         this.files = [file ];
@@ -93,7 +89,6 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
     this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = this.idTipoConteudo; 
     let segundos = this.form.controls['segundos'].value;
-    segundos += (this.form.controls['minutos'].value * 60);
     this.conteudo.tempoExibicao = segundos;
     this.conteudo.idTemplate = null;
     this.conteudo.tipo = ETipoConteudo.Imagens;
@@ -123,7 +118,7 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
   }
 
   public novo(){
-    this.form.reset({minutos:0,segundos:15});
+    this.form.reset({segundos:10});
     this.arquivo = null;
     this.conteudo = null;
     this.panelAgendamento.reset();

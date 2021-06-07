@@ -99,7 +99,11 @@ export class ConteudoDisplayComponent implements OnInit {
             campo.valor = this.previsaoTempo.cidade.nome;
             break;
           case 'data':
-            campo.valor = this.previsaoTempo.dataPrevisao;
+            if (campo.valorFormato != null){
+              campo.valor = this.datePipe.transform(this.previsaoTempo.dataPrevisao,campo.valorFormato);
+            }else{
+              campo.valor = this.datePipe.transform(this.previsaoTempo.dataPrevisao,'dd/MM/yyyy');
+            }
             break;
           case 'descricao':
               campo.valor = vetorPrevisao[campo.indice].descricao;
@@ -123,7 +127,11 @@ export class ConteudoDisplayComponent implements OnInit {
       }else if (this.conteudoLoteria != null){
         switch (campo.variavel){
           case 'dataSorteio':
-            campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataSorteio,'dd/MM/yyyy');
+            if (campo.valorFormato !=  null){
+              campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataSorteio,campo.valorFormato);
+            }else {
+              campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataSorteio,'dd/MM/yyyy');
+            }
             break;
           case 'codigoSorteio':
             campo.valor = this.conteudoLoteria.resultado.codigoSorteio;
@@ -135,7 +143,11 @@ export class ConteudoDisplayComponent implements OnInit {
               campo.valor = this.conteudoLoteria.resultado.numeros2;
               break;
           case 'dataProximoSorteio':
-            campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataProximoSorteio,'dd/MM/yyyy');
+            if (campo.valorFormato != null){
+              campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataProximoSorteio,campo.valorFormato);
+            }else{
+              campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataProximoSorteio,'dd/MM/yyyy');
+            }
             break;
           case 'valorProximoSorteio':
             campo.valor = this.currencyPipe.transform(this.conteudoLoteria.resultado.valorProximoSorteio,'BRL');
@@ -149,11 +161,17 @@ export class ConteudoDisplayComponent implements OnInit {
             case 'descricao':
               campo.valor = this.noticia.descricao;
               break;
-            case 'url':
+            case 'link':
               campo.valor = this.noticia.link;
+            case 'url':
+              campo.valor = this.noticia.url;
               break;
             case 'datapublicacao':
-              campo.valor = this.datePipe.transform(this.noticia.dataPublicado,'dd/MM/yyyy');
+              if (campo.valorFormato != null){
+                campo.valor = this.datePipe.transform(this.noticia.dataPublicado,campo.valorFormato);
+              }else{
+                campo.valor = this.datePipe.transform(this.noticia.dataPublicado,'dd/MM/yyyy');
+              }              
               break;
         }
       }

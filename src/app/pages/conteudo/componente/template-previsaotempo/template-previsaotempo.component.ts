@@ -62,10 +62,7 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
             this.previsao = conteudo.conteudoPrevisaoTempo;
             this.form.controls['cidade'].setValue(this.previsao.cidade)
             this.form.controls['template'].setValue(this.conteudo.template);
-            let min = (conteudo.tempoExibicao / 60).toFixed(0);
-            let segundos = (conteudo.tempoExibicao % 60);
-            this.form.controls['minutos'].setValue(min);
-            this.form.controls['segundos'].setValue(segundos);
+            this.form.controls['segundos'].setValue(this.conteudo.tempoExibicao);
             if (this.conteudo.agendamento != null){
               this.panelAgendamento.setAgendamento(this.conteudo.agendamento);
             }else{
@@ -105,9 +102,8 @@ export class TemplatePrevisaoTempoComponent extends CadConteudoComponent impleme
     this.conteudo.conteudoPrevisaoTempo = this.previsao;
     this.conteudo.idTipoConteudo = this.idTipoConteudo;
     let segundos = this.form.controls['segundos'].value;
-    segundos += (this.form.controls['minutos'].value * 60);
-    this.conteudo.tipo = ETipoConteudo.PrevisaoTempo;
     this.conteudo.tempoExibicao = segundos;
+    this.conteudo.tipo = ETipoConteudo.PrevisaoTempo;    
     this.conteudo.idTemplate = this.form.controls['template'].value.id;
     this.conteudo.template = this.form.controls['template'].value;
     this.conteudo.idArquivo = null;  

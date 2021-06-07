@@ -27,12 +27,14 @@ import { LicencaService } from '@radoccservices/base/licenca-service';
 import { NovoAmbiente } from '@radoccmodels/request/novo-ambiente';
 import { EventBrokerService } from 'ng-event-broker';
 import { MenuItem } from 'primeng/api';
+import { UsuarioService } from '@radoccservices/base/usuario-service';
 
 @Component({
     selector: 'app-ambientenovo-cadastro',
     templateUrl: './ambientenovo-cadastro.component.html',
     styleUrls: ['./ambientenovo-cadastro.component.scss'],
-    providers: [EmpresaService, EstadoService, CidadeService, IdiomaService, PlanoService, PeriodoService, LicencaService, AdicionalService]
+    providers: [EmpresaService, EstadoService, CidadeService, IdiomaService, PlanoService, PeriodoService, LicencaService, AdicionalService,
+    UsuarioService]
 })
 export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
     public config: {
@@ -78,6 +80,7 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         public estadoService: EstadoService,
         public cidadeService: CidadeService,
         private router: Router,
+        private usuarioService:UsuarioService,
         private fb: FormBuilder, public eventService: EventBrokerService,
         public idiomaService: IdiomaService,
         private periodoService: PeriodoService, private adicionalService: AdicionalService,
@@ -143,14 +146,10 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
             razaoSocialUsuario: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(200)])],
             email: [null, Validators.compose([Validators.required, CustomValidators.email])],
             fantasiaUsuario: [null],
-            login: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50)])],
-            cnpjUsuario: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
             celularUsuario: [null],
             telefoneUsuario: [null],
             senha: senha,
             confirmeSenha: confirmeSenha,
-            idioma: [null, Validators.required],
-
             // EMPRESA
             razaoSocial: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(150)])],
             cnpjEmpresa: [null, Validators.required],
@@ -197,9 +196,7 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         this.form.controls['cep'].valueChanges.subscribe((value) => {
             this.buscarCep(value);
         })
-        this.form.controls['cnpjUsuario'].valueChanges.subscribe((value) => {
-            //this.validarMascara(value);
-        });
+        
         this.form.controls['numeroUsuario'].valueChanges.subscribe((value) => {
             this.calcularTotal();
         });
@@ -229,9 +226,18 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
     }
 
     public blurFocusEmailUsuario() {
-        if (this.form.controls['login'].value == null || this.form.controls['login'].value == '') {
-            this.form.controls['login'].setValue(this.form.controls['email'].value);
-        }
+            let idUsuario = -1
+            if ( this.usuario != null){
+              idUsuario = this.usuario.id;
+            }
+            let email = this.form.controls['email'].value;
+            this.usuarioService.existeEmail(email, idUsuario).subscribe((res)=>{
+              if (res){
+                this.form.controls['email'].setErrors({ 'jaExiste':true});
+              }else{
+                this.form.controls['email'].setErrors(null);
+              }
+            })
     }
 
     public montarEmpresa() {
@@ -253,16 +259,13 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
     public montarUsuario() {
         this.usuario.razaoSocial = this.form.controls['razaoSocialUsuario'].value;
         this.usuario.fantasia = this.form.controls['fantasiaUsuario'].value;
-        this.usuario.cnpj = this.form.controls['cnpjUsuario'].value;
+        this.usuario.cnpj = '0';
         this.usuario.email = this.form.controls['email'].value;
         this.usuario.celular = this.form.controls['celularUsuario'].value;
         this.usuario.senha = this.form.controls['senha'].value;
-        this.usuario.login = this.form.controls['login'].value;
+        this.usuario.login = this.form.controls['email'].value;
         this.usuario.telefone = this.form.controls['telefoneUsuario'].value;
-        if (this.form.controls['idioma'].value != null) {
-            this.usuario.idIdioma = this.form.controls['idioma'].value.id;
-        }
-
+        this.usuario.idIdioma = 1;
     }
 
     public montarLicenca() {

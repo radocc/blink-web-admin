@@ -1,24 +1,31 @@
 <app-pagecadastro-conteudo [content]="content" [config]="{titulo: 'CADASTRO_NOTICIA', btnNovo: 'NOVO_CONTEUDO'}" (novo)="novo()" (preview)="preview()" (salvar)="salvar()" (publicar)="publicar()">
     <ng-template #content>
+        <p-messages></p-messages>
         <form [formGroup]="form" class="rd-flex rd-col">
-            <div class="rd-flex rd-col ">
+            <div class="rd-flex rd-col div-form">
                 <div class="rd-flex p-field rd-row rd-gap-8">
                     <p-tree [value]="fontes" selectionMode="checkbox" [(selection)]="selectedFontes"
                             (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
                 </div>
-                <div class="p-field rd-col">
+                <div class="p-field rd-col p-input-icon-right">
                     <label for="titulo" translate>FILTROS</label>
-                    <input id="titulo" formControlName="filtroAssuntos" type="text" pInputText>                     
+                    <input id="titulo" class="p-inputtext-sm" formControlName="assunto" type="text" pInputText (keyup.enter)="adicionarAssunto()">
+                    <i class="pi pi-plus i-add" (click)="adicionarAssunto()" title="{{'ADICIONAR'|translate}}"></i>                    
                 </div>
-                <div class="tempo rd-row rd-gap">
-                    <label class="label-field">Tempo de exibição</label>
+                <div class="p-field rd-block" *ngIf="assuntos.length > 0">
+                    <p-tag styleClass="p-mr-8"  *ngFor="let a of assuntos" [rounded]="true"> 
+                        <div class="assunto">
+                            {{a}}
+                        </div>
+                        <div (click)="removerAssunto(a)">
+                            <i class="pi pi-trash"></i>
+                        </div>
+                    </p-tag>
+                </div>
+                <div class="tempo rd-row rd-gap">                    
                     <span class=" rd-row">                
-                        <input id="minutos" class="input-tempo" formControlName="minutos" min="0"  type="number" pInputText>                         
-                        <label class="label-field" for="minutos" translate>&nbsp; MINUTOS</label>
-                    </span>
-                    <span class=" rd-row">                
-                        <input id="segundos" type="number" min="0" max="60" formControlName="segundos" class="input-tempo" pInputText>                         
-                        <label class="label-field" for="segundos" translate>&nbsp;SEGUNDOS</label>
+                        <label class="label-field" for="segundos">{{'EXIBICAO_EM_SEGUNDOS'|translate}}</label>
+                        <input id="segundos" type="number" min="0"  formControlName="segundos" class="input-tempo p-inputtext-sm" pInputText>                         
                     </span>
                 </div>
             </div> 

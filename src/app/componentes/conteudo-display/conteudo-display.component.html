@@ -1,10 +1,9 @@
 <div class="content-display rd-col">
-
     <div #imageContainer class="conteiner">
         <div class="panel">
             <div class="content">  
-                <img class="view" *ngIf="conteudoResult?.idTipoConteudo != 1" [src]="conteudoResult?.url">
-                <video class="view" controls autoplay [height]="imageHeight" [muted]="conteudoResult.audio == 1" *ngIf="conteudoResult?.idTipoConteudo == 1"  >
+                <img class="view" *ngIf="conteudoResult?.tipo == 2 || conteudoResult?.tipo == 6" [src]="conteudoResult?.url">
+                <video class="view" controls autoplay [height]="imageHeight" [muted]="conteudoResult.audio == 1" *ngIf="conteudoResult?.tipo == 1"  >
                     <source *ngIf="arquivo" [src]="arquivo?.url" type="video/mp4">
                         Seu navegador não suporta este vídeoe.
                 </video>              

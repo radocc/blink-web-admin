@@ -41,10 +41,9 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   public form:FormGroup = new FormGroup({
     titulo:new FormControl('', Validators.required),    
     template:new FormControl(),
-    minutos:new FormControl(1),
     audio:new FormControl(1),
     tipo:new FormControl(1),
-    segundos:new FormControl(30),
+    segundos:new FormControl(10),
   }) 
   public conteudo:Conteudo;
   public templates:Template[] = [];
@@ -55,6 +54,8 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   public arquivo:Arquivo;
   public files:File[] = [];
   public idTipoConteudo:number;
+  public carregandoArquivo:boolean = false;
+  public progressValue = 0;
   public clonar:boolean = false;
   public tipo:number=3;
   public tipos:{id:number,nome:string}[] = [    
@@ -131,10 +132,15 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   public uploadFile(event){
     if (event.files.length > 0){
       event.progress = 10;
-      this.arquivoService.postFile(event.files[0]).then((res)=>{
+      this.carregandoArquivo = true;
+      let me = this;
+      let fnProgress = (value)=>{
+        me.progressValue = value;
+      };
+      this.arquivoService.postFile(event.files[0], fnProgress).then((res)=>{
         event.progress = 100;
         this.arquivo = res;
-        console.log(res);
+        this.carregandoArquivo = false;
       })
     }    
   }
@@ -144,10 +150,8 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
       this.conteudo = conteudo;
       if (conteudo != null){
         this.form.controls['titulo'].setValue(conteudo.titulo);
-        let min = (conteudo.tempoExibicao / 60).toFixed(0);
-        let segundos = (conteudo.tempoExibicao % 60);
-        this.form.controls['minutos'].setValue(min);
-        this.form.controls['segundos'].setValue(segundos);
+        
+        this.form.controls['segundos'].setValue(conteudo.tempoExibicao);
         this.form.controls['template'].setValue(conteudo.template);
         this.form.controls['tipo'].setValue(conteudo.tipo);
         this.tipo = conteudo.tipo;
@@ -183,7 +187,6 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     this.conteudo.tipo = this.form.controls['tipo'].value;
     if (this.tipo != 1){
       let segundos = this.form.controls['segundos'].value;
-      segundos += (this.form.controls['minutos'].value * 60);
       this.conteudo.tempoExibicao = segundos;
     }else {
       this.conteudo.tempoExibicao = 0;
@@ -216,15 +219,18 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
   }
 
   public novo(){
-    this.form.reset({minutos:0,segundos:15});
-    this.conteudo = null;
-    this.panelAgendamento.reset();
     if (this.fileUploadVideo != null){
       this.fileUploadVideo.clear();
     }
     if (this.fileUploadImagem != null){
       this.fileUploadImagem.clear();
     }
+    this.conteudo = null;
+    this.arquivo = null;
+    this.panelAgendamento.reset();
+    
+    this.carregandoArquivo = false;
+    this.form.reset({segundos:10});
   }
 
   public publicar(){
