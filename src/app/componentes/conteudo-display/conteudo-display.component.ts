@@ -54,12 +54,16 @@ export class ConteudoDisplayComponent implements OnInit {
         this.conteudo = conteudo;
         this.arquivo = conteudo.arquivo;
         this.noticia = conteudo.noticia;
-        this.conteudoResult.url = this.arquivo.url;
+        if (this.arquivo != null){
+          this.conteudoResult.url = this.arquivo.url;
+        }        
         this.template = conteudo.template;
-        this.templateCampoService.getPreenchimentoManualByTemplate(this.template.id).subscribe((lista)=>{
-          this.campos = lista;
-          this.montarCampos();
-        })
+        if (this.template != null){
+          this.templateCampoService.getPreenchimentoManualByTemplate(this.template.id).subscribe((lista)=>{
+            this.campos = lista;
+            this.montarCampos();
+          })
+        }
       })
     }else {
       this.conteudoService.findPreview(this.conteudoResult.id).subscribe((conteudo)=>{
@@ -99,10 +103,10 @@ export class ConteudoDisplayComponent implements OnInit {
             campo.valor = this.previsaoTempo.cidade.nome;
             break;
           case 'data':
-            if (campo.valorFormato != null){
-              campo.valor = this.datePipe.transform(this.previsaoTempo.dataPrevisao,campo.valorFormato);
+            if (campo.valorFormato != null && campo.valorFormato != ''){
+              campo.valor = this.datePipe.transform(vetorPrevisao[campo.indice].data,campo.valorFormato);
             }else{
-              campo.valor = this.datePipe.transform(this.previsaoTempo.dataPrevisao,'dd/MM/yyyy');
+              campo.valor = this.datePipe.transform(vetorPrevisao[campo.indice].data,'dd/MM/yyyy');
             }
             break;
           case 'descricao':
@@ -127,7 +131,7 @@ export class ConteudoDisplayComponent implements OnInit {
       }else if (this.conteudoLoteria != null){
         switch (campo.variavel){
           case 'dataSorteio':
-            if (campo.valorFormato !=  null){
+            if (campo.valorFormato !=  null && campo.valorFormato != ''){
               campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataSorteio,campo.valorFormato);
             }else {
               campo.valor = this.datePipe.transform(this.conteudoLoteria.resultado.dataSorteio,'dd/MM/yyyy');
@@ -167,7 +171,7 @@ export class ConteudoDisplayComponent implements OnInit {
               campo.valor = this.noticia.url;
               break;
             case 'datapublicacao':
-              if (campo.valorFormato != null){
+              if (campo.valorFormato != null && campo.valorFormato != ''){
                 campo.valor = this.datePipe.transform(this.noticia.dataPublicado,campo.valorFormato);
               }else{
                 campo.valor = this.datePipe.transform(this.noticia.dataPublicado,'dd/MM/yyyy');

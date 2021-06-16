@@ -219,21 +219,10 @@
                                 </p-autoComplete>
                                 <small id="plano"
                                     *ngIf="form.controls['plano'].hasError('required') && form.controls['plano'].touched"
-                                    class="p-error">
-                                    {{'CAMPO_OBRIGATORIO'| translate}}</small>
-
+                                    class="p-error"> {{'CAMPO_OBRIGATORIO'| translate}}</small>
                             </div>
-
-                            <div class="p-field p-col">
-                                <label for="valor">{{'VALOR_DO_PLANO' |translate}}</label>
-                                <p-inputNumber formControlName="valor" inputId="valor" mode="currency"
-                                currency="BRL" locale="pt-BR" (blur)="calcularTotal()">
-                                </p-inputNumber>
-                            </div>
-
                             <div class="p-field p-col">
                                 <label for="periodo">{{'PERIODO' |translate}}</label>
-
                                 <p-autoComplete (blur)="validarData()" formControlName="periodo"
                                     [suggestions]="listaPeriodo" (completeMethod)="findPeriodoPorNome($event.query)"
                                     field="descricao" [dropdown]="true">
@@ -246,20 +235,38 @@
                                     class="p-error">
                                     {{'CAMPO_OBRIGATORIO'| translate}}</small>
                             </div>
-
+                            <div class="p-field p-col">
+                                <label for="valor">{{'VALOR_DO_PLANO' |translate}}</label>
+                                <p-inputNumber formControlName="valor" inputId="valor" mode="currency"
+                                currency="BRL" locale="pt-BR" (blur)="calcularTotal()">
+                                </p-inputNumber>
+                            </div>
+                            <div class="p-field p-col">
+                                <label for="valor">{{'VALOR_POR_PLAYER' |translate}}</label>
+                                <p-inputNumber formControlName="valor2" inputId="valor2" mode="currency"
+                                currency="BRL" locale="pt-BR" (blur)="calcularTotal()">
+                                </p-inputNumber>
+                            </div>
+                            
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
                             <div class="p-field p-col">
                                 <label for="numeroUsuario">{{'NUMERO_DE_USUARIOS' |translate}}</label>
                                 <p-inputNumber formControlName="numeroUsuario" mode="decimal" [showButtons]="true"
                                     inputId="numeroUsuario" [min]="1" [max]="100" required>
                                 </p-inputNumber>
-                                <!-- <input autocomplete="off" type="number" formControlName="numeroUsuario"
-                                    (blur)="calcularTotal()" placeholder="{{'NUMERO_USUARIOS' | translate}}" required> -->
                                 <small id="numeroUsuario-error" *ngIf="form.controls['numeroUsuario'].invalid"
                                     class="p-error">{{'CAMPO_OBRIGATORIO'| translate}}</small>
                             </div>
-
+                            <div class="p-field p-col">
+                                <label for="numero2">{{'NUMERO_DE_PLAYERS' |translate}}</label>
+                                <p-inputNumber formControlName="numero2" mode="decimal" [showButtons]="true"
+                                    inputId="numero2" [min]="1" [max]="100" required>
+                                </p-inputNumber>
+                                <small id="numero2-error" *ngIf="form.controls['numero2'].invalid"
+                                    class="p-error">{{'CAMPO_OBRIGATORIO'| translate}}</small>
+                            </div>
                         </div>
-
                         <div class="p-fluid p-formgrid p-grid">
                             <div class="p-field p-col">
                                 <label for="diavencimento">{{'DIA_VENCIMENTO' |translate}}</label>

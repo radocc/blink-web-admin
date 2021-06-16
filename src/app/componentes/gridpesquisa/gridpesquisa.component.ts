@@ -48,7 +48,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
   constructor(private router: Router,public filtroService: FiltroService,private direitoGrupoService: DireitoGrupoService,
     public translate: TranslateService, public zone: NgZone, public fb: FormBuilder, private eventService: EventBrokerService,
-    private msgService:MessageService) {
+    public msgService:MessageService) {
     super(filtroService, zone, fb, translate);
    }
 
@@ -184,12 +184,7 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
       return this.service;
   }
 
-  public alterar() {
-    // if (this.selection) {
-    //     this.translateService.get('FAVOR_SELECIONAR_APENAS_UM_REGISTRO').subscribe(FAVOR_SELECIONAR_APENAS_UM_REGISTRO => {
-    //         // this.showMessage(FAVOR_SELECIONAR_APENAS_UM_REGISTRO, '');
-    //     });
-    // } else 
+  public alterar() { 
     if (this.selection == null) {
         this.translateService.get('FAVOR_SELECIONAR_UM_REGISTRO').subscribe(frase => {
             this.msgService.add(
@@ -239,6 +234,21 @@ export class GridPesquisaComponent extends FiltroPanel implements OnInit {
 
   public novo(){
     this.eventService.publishEvent(Events.novo);
+  }
+
+  public copiar(){
+    if (this.selection == null) {
+      this.translateService.get('FAVOR_SELECIONAR_UM_REGISTRO').subscribe(frase => {
+          this.msgService.add(
+            {
+              severity: 'info',
+              summary: 'Informação',
+              detail: frase
+            });
+      });
+  } else {
+    this.eventService.publishEvent(Events.copiar, {id: this.selection.id});
+  }
   }
 
   public onRowSelect(item) {

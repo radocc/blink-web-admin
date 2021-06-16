@@ -57,7 +57,7 @@ export class TipoConteudoCadastroComponent extends CadForm implements OnInit {
     },
     {
       id:6,
-      nome:'Padrão'
+      nome:'Multimídias'
     }
   ];
 

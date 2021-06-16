@@ -29,7 +29,7 @@ export class Plano extends AbstractEntity {
     public nivel: number;
     public ativo: boolean;
     public valor: number;
-    // public funcionalidadeApliacoes: FuncionalidadeAplicacao[] = [];
+    public valor2: number;
     public valorPorUsuario: boolean;
     public quantidadeUsuarios: number;
     public quantidadeConvidado: number;

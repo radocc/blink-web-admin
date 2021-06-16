@@ -72,25 +72,32 @@ export class PlayerCadastroComponent extends CadForm implements OnInit {
     this.player = player;
     this.form.controls['nome'].setValue(player.nome,{emitEvent:false});
     this.form.controls['observacao'].setValue(player.observacao,{emitEvent:false});    
-    let horaInicio = new Date();
-    let hr = (player.horaInicio+"").split(":")[0];
-    let minutos = (player.horaInicio+"").split(":")[1];
-    horaInicio.setHours(parseInt(hr));
-    horaInicio.setMinutes(parseInt(minutos));
-    this.form.controls['horaInicio'].setValue(horaInicio ,{emitEvent:false});
-
-    let horaFim = new Date();
-    hr = (player.horaFim+"").split(":")[0];
-    minutos = (player.horaFim+"").split(":")[1];
-    horaFim.setHours(parseInt(hr));
-    horaFim.setMinutes(parseInt(minutos));
-    this.form.controls['horaFim'].setValue(horaFim ,{emitEvent:false});
+    if (player.horaInicio != null){
+      let horaInicio = new Date();
+      let hr = (player.horaInicio+"").split(":")[0];
+      let minutos = (player.horaInicio+"").split(":")[1];
+      horaInicio.setHours(parseInt(hr));
+      horaInicio.setMinutes(parseInt(minutos));
+      this.form.controls['horaInicio'].setValue(horaInicio ,{emitEvent:false});
+    }
+    if (player.horaFim != null){
+      let horaFim = new Date();
+      let hr = (player.horaFim+"").split(":")[0];
+      let minutos = (player.horaFim+"").split(":")[1];
+      horaFim.setHours(parseInt(hr));
+      horaFim.setMinutes(parseInt(minutos));
+      this.form.controls['horaFim'].setValue(horaFim ,{emitEvent:false});
+    }
 
     if (player.playerEquipamento != null){
       this.playerEquipamento = player.playerEquipamento;
       this.form.controls['equipamento'].setValue(player.playerEquipamento.equipamento, {emitEvent:false});
       this.form.controls['dataImplantacao'].setValue(new Date(this.playerEquipamento.dataImplantacao), {emitEvent:false});
       // this.form.controls['dataRemocao'].setValue()
+    }else{
+      this.form.controls['equipamento'].setValue(null);
+      this.form.controls['dataImplantacao'].setValue(null);
+      this.form.controls['dataRemocao'].setValue(null);
     }
 
     if (editavel == false){
@@ -117,14 +124,17 @@ export class PlayerCadastroComponent extends CadForm implements OnInit {
     this.player.observacao = this.form.controls['observacao'].value;
     this.player.horaInicio = this.form.controls['horaInicio'].value;    
     this.player.horaFim = this.form.controls['horaFim'].value;
-
-    if (this.playerEquipamento == null){
-      this.playerEquipamento = new PlayerEquipamento();
+    
+    if (this.form.controls['equipamento'].value != null){
+      if (this.playerEquipamento == null){
+        this.playerEquipamento = new PlayerEquipamento();
+      }
+      this.playerEquipamento.equipamento = this.form.controls['equipamento'].value;
+      this.playerEquipamento.dataImplantacao = this.form.controls['dataImplantacao'].value;
+      this.playerEquipamento.dataRemocao = this.form.controls['dataRemocao'].value;
+    }else{
+      this.playerEquipamento = null;
     }
-    this.playerEquipamento.equipamento = this.form.controls['equipamento'].value;
-    this.playerEquipamento.dataImplantacao = this.form.controls['dataImplantacao'].value;
-    this.playerEquipamento.dataRemocao = this.form.controls['dataRemocao'].value;
-
     this.player.playerEquipamento = this.playerEquipamento;
 
     this.playerService.save(this.player).subscribe((player)=>{

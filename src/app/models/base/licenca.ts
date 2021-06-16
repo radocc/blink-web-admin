@@ -39,6 +39,7 @@ export class Licenca extends AbstractEntity{
     public plano:Plano;
     public periodo:Periodo;
     public numeroVendedores:number;
+    public numero2:number;
     public diaVencimento:number;
     public adicionais:Array<FuncionalidadeAdicional> = [];
     public faturas:Array<LicencaFatura> = [];
@@ -47,6 +48,7 @@ export class Licenca extends AbstractEntity{
     public idPlano:number;
     public valorTotal:number;
     public valor:number;
+    public valor2:number;
     public valorAdicional:number;
     public dataFim:Date;
     public dataInicio:Date;

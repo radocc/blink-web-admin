@@ -64,6 +64,55 @@ export class TemplatePesquisaComponent implements OnInit {
   
   public gridPesquisa(grid) {
     this.gridpesquisa = grid;
+    this.gridpesquisa.alterar = () => { 
+      if (this.gridpesquisa.selection == null) {
+          this.gridpesquisa.translateService.get('FAVOR_SELECIONAR_UM_REGISTRO').subscribe(frase => {
+              this.gridpesquisa.msgService.add(
+                {
+                  severity: 'info',
+                  summary: 'Informação',
+                  detail: frase
+                });
+          });
+      } else if (this.gridpesquisa.selection.permiteEditar){
+        this.eventService.publishEvent(Events.editar, {id: this.gridpesquisa.selection.id});
+      }else{
+        this.gridpesquisa.translateService.get('NAO_E_PERMITIDO_EDITAR').subscribe(frase => {
+          this.gridpesquisa.msgService.add(
+            {
+              severity: 'info',
+              summary: 'Informação',
+              detail: frase
+            });
+        });
+      };
+    };
+    this.gridpesquisa.excluir = () => {
+      if (this.gridpesquisa.selection == null) {
+        this.gridpesquisa.translateService.get('FAVOR_SELECIONAR_UM_REGISTRO').subscribe(frase => {
+          this.gridpesquisa.msgService.add(
+            {
+              severity: 'info',
+              summary: 'Informação!',
+              detail: frase
+            });
+          });
+      } else if (this.gridpesquisa.selection.permiteEditar){
+        this.gridpesquisa.getService().remove(this.gridpesquisa.selection.id).subscribe((result)=>{
+          let index = this.gridpesquisa.dataSource.indexOf(this.gridpesquisa.selection);
+          this.gridpesquisa.dataSource.splice(index,1);
+        });
+      }else {
+        this.gridpesquisa.translateService.get('NAO_E_PERMITIDO_EDITAR').subscribe(frase => {
+          this.gridpesquisa.msgService.add(
+            {
+              severity: 'info',
+              summary: 'Informação',
+              detail: frase
+            });
+        });
+      };
+    };      
   }
 
   public buscarTipos(){

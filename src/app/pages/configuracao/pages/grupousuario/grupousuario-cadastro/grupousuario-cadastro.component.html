@@ -15,7 +15,9 @@
                                 <label class="lbl-cor" for="cor" translate>COR</label>
                             </div>
                             <div class="p-field rd-col p-mr-8 rd-flex">
-                                <p-checkbox name="ativo" value="true" label="ATIVO" [(ngModel)]="grupoUsuario.ativo" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                                <p-checkbox name="ativo" label="{{'ATIVO'|translate}}" [binary]="true"
+                                    [formControl]="form.controls['ativo']"></p-checkbox>
+                                <!-- [(ngModel)]="grupoUsuario.ativo" [ngModelOptions]="{standalone: true}" -->
                             </div>
                         </div>
                         <div class="p-field rd-col">

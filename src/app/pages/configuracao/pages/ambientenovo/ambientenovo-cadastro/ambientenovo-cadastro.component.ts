@@ -90,6 +90,9 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
     }
 
     public findCidadePorNomeEIdEstado(nome: string) {
+        if (this.form.controls['estado'].value == null){
+            return;
+        }
         this.cidadeService.findNomeIdEstado(nome, this.form.controls['estado'].value.id).subscribe((lista: Cidade[]) => {
             this.listaCidade = lista;
         });
@@ -170,8 +173,10 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
             plano: [null, Validators.required],
             periodo: [null, Validators.required],
             valor: [{ value: null, disabled: false }],
+            valor2: [{ value: null, disabled: false }],
             valorTotal: [{ value: null, disabled: true }],
             numeroUsuario: [1, Validators.required],
+            numero2: [1, Validators.required],
             diaVencimento: [10, Validators.required],
             dataInicio: [new Date(), Validators.required],
             dataFim: [{ value: null, disabled: true }, Validators.required],
@@ -200,14 +205,21 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
         this.form.controls['numeroUsuario'].valueChanges.subscribe((value) => {
             this.calcularTotal();
         });
+        this.form.controls['numero2'].valueChanges.subscribe((value) => {
+            this.calcularTotal();
+        });
         this.form.controls['plano'].valueChanges.subscribe((plano) => {
             if (typeof plano === 'object' && plano != null) {
                 this.licenca.valor = plano.valor;                
                 this.form.controls['valor'].setValue(plano.valor, {emitEvent:false});
+                this.form.controls['valor2'].setValue(plano.valor2, {emitEvent:false});
             }
             this.calcularTotal();
         });
         this.form.controls['valor'].valueChanges.subscribe((value) => {
+            this.calcularTotal();
+        });
+        this.form.controls['valor2'].valueChanges.subscribe((value) => {
             this.calcularTotal();
         });
 
@@ -524,16 +536,19 @@ export class AmbienteNovoCadastroComponent extends CadForm implements OnInit {
 
     public calcularTotal() {
         this.licenca.valorTotal = 0;
-        this.licenca.valor;
+        this.licenca.valor = 0;
         this.plano = this.form.controls['plano'].value;
         
         this.licenca.valor = this.form.controls['valor'].value;
+        this.licenca.valor2 = this.form.controls['valor2'].value;
         this.licenca.numeroVendedores = this.form.controls['numeroUsuario'].value;
+        this.licenca.numero2 = this.form.controls['numero2'].value;
         this.licenca.valorAdicional = 0;
         this.listaAdicional.forEach(data => {
             if (data.marcado && data.valor != null) this.licenca.valorAdicional += data.valor
         })
-        this.licenca.valorTotal = (this.licenca.valor + this.licenca.valorAdicional) * this.licenca.numeroVendedores;
+        let valor2 = this.licenca.valor2 * this.licenca.numero2;
+        this.licenca.valorTotal = ((this.licenca.valor + this.licenca.valorAdicional) * this.licenca.numeroVendedores) + valor2;
         this.form.controls['valorTotal'].setValue(this.licenca.valorTotal);
         this.form.controls['valor'].setValue(this.licenca.valor, {emitEvent:false});
     }

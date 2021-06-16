@@ -27,12 +27,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { ETipoConteudo } from '@radoccmodels/enum/etipoConteudo';
 import ETextAlinhamento from '@radoccmodels/enum/text-alinhamento-enum';
 import { Accordion } from 'primeng/accordion';
+import { ConfigAmbienteService } from '@radoccservices/configambiente-services';
+import { ConfigAmbiente } from '@radoccmodels/configambiente';
 
 @Component({
   selector: 'app-template-cadastro',
   templateUrl: './template-cadastro.component.html',
   styleUrls: ['./template-cadastro.component.scss'],
-  providers: [ ArquivoService, TemplateService, TipoConteudoService, TemplateCampoService ]
+  providers: [ ArquivoService, TemplateService, TipoConteudoService, TemplateCampoService, ConfigAmbienteService ]
 })
 export class TemplateCadastroComponent extends CadForm implements OnInit {
 
@@ -41,7 +43,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   @ViewChildren(CdkDrag) cdkDrags: QueryList<CdkDrag>;
   @ViewChild("accordion", {static:true}) accordion:Accordion;
 
-  public template: Template;
+  public template: Template = new Template();
   public imageHeight = 400;
   public form: FormGroup;
   public loadImage: boolean = false;
@@ -60,6 +62,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   public variaveisLoteria = VariaveisTipo.map.loteria;
   private subscriptionTipo: Subscription;
   public campoSelecionado: TemplateCampo;
+  public configAmbiente:ConfigAmbiente;
 
   constructor(private fb: FormBuilder,
     private imagemService: ImagemService,
@@ -68,15 +71,18 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     private service: TemplateService,
     private tipoConteudoService: TipoConteudoService,
     public eventService: EventBrokerService,
+    private configService:ConfigAmbienteService,
     private campoService : TemplateCampoService) { 
       super(eventService);
   }
 
   ngOnInit(): void {
-    super.ngOnInit()
     this.form = this.fb.group({
-      nome:new FormControl(null,[Validators.required])
+      nome:new FormControl(null,[Validators.required]),
+      todasEmpresas:new FormControl(true)
     })
+    super.ngOnInit()
+    
     this.route.params.subscribe((param)=>{
       if (param['id']){
         this.buscar(param['id']);
@@ -86,6 +92,10 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     });
 
     this.buscarTiposConteudo();
+    this.configService.getConfig().subscribe((config)=>{
+      this.configAmbiente = config;
+      this.form.controls['todasEmpresas'].setValue(config.criaTemplatePublico);
+    })
   }
 
   ngAfterViewInit(): void {
@@ -108,8 +118,55 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
 
   public novo() {    
     this.clearForm();
+    this.template = new Template();
     this.template.idTipoConteudo = parseInt(localStorage.getItem('configTipoConteudo'));
+    this.form.controls['todasEmpresas'].setValue(this.configAmbiente.criaTemplatePublico);
     this.inputFile.clear();
+  }
+
+  public async copiar(id:number) {
+    this.template = await this.service.findById(id).toPromise();
+    if (this.template != null) {
+      this.arquivo = await this.arquivoService.findById(this.template.idArquivo).toPromise();
+      this.form.controls['nome'].setValue(this.template.nome);
+      this.form.controls['todasEmpresas'].setValue(this.template.todasEmpresas);
+      
+    }      
+    this.camposAdicionais = await this.campoService.getByTemplate(this.template.id)
+      .pipe(
+        map((campos) => {
+          campos.forEach(campo => {
+            campo.hash = uuidv4();
+            campo.preenchimento = !campo.cadastro;
+            campo.id = null;
+            campo.versao = null;
+          });
+          return campos;
+        })
+      )
+      .toPromise();
+    this.template.id = null;
+    this.template.versao = null;
+
+    setTimeout(() => {
+      this.setContainerImageHeight(this.imageContainer.nativeElement);
+      this.camposAdicionais.forEach((campo) => {
+        campo.valor = 'Texto aqui';
+        setTimeout(() => {
+          const drag = document.getElementById(campo.hash);
+          const dragContent: any = drag.getElementsByClassName('drag-content').item(0);
+          campo.width = (Math.round(this.imageContainer.nativeElement.clientWidth) * campo.width) / 100;
+          campo.height = (Math.round(this.imageContainer.nativeElement.clientHeight) * campo.height) / 100;
+
+          dragContent.style.width = campo.width + 'px';
+          dragContent.style.height = campo.height + 'px';
+          this.setTamanhoCampo(campo);
+        }, 300);        
+      });
+      for (let w =0;w < this.camposAdicionais.length;w++){
+        this.accordion.activeIndex = w;
+      }
+    }, 100);
   }
 
   //** Seta a altura para manter a proporção 16:9 */
@@ -133,6 +190,8 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     }
     this.template.idArquivo = this.arquivo.id;
     this.template.campos = this.camposAdicionais;
+    this.template.nome = this.form.controls['nome'].value;
+    this.template.todasEmpresas = this.form.controls['todasEmpresas'].value;
     this.service.save(this.template).subscribe(
       (data) => {
         this.page.showSuccessMsg('Template salvo com sucesso!');
@@ -162,6 +221,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     if (this.template != null) {
       this.arquivo = await this.arquivoService.findById(this.template.idArquivo).toPromise();
       this.form.controls['nome'].setValue(this.template.nome);
+      this.form.controls['todasEmpresas'].setValue(this.template.todasEmpresas);
     }      
     this.camposAdicionais = await this.campoService.getByTemplate(this.template.id)
       .pipe(

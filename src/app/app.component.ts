@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
     this.eventService.registerEvent(Events.atualizarLista);
     this.eventService.registerEvent(Events.editar);
     this.eventService.registerEvent(Events.novo);
+    this.eventService.registerEvent(Events.copiar);
     this.eventService.registerEvent(Events.visualizar);
     this.eventService.registerEvent(Events.configAtualizaTipoTemplate);
     this.translate.setDefaultLang('pt');

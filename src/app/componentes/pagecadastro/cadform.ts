@@ -6,6 +6,7 @@ import { PageCadastroComponent } from "./pagecadastro.component";
 export class CadForm implements OnInit, OnDestroy {
     @ViewChild(PageCadastroComponent, {static: true}) page: PageCadastroComponent;
     private eventEditar:any;
+    private eventCopiar:any;
     private eventVisualizar:any;
     private eventNovo:any;
 
@@ -24,7 +25,9 @@ export class CadForm implements OnInit, OnDestroy {
         this.eventNovo = this.eventService.subscribeEvent(Events.novo).subscribe(() => {
             this.novo();
         });
-
+        this.eventCopiar = this.eventService.subscribeEvent(Events.copiar).subscribe((obj:{id:number})=>{
+            this.copiar(obj.id);            
+        });
         this.page.cancelar = () => {
             this.novo();
         }
@@ -40,12 +43,18 @@ export class CadForm implements OnInit, OnDestroy {
         if (this.eventNovo){
             this.eventNovo.unsubscribe();
         }
-
+        if (this.eventCopiar){
+            this.eventCopiar.unsubscribe();
+        }
     }
 
     public buscar(id:number, editavel:boolean):void{}
     public novo(): void {
         this.page.novo();
     };
+
+    public copiar(id:number):void{
+
+    }
 
 }

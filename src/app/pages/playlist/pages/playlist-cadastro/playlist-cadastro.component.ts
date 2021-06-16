@@ -192,6 +192,7 @@ export class PlaylistCadastroComponent extends CadForm implements OnInit {
     
     this.playlistService.save(this.playlist).subscribe((playlist)=>{
       this.playlist = playlist;
+      this.listaConteudo = playlist.playlistConteudos;
       this.page.showSuccessMsg('SALVO_COM_SUCESSO');
       this.eventService.publishEvent(Events.atualizarLista);
     }, error=>{

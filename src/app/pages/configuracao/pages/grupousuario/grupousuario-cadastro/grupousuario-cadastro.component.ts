@@ -82,7 +82,6 @@ export class GrupoUsuarioCadastroComponent extends CadForm implements OnInit {
     }
     this.grupoUsuario.nome = this.form.controls['nome'].value;
     this.grupoUsuario.cor = this.form.controls['cor'].value;
-    this.grupoUsuario.ativo = this.form.controls['ativo'].value;
     this.grupoUsuario.descricao = this.form.controls['descricao'].value;
     this.grupoUsuarioService.save(this.grupoUsuario).subscribe((grupo)=>{
       this.grupoUsuario = grupo;

@@ -41,6 +41,7 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
     nome:new FormControl('', Validators.required),
     url:new FormControl('', Validators.required),
     codificacao:new FormControl('UTF-8', Validators.required),
+    contentType:new FormControl('text/xml;text/html;application/xhtml+xml;application/json;application/rss+xml;application/xml;', Validators.required),
     template:new FormControl('', Validators.required)
   }) 
   public formEditoria = new FormGroup({
@@ -83,6 +84,7 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
     this.form.controls['url'].setValue(fonte.url,{emitEvent:false});
     this.form.controls['template'].setValue(fonte.template,{emitEvent:false});
     this.form.controls['codificacao'].setValue(fonte.codificacao,{emitEvent:false});
+    this.form.controls['contentType'].setValue(fonte.contentType,{emitEvent:false});
     this.editoriaService.findPorFonte(fonte.id).subscribe((lista)=>{
       this.editorias = lista;
     })
@@ -109,6 +111,7 @@ export class FonteNoticiaCadastroComponent extends CadForm implements OnInit {
     this.fonteNoticia.url = this.form.controls['url'].value;
     this.fonteNoticia.template = this.form.controls['template'].value;
     this.fonteNoticia.codificacao = this.form.controls['codificacao'].value;
+    this.fonteNoticia.contentType = this.form.controls['contentType'].value;
     this.fonteNoticia.editorias = this.editorias;
     this.fonteNoticiaService.save(this.fonteNoticia).subscribe((fonteNoticia)=>{
       this.fonteNoticia = fonteNoticia;

@@ -50,7 +50,7 @@
                                         <small id="dataRemocao" *ngIf="form.controls['dataRemocao'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                                     </div>
                                     <div class="div-btn-trocar" *ngIf="form.controls['dataRemocao'].value != null">
-                                        <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="TROCAR_EQUIPAMENTO" translate (click)="trocarEquipamento($event)"></button>
+                                        <button pButton class="p-mr-2" type="button" icon="pi pi-plus" label="{{'TROCAR_EQUIPAMENTO'|translate}}" translate (click)="trocarEquipamento($event)"></button>
                                     </div>
                                 </div>
                             </p-fieldset>

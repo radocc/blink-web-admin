@@ -1,15 +1,15 @@
 <!-- <p-card header="Cadastro de template"> -->
-<app-pagecadastro [config]="{titulo: 'Cadastro de template'}" class="p-d-flex p-flex-column" (save)="salvar()">
+<app-pagecadastro [config]="{titulo: 'Cadastro de template'}" [form]="form" class="p-d-flex p-flex-column" (save)="salvar()">
     <form [formGroup]="form" class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-9">
+        <div class="p-field p-col-12">
             <label for="txtNome">{{'Nome' | translate}}</label>
             <input type="text" id="txtNome" pInputText formControlName="nome">
             <small id="nome" *ngIf="form.controls['nome'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
         </div>
-        <div class="p-field-checkbox p-col-3 p-mt-4">
+        <!-- <div class="p-field-checkbox p-col-3 p-mt-4">
             <p-checkbox [binary]="true" inputId="chkTodos" [(ngModel)]="template.todasEmpresas" [ngModelOptions]="{standalone: true}"></p-checkbox>
             <label for="chkTodos">{{'Todas as empresas' | translate}}</label>
-        </div>
+        </div> -->
         <div class="p-field p-col-6 p-mt-4">
             <p-fileUpload #fileupload  mode="basic" cancelLabel="CANCELAR" chooseLabel="Adicionar imagem" [auto]="true"  
                 name="filename" customUpload="true" (uploadHandler)="adicionarImagem($event)" ></p-fileUpload>
@@ -82,8 +82,8 @@
                                 <label class="label-nowrap" >{{'PREENCHIMENTO_AUTOMATICO' | translate}}</label>
                             </div>
                             <div class="p-field p-col-4" *ngIf="campo.cadastro">
-                                <label for="txtCampoTipo">{{'VARIAVEL' | translate}}</label>
-                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}">
+                                <label for="{{'txtCampoTipo'+campo.hash}}">{{'VARIAVEL' | translate}}</label>
+                                <p-dropdown id="{{'txtCampoTipo'+campo.hash}}" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}">
                                     <ng-template let-tipo pTemplate="selectedItem">
                                         <div>{{tipo.nome|translate}}</div>
                                     </ng-template>
@@ -94,44 +94,44 @@
                                 </p-dropdown>
                             </div>
                             <div class="p-field p-col-2" *ngIf="campo.cadastro">
-                                <label for="txtCampoIndice">{{'INDICE' | translate}}</label>
-                                <input type="number" id="txtCampoIndice" pInputText [(ngModel)]="campo.indice" [ngModelOptions]="{standalone: true}">
+                                <label for="{{'txtCampoIndice'+campo.hash}}">{{'INDICE' | translate}}</label>
+                                <input type="number" id="{{'txtCampoIndice'+campo.hash}}" pInputText [(ngModel)]="campo.indice" [ngModelOptions]="{standalone: true}">
                             </div>
                             <div class="p-field p-col-4" *ngIf="campo.variavel == 'variavelCustomizado'">
-                                <label for="txtCampoCustomizado">{{'CUSTOMIZE' | translate}}</label>
-                                <input type="text" id="txtCampoCustomizado" pInputText [(ngModel)]="campo.variavelCustomizado" [ngModelOptions]="{standalone: true}">
+                                <label for="{{'txtCampoCustomizado'+campo.hash}}">{{'CUSTOMIZE' | translate}}</label>
+                                <input type="text" id="{{'txtCampoCustomizado'+campo.hash}}" pInputText [(ngModel)]="campo.variavelCustomizado" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                         <div class="p-d-flex">
                             <div class="p-field p-col-4" *ngIf="!campo.preenchimento || (campo.preenchimento && campo.variavel == 'variavelCustomizado')">
-                                <label for="txtCampoNome">{{'NOME' | translate}}</label>
-                                <input type="text" id="txtCampoNome" pInputText [(ngModel)]="campo.nome" [ngModelOptions]="{standalone: true}">
+                                <label for="{{'txtCampoNome'+campo.hash}}">{{'NOME' | translate}}</label>
+                                <input type="text" id="{{'txtCampoNome'+campo.hash}}" pInputText [(ngModel)]="campo.nome" [ngModelOptions]="{standalone: true}">
                             </div>
                             <div class="p-field" [ngClass]="{'p-col-12' : (campo.preenchimento && campo.variavel != 'variavelCustomizado'), 'p-col-4' : !campo.preenchimento || (campo.preenchimento && campo.variavel == 'variavelCustomizado')}">
-                                <label for="txtCampoTipo">{{'TIPO' | translate}}</label>
-                                <p-dropdown id="txtCampoTipo" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <label for="{{'txtCampoTipo'+campo.hash}}">{{'TIPO' | translate}}</label>
+                                <p-dropdown id="{{'txtCampoTipo'+campo.hash}}" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                             <div class="p-field p-col-4" >
-                                <label for="txtCampoFormato">{{'FORMATO' | translate}}</label>
-                                <input type="text" id="txtCampoFormato" pInputText [(ngModel)]="campo.valorFormato" [ngModelOptions]="{standalone: true}">
+                                <label for="{{'txtCampoFormato'+campo.hash}}">{{'FORMATO' | translate}}</label>
+                                <input type="text" id="{{'txtCampoFormato'+campo.hash}}" pInputText [(ngModel)]="campo.valorFormato" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                         <div class="p-d-flex">
                             <div class="p-field p-col-3">
-                                <label for="txtCampoFonte">{{'FONTE' | translate}}</label>
-                                <p-dropdown id="txtCampoFonte" [(ngModel)]="campo.fonte" optionValue="name" [options]="fontes" placeholder="{{'Selecione uma fonte' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <label for="{{'txtCampoFonte'+campo.hash}}">{{'FONTE' | translate}}</label>
+                                <p-dropdown id="{{'txtCampoFonte'+campo.hash}}" [(ngModel)]="campo.fonte" optionValue="name" [options]="fontes" placeholder="{{'Selecione uma fonte' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                             <div class="p-field p-col-3">
-                                <label for="txtCampoEspessura">{{'ESPESSURA' | translate}}</label>
-                                <p-dropdown id="txtCampoEspessura" [(ngModel)]="campo.fonteEspessura" optionValue="value" [options]="espessuras" placeholder="{{'Selecione uma espessura' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <label for="{{'txtCampoEspessura'+campo.hash}}">{{'ESPESSURA' | translate}}</label>
+                                <p-dropdown id="{{'txtCampoEspessura'+campo.hash}}" [(ngModel)]="campo.fonteEspessura" optionValue="value" [options]="espessuras" placeholder="{{'Selecione uma espessura' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                             <div class="p-field p-col-3">
-                                <label for="txtCampoFonteTamanho">{{'TAMANHO' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.fonteTamanho" mode="decimal" [showButtons]="true" inputId="txtCampoFonteTamanho" [min]="0" [max]="100" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label for="{{'txtCampoFonteTamanho'+campo.hash}}">{{'TAMANHO' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.fonteTamanho" mode="decimal" [showButtons]="true" id="{{'txtCampoFonteTamanho'+campo.hash}}" [min]="0" [max]="100" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                             <div class="p-field p-col-3">
-                                <label for="txtCampoAlinhamento">{{'ALINHAMENTO' | translate}}</label>
-                                <p-dropdown id="txtCampoAlinhamento" [(ngModel)]="campo.alinhamento" optionValue="name" [options]="alinhamentos" placeholder="{{'Selecione uma alinhamento' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <label for="{{'txtCampoAlinhamento'+campo.hash}}">{{'ALINHAMENTO' | translate}}</label>
+                                <p-dropdown id="{{'txtCampoAlinhamento'+campo.hash}}" [(ngModel)]="campo.alinhamento" optionValue="name" [options]="alinhamentos" placeholder="{{'Selecione uma alinhamento' | translate}}" editable="true" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>                            
                         </div>
                         <div class="p-d-flex">
@@ -141,30 +141,30 @@
                                     <p-colorPicker [(ngModel)]="campo.fonteCor" [ngModelOptions]="{standalone: true}" format="hex"></p-colorPicker>
                                 </div>
                                 <div class="p-field p-col p-mt-4">
-                                    <input type="text" id="txtCampoFonteCor" pInputText [(ngModel)]="campo.fonteCor" [ngModelOptions]="{standalone: true}">
+                                    <input type="text" id="{{'txtCampoFonteCor'+campo.hash}}" pInputText [(ngModel)]="campo.fonteCor" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
                             <div class="p-field p-col-4">
-                                <label class="label-nowrap" for="txtCampoWidth">{{'LARGURA' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.width" mode="decimal" inputId="txtCampoWidth" (onBlur)="setFieldWidth($event, campo)" [useGrouping]="false" [minFractionDigits]="2" suffix="%"  [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label class="label-nowrap" for="{{'txtCampoWidth'+campo.hash}}">{{'LARGURA' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.width" mode="decimal" id="{{'txtCampoWidth'+campo.hash}}" (onBlur)="setFieldWidth($event, campo)" [useGrouping]="false" [minFractionDigits]="2" suffix="%"  [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                             <div class="p-field p-col-4">
-                                <label class="label-nowrap" for="txtCampoHeight">{{'ALTURA' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.height" mode="decimal" inputId="txtCampoHeight" (onBlur)="setFieldHeight($event, campo)" [useGrouping]="false" [minFractionDigits]="2" suffix="%"  [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label class="label-nowrap" for="{{'txtCampoHeight'+campo.hash}}">{{'ALTURA' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.height" mode="decimal" id="{{'txtCampoHeight'+campo.hash}}" (onBlur)="setFieldHeight($event, campo)" [useGrouping]="false" [minFractionDigits]="2" suffix="%"  [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                         </div>
                         <div class="p-d-flex">                            
                             <div class="p-field p-col-4">
-                                <label class="label-nowrap" for="txtCampoLeft">{{'DISTANCIA_ESQUERDA' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.positionLeft" (keypress)="onKeyPress($event, campo)" (onBlur)="setDistancia(campo)" mode="decimal" inputId="txtCampoLeft" [minFractionDigits]="2" suffix="%" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label class="label-nowrap" for="{{'txtCampoLeft'+campo.hash}}">{{'DISTANCIA_ESQUERDA' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.positionLeft" (keypress)="onKeyPress($event, campo)" (onBlur)="setDistancia(campo)" mode="decimal" id="{{'txtCampoLeft'+campo.hash}}" [minFractionDigits]="2" suffix="%" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                             <div class="p-field p-col-4">
-                                <label class="label-nowrap" for="txtCampoTop">{{'DISTANCIA_TOPO' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.positionTop" (keypress)="onKeyPress($event, campo)" (onBlur)="setDistancia(campo)"  mode="decimal" inputId="txtCampoTop" [minFractionDigits]="2" suffix="%" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label class="label-nowrap" for="{{'txtCampoTop'+campo.hash}}">{{'DISTANCIA_TOPO' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.positionTop" (keypress)="onKeyPress($event, campo)" (onBlur)="setDistancia(campo)"  mode="decimal" id="{{'txtCampoTop'+campo.hash}}" [minFractionDigits]="2" suffix="%" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                             <div class="p-field p-col-4">
-                                <label class="label-nowrap" for="txtCampoAngulo">{{'ANGULO' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.angulo" mode="decimal" inputId="txtCampoAngulo" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label class="label-nowrap" for="{{'txtCampoAngulo'+campo.hash}}">{{'ANGULO' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.angulo" mode="decimal" id="{{'txtCampoAngulo'+campo.hash}}" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                         </div>
                         <!--CAMPOS PARA IMAGEM -->
@@ -174,23 +174,23 @@
                                     name="filename" customUpload="true" (uploadHandler)="campo.file = $event.files[0]" ></p-fileUpload>
                             </div>
                             <div class="p-field p-col-4">
-                                <label for="txtCampoResolucao">{{'RESOLUCAO' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.resolucaoImagem" mode="decimal" inputId="txtCampoResolucao" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label for="{{'txtCampoResolucao'+campo.hash}}">{{'RESOLUCAO' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.resolucaoImagem" mode="decimal" id="{{'txtCampoResolucao'+campo.hash}}" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                             <div class="p-field p-col-4">
-                                <label for="txtCampoFormato">{{'FORMATO' | translate}}</label>
-                                <p-dropdown id="txtCampoFormato" [(ngModel)]="campo.imagemFormato" optionValue="cod" [options]="formatos" placeholder="{{'Selecione o formato' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                                <label for="{{'txtCampoFormato'+campo.hash}}">{{'FORMATO' | translate}}</label>
+                                <p-dropdown id="{{'txtCampoFormato'+campo.hash}}" [(ngModel)]="campo.imagemFormato" optionValue="cod" [options]="formatos" placeholder="{{'Selecione o formato' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>
                         </div>
                         <!--CAMPOS PARA TEXTO -->
                         <div class="p-d-flex" *ngIf="campo.tipo == 1">
                             <div class="p-field p-col-6">
-                                <label for="txtCampoLimite">{{'LIMITE' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.limite" mode="decimal" inputId="txtCampoLimite" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label for="{{'txtCampoLimite'+campo.hash}}">{{'LIMITE' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.limite" mode="decimal" id="{{'txtCampoLimite'+campo.hash}}" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                             <div class="p-field p-col-6">
-                                <label for="txtCampoLinhas">{{'LINHAS' | translate}}</label>
-                                <p-inputNumber [(ngModel)]="campo.numeroLinhas" mode="decimal" inputId="txtCampoLinhas" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                                <label for="{{'txtCampoLinhas'+campo.hash}}">{{'LINHAS' | translate}}</label>
+                                <p-inputNumber [(ngModel)]="campo.numeroLinhas" mode="decimal" id="{{'txtCampoLinhas'+campo.hash}}" [useGrouping]="false" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                             </div>
                         </div>
                     <!-- </div> -->

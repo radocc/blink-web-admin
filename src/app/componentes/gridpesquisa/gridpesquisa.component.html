@@ -58,6 +58,7 @@
                                 <div *ngIf="coluna.tipo.toUpperCase() == 'DECIMAL' || coluna.tipo.toUpperCase() == 'DOUBLE'" translate>{{item[coluna.prop]|currency:coluna.mascara}}</div>
                                 <div *ngIf="coluna.tipo.toUpperCase() == 'BOOLEAN'" translate>{{item[coluna.prop] == true ? 'SIM':'NAO'}}</div>
                                 <div *ngIf="coluna.tipo.toUpperCase() == 'TIMESTAMP'" translate>{{item[coluna.prop] | date: coluna.mascara}}</div>
+                                <div *ngIf="coluna.tipo.toUpperCase() == 'TIME'" translate>{{item[coluna.prop]}}</div>
                             </td>
                         </tr>
                     </ng-template>
