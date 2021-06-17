@@ -106,7 +106,7 @@
                                 <label for="{{'txtCampoNome'+campo.hash}}">{{'NOME' | translate}}</label>
                                 <input type="text" id="{{'txtCampoNome'+campo.hash}}" pInputText [(ngModel)]="campo.nome" [ngModelOptions]="{standalone: true}">
                             </div>
-                            <div class="p-field" [ngClass]="{'p-col-12' : (campo.cadastro && campo.variavel != 'variavelCustomizado'), 'p-col-4' : !campo.cadastro || (campo.cadastro && campo.variavel == 'variavelCustomizado')}">
+                            <div class="p-field" [ngClass]="{'p-col-8' : (campo.cadastro && campo.variavel != 'variavelCustomizado'), 'p-col-4' : !campo.cadastro || (campo.cadastro && campo.variavel == 'variavelCustomizado')}">
                                 <label for="{{'txtCampoTipo'+campo.hash}}">{{'TIPO' | translate}}</label>
                                 <p-dropdown id="{{'txtCampoTipo'+campo.hash}}" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>

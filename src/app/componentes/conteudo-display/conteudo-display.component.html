@@ -2,7 +2,7 @@
     <div #imageContainer class="conteiner">
         <div class="panel">
             <div class="content">  
-                <img class="view" *ngIf="conteudoResult?.tipo == 2 || conteudoResult?.tipo == 4 || conteudoResult?.tipo == 6" [src]="conteudoResult?.url">
+                <img class="view" *ngIf="conteudoResult?.tipo != 1 && conteudoResult?.url != null" [src]="conteudoResult?.url">
                 <video class="view" controls autoplay [height]="imageHeight" [muted]="conteudoResult.audio == 1" *ngIf="conteudoResult?.tipo == 1"  >
                     <source *ngIf="arquivo" [src]="arquivo?.url" type="video/mp4">
                         Seu navegador não suporta este vídeoe.
@@ -10,14 +10,7 @@
                 <div id="campos-container" class="campos-container" *ngIf="campos.length > 0">
                     <div [id]="campo.hash" class="div-campo" *ngFor="let campo of campos">
                         <div [ngSwitch]="campo.tipo" class="drag-content " >
-                            <div *ngSwitchCase="7" [ngStyle]="{
-                                    'font-family': campo.fonte,
-                                    'font-size': campo.fonteTamanho + 'px',
-                                    'text-align':campo.alinhamento,
-                                    'font-weight': campo.fonteEspessura,
-                                    'color': campo.fonteCor
-                            }">{{campo.nome}}</div>
-                            <div *ngSwitchCase="5" [ngStyle]="{
+                            <div *ngSwitchCase="3" [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
                                 'text-align':campo.alinhamento,
@@ -37,7 +30,14 @@
                                 'text-align':campo.alinhamento,
                                 'font-weight': campo.fonteEspessura,
                                 'color': campo.fonteCor
-                            }">{{campo.valor | date:'dd/MM/yyyy'}}</div>
+                            }">{{campo.valor}}</div>
+                            <div *ngSwitchCase="7" [ngStyle]="{
+                                'font-family': campo.fonte,
+                                'font-size': campo.fonteTamanho + 'px',
+                                'text-align':campo.alinhamento,
+                                'font-weight': campo.fonteEspessura,
+                                'color': campo.fonteCor
+                            }">{{campo.nome}}</div>
                             <div *ngSwitchDefault [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
@@ -45,8 +45,7 @@
                                 'font-weight': campo.fonteEspessura,
                                 'color': campo.fonteCor
                             }">{{campo.valor}}</div>
-                        </div>
-                        
+                        </div>                        
                         <div *ngIf="campo.tipo != 7" class="drag-content " >
                             
                         </div>

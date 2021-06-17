@@ -318,10 +318,11 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
       this.setDistancia(campo);
     }
     this.camposAdicionais.push(campo);
-    this.campoSelecionado = campo;
-
+    this.accordion.updateSelectionState();
+    this.campoSelecionado = campo;    
     setTimeout(() => {
       this.setTamanhoCampo(campo);
+      // this.accordion.activeIndex = this.accordion.tabList.length-1;
     }, 300);
   }
 
@@ -418,7 +419,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   }
 
   public changeVariavel(event, campo: TemplateCampo) {
-    if (campo.preenchimento) {
+    if (campo.cadastro) {
       if (campo.variavel == 'variavelCustomizado'){
         campo.nome = '';
         return;
@@ -429,8 +430,9 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
         campo.nome = VariaveisTipo.getNome('previsao', campo.variavel);
       }else if (this.template.idTipoConteudo == ETipoConteudo.Loteria) {
         campo.nome = VariaveisTipo.getNome('loteria', campo.variavel);
-      }
-      
+      }else {
+        campo.nome = campo.variavel;
+      }      
     }
   }
 

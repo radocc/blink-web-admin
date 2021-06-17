@@ -72,6 +72,9 @@ export class ConteudoDisplayComponent implements OnInit {
         this.template = conteudo.template;
         this.previsaoTempo = conteudo.previsaoTempo;
         this.conteudoLoteria = conteudo.conteudoLoteria;
+        if (this.arquivo != null){
+          this.conteudoResult.url = this.arquivo.url;
+        }
         if (this.noticia == null){
           this.noticia = conteudo.noticia;
         }
