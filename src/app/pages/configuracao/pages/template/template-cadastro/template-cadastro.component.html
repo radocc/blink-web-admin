@@ -82,15 +82,14 @@
                                 <label class="label-nowrap" >{{'PREENCHIMENTO_AUTOMATICO' | translate}}</label>
                             </div>
                             <div class="p-field p-col-4" *ngIf="campo.cadastro">
-                                <label for="{{'txtCampoTipo'+campo.hash}}">{{'VARIAVEL' | translate}}</label>
-                                <p-dropdown id="{{'txtCampoTipo'+campo.hash}}" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}">
+                                <label for="{{'txtCampoVariavel'+campo.hash}}">{{'VARIAVEL' | translate}}</label>
+                                <p-dropdown id="{{'txtCampoVariavel'+campo.hash}}" [(ngModel)]="campo.variavel" optionValue="campo" [options]="template.idTipoConteudo == 3 ? variaveisNoticias : template.idTipoConteudo == 6 ? variaveisPrevisoes : template.idTipoConteudo == 5 ? variaveisLoteria : []" placeholder="{{'SELECIONE_UMA_VARIAVEL' | translate}}" optionLabel="nome" (onChange)="changeVariavel($event, campo)" [ngModelOptions]="{standalone: true}">
                                     <ng-template let-tipo pTemplate="selectedItem">
                                         <div>{{tipo.nome|translate}}</div>
                                     </ng-template>
                                     <ng-template let-tipo pTemplate="item">
                                         <div>{{tipo.nome|translate}}</div>
                                     </ng-template>
-
                                 </p-dropdown>
                             </div>
                             <div class="p-field p-col-2" *ngIf="campo.cadastro">
@@ -103,11 +102,11 @@
                             </div>
                         </div>
                         <div class="p-d-flex">
-                            <div class="p-field p-col-4" *ngIf="!campo.preenchimento || (campo.preenchimento && campo.variavel == 'variavelCustomizado')">
+                            <div class="p-field p-col-4" *ngIf="!campo.cadastro || (campo.cadastro && campo.variavel == 'variavelCustomizado')">
                                 <label for="{{'txtCampoNome'+campo.hash}}">{{'NOME' | translate}}</label>
                                 <input type="text" id="{{'txtCampoNome'+campo.hash}}" pInputText [(ngModel)]="campo.nome" [ngModelOptions]="{standalone: true}">
                             </div>
-                            <div class="p-field" [ngClass]="{'p-col-12' : (campo.preenchimento && campo.variavel != 'variavelCustomizado'), 'p-col-4' : !campo.preenchimento || (campo.preenchimento && campo.variavel == 'variavelCustomizado')}">
+                            <div class="p-field" [ngClass]="{'p-col-12' : (campo.cadastro && campo.variavel != 'variavelCustomizado'), 'p-col-4' : !campo.cadastro || (campo.cadastro && campo.variavel == 'variavelCustomizado')}">
                                 <label for="{{'txtCampoTipo'+campo.hash}}">{{'TIPO' | translate}}</label>
                                 <p-dropdown id="{{'txtCampoTipo'+campo.hash}}" [(ngModel)]="campo.tipo" optionValue="cod" [options]="tipos" placeholder="{{'Selecione um tipo' | translate}}" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             </div>

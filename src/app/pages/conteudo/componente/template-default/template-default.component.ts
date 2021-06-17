@@ -119,14 +119,17 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     this.conteudoCampoService.getPreenchimentoManualByConteudoETemplate(idConteudo, template.id).subscribe((lista)=>{
       this.campos = lista;
       if (lista.length > 0){
-            for (let w = 0; w < lista.length;w++){
-              let camp = lista[w];
-              if (camp.valor == null){
-                camp.valor = '';
-              }
-            }
-          } 
-    }) 
+        lista.map((camp)=>{
+          if (camp.tipo == 4 && camp.valor != null){            
+            this.arquivoService.findById(parseInt(camp.valor)).subscribe((arq)=>{
+              camp.arquivo = arq;
+            });
+          }else if (camp.valor == null){
+            camp.valor = '';
+          }
+        }); 
+    }
+    }); 
   }
 
   public uploadFile(event){
@@ -141,6 +144,21 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
         event.progress = 100;
         this.arquivo = res;
         this.carregandoArquivo = false;
+      })
+    }    
+  }
+
+  public uploadFileCampo(event, campo:ConteudoCampo){
+    if (event.files.length > 0){
+      event.progress = 10;
+      let me = this;
+      let fnProgress = (value)=>{
+        me.progressValue = value;
+      };
+      this.arquivoService.postFile(event.files[0], fnProgress).then((res)=>{
+        event.progress = 100;
+        campo.valor = res.id;
+        campo.arquivo = res;
       })
     }    
   }
@@ -164,12 +182,18 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
         if (conteudo.idTemplate != null){
           this.conteudoCampoService.getPreenchimentoManualByConteudoETemplate(conteudo.id,conteudo.idTemplate).subscribe((lista)=>{
             this.campos = lista;
+            this.campos.map((camp)=>{
+              if (camp.tipo == 4 && camp.valor != null){            
+                this.arquivoService.findById(parseInt(camp.valor)).subscribe((arq)=>{
+                  camp.arquivo = arq;
+                });
+              }
+            });
           })
         }
         if (conteudo.agendamento != null){
           this.panelAgendamento.setAgendamento(conteudo.agendamento);
         }
-        
       }
     });
   }

@@ -47,8 +47,14 @@
                     <small id="template" *ngIf="form.controls['template'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
                 </div> 
                 <div class="p-field rd-col" *ngFor="let camp of campos">
-                    <label for="{{'camp'+camp.id}}">{{camp.nome |translate}}</label>
-                    <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
+                    <label for="{{'camp'+camp.id}}">{{camp.nome |translate}}</label>                    
+                    <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" *ngIf="camp.tipo != 4" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
+                    <div *ngIf="camp.tipo == 4" class="p-field p-d-flex p-flex-row">
+                        <p-fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
+                            customUpload="true" (uploadHandler)="uploadFileCampo($event, camp)" 
+                        accept="image/.png,.jpg,.jpeg"></p-fileUpload>
+                        <div class="rd-flex arquivo">{{camp?.arquivo?.nome}}</div>
+                    </div>
                 </div> 
                 <div class="tempo rd-row rd-gap" *ngIf="tipo != 1">                    
                     <span class=" rd-row">                

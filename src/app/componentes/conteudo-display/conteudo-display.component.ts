@@ -103,10 +103,11 @@ export class ConteudoDisplayComponent implements OnInit {
             campo.valor = this.previsaoTempo.cidade.nome;
             break;
           case 'data':
-            if (campo.valorFormato != null && campo.valorFormato != ''){
-              campo.valor = this.datePipe.transform(vetorPrevisao[campo.indice].data,campo.valorFormato);
+            let data = new Date(vetorPrevisao[campo.indice].data);
+            if (campo.valorFormato != null && campo.valorFormato != ''){              
+              campo.valor = this.datePipe.transform(data,campo.valorFormato);
             }else{
-              campo.valor = this.datePipe.transform(vetorPrevisao[campo.indice].data,'dd/MM/yyyy');
+              campo.valor = this.datePipe.transform(data,'dd/MM/yyyy');
             }
             break;
           case 'descricao':
