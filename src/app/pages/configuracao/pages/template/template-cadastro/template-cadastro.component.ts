@@ -79,6 +79,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       nome:new FormControl(null,[Validators.required]),
+      tipoConteudo:new FormControl(null,[Validators.required]),
       todasEmpresas:new FormControl(true)
     })
     super.ngOnInit()
@@ -108,6 +109,7 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
     this.subscriptionTipo = this.eventService.subscribeEvent(Events.configAtualizaTipoTemplate).subscribe((tipo: TipoConteudo) => {
       if (this.template.id == null) {
         this.template.idTipoConteudo = tipo.id;
+        this.template.tipoConteudo = tipo;
       }
     });
   }
@@ -424,11 +426,12 @@ export class TemplateCadastroComponent extends CadForm implements OnInit {
         campo.nome = '';
         return;
       }
-      if (this.template.idTipoConteudo == ETipoConteudo.Noticias) {
+      let tipoConteudo = this.form.controls['tipoConteudo'].value;
+      if (tipoConteudo.tipo == ETipoConteudo.Noticias) {
         campo.nome = VariaveisTipo.getNome('noticia', campo.variavel);
-      } else if (this.template.idTipoConteudo == ETipoConteudo.PrevisaoTempo) {
+      } else if (tipoConteudo.tipo == ETipoConteudo.PrevisaoTempo) {
         campo.nome = VariaveisTipo.getNome('previsao', campo.variavel);
-      }else if (this.template.idTipoConteudo == ETipoConteudo.Loteria) {
+      }else if (tipoConteudo.tipo == ETipoConteudo.Loteria) {
         campo.nome = VariaveisTipo.getNome('loteria', campo.variavel);
       }else {
         campo.nome = campo.variavel;

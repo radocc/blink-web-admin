@@ -48,7 +48,8 @@
                 </div> 
                 <div class="p-field rd-col" *ngFor="let camp of campos">
                     <label for="{{'camp'+camp.id}}">{{camp.nome |translate}}</label>                    
-                    <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" *ngIf="camp.tipo != 4" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
+                    <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" *ngIf="camp.tipo != 4 && camp.tipo != 3 && camp.tipo != 8" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
+                    <p-inputNumber id="{{'camp'+camp.id}}" [(ngModel)]="camp.valor" *ngIf="camp.tipo == 3 || camp.tipo == 8" mode="decimal" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                     <div *ngIf="camp.tipo == 4" class="p-field p-d-flex p-flex-row">
                         <p-fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                             customUpload="true" (uploadHandler)="uploadFileCampo($event, camp)" 

@@ -1,4 +1,4 @@
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { Conteudo } from '@radoccmodels/conteudo';
@@ -18,7 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './conteudo-display.component.html',
   styleUrls: ['./conteudo-display.component.scss'],
   providers:[
-    MessageService,ConteudoService,TemplateCampoService, DatePipe,CurrencyPipe
+    MessageService,ConteudoService,TemplateCampoService, DatePipe,CurrencyPipe, DecimalPipe
   ]
 })
 export class ConteudoDisplayComponent implements OnInit {
@@ -37,7 +37,7 @@ export class ConteudoDisplayComponent implements OnInit {
   public conteudoLoteria:ConteudoLoteria;
   public noticia:Noticia;
   constructor( private msgService:MessageService,private conteudoService:ConteudoService, private templateCampoService:TemplateCampoService,
-    private currencyPipe:CurrencyPipe, private datePipe:DatePipe) {
+    private currencyPipe:CurrencyPipe, private datePipe:DatePipe, private decimalPipe:DecimalPipe) {
     
   }
 
@@ -179,9 +179,19 @@ export class ConteudoDisplayComponent implements OnInit {
                 campo.valor = this.datePipe.transform(this.noticia.dataPublicado,campo.valorFormato);
               }else{
                 campo.valor = this.datePipe.transform(this.noticia.dataPublicado,'dd/MM/yyyy');
-              }              
+              }
               break;
         }
+      }else if (campo.tipo == 3){        
+        campo.valor = this.decimalPipe.transform(campo.valor);
+      }else if (campo.tipo == 5){
+        if (campo.valorFormato != null && campo.valorFormato != ''){
+          campo.valor = this.datePipe.transform(campo.valor,campo.valorFormato);
+        }else{
+          campo.valor = this.datePipe.transform(campo.valor,'dd/MM/yyyy');
+        }
+      }else if (campo.tipo == 8){
+        campo.valor = this.currencyPipe.transform(campo.valor,'BRL');
       }
     });
     setTimeout(() => {

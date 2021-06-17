@@ -2,17 +2,19 @@ class ECampoTipo {
     
     static readonly TEXT = new ECampoTipo('Texto', 1);
     static readonly INTEGER = new ECampoTipo('Inteiro', 2);
-    static readonly DOUBLE = new ECampoTipo('Decimal', 3);
+    static readonly DOUBLE = new ECampoTipo('Decimal', 3);    
     static readonly IMAGE = new ECampoTipo('Imagem', 4);
     static readonly DATE = new ECampoTipo('Data', 5);
     static readonly DATETIME = new ECampoTipo('Data e Hora', 6);
     static readonly LABEL = new ECampoTipo('Label', 7);
+    static readonly MOEDA = new ECampoTipo('Moeda', 8);
 
     static get values(): ECampoTipo[] {
       return [
         this.TEXT,
         this.INTEGER,
         this.DOUBLE,
+        this.MOEDA,
         this.IMAGE,
         this.DATE,
         this.DATETIME,

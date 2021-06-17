@@ -16,7 +16,7 @@
         </div>
         <div class="p-field p-col-6">
             <label for="txtTipoConteudo">{{'TIPO_DE_CONTEUDO' | translate}}</label>
-            <p-dropdown id="txtTipoConteudo" [(ngModel)]="template.idTipoConteudo" optionValue="id" optionLabel="nome" [options]="tiposConteudos" placeholder="{{'SELECIONE_UM_TIPO' | translate}}" [ngModelOptions]="{standalone: true}"></p-dropdown>
+            <p-dropdown id="txtTipoConteudo" [(ngModel)]="template.tipoConteudo" formControlName="tipoConteudo" optionLabel="nome" [options]="tiposConteudos" placeholder="{{'SELECIONE_UM_TIPO' | translate}}"></p-dropdown>
         </div>
 
         <div #imageContainer id="image-container" class="p-d-flex p-ml-2 p-mr-2 image-container" devImage [bgImage]="arquivo?.url" position="left top">

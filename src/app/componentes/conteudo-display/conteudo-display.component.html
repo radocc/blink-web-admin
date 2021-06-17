@@ -9,19 +9,21 @@
                 </video>              
                 <div id="campos-container" class="campos-container" *ngIf="campos.length > 0">
                     <div [id]="campo.hash" class="div-campo" *ngFor="let campo of campos">
-                        <div [ngSwitch]="campo.tipo" class="drag-content " >
+                        <div [ngSwitch]="campo.tipo" class="drag-content " [ngStyle]="{'text-align':campo.alinhamento}">
                             <div *ngSwitchCase="3" [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
                                 'text-align':campo.alinhamento,
                                 'font-weight': campo.fonteEspessura,
                                 'color': campo.fonteCor
-                            }">{{campo.valor | currency:'':'1.2-2'}}</div>
+                            }">{{campo.valor }}</div>
+                            <!-- | number:'1.2-2' -->
                             <img *ngSwitchCase="4" [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
                                 'font-weight': campo.fonteEspessura,
                                 'color': campo. fonteCor,
+                                'text-align':campo.alinhamento,
                                 'width':campo.resolucaoImagem+'px'
                             }" [src]="campo.valor">
                             <div *ngSwitchCase="5" [ngStyle]="{
