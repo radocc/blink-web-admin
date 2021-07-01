@@ -1,15 +1,14 @@
-import { OnDestroy, EventEmitter } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { Events } from './../../../models/enum/events';
 import { EventBrokerService } from 'ng-event-broker';
-import { Loteria } from './../../../models/loteria';
 import { ETipoConteudo } from './../../../models/enum/etipoConteudo';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
-import { Conteudo } from '@radoccmodels/conteudo';
 import { ConteudoResult } from '@radoccmodels/result/conteudoresult';
 import { TipoConteudo } from '@radoccmodels/tipoconteudo';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { TipoConteudoService } from '@radoccservices/tipoconteudo-services';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-panel-conteudo',
@@ -43,13 +42,13 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
   }
 
   public pesquisar(){
-    this.conteudoService.pesquisar(this.textoPesquisa).subscribe((lista)=>{
+    this.conteudoService.pesquisar(this.textoPesquisa).pipe(take(1)).subscribe((lista)=>{
       this.conteudos = lista;
     })
   }
 
   public buscarTipos(){
-    this.tipoConteudoService.findAll().subscribe( (lista) =>{
+    this.tipoConteudoService.findAll().pipe(take(1)).subscribe( (lista) =>{
       this.tiposConteudos = lista;
       if (lista.length> 0){
         this.filtrarTipo(lista[0]);
@@ -58,7 +57,7 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
   }
 
   public pesquisarTipo(nome:string){
-    this.tipoConteudoService.findNome(nome).subscribe((lista)=>{
+    this.tipoConteudoService.findNome(nome).pipe(take(1)).subscribe((lista)=>{
       this.tiposConteudos = lista;
     })
   }
@@ -68,7 +67,7 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
     let url = this.getUrl(tipo);
     // this.conteudoService.
     this.router.navigate([url]);
-    this.conteudoService.filtrarTipo(tipo.id,this.nomeBusca).subscribe((lista)=>{
+    this.conteudoService.filtrarTipo(tipo.id,this.nomeBusca).pipe(take(1)).subscribe((lista)=>{
       this.conteudos = lista;
     })
   }
@@ -122,7 +121,7 @@ export class PanelConteudoComponent implements OnInit, OnDestroy {
   }
 
   public excluirConteudo(conteudo){
-    this.conteudoService.remove(conteudo.id).subscribe((res)=>{
+    this.conteudoService.remove(conteudo.id).pipe(take(1)).subscribe((res)=>{
       let index = this.conteudos.indexOf(conteudo);
       if (index > -1){
         this.conteudos.splice(index,1);

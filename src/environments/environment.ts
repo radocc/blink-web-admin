@@ -4,10 +4,12 @@
 
 export const environment = {
   production: false,
+  // serverHost: 'server.versa.tv',
+  // serverPort: '8080', 
   serverHost: 'developer-tv.radocc.com',
   serverPort: '8468', 
   protocol:'https', 
-  ws:'wss', 
+  ws:'wss' 
 };
 
 /*

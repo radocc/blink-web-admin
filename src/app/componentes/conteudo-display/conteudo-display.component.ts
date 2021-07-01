@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe, DecimalPipe } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Arquivo } from '@radoccmodels/base/arquivo';
 import { Conteudo } from '@radoccmodels/conteudo';
 import { ConteudoLoteria } from '@radoccmodels/conteudoloteria';
@@ -11,6 +11,7 @@ import { TemplateCampo } from '@radoccmodels/templatecampo';
 import { ConteudoService } from '@radoccservices/conteudo-services';
 import { TemplateCampoService } from '@radoccservices/templatecampo-services';
 import { MessageService } from 'primeng/api';
+import { take } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -21,9 +22,21 @@ import { v4 as uuidv4 } from 'uuid';
     MessageService,ConteudoService,TemplateCampoService, DatePipe,CurrencyPipe, DecimalPipe
   ]
 })
-export class ConteudoDisplayComponent implements OnInit {
+export class ConteudoDisplayComponent implements OnInit, OnDestroy {
 
-  @Input("conteudo") public conteudoResult:ConteudoResult;
+  public _conteudoResult: ConteudoResult;
+  @Input("conteudo") public set conteudoResult(conteudo: ConteudoResult) {
+    this.urlVideo = '';
+    this.conteudo = null;
+    this.arquivo = null;
+    this.template = null;
+    this.campos = [];
+    this.previsaoTempo = null;
+    this.conteudoLoteria = null;
+    this.noticia = null;
+    this._conteudoResult = conteudo;
+    this.montarTela();
+  };
   @ViewChild('imageContainer', {static: false}) imageContainer: ElementRef;
   @ViewChild('videoContainer', {static: false}) videoContainer: ElementRef;
   public urlVideo:string;
@@ -41,39 +54,47 @@ export class ConteudoDisplayComponent implements OnInit {
     
   }
 
-  ngOnInit(): void {
-    if (this.conteudoResult.tipo == 4){
-      if (this.conteudoResult.noticia != null){
-        this.noticia = this.conteudoResult.noticia;
+  ngOnDestroy() {
+    console.log('Destroied');
+  }
+
+  ngOnInit(): void {        
+    
+  }
+
+  public montarTela(){
+    if (this._conteudoResult.tipo == 4){
+      if (this._conteudoResult.noticia != null){
+        this.noticia = this._conteudoResult.noticia;
       } 
       let idNoticia = 0;
       if (this.noticia != null){
         idNoticia = this.noticia.id;
       } 
-      this.conteudoService.findPreviewNoticia(this.conteudoResult.id,idNoticia).subscribe((conteudo)=>{
+      this.conteudoService.findPreviewNoticia(this._conteudoResult.id,idNoticia).pipe(take(1)).subscribe((conteudo)=>{
         this.conteudo = conteudo;
         this.arquivo = conteudo.arquivo;
         this.noticia = conteudo.noticia;
         if (this.arquivo != null){
-          this.conteudoResult.url = this.arquivo.url;
+          this._conteudoResult.url = this.arquivo.url;
         }        
         this.template = conteudo.template;
         if (this.template != null){
-          this.templateCampoService.getPreenchimentoManualByTemplate(this.template.id).subscribe((lista)=>{
+          this.templateCampoService.getPreenchimentoManualByTemplate(this.template.id).pipe(take(1)).subscribe((lista)=>{
             this.campos = lista;
             this.montarCampos();
           })
         }
       })
     }else {
-      this.conteudoService.findPreview(this.conteudoResult.id).subscribe((conteudo)=>{
+      this.conteudoService.findPreview(this._conteudoResult.id).pipe(take(1)).subscribe((conteudo)=>{
         this.conteudo = conteudo;
         this.arquivo = conteudo.arquivo;
         this.template = conteudo.template;
         this.previsaoTempo = conteudo.previsaoTempo;
         this.conteudoLoteria = conteudo.conteudoLoteria;
         if (this.arquivo != null){
-          this.conteudoResult.url = this.arquivo.url;
+          this._conteudoResult.url = this.arquivo.url;
         }
         if (this.noticia == null){
           this.noticia = conteudo.noticia;
@@ -81,15 +102,13 @@ export class ConteudoDisplayComponent implements OnInit {
         this.buscarCampos();
       })
     }
-    
-    
   }
 
   public buscarCampos(){
     if (this.template == null){
       return;
     }
-    this.templateCampoService.getPreviewByConteudoTemplate(this.conteudo.id,this.template.id).subscribe((lista)=>{
+    this.templateCampoService.getPreviewByConteudoTemplate(this.conteudo.id,this.template.id).pipe(take(1)).subscribe((lista)=>{
       this.campos = lista;      
       this.montarCampos();      
     })
