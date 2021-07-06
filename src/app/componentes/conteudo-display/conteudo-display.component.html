@@ -9,7 +9,7 @@
                 </video>              
                 <div id="campos-container" class="campos-container" *ngIf="campos.length > 0">
                     <div [id]="campo.hash" class="div-campo" *ngFor="let campo of campos">
-                        <div [ngSwitch]="campo.tipo" class="drag-content " [ngStyle]="{'text-align':campo.alinhamento}">
+                        <div [ngSwitch]="campo.tipo" *ngIf="campo.valor" class="drag-content " [ngStyle]="{'text-align':campo.alinhamento}">
                             <div *ngSwitchCase="3" [ngStyle]="{
                                 'font-family': campo.fonte,
                                 'font-size': campo.fonteTamanho + 'px',
