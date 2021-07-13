@@ -65,7 +65,11 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
             if (conteudo.filtro != null){
               this.filtro = conteudo.filtro;
               this.form.controls['filtroAssuntos'].setValue(conteudo.filtro.assuntos);
-              this.assuntos = conteudo.filtro.assuntos.split(',');
+              if (conteudo.filtro.assuntos != null && conteudo.filtro.assuntos != ''){
+                this.assuntos = conteudo.filtro.assuntos.split(',');
+              }else{
+                this.assuntos = [];
+              }              
             }
             this.form.controls['segundos'].setValue(conteudo.tempoExibicao);
             if (conteudo.fontes != null){
@@ -79,8 +83,7 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
           this.montarTree(); 
         });
       }
-    })
-    
+    })    
   }
 
   public montarTree(){
