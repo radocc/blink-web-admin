@@ -54,8 +54,7 @@ export class ConteudoDisplayComponent implements OnInit, OnDestroy {
     
   }
 
-  ngOnDestroy() {
-    console.log('Destroied');
+  ngOnDestroy() { 
   }
 
   ngOnInit(): void {        
@@ -139,10 +138,10 @@ export class ConteudoDisplayComponent implements OnInit, OnDestroy {
             campo.valor = vetorPrevisao[campo.indice].tempo;
               break;
           case 'maxima':
-            campo.valor = vetorPrevisao[campo.indice].maxima;
+            campo.valor = vetorPrevisao[campo.indice].maxima+"º";
             break;
           case 'minima':
-            campo.valor = vetorPrevisao[campo.indice].minima;
+            campo.valor = vetorPrevisao[campo.indice].minima+"º";
             break;
           case 'iuv':
             campo.valor = vetorPrevisao[campo.indice].iuv;

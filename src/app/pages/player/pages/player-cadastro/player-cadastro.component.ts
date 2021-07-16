@@ -60,6 +60,7 @@ export class PlayerCadastroComponent extends CadForm implements OnInit {
     super.novo();
     this.player = null;
     this.equipamentos = [];
+    this.form.reset();
   }
 
   public buscar(id:number, editavel:boolean){
@@ -130,6 +131,7 @@ export class PlayerCadastroComponent extends CadForm implements OnInit {
         this.playerEquipamento = new PlayerEquipamento();
       }
       this.playerEquipamento.equipamento = this.form.controls['equipamento'].value;
+      this.playerEquipamento.idEquipamento = this.form.controls['equipamento'].value.id;
       this.playerEquipamento.dataImplantacao = this.form.controls['dataImplantacao'].value;
       this.playerEquipamento.dataRemocao = this.form.controls['dataRemocao'].value;
     }else{

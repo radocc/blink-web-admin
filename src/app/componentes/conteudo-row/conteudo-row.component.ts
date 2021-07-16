@@ -44,10 +44,9 @@ export class ConteudoRowComponent implements OnInit {
     // if (this.btnVisualizar){
     //   this.btnVisualizar.emit(conteudo);
     // }
-    const dialog = this.dialogService.open(ConteudoDisplayDialogComponent, {
-      // width: '60%',
-      // height:'80%',
-      data:this.conteudo,
+    let ct = Object.assign({},this.conteudo);
+    const dialog = this.dialogService.open(ConteudoDisplayDialogComponent, { 
+      data:ct,
       modal:true,
       showHeader:true,
       closable:true,

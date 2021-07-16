@@ -13,8 +13,7 @@
                     name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" accept=".mov,.mp3,.mkv,.mp4,.avi"
                     invalidFileSizeMessageSummary="{0}:Invalido o tamanho do arquivo!" 
                     invalidFileSizeMessageDetail="O tamanho máximo do arquivo é {0}"></p-fileUpload>                    
-                    <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
-                    <!-- <div class="rd-flex">{{arquivo.url}}</div> -->
+                    <div class="rd-flex arquivo">{{arquivo?.nome}}</div>                    
                     <button pButton *ngIf="arquivo" class="p-button-secondary"  type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                 </div>  
                 <p-progressBar *ngIf="carregandoArquivo" class="p-field" [value]="progressValue" mode="determinate"></p-progressBar>

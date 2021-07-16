@@ -35,6 +35,7 @@ import { Tree } from 'primeng/tree';
 export class TemplateNoticiaComponent extends CadConteudoComponent implements OnInit {
 
   public form:FormGroup = new FormGroup({
+    titulo:new FormControl(null,[Validators.required]),
     filtroAssuntos:new FormControl(''),
     assunto:new FormControl(),
     segundos:new FormControl(10)
@@ -72,6 +73,7 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
               }              
             }
             this.form.controls['segundos'].setValue(conteudo.tempoExibicao);
+            this.form.controls['titulo'].setValue(conteudo.titulo);
             if (conteudo.fontes != null){
               this.conteudoNoticias = conteudo.fontes;
               this.montarTree();
@@ -127,21 +129,23 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
             
             for (let n = 0; n < treFonte.children.length;n++){
               if (treFonte.children[n].data == this.conteudoNoticias[w].editoriasSelecionado[x].id){
-                treFonte.partialSelected = true;
+                // treFonte.partialSelected = true;
                 treFonte.selectable = true;
-                treFonte.parent = treFonte;
+                // treFonte.parent = treFonte;
                 treFonte.expanded = true;
-                // treFonte.children.push(treFonte.children[n]);
+                treFonte.children[n].selectable = true;
+                treFonte.children[n].expanded = true;
+                // treFonte.children[n].partialSelected = true;
+                treFonte.children[n].parent = treFonte;
+                // treFonte.children[n]. = true;
+                this.selectedFontes.push(treFonte);
                 this.selectedFontes.push(treFonte.children[n]);
               }
             }
           }
         }
-        
-
       }      
     }
-    // this.selectedFontes = this.fontes;
   }
 
   public novo(){
@@ -162,27 +166,32 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
     if (this.conteudo == null){
       this.conteudo = new Conteudo();
     }
-    let titulos = [];
+    // let titulos = [];
     let fontes = [];
     for (let i = 0; i < this.selectedFontes.length;i++){
       let fonte:TreeNode = this.selectedFontes[i];
+      
       for (let w = 0; w < this.conteudoNoticias.length;w++){
+        console.log(this.conteudoNoticias[w].fonte.id);
         if (fonte.data == this.conteudoNoticias[w].fonte.id){
           
           let ids = [];
           for (let x = 0; x < fonte.children.length;x++){
               ids.push(fonte.children[x].data);
           }
-          if (ids.length > 0){
-            titulos.push(fonte.label);
+          if (ids.length > 0){            
             this.conteudoNoticias[w].idsEditorias =  ids.join(',');
-            fontes.push(this.conteudoNoticias[w]);
+            let indexFonte = fontes.findIndex((ft)=> ft.idFonteNoticia == this.conteudoNoticias[w].idFonteNoticia);
+            if (indexFonte <= -1){
+              // titulos.push(fonte.label);
+              fontes.push(this.conteudoNoticias[w]);
+            }            
           }
         }
       }  
     }
-     
-    this.conteudo.titulo = titulos.join(',');
+    
+    this.conteudo.titulo = this.form.controls['titulo'].value;
     this.conteudo.idTipoConteudo = this.idTipoConteudo;
     let segundos = this.form.controls['segundos'].value;
     this.conteudo.tipo = ETipoConteudo.Noticias;    
@@ -233,6 +242,7 @@ export class TemplateNoticiaComponent extends CadConteudoComponent implements On
 
   nodeSelect(event) {
     //event.node = selected node
+    event.node.label
     console.log(event);
   }
 

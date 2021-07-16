@@ -65,7 +65,7 @@ export class DireitoAcessoDialogComponent implements OnInit {
           data:tela,
           children:[],
           parent:treMenu,
-        };;
+        };
         treMenu.children.push(treTela);
         let acoes = await this.direitoGrupoService.findByIdTelaIdGrupo(tela.id,this.grupoUsuario.id).toPromise();
         for (let i = 0; i < acoes.length; i++){
@@ -79,6 +79,8 @@ export class DireitoAcessoDialogComponent implements OnInit {
           }
           if (acao.status ){
             this.nodesSelected.push(treAcao);
+            this.nodesSelected.push(treTela);
+            this.nodesSelected.push(treMenu);
           }
           treTela.children.push(treAcao);
         }

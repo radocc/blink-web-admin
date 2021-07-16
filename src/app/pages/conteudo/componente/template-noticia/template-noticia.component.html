@@ -8,8 +8,13 @@
                             (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
                 </div>
                 <div class="p-field rd-col p-input-icon-right">
-                    <label for="titulo" translate>FILTROS</label>
-                    <input id="titulo" class="p-inputtext-sm" formControlName="assunto" type="text" pInputText (keyup.enter)="adicionarAssunto()">
+                    <label for="titulo" translate>TITULO</label>
+                    <input id="titulo" required formControlName="titulo" type="text" pInputText>                     
+                    <small id="titulo-error" *ngIf="form.controls['titulo'].errors?.required" class="p-error">{{'CAMPO_OBRIGATORIO'|translate}}</small>
+                </div>
+                <div class="p-field rd-col p-input-icon-right">
+                    <label for="assunto" translate>FILTROS</label>
+                    <input id="assunto" class="p-inputtext-sm" formControlName="assunto" type="text" pInputText (keyup.enter)="adicionarAssunto()">
                     <i class="pi pi-plus i-add" (click)="adicionarAssunto()" title="{{'ADICIONAR'|translate}}"></i>                    
                 </div>
                 <div class="p-field rd-block" *ngIf="assuntos.length > 0">

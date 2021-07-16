@@ -78,6 +78,7 @@ export class TemplateVideoComponent extends CadConteudoComponent implements OnIn
         event.progress = 100;
         this.arquivo = res;
         this.carregandoArquivo = false;
+        this.fileUpload.clear();
       })
     }    
   }  

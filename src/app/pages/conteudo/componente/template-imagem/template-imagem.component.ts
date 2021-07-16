@@ -73,7 +73,7 @@ export class TemplateImagemComponent extends CadConteudoComponent implements OnI
       this.arquivoService.postFile(event.files[0]).then((res)=>{
         event.progress = 100;
         this.arquivo = res;
-        console.log(res);
+        this.fileUpload.clear();
       })
     }    
   }  

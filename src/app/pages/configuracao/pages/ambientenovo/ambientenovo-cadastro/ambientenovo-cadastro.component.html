@@ -210,8 +210,7 @@
                         <div class="p-fluid p-formgrid p-grid">
                             <div class="p-field p-col">
                                 <label for="plano">{{'PLANO' |translate}}</label>
-                                <p-autoComplete formControlName="plano" [suggestions]="listaPlano"
-                                    (completeMethod)="findPlanoPorNome($event.query)" field="nome"
+                                <p-autoComplete formControlName="plano" [suggestions]="listaPlano" field="nome"
                                     onselect="calcularTotal()" [dropdown]="true">
                                     <ng-template let-plano pTemplate="item">
                                         <div>{{plano.nome}}; {{plano.valor | currency:'BRL':'1.2-2'}}</div>

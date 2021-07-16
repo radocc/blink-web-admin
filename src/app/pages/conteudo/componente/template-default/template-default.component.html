@@ -17,7 +17,7 @@
                 <div *ngIf="tipo == 1">
                     <div class="p-field rd-row">
                         <p-fileUpload #fileUploadVideo mode="basic" maxFileSize="99999999" fileLimit="1" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
-                        name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" accept=".mov,.mp3,.mkv,.mp4" ></p-fileUpload>
+                        name="filename" customUpload="true" (uploadHandler)="uploadFile($event,fileUploadVideo)" accept=".mov,.mp3,.mkv,.mp4" ></p-fileUpload>
                         <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
                         <button pButton *ngIf="arquivo" class="p-button-secondary" type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                     </div>  
@@ -31,8 +31,8 @@
                 </div>
                 <div class="p-field p-d-flex p-flex-row" *ngIf="tipo == 2">
                     <p-fileUpload #fileUploadImagem mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
-                    name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
-                    accept="image/.png,.jpg,.jpeg"></p-fileUpload>
+                    name="filename" customUpload="true" (uploadHandler)="uploadFile($event,fileUploadImagem)" 
+                    accept="image/*"></p-fileUpload>
                     <div class="rd-flex arquivo">{{arquivo?.nome}}</div>
                     <button pButton *ngIf="arquivo" class="p-button-secondary" type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                 </div> 
@@ -51,9 +51,9 @@
                     <input id="{{'camp'+camp.id}}" required [(ngModel)]="camp.valor" *ngIf="camp.tipo != 4 && camp.tipo != 3 && camp.tipo != 8" type="{{camp.tipo == 1 ?'text': camp.tipo == 2 ?'number':camp.tipo == 5?'date':'text'}}" pInputText [ngModelOptions]="{standalone: true}">                     
                     <p-inputNumber id="{{'camp'+camp.id}}" [(ngModel)]="camp.valor" *ngIf="camp.tipo == 3 || camp.tipo == 8" mode="decimal" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                     <div *ngIf="camp.tipo == 4" class="p-field p-d-flex p-flex-row">
-                        <p-fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
-                            customUpload="true" (uploadHandler)="uploadFileCampo($event, camp)" 
-                        accept="image/.png,.jpg,.jpeg"></p-fileUpload>
+                        <p-fileUpload #uploadCamp mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
+                            customUpload="true" (uploadHandler)="uploadFileCampo($event, camp,uploadCamp)" 
+                        accept="image/*"></p-fileUpload>
                         <div class="rd-flex arquivo">{{camp?.arquivo?.nome}}</div>
                     </div>
                 </div> 

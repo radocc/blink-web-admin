@@ -11,8 +11,9 @@
                     <div class="p-field rd-row p-col-12">
                         <p-fileUpload #fileUpload mode="basic" cancelLabel="CANCELAR" [auto]="true" chooseLabel="ESCOLHER" uploadLabel="CARREGAR" 
                         name="filename" customUpload="true" (uploadHandler)="uploadFile($event)" 
-                        accept="image/.png,.jpg,.jpeg"></p-fileUpload>
-                        <div class="rd-flex arquivo">{{arquivo?.nome}}</div>                        
+                        accept="image/*"></p-fileUpload>
+                        <div class="rd-flex arquivo">{{arquivo?.nome}}</div>                     
+                        <button pButton *ngIf="arquivo" class="p-button-secondary"  type="button" label="{{'BAIXAR'|translate}}" (click)="baixarArquivo()" ></button>
                     </div> 
                     <div class="tempo rd-row rd-gap p-col-12">                    
                         <span class=" rd-row">                

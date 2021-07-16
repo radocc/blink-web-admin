@@ -68,7 +68,7 @@ export class PrevisaoTempoImagemCadastroComponent extends CadForm implements OnI
       this.arquivoService.postFile(event.files[0]).then((res)=>{
         event.progress = 100;
         this.arquivo = res;
-        console.log(res);
+        this.fileUpload.clear();
       })
     }    
   }
@@ -78,9 +78,14 @@ export class PrevisaoTempoImagemCadastroComponent extends CadForm implements OnI
     this.form.controls['sigla'].setValue(tipo.sigla, {emitEvent:false});
     this.form.controls['descricao'].setValue(tipo.descricao, {emitEvent:false});
     this.form.controls['texto'].setValue(tipo.texto, {emitEvent:false});
-    this.arquivoService.findById(tipo.idArquivo).subscribe((arquivo)=>{
-      this.arquivo = arquivo;
-    })
+    if (tipo.idArquivo){
+      this.arquivoService.findById(tipo.idArquivo).subscribe((arquivo)=>{
+        this.arquivo = arquivo;
+      })
+    }else{
+      this.arquivo = null;
+    }
+    
     // this.form.controls['descricao'].setValue(tipo.descricao, {emitEvent:false});
     if (editavel == false){
       this.form.disable();

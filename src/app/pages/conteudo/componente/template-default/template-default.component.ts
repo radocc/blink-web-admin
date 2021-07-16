@@ -132,7 +132,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
     }); 
   }
 
-  public uploadFile(event){
+  public uploadFile(event, fileUpload:FileUpload){
     if (event.files.length > 0){
       event.progress = 10;
       this.carregandoArquivo = true;
@@ -144,11 +144,12 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
         event.progress = 100;
         this.arquivo = res;
         this.carregandoArquivo = false;
+        fileUpload.clear();
       })
     }    
   }
 
-  public uploadFileCampo(event, campo:ConteudoCampo){
+  public uploadFileCampo(event, campo:ConteudoCampo, uploadFile:FileUpload){
     if (event.files.length > 0){
       event.progress = 10;
       let me = this;
@@ -159,6 +160,7 @@ export class TemplateDefaultComponent extends CadConteudoComponent implements On
         event.progress = 100;
         campo.valor = res.id;
         campo.arquivo = res;
+        uploadFile.clear();
       })
     }    
   }
